@@ -1,0 +1,12 @@
+{
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "phpmailer/phpmailer": "^6.0",
+        "maximebf/debugbar": "^1.15"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
