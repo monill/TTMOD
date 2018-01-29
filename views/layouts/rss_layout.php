@@ -1,5 +1,5 @@
 <?php
-$title = "Rss";
+$title = "RSS";
 $blockId = 'b-' . sha1($title);
 ?>
 

@@ -15,8 +15,6 @@ $blockId = 'b-' . sha1($title);
 
 	<?php
 
-		// $expire = 900; // time in seconds
-	    //
 		// if (($latestuploadsrecords = $TTCache->Get("latestuploadsblock", $expire)) === false) {
 		// 	$latestuploadsquery = SQL_Query_exec("SELECT id, name, size, seeders, leechers FROM torrents WHERE banned='no' AND visible = 'yes' ORDER BY id DESC LIMIT 5");
 	    //
@@ -39,7 +37,7 @@ $blockId = 'b-' . sha1($title);
 		<?php
 	//}
 	?>
-	
+
 	<!-- end content -->
     </div>
 </div>

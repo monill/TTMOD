@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Libs\Redirect;
+use App\Libs\Input;
 
 class Torrents extends Controller
 {
@@ -39,5 +40,32 @@ class Torrents extends Controller
     public function torrent($id)
     {
         echo $id;
+    }
+
+    public function search()
+    {
+        if (Input::exist()) {
+            $search = Input::get('search');
+
+
+        } else {
+            Redirect::to('/torrents');
+        }
+    }
+
+    public function advsearch()
+    {
+        if (Input::exist()) {
+
+
+
+        } else {
+            Redirect::to('/torrents');
+        }
+    }
+
+    public function categ($slug = '')
+    {
+        
     }
 }

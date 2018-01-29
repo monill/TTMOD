@@ -1,9 +1,13 @@
 <?php
+use App\Libs\Database;
+use App\Libs\Helper;
+
 $title = "Users online";
 $blockId = 'b-' . sha1($title);
 
 $db = Database::getInstance();
-$user = $db->select("SELECT `id`, `username` FROM `users` WHERE enable = 'yes' AND status = 'confirmed' AND privacy != 'strong'");
+$datetime = Helper::dateTime();
+$user = $db->select("SELECT `id`, `username` FROM `users` WHERE status = 'confirmed' AND privacy != 'strong' AND UNIX_TIMESTAMP('".$datetime."') - UNIX_TIMESTAMP(lastlogin) <= 1000");
 ?>
 
 <div class="card">
@@ -17,9 +21,7 @@ $user = $db->select("SELECT `id`, `username` FROM `users` WHERE enable = 'yes' A
             <p class="text-center"> No Users Online </p>
         <?php else: ?>
             <?php foreach ($user as $key => $u): ?>
-                <a href="<?= url('/user/id/', $u->id); ?>">
-                    <?= $u->username . " " ?>
-                </a>
+                <a href="<?= url('/user/id/' . $u->id ); ?>"> <?= $u->username . " " ?> </a>
             <?php endforeach; ?>
         <?php endif; ?>
     <!-- end content -->

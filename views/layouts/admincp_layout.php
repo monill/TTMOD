@@ -12,7 +12,7 @@ $blockId = 'b-' . sha1($title);
     <!-- content -->
 
     <select name="admin" class="form-control" onchange="if(this.options[this.selectedIndex].value != -1){ window.location = this.options[this.selectedIndex].value; }">
-        <option value="-1">Navigation</option>
+        <option selected disabled="disabled">Navigation</option>
         <option value="admincp.php?action=usersearch">Advanced User Search</option>
         <option value="admincp.php?action=avatars">Avatar Log</option>
         <option value="admincp.php?action=backups">Backups</option>

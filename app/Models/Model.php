@@ -15,5 +15,4 @@ class Model
 
     private function __clone() { }
 
-
 }

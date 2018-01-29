@@ -12,11 +12,11 @@ use App\Models\Torrent;
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
 
-    <form method="get" action="#">
+    <form method="post" action="<?= url('/torrents/advsearch'); ?>">
 		<input type="text" name="search" class="form-control" placeholder="Search.." />
         <br />
 		<select name="cat" class="form-control">
-			<option value="0"> All types </option>
+			<option selected disabled="disabled"> All types </option>
             <?php foreach (Torrent::categories() as $c): ?>
                 <option value="<?= $c->id; ?>"><?= $c->name; ?></option>
             <?php endforeach; ?>

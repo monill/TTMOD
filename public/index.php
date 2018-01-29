@@ -6,7 +6,7 @@ header("X-Content-Type-Options: nosniff");
 header("X-XSS-Protection: 1; mode=block");
 
 ob_start();
-session_start();
+//session_start();
 
 //ROOT
 define('ROOT', dirname(__DIR__) . DIRECTORY_SEPARATOR);

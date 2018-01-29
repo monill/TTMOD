@@ -1,7 +1,7 @@
 <?php
 
 // Website URL
-define('URL', 'http://localhost:7000');
+define('URL', 'http://localhost');
 // App root
 define('RUT', $_SERVER['DOCUMENT_ROOT']);
 // Page name
