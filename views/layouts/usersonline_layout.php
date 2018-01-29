@@ -21,7 +21,7 @@ $user = $db->select("SELECT `id`, `username` FROM `users` WHERE status = 'confir
             <p class="text-center"> No Users Online </p>
         <?php else: ?>
             <?php foreach ($user as $key => $u): ?>
-                <a href="<?= url('/user/id/' . $u->id ); ?>"> <?= $u->username . " " ?> </a>
+                <a href="<?= url('/user/id/' . $u->id ); ?>"> <?= $u->username . ", " ?> </a>
             <?php endforeach; ?>
         <?php endif; ?>
     <!-- end content -->
