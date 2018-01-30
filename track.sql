@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 29, 2018 at 02:23 PM
--- Server version: 5.6.37
+-- Generation Time: 30-Jan-2018 às 20:58
+-- Versão do servidor: 5.6.37
 -- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bruteforces`
+-- Estrutura da tabela `bruteforces`
 --
 
 CREATE TABLE IF NOT EXISTS `bruteforces` (
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `bruteforces` (
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `bruteforces`
+-- Extraindo dados da tabela `bruteforces`
 --
 
 INSERT INTO `bruteforces` (`id`, `ip`, `alltimes`, `alldate`) VALUES
@@ -44,7 +44,7 @@ INSERT INTO `bruteforces` (`id`, `ip`, `alltimes`, `alldate`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Estrutura da tabela `categories`
 --
 
 CREATE TABLE IF NOT EXISTS `categories` (
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `categories`
+-- Extraindo dados da tabela `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `slug`, `icon`) VALUES
@@ -66,7 +66,7 @@ INSERT INTO `categories` (`id`, `name`, `slug`, `icon`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estates`
+-- Estrutura da tabela `estates`
 --
 
 CREATE TABLE IF NOT EXISTS `estates` (
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `estates` (
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `estates`
+-- Extraindo dados da tabela `estates`
 --
 
 INSERT INTO `estates` (`id`, `name`, `uf`) VALUES
@@ -111,7 +111,7 @@ INSERT INTO `estates` (`id`, `name`, `uf`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `faqs`
+-- Estrutura da tabela `faqs`
 --
 
 CREATE TABLE IF NOT EXISTS `faqs` (
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `faqs` (
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `faqs`
+-- Extraindo dados da tabela `faqs`
 --
 
 INSERT INTO `faqs` (`id`, `question`, `categ_id`, `style`, `answer`, `created_at`, `update_at`) VALUES
@@ -176,7 +176,7 @@ INSERT INTO `faqs` (`id`, `question`, `categ_id`, `style`, `answer`, `created_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `faq_categs`
+-- Estrutura da tabela `faq_categs`
 --
 
 CREATE TABLE IF NOT EXISTS `faq_categs` (
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `faq_categs` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `faq_categs`
+-- Extraindo dados da tabela `faq_categs`
 --
 
 INSERT INTO `faq_categs` (`id`, `name`, `style`, `created_at`, `update_at`) VALUES
@@ -205,7 +205,7 @@ INSERT INTO `faq_categs` (`id`, `name`, `style`, `created_at`, `update_at`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `layouts`
+-- Estrutura da tabela `layouts`
 --
 
 CREATE TABLE IF NOT EXISTS `layouts` (
@@ -216,10 +216,10 @@ CREATE TABLE IF NOT EXISTS `layouts` (
   `description` varchar(200) NOT NULL,
   `enabled` tinyint(3) unsigned NOT NULL,
   `sort` tinyint(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `layouts`
+-- Extraindo dados da tabela `layouts`
 --
 
 INSERT INTO `layouts` (`id`, `named`, `name`, `position`, `description`, `enabled`, `sort`) VALUES
@@ -238,15 +238,16 @@ INSERT INTO `layouts` (`id`, `named`, `name`, `position`, `description`, `enable
 (13, 'latestimages', 'latestimages', 'right', 'Description here...', 1, 7),
 (14, 'mostactivetorrents', 'mostactivetorrents', 'left', 'Description here...', 1, 10),
 (15, 'scrollingnews', 'scrollingnews', 'left', 'Description here...', 1, 9),
-(16, 'newestmember', 'newestmember', 'left', 'Description here...', 1, 8),
+(16, 'newestmember', 'newestmember', 'middle', 'Description here...', 1, 8),
 (17, 'polls', 'polls', 'left', 'Description here...', 1, 6),
 (18, 'seedwanted', 'seedwanted', 'left', 'Description here...', 1, 7),
-(20, 'Powered By', 'poweredby', 'right', 'Description here...', 1, 3);
+(20, 'Powered By', 'poweredby', 'right', 'Description here...', 1, 3),
+(21, 'Admin CP', 'admincp', 'right', 'Admin Cp', 1, 8);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `logs`
+-- Estrutura da tabela `logs`
 --
 
 CREATE TABLE IF NOT EXISTS `logs` (
@@ -261,7 +262,29 @@ CREATE TABLE IF NOT EXISTS `logs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rules`
+-- Estrutura da tabela `news`
+--
+
+CREATE TABLE IF NOT EXISTS `news` (
+  `id` int(11) unsigned NOT NULL,
+  `userid` int(11) unsigned NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `content` text NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `news`
+--
+
+INSERT INTO `news` (`id`, `userid`, `title`, `content`, `created_at`, `update_at`) VALUES
+(1, 1, 'Testingd...', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat nunc eget neque iaculis, ac iaculis diam laoreet. Maecenas porta pulvinar nulla lacinia imperdiet. Nam et dignissim ex. Phasellus pretium tempor erat non accumsan. Nullam at nunc ipsum. Donec lorem libero, convallis id orci ut, fringilla vestibulum justo. Fusce sit amet lobortis turpis.', '2018-01-29 17:58:50', '2018-01-29 17:58:50');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `rules`
 --
 
 CREATE TABLE IF NOT EXISTS `rules` (
@@ -273,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `rules` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `rules`
+-- Extraindo dados da tabela `rules`
 --
 
 INSERT INTO `rules` (`id`, `title`, `content`, `created_at`, `update_at`) VALUES
@@ -284,7 +307,7 @@ INSERT INTO `rules` (`id`, `title`, `content`, `created_at`, `update_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estrutura da tabela `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -320,13 +343,13 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Extraindo dados da tabela `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `status`, `banned`, `privacy`, `class`, `dob`, `info`, `acceptpms`, `codeactivation`, `confirmresetpwd`, `ip`, `avatar`, `uploaded`, `downloaded`, `title`, `estate_id`, `sex`, `passkey`, `points`, `invites`, `warn`, `lastlogin`, `created_at`, `update_at`, `active_at`, `resetpwd_at`) VALUES
 (1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'normal', 'member', '0000-00-00', NULL, 'yes', NULL, NULL, '::1', NULL, 0, 0, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1020, 0, 'no', '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
 (2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'normal', 'member', '0000-00-00', NULL, 'yes', NULL, NULL, '::1', NULL, 0, 0, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1030, 0, 'no', '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'normal', 'member', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, 0, 0, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1430, 1, 'no', '2018-01-29 10:35:28', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
+(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'normal', 'member', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, 0, 0, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1450, 1, 'no', '2018-01-29 15:58:49', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
 
 --
 -- Indexes for dumped tables
@@ -376,6 +399,13 @@ ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userid` (`userid`);
+
+--
 -- Indexes for table `rules`
 --
 ALTER TABLE `rules`
@@ -421,12 +451,17 @@ ALTER TABLE `faq_categs`
 -- AUTO_INCREMENT for table `layouts`
 --
 ALTER TABLE `layouts`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `rules`
 --
@@ -442,13 +477,19 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `faqs`
+-- Limitadores para a tabela `faqs`
 --
 ALTER TABLE `faqs`
   ADD CONSTRAINT `faqs_ibfk_1` FOREIGN KEY (`categ_id`) REFERENCES `faq_categs` (`id`);
 
 --
--- Constraints for table `users`
+-- Limitadores para a tabela `news`
+--
+ALTER TABLE `news`
+  ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`);
+
+--
+-- Limitadores para a tabela `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`estate_id`) REFERENCES `estates` (`id`);
