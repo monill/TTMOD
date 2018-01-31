@@ -15,7 +15,7 @@ class Email extends PHPMailer
         // where you want to send confirmation email
         $mail->addAddress($email);
         // link for email confirmation
-        //TODO arrumar link
+        //TODO fix link
         $link = URL . '/confirmacc.php?k=' . $key;
         // load email HTML template
         $body = file_get_contents(VIEWS . 'emails/confirmacc.php');
