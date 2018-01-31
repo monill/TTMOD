@@ -1,6 +1,2 @@
 /vendor
 /.idea
-data/logs/php-error.txt
-data/logs/ip.txt
-data/logs/ip-banned.txt
-data/logs/php-error.txt

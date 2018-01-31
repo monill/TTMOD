@@ -84,7 +84,7 @@ class Decode
                 return array(false);
             }
         }
-        //return $ret; //nao estava aqui antes - soh coloquei pq pedia retorno de algo
+        return $ret; //nao estava aqui antes - soh coloquei pq pedia retorno de algo
     }
 
     public function decodeEntry($wholefile, $offset = 0)
