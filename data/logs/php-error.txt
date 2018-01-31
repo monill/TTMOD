@@ -267,3 +267,21 @@ Stack trace:
 #1 D:\Ampps\www\public\index.php(31): Autoload->__construct()
 #2 {main}
   thrown in D:\Ampps\www\app\Controllers\Torrent.php on line 75
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP Warning:  A non-numeric value encountered in D:\Ampps\www\app\Libs\Torrent\Parse.php on line 65
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP Stack trace:
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:43
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP   4. App\Libs\Torrent\Parse->__construct() D:\Ampps\www\app\Controllers\Torrent.php:69
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP Notice:  Undefined variable: torrentsize in D:\Ampps\www\app\Libs\Torrent\Parse.php on line 68
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP Stack trace:
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:43
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP   4. App\Libs\Torrent\Parse->__construct() D:\Ampps\www\app\Controllers\Torrent.php:69
+[31-Jan-2018 16:19:25 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Cannot use object of type App\Libs\Torrent\Parse as array in D:\Ampps\www\app\Controllers\Torrent.php:71
+Stack trace:
+#0 D:\Ampps\www\bootstrap\Autoload.php(43): App\Controllers\Torrent->upload()
+#1 D:\Ampps\www\public\index.php(31): Autoload->__construct()
+#2 {main}
+  thrown in D:\Ampps\www\app\Controllers\Torrent.php on line 71
