@@ -17,10 +17,8 @@ use App\Models\Layout;
 
     <footer class="footer">
         <div class="container-fluid">
-            <center>
-                <a href="<?= url('/home'); ?>"> TTMOD </a> &copy; <?= date('Y'); ?>
-                <span class="text-muted">Powered by TTMOD</a></span>
-            </center>
+            <a href="<?= url('/home'); ?>"> TTMOD </a> &copy; <?= date('Y'); ?>
+            <span class="text-muted">Powered by <a href="<?= url('/home'); ?>"> TTMOD </a></span>
         </div>
     </footer>
 

@@ -31,7 +31,7 @@
                         <div class="card fat">
                             <div class="card-body">
                                 <h4 class="card-title">Signup</h4>
-                                <form method="post" action="<?= url('/signup/in'); ?>">
+                                <form method="post" action="<?= url('/signup/in'); ?>" autocomplete="off">
                                     <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
 
                                     <div class="form-group">

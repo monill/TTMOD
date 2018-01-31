@@ -14,13 +14,13 @@ $avatar = "https://placehold.it/200x300";
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
 
-        <img width="100%" height="100%" src="<?php echo $avatar; ?>" alt="" class="thumbnail center-block" />
+        <img src="<?php echo $avatar; ?>" alt="Avatar" class="thumbnail center-block" />
         <ul class="list-group">
             <li class="list-group-item"> Downloaded : <span class="label label-danger pull-right"> 10 BG </span></li>
             <li class="list-group-item"> Uploaded : <span class="label label-success pull-right"> 10 BG </span></li>
-            <li class="list-group-item"> Class : <div class="pull-right"> Member </div></li>
-            <li class="list-group-item"> Privacy : <div class="pull-right"> Normal </div></li>
-            <li class="list-group-item"> Ratio : 0.00 </span></li>
+            <li class="list-group-item"> Class : <span class="label label-danger pull-right"> Member </span></li>
+            <li class="list-group-item"> Privacy : <span class="label label-danger pull-right"> Normal </span></li>
+            <li class="list-group-item"> Ratio : <span class="label label-danger pull-right"> 0.00 </span></li>
         </ul>
         <br />
         <div class="text-center">

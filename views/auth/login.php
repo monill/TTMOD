@@ -30,7 +30,7 @@
 							<div class="card-body">
 								<h4 class="card-title">Login</h4>
 
-	                            <form method="post" action="<?= url('/login/in'); ?>">
+	                            <form method="post" action="<?= url('/login/in'); ?>" autocomplete="off">
 	                                <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
 	                                <div class="form-group">
 	                                	<label for="name">Username</label>

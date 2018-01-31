@@ -330,3 +330,17 @@ Stack trace:
 #4 D:\Ampps\www\public\index.php(31): Autoload->__construct()
 #5 {main}
   thrown in D:\Ampps\www\app\Libs\Database.php on line 50
+[30-Jan-2018 19:49:14 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Call to undefined method App\Controllers\Torrent::categorias() in D:\Ampps\www\app\Controllers\Torrents.php:30
+Stack trace:
+#0 D:\Ampps\www\bootstrap\Autoload.php(45): App\Controllers\Torrents->upload()
+#1 D:\Ampps\www\public\index.php(31): Autoload->__construct()
+#2 {main}
+  thrown in D:\Ampps\www\app\Controllers\Torrents.php on line 30
+[30-Jan-2018 19:49:53 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in D:\Ampps\www\views\torrents\upload.php:67
+Stack trace:
+#0 D:\Ampps\www\app\Libs\Views.php(15): require_once()
+#1 D:\Ampps\www\app\Controllers\Torrents.php(32): App\Libs\Views->load('torrents/upload', false)
+#2 D:\Ampps\www\bootstrap\Autoload.php(45): App\Controllers\Torrents->upload()
+#3 D:\Ampps\www\public\index.php(31): Autoload->__construct()
+#4 {main}
+  thrown in D:\Ampps\www\views\torrents\upload.php on line 67

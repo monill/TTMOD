@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Libs\Input;
 use App\Libs\Redirect;
 
 class Torrent extends Controller
@@ -31,6 +32,17 @@ class Torrent extends Controller
         exit();
     }
 
+    public function upload()
+    {
+        if (Input::exist())
+        {
+            var_dump($_REQUEST);
+
+        } else {
+            Redirect::to('/torrents/upload');
+        }
+    }
+
     public function edit($id)
     {
 
@@ -40,4 +52,5 @@ class Torrent extends Controller
     {
 
     }
+
 }

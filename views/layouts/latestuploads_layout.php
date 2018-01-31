@@ -33,7 +33,7 @@ $blockId = 'b-' . sha1($title);
 			<?php
 		//}
 		//} else { ?>
-			<p calss="text-center"> Nothing found </p>
+			<p class="text-center"> Nothing found </p>
 		<?php
 	//}
 	?>

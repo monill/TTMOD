@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Libs\Redirect;
 use App\Libs\Input;
+use App\Libs\Token;
+use App\Models\Torrent;
 
 class Torrents extends Controller
 {
@@ -26,16 +28,13 @@ class Torrents extends Controller
 
     public function upload()
     {
-        $this->view->title = SNAME . " :: Torrent Upload";
-        $this->view->categorias = Torrent::categorias();
+        $this->view->title = SNAME . " :: Upload Torrent";
+        $this->view->categories = Torrent::categories();
+        $this->view->token = Token::generate();
         $this->view->load('torrents/upload', false);
         exit();
     }
 
-    public function torrentupload($data)
-    {
-
-    }
 
     public function torrent($id)
     {

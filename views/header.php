@@ -34,7 +34,7 @@ use App\Models\Layout;
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a class="nav-link" href="<?= url('/home'); ?>"> Home </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url('/forum'); ?>"> Forum </a></li>
-                    <li class="nav-item"><a class="nav-link" href="torrents-upload.php"> UPLOAD_TORRENT </a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url('/torrents/upload'); ?>"> Upload Torrents </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url('/torrents'); ?>"> Torrents </a></li>
                     <li class="nav-item"><a class="nav-link" href="torrents-today.php"> TODAYS_TORRENTS </a></li>
                     <li class="nav-item"><a class="nav-link" href="torrents-search.php"> SEARCH_TORRENTS </a></li>

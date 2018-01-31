@@ -1,124 +1,105 @@
+
 <?php
-
-use App\Libs\Helper;
-
+$title = "Upload";
+$blockId = 'b-' . sha1($title);
 ?>
 
+<div class="card">
+    <div class="card-header">
+        <?php echo $title ?>
+        <a data-toggle="collapse" href="#" class="showHide" id="<?php echo $blockId; ?>" style="float: right;"></a>
+    </div>
+    <div class="card-body slidingDiv<?php echo $blockId; ?>">
+        <!-- content -->
 
-<div class="col-md-8 col-md-offset-2">
-    <section class="panel">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?= url('/torrent/upload'); ?>" method="post" autocomplete="off">
+            <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
 
-        <header class="panel-heading"> URL: </header>
+            <div class="form-group">
+                <div class="col-md-5">
+                    <h5> Announce Url: </h5>
+                </div>
+            </div>
 
-        <div class="panel-body">
-            <form class="form-horizontal" action="<?= URL; ?>/torrentupload" method="post" enctype="multipart/form-data" autocomplete="off">
-                <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : ''; ?>" />
-                <input type="hidden" name="formulario" value="uploadtorrent">
+            <div class="form-group">
+                <label for="torrentfile">Torrent file:</label>
+                <div class="col-md-5">
+                    <input type="file" class="form-control-file" name="torrent" id="torrentfile">
+                </div>
+            </div>
 
-                <div class="form-group">
-                    <label class="col-lg-2 col-sm-2 control-label">Arquivo *.torrent </label>
-                    <div class="col-md-8">
-                        <input type="file" name="torrent">
-                    </div>
+            <div class="form-group">
+                <label for="nfofile">NFO file:</label>
+                <div class="col-md-5">
+                    <input type="file" class="form-control-file" name="nfo" id="nfofile">
                 </div>
-                <hr>
-                <div class="form-group">
-                    <label class="col-lg-2 col-sm-2 control-label">Nome do Torrent</label>
-                    <div class="col-md-5">
-                        <input type="text" name="nome" class="form-control">
-                        <p class="help-block">(Tirado do nome do arquivo se não especificado. Use nomes descritivos.)</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <label class="col-lg-2 col-sm-2 control-label">Poster </label>
-                    <div class=" col-md-8">
-                        <input type="file" name="poster">
-                    </div>
-                </div>
-                <hr>
-                <p> Imagens 1 ao 3, não são totalmente necessárias.</p>
-                <div class="form-group">
-                    <label class="col-lg-2 col-sm-2 control-label">Imagem 1 </label>
-                    <div class=" col-md-8">
-                        <input type="file" name="imagem1">
-                    </div>
-                </div>
+            </div>
 
-                <div class="form-group">
-                    <label class="col-lg-2 col-sm-2 control-label">Imagem 2 </label>
-                    <div class=" col-md-8">
-                        <input type="file" name="imagem2">
-                    </div>
+            <div class="form-group">
+                <label for="tname">Torrent name:</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="tname" id="tname">
                 </div>
+            </div>
+            <div class="form-group">
+                <h5>Extensions allowed: </h5>
+            </div>
 
-                <div class="form-group">
-                    <label class="col-lg-2 col-sm-2 control-label">Imagem 3 </label>
-                    <div class=" col-md-8">
-                        <input type="file" name="imagem3">
-                    </div>
+            <div class="form-group">
+                <label for="image1">Image 1</label>
+                <div class="col-md-5">
+                    <input type="file" class="form-control-file" name="image1" id="image1">
                 </div>
-                <hr>
-                <div class="form-group">
-                    <label class="col-lg-2 col-sm-2 control-label">Categoria</label>
-                    <div class="col-md-2">
-                        <select class="form-control" name="categoria_id" id="categoria_id">
-                            <?php foreach (isset($this->categorias) ? $this->categorias : '' as $categoria): ?>
-                                <option value="<?= intval($categoria['id']) ?>"><?= Helper::escape($categoria['nome']) ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <label class="col-lg-2 col-sm-2 control-label">Mostrar Uploader?</label>
-                    <div class="col-md-8">
-                        <div class="checkboxes">
-                            <label class="label_check" for="checkbox-01">
-                                <input name="showuploader" value="sim" type="checkbox" checked="checked" /> Check para sim.
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <label class="col-lg-2 col-sm-2 control-label">Freeleech?</label>
-                    <div class="col-md-8">
-                        <div class="checkboxes">
-                            <label class="label_check" for="checkbox-01">
-                                <input name="freeleeach" value="sim" type="checkbox" /> Check para sim.
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <label class="col-lg-2 col-sm-2 control-label">Liberar comentários:</label>
-                    <div class="col-md-8">
-                        <div class="checkboxes">
-                            <label class="label_check" for="checkbox-01">
-                                <input name="comentarios" value="sim" type="checkbox" checked="checked"/> Check para sim.
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <label class="col-lg-2 col-sm-2 control-label">Descrição:</label>
-                    <div class="col-md-8">
-                        <textarea class="form-control descricao" name="descricao" rows="8"></textarea>
-                    </div>
-                </div>
+            </div>
 
-                <hr>
-                <p class="text-center"> Aguarde seu arquivo ser analisado pelo nosso servidor para liberação do download. </p>
-                <div class="form-group">
-                    <div class="col-lg-offset-5 col-lg-10">
-                        <button type="submit" class="btn btn-danger">Enviar</button>
+            <div class="form-group">
+                <label for="image2">Image 2</label>
+                <div class="col-md-5">
+                    <input type="file" class="form-control-file" name="image2" id="image2">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 col-sm-2" for="category">Category:</label>
+                <div class="col-md-3">
+                    <select name="category" id="category" class="form-control">
+                        <option selected disabled="disabled">Select a category</option>
+                        <?php foreach (isset($this->categories) ? $this->categories : $this->categories as $categ): ?>
+                            <option value="<?= intval($categ->id); ?>"><?= $categ->name; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-4 col-sm-4 custom-control"> Annonymous Upload? </label>
+                <div class="col-md-8">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="showuploader" id="yes" value="yes" checked>
+                        <label class="form-check-label" for="yes"> Yes </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="showuploader" id="no" value="no">
+                        <label class="form-check-label" for="no"> No </label>
                     </div>
                 </div>
+            </div>
 
-            </form>
-        </div>
-    </section>
+            <div class="form-group">
+                <label class="col-lg-2 col-sm-2" for="descr"> Description: </label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="descr" id="descr" rows="4"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-offset-5 col-lg-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- end content -->
+    </div>
 </div>
+<br />
