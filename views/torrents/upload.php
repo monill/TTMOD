@@ -1,9 +1,29 @@
+<?php
+$title1 = "Upload Rules";
+$blockId1 = 'b-' . sha1($title1);
+?>
+
+<div class="card">
+    <div class="card-header">
+        <?php echo $title1 ?>
+        <a data-toggle="collapse" href="#" class="showHide" id="<?php echo $blockId1; ?>" style="float: right;"></a>
+    </div>
+    <div class="card-body slidingDiv<?php echo $blockId1; ?>">
+        <!-- content -->
+
+        You should also include a .nfo file wherever possible<br />
+        Try to make sure your torrents are well-seeded for at least 24 hours<br />
+        Do not re-release material that is still active
+
+        <!-- end content -->
+    </div>
+</div>
+<br />
 
 <?php
 $title = "Upload";
 $blockId = 'b-' . sha1($title);
 ?>
-
 <div class="card">
     <div class="card-header">
         <?php echo $title ?>

@@ -5,7 +5,7 @@ use App\Libs\Database;
 $db = Database::getInstance(); //TODO fix this
 $user = $db->select1("SELECT invites FROM `users` WHERE `id` = :idd LIMIT 1", ["idd" => 7]); //Session::get('userid')
 $invites = $user->invites;
-$inv = $invites > 0 ? "s" : "";
+$inv = $invites > 1 ? "s" : "";
 
 $title = "Invites";
 $blockId = 'b-' . sha1($title);
@@ -20,9 +20,9 @@ $blockId = 'b-' . sha1($title);
     <!-- content -->
 
     <?php
-        echo '<p class="text-center">' . "Voce tem " . $invites . " convite" . $inv . '</p>';
+        echo '<p class="text-center">' . "You have " . $invites . " invite" . $inv . '</p>';
         if ($invites > 0) {
-            echo '<p class="text-center"><a href="'. url('/invite') . '"> Enviar um convite </a></p>';
+            echo '<p class="text-center"><a href="'. url('/invite') . '"> Send a invite </a></p>';
         }
     ?>
 

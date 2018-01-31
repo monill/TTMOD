@@ -1,0 +1,14 @@
+[31-Jan-2018 00:34:15 America/Sao_Paulo] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in D:\Ampps\www\app\Libs\Session.php on line 28
+[31-Jan-2018 00:34:15 America/Sao_Paulo] PHP Stack trace:
+[31-Jan-2018 00:34:15 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[31-Jan-2018 00:34:15 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[31-Jan-2018 00:34:15 America/Sao_Paulo] PHP   3. App\Controllers\Logout->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[31-Jan-2018 00:34:15 America/Sao_Paulo] PHP   4. App\Libs\Session::destroySession() D:\Ampps\www\app\Controllers\Logout.php:20
+[31-Jan-2018 00:34:15 America/Sao_Paulo] PHP   5. session_destroy() D:\Ampps\www\app\Libs\Session.php:28
+[31-Jan-2018 00:38:25 America/Sao_Paulo] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in D:\Ampps\www\app\Libs\Session.php on line 28
+[31-Jan-2018 00:38:25 America/Sao_Paulo] PHP Stack trace:
+[31-Jan-2018 00:38:25 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[31-Jan-2018 00:38:25 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[31-Jan-2018 00:38:25 America/Sao_Paulo] PHP   3. App\Controllers\Logout->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[31-Jan-2018 00:38:25 America/Sao_Paulo] PHP   4. App\Libs\Session::destroySession() D:\Ampps\www\app\Controllers\Logout.php:20
+[31-Jan-2018 00:38:25 America/Sao_Paulo] PHP   5. session_destroy() D:\Ampps\www\app\Libs\Session.php:28
