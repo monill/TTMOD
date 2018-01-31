@@ -48,14 +48,14 @@ class Torrent extends Controller
             $ferror = $torrent['error'];
             $fsize = $torrent['size'];
 
-            $uploadlocal = TUPLOAD . basename($fname);
+            $uploadlocal = TUPLOAD . $fname;
 
             if (!Helper::validFilename($fname)) {
                 $errors[] = "Invalid filename.";
             }
 
             if (!preg_match('/^(.+)\.torrent$/si', $fname)) {
-                $error[] = "Nome de arquivo inválido (não é .torrents).";
+                $errors[] = "Nome de arquivo inválido (não é .torrents).";
             }
 
             $name = Input::get('tname');
@@ -66,11 +66,11 @@ class Torrent extends Controller
             if (!$errors)
             {
                 if (!move_uploaded_file($ftmp_name, $uploadlocal)) {
-                    $errors[] = "File Could not be copied.";
+                    $errors[] = "File Could not uploaded.";
                 }
 
-                //$torrentInfo = array();
-                $torrentInfo = new Parse("$uploadlocal/$fname");
+                $torrentInfo = [];
+                $torrentInfo = new Parse("$uploadlocal");
 
                 $announce       = $torrentInfo[0];
                 $infohash       = $torrentInfo[1];
@@ -83,15 +83,33 @@ class Torrent extends Controller
                 $filelist       = $torrentInfo[8];
 
                 //for debug...
-                print ("<br /><br />announce: ".$announce);
-                print ("<br /><br />infohash: ".$infohash);
-                print ("<br /><br />creationdate: ".$creationdate);
-                print ("<br /><br />internalname: ".$internalname);
-                print ("<br /><br />torrentsize: ".$torrentsize);
-                print ("<br /><br />filecount: ".$filecount);
-                print ("<br /><br />annlist: ".$annlist);
-                print ("<br /><br />comment: ".$comment);
+                print ("<br>announce: " . $announce);
+                print ("<br>infohash: " . $infohash);
+                print ("<br>creationdate: " . $creationdate);
+                print ("<br>internalname: " . $internalname);
+                print ("<br>torrentsize: " . $torrentsize);
+                print ("<br>filecount: " . $filecount);
+                print ("<br>annlist: " . $annlist);
+                print ("<br>comment: " . $comment);
 
+                //check announce url is local or external
+                if (!in_array($announce, $this->annouce, 1)) {
+                    $external = 'yes';
+                } else {
+                    $external = 'no';
+                }
+
+            }
+
+            //caso nome em branco pega o nome do arquivo
+            if (empty($name)) {
+                $name = $internalname;
+            }
+
+            if ($errors) {
+                unlink("$uploadlocal");
+                unlink($ftmp_name);
+                $errors[] = "File deleted.";
             }
 
         } else {

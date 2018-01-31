@@ -2,3 +2,4 @@
 /.idea
 *.txt
 *.torrent
+data/logs/php-error.txt
