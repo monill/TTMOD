@@ -30,7 +30,6 @@ class Signup extends Controller
         $this->view->title = SNAME . " :: Signup";
         $this->view->estates = Estate::all();
         $this->view->load('auth/signup', true);
-        exit();
     }
 
     public function in()

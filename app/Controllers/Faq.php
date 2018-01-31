@@ -22,6 +22,5 @@ class Faq extends Controller
         $this->view->categs = \App\Models\Faq::categ();
         $this->view->answers = \App\Models\Faq::answer();
         $this->view->load('faq/index', false);
-        exit();
     }
 }

@@ -20,6 +20,5 @@ class Members extends Controller
     {
         $this->view->title = SNAME . " :: Members";
         $this->view->load('members/index', false);
-        exit();
     }
 }

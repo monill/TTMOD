@@ -16,10 +16,11 @@ class Logout extends Controller
 
     public function index()
     {
-        // if ($_SERVER['PHP_SELF'] != $_SERVER['REQUEST_URI']) {
-        // die();
-        // }
-        Session::destroySession();
-        Redirect::to('/login');
+        if ($_SERVER['PHP_SELF'] != $_SERVER['REQUEST_URI']){
+
+        } else {
+            Session::destroySession();
+            Redirect::to('/login');
+        }
     }
 }

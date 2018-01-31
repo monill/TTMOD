@@ -23,7 +23,6 @@ class Torrents extends Controller
     {
         $this->view->title = SNAME . " :: Torrents";
         $this->view->load('torrents/index', false);
-        exit();
     }
 
     public function upload()
@@ -32,7 +31,6 @@ class Torrents extends Controller
         $this->view->categories = Torrent::categories();
         $this->view->token = Token::generate();
         $this->view->load('torrents/upload', false);
-        exit();
     }
 
 

@@ -21,6 +21,5 @@ class Rules extends Controller
         $this->view->title = SNAME . " :: Rules";
         $this->view->rules = \App\Models\Rules::all();
         $this->view->load('rules/index', false);
-        exit();
     }
 }

@@ -21,7 +21,6 @@ class Torrent extends Controller
     {
         $this->view->title = SNAME . " :: Torrrents";
         $this->view->load('torrents/index', false);
-        exit();
     }
 
     public function view($slug)
@@ -29,7 +28,6 @@ class Torrent extends Controller
         $this->view->title = SNAME . " :: tal";
         $this->view->slug = $slug;
         $this->view->load('torrents/torrent', false);
-        exit();
     }
 
     public function upload()

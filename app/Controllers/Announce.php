@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Libs\Redirect;
-
-class Admin extends Controller
+class Announce extends Controller
 {
     public function __construct()
     {
@@ -18,7 +16,11 @@ class Admin extends Controller
 
     public function index()
     {
-        $this->view->title = SNAME . " :: Admin Control Panel";
-        $this->view->load('admin/index', false);
+
+    }
+
+    public function passkey($passkey = '')
+    {
+
     }
 }

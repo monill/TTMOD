@@ -14,7 +14,6 @@ class Error extends Controller
     public function index()
     {
         $this->view->title = SNAME . " :: 404";
-        $this->view->load('errors/404', false);
-        exit();
+        $this->view->load('errors/404', true);
     }
 }

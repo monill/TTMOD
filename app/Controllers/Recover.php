@@ -31,7 +31,6 @@ class Recover extends Controller
         $this->view->title = SNAME . " :: Recover Password";
         $this->view->token = Token::generate();
         $this->view->load('recover/index', true);
-        exit();
     }
 
     public function in()
@@ -91,7 +90,6 @@ class Recover extends Controller
                 $this->view->token = Token::generate();
                 $this->view->coding = $key;
                 $this->view->load('recover/recover', true);
-                exit();
             } else {
                 //echo "<h5 class='text-error' style='text-align: center;'> Reset key is invalid or already used. </h5>";
                 Redirect::to('/recover');

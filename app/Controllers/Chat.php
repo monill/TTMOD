@@ -20,6 +20,5 @@ class Chat extends Controller
     {
         $this->view->title = SNAME . " :: Chat";
         $this->view->load('chat/index', false);
-        exit();
     }
 }

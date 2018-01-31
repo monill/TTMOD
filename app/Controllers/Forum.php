@@ -20,12 +20,10 @@ class Forum extends Controller
     {
         $this->view->title = SNAME . " :: Forum";
         $this->view->load('forum/index', false);
-        exit();
     }
 
     public function topic($slug = '')
     {
         $this->view->load('forum/topic', false);
-        exit();
     }
 }
