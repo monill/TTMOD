@@ -2,14 +2,17 @@
 
 namespace App\Libs;
 
-class Views
-{
-    public function __construct() { }
+class Views {
 
-    public function __clone() { }
+    public function __construct() {
+        
+    }
 
-    public function load($file, $inc = false)
-    {
+    public function __clone() {
+        
+    }
+
+    public function load($file, $inc = false) {
         if (!$inc) {
             require_once ROOT . 'views/header.php';
             require_once ROOT . 'views/' . $file . '.php';
@@ -20,4 +23,5 @@ class Views
             exit();
         }
     }
+
 }

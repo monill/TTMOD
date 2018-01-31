@@ -2,16 +2,19 @@
 
 namespace App\Libs\Torrent;
 
-class Encode
-{
-    public function __construct() { }
+class Encode {
 
-    public function __clone() { }
+    public function __construct() {
+        
+    }
+
+    public function __clone() {
+        
+    }
 
     // Dictionary keys must be sorted. foreach tends to iterate over the order
     // the array was made, so we make a new one in sorted order. :)
-    public function makeSorted($array)
-    {
+    public function makeSorted($array) {
         $i = 0;
 
         // Shouldn't happen!
@@ -32,8 +35,7 @@ class Encode
 
     // Encodes strings, integers and empty dictionaries.
     // $unstrip is set to true when decoding dictionary keys
-    public function encodeEntry($entry, &$fd, $unstrip = false)
-    {
+    public function encodeEntry($entry, &$fd, $unstrip = false) {
         if (is_bool($entry)) {
             return $fd .= "de";
         }
@@ -50,8 +52,7 @@ class Encode
     }
 
     // Encodes lists
-    public function encodeList($array, &$fd)
-    {
+    public function encodeList($array, &$fd) {
         $fd .= "l";
         // The empty list is defined as array();
         if (empty($array)) {
@@ -65,8 +66,7 @@ class Encode
 
     // Passes lists and dictionaries accordingly, and has
     // encodeEntry handle the strings and integers.
-    public function encodeDecide($unknown, &$fd)
-    {
+    public function encodeDecide($unknown, &$fd) {
         if (is_array($unknown)) {
             if (isset($unknown[0]) || empty($unknown)) {
                 return $this->encodeList($unknown, $fd);
@@ -77,8 +77,7 @@ class Encode
         return $this->encodeEntry($unknown, $fd);
     }
 
-    public function encodeDict($array, &$fd)
-    {
+    public function encodeDict($array, &$fd) {
         $fd .= "d";
         if (is_bool($array)) {
             return $fd .= "e";
@@ -91,4 +90,5 @@ class Encode
         }
         return $fd .= "e";
     }
+
 }

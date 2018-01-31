@@ -3,55 +3,56 @@
 namespace App\Libs\Torrent;
 
 /* 	Torrent HTTP Scraper
-    v1.0
+  v1.0
 
-    2010 by Johannes Zinnau
-    johannes@johnimedia.de
+  2010 by Johannes Zinnau
+  johannes@johnimedia.de
 
-    Licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License
-    http://creativecommons.org/licenses/by-sa/3.0/
+  Licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License
+  http://creativecommons.org/licenses/by-sa/3.0/
 
-    It would be very nice if you send me your changes on this class, so that i can include them if they are improve it.
-Thanks!
+  It would be very nice if you send me your changes on this class, so that i can include them if they are improve it.
+  Thanks!
 
-Usage:
-    try{
-        $timeout = 2;
-        //Read only 4MiB of the scrape response
-        $maxread = 1024 * 4;
+  Usage:
+  try{
+  $timeout = 2;
+  //Read only 4MiB of the scrape response
+  $maxread = 1024 * 4;
 
-        $scraper = new httptscraper($timeout,$maxread);
-        $ret = $scraper->scrape("http://tracker.tld:port/announce",array("0000000000000000000000000000000000000000"));
+  $scraper = new httptscraper($timeout,$maxread);
+  $ret = $scraper->scrape("http://tracker.tld:port/announce",array("0000000000000000000000000000000000000000"));
 
-        print_r($ret);
-    }catch(ScraperException $e){
-        echo("Error: " . $e->getMessage() . "<br />\n");
-        echo("Connection error: " . ($e->isConnectionError() ? "yes" : "no") . "<br />\n");
-    }
-*/
-class HttpScraper extends Scraper
-{
+  print_r($ret);
+  }catch(ScraperException $e){
+  echo("Error: " . $e->getMessage() . "<br />\n");
+  echo("Connection error: " . ($e->isConnectionError() ? "yes" : "no") . "<br />\n");
+  }
+ */
+
+class HttpScraper extends Scraper {
+
     protected $maxreadsize;
 
-    public function __construct($timeout = 2, $maxreadsize = 4096)
-    {
+    public function __construct($timeout = 2, $maxreadsize = 4096) {
         parent::__construct($timeout);
         $this->maxreadsize = $maxreadsize;
     }
 
-    public function __clone() { }
+    public function __clone() {
+        
+    }
 
     /**
      * $url: Tracker url like: http://tracker.tld:port/announce or http://tracker.tld:port/scrape
      * $infohash: Infohash string or array. 40 char long infohash.
      */
-    public function scrape($url, $infohash)
-    {
+    public function scrape($url, $infohash) {
         if (!is_array($infohash)) {
             $infohash = array($infohash);
         }
         foreach ($infohash as $hash) {
-            if (!preg_match("#^[a-f0-9]{40}$#i",$hash)) {
+            if (!preg_match("#^[a-f0-9]{40}$#i", $hash)) {
                 throw new ScraperException("Invalid infohash: " . $hash . ".");
             }
         }
@@ -63,7 +64,7 @@ class HttpScraper extends Scraper
         } else {
             throw new ScraperException("Invalid tracker url.");
         }
-        $sep = preg_match ("/\?.{1,}?/i", $url) ? "&" : "?";
+        $sep = preg_match("/\?.{1,}?/i", $url) ? "&" : "?";
         $requesturl = $url;
         foreach ($infohash as $hash) {
             $requesturl .= $sep . "info_hash=" . rawurlencode(pack("H*", $hash));
@@ -96,10 +97,10 @@ class HttpScraper extends Scraper
                     $completed = "0";
                 }
                 $torrents[$hash] = [
-                    "infohash"  => $hash,
-                    "seeders"   => (int) $arr_scrape_data["files"][$ehash]["complete"],
+                    "infohash" => $hash,
+                    "seeders" => (int) $arr_scrape_data["files"][$ehash]["complete"],
                     "completed" => (int) $completed,
-                    "leechers"  => (int) $arr_scrape_data["files"][$ehash]["incomplete"]
+                    "leechers" => (int) $arr_scrape_data["files"][$ehash]["incomplete"]
                 ];
             } else {
                 $torrents[$hash] = false;
@@ -108,4 +109,5 @@ class HttpScraper extends Scraper
         // var_dump($torrents);
         return $torrents;
     }
+
 }

@@ -10,28 +10,26 @@ use App\Libs\Session;
 use App\Libs\Token;
 use App\Libs\Validation;
 
-class Login extends Controller
-{
+class Login extends Controller {
+
     private $loginFingerPrint = LOGINFG;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 
-    public function __clone() { }
+    public function __clone() {
+        
+    }
 
-    public function index()
-    {
+    public function index() {
         $this->view->title = SNAME . " :: Login";
         $this->view->token = Token::generate();
         $this->view->load('auth/login', true);
     }
 
-    public function in()
-    {
-        if (Input::exist())
-        {
+    public function in() {
+        if (Input::exist()) {
             $user = Input::get('username');
             $pass = Input::get('password');
 
@@ -98,8 +96,7 @@ class Login extends Controller
         }
     }
 
-    public function validLogin($user, $pass)
-    {
+    public function validLogin($user, $pass) {
         $erro = array();
         $valid = new Validation();
 
@@ -122,45 +119,42 @@ class Login extends Controller
         return $this->loginTries() > 10 ? true : false;
     }
 
-    public function triesLogin()
-    {
+    public function triesLogin() {
         //obtem o numero atual de tentativas daquele IP
         $logins = $this->loginTries();
 
         //se forem maiores que 0, atualiza o valor
         if ($logins > 0) {
-            $this->db->update('bruteforces', ["alltimes" => $logins + 1], "`ip` = :ip AND `alldate` = :em", [ "ip" => Helper::getIP(), "em" => Helper::data() ]);
+            $this->db->update('bruteforces', ["alltimes" => $logins + 1], "`ip` = :ip AND `alldate` = :em", ["ip" => Helper::getIP(), "em" => Helper::data()]);
         } else {
             $this->db->insert('bruteforces', ["ip" => Helper::getIP(), "alldate" => Helper::data()]);
         }
     }
 
-    public function updateLogin($userid, $points)
-    {
+    public function updateLogin($userid, $points) {
         $this->db->update('users', [
             'lastlogin' => Helper::dateTime(),
             'points' => $points + 10,
             'ip' => Helper::getIP()
-        ], 'id = :id', ["id" => (int) $userid]);
+                ], 'id = :id', ["id" => (int) $userid]);
     }
 
     //======= PRIVATE AREA =======//
     /**
-      * Gerar uma string que será usada como impressão digital.
-      * Esta é realmente uma string criada a partir do nome do navegador do usuário e do IP do usuário
-      * Endereço, então, se alguém roubar sessão de usuários, ele não poderá acessar.
-      * @return string string gerado.
-      */
-    private function loginString()
-    {
+            * Gerar uma string que será usada como impressão digital.
+            * Esta é realmente uma string criada a partir do nome do navegador do usuário e do IP do usuário
+            * Endereço, então, se alguém roubar sessão de usuários, ele não poderá acessar.
+            * @return string string gerado.
+            */
+    private function loginString() {
         $ip = Helper::getIP();
         $browser = Helper::browser();
         return hash('sha512', $ip, $browser);
     }
 
-    private function loginTries()
-    {
+    private function loginTries() {
         $query = $this->db->select1("SELECT `alltimes` FROM `bruteforces` WHERE `ip` = :ipp AND `alldate` = :em", ["ipp" => Helper::getIP(), "em" => Helper::data()]);
         return count($query) == 0 ? 0 : $query->alltimes;
     }
+
 }

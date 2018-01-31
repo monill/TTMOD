@@ -1,7 +1,7 @@
 <?php
+
 use App\Libs\Session;
 ?>
-
 
 <?php if (Session::exist('success')): ?>
     <div class="alert alert-success">

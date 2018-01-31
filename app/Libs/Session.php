@@ -2,8 +2,8 @@
 
 namespace App\Libs;
 
-class Session
-{
+class Session {
+
     private $onlyCookies = false;
     private $siteNome = SNAME;
     private $sessionSecure = false;
@@ -59,4 +59,5 @@ class Session
         }
         return $session;
     }
+
 }

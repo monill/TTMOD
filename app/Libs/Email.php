@@ -6,10 +6,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\Libs\Helper;
 
-class Email extends PHPMailer
-{
-    public function confirmEmail($email, $key)
-    {
+class Email extends PHPMailer {
+
+    public function confirmEmail($email, $key) {
         // get instance of PHPMailer (including some additional info)
         $mail = $this->getMailer();
         // where you want to send confirmation email
@@ -29,15 +28,14 @@ class Email extends PHPMailer
         $mail->Body = $body;
 
         // try to send the email
-        if ( !$mail->send() ) {
+        if (!$mail->send()) {
             echo 'Message can not be sent. <br />';
             echo 'Mail error: ' . $mail->ErrorInfo;
             exit();
         }
     }
 
-    public function resetPass($email, $key)
-    {
+    public function resetPass($email, $key) {
         // get instance of PHPMailer (including some additional info)
         $mail = $this->getMailer();
         // where you want to send confirmation email
@@ -53,22 +51,21 @@ class Email extends PHPMailer
         $body = str_replace('{{link}}', $link, $body);
 
         $mail->Subject = SNAME . " - Password Reset.";
-        $mail->Body    = $body;
+        $mail->Body = $body;
 
-        if ( !$mail->send() ) {
+        if (!$mail->send()) {
             echo 'Message can not be sent. <br />';
             echo 'Mail error: ' . $mail->ErrorInfo;
             exit();
         }
     }
 
-    private function getMailer()
-    {
+    private function getMailer() {
         $email = new PHPMailer();
 
         if (MAILER == "smtp") {
             $email->isSMTP();
-            $email->Host    = SMTP_HOST;
+            $email->Host = SMTP_HOST;
             $email->SMTPAuth = true;
             $email->Username = SMTP_USERNAME;
             $email->SMTPSecure = SMTP_ENCRYPTION;
@@ -81,11 +78,11 @@ class Email extends PHPMailer
 
         //TODO
         //fix website_domain
-        $email->From     = '123456@inbox.mailtrap.io';
+        $email->From = '123456@inbox.mailtrap.io';
         $email->FromName = SNAME;
         $email->addReplyTo('123456@inbox.mailtrap.io', SNAME);
 
         return $email;
-
     }
+
 }

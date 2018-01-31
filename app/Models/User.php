@@ -4,17 +4,17 @@ namespace App\Models;
 
 use App\Libs\Database;
 
-class User extends Model
-{
-    public function __construct()
-    {
+class User extends Model {
+
+    public function __construct() {
         parent::__construct();
     }
 
-    private function __clone() { }
+    private function __clone() {
+        
+    }
 
-    public function classes($class)
-    {
+    public function classes($class) {
         if ($class == "member") {
             return "Member";
         } elseif ($class == "memberplus") {
@@ -35,7 +35,5 @@ class User extends Model
             return "Undefined";
         }
     }
-
-
 
 }

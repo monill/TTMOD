@@ -2,17 +2,20 @@
 
 namespace App\Libs;
 
-class Redirect
-{
+class Redirect {
+
     public $link = URL . '/';
     public $url;
 
-    public function __construct() { }
+    public function __construct() {
+        
+    }
 
-    public function __clone() { }
+    public function __clone() {
+        
+    }
 
-    public static function to($url)
-    {
+    public static function to($url) {
         if (!headers_sent()) {
             header("Location: " . $url, true, 302);
             exit();
@@ -26,4 +29,5 @@ class Redirect
             exit();
         }
     }
+
 }

@@ -33,14 +33,17 @@ namespace App\Libs\Torrent;
  *   before they get rejected by the decoder. This is worked around by
  *   suppressing errors.
  */
-class Decode
-{
-    public function __construct() { }
+class Decode {
 
-    public function __clone() { }
+    public function __construct() {
+        
+    }
 
-    public function decodeNumber($wholefile, $start)
-    {
+    public function __clone() {
+        
+    }
+
+    public function decodeNumber($wholefile, $start) {
         $ret = array();
 
         $ret[0] = 0;
@@ -72,7 +75,7 @@ class Decode
             }
             // Tolerate : or e because this is a multiuse function
             else if ($wholefile[$offset] == "e" || $wholefile[$offset] == ":") {
-                $ret[1] = $offset+1;
+                $ret[1] = $offset + 1;
                 if ($negative) {
                     if ($ret[0] == 0) {
                         return array(false);
@@ -87,8 +90,7 @@ class Decode
         return $ret; //nao estava aqui antes - soh coloquei pq pedia retorno de algo
     }
 
-    public function decodeEntry($wholefile, $offset = 0)
-    {
+    public function decodeEntry($wholefile, $offset = 0) {
         if ($wholefile[$offset] == "d") {
             return $this->decodeDict($wholefile, $offset);
         }
@@ -109,9 +111,8 @@ class Decode
         return $ret;
     }
 
-    public function decodeList($wholefile, $start)
-    {
-        $offset = $start+1;
+    public function decodeList($wholefile, $start) {
+        $offset = $start + 1;
         $i = 0;
         if ($wholefile[$start] != "l") {
             return array(false);
@@ -135,8 +136,7 @@ class Decode
         return $final;
     }
 
-    public function decodeDict($wholefile, $start = 0)
-    {
+    public function decodeDict($wholefile, $start = 0) {
         $offset = $start;
         if ($wholefile[$offset] == "l") {
             return $this->decodeList($wholefile, $start);
@@ -163,7 +163,7 @@ class Decode
                     return false;
                 }
                 $ret[addslashes($left[0])] = $value[0];
-                $offset= $value[1];
+                $offset = $value[1];
                 continue;
             } elseif ($wholefile[$offset] == "l") {
                 $value = $this->decodeList($wholefile, $offset);
@@ -189,4 +189,5 @@ class Decode
         $final[1] = $offset;
         return $final;
     }
+
 }

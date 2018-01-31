@@ -2,17 +2,16 @@
 
 namespace App\Libs;
 
-class Cache
-{
+class Cache {
+
     public $cacheDir = CACHE;
     public $cacheType = "disk"; // disk = Save cache to disk, memcache = Use memcache, apc = Use APC, xcache = Use XCache
 
-    public function __construct()
-    {
+    public function __construct() {
         switch ($this->cacheType) {
             case "memcache":
                 $this->obj = new \Memcache();
-                if (!@$this->obj->connect("127.0.0.1", 112111)) {
+                if (!$this->obj->connect("127.0.0.1", 112111)) {
                     $this->cacheType = "disk";
                 }
                 break;
@@ -35,10 +34,11 @@ class Cache
         }
     }
 
-    public function __clone() { }
+    public function __clone() {
+        
+    }
 
-    public function set($var, $val, $expire = 0)
-    {
+    public function set($var, $val, $expire = 0) {
         if ($expire == 0) {
             return false;
         }
@@ -68,8 +68,7 @@ class Cache
         }
     }
 
-    public function get($var, $expire = 0)
-    {
+    public function get($var, $expire = 0) {
         if ($expire == 0) {
             return false;
         }
@@ -104,8 +103,7 @@ class Cache
         }
     }
 
-    public function delete($var)
-    {
+    public function delete($var) {
         switch ($this->cacheType) {
             case "memcache":
                 return $this->obj->delete(SNAME . "_" . $var);
@@ -128,4 +126,5 @@ class Cache
                 break;
         }
     }
+
 }

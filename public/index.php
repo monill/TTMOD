@@ -31,4 +31,5 @@ require_once ROOT . 'bootstrap/Autoload.php';
 $app = new Autoload();
 
 use App\Libs\Session;
+
 Session::startSession();

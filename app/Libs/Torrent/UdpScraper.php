@@ -25,14 +25,13 @@ use App\Libs\Torrent\ScraperException;
  *      echo('Connection error: ' . ($e->isConnectionError() ? 'yes' : 'no') . "<br />\n");
  * }
  */
-class UdpScraper extends ScraperException
-{
+class UdpScraper extends ScraperException {
+
     /**
      * $url: Tracker url like: udp://tracker.tld:port or udp://tracker.tld:port/announce
      * $infohash: Infohash string or array (max 74 items). 40 char long infohash.
      */
-    public function scrape($url, $infohash)
-    {
+    public function scrape($url, $infohash) {
         if (!is_array($infohash)) {
             $infohash = array($infohash);
         }
@@ -106,4 +105,5 @@ class UdpScraper extends ScraperException
         }
         return $torrents;
     }
+
 }

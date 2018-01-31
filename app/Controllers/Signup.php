@@ -12,30 +12,28 @@ use App\Libs\Validation;
 use App\Models\Estate;
 use App\Models\Log;
 
-class Signup extends Controller
-{
+class Signup extends Controller {
+
     private $mailer;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->mailer = new Email();
     }
 
-    public function __clone() { }
+    public function __clone() {
+        
+    }
 
-    public function index()
-    {
+    public function index() {
         $this->view->token = Token::generate();
         $this->view->title = SNAME . " :: Signup";
         $this->view->estates = Estate::all();
         $this->view->load('auth/signup', true);
     }
 
-    public function in()
-    {
-        if (Input::exist())
-        {
+    public function in() {
+        if (Input::exist()) {
             $user = Input::get('username');
             $pass = Input::get('password');
             $passagain = Input::get('passagain');
@@ -45,14 +43,13 @@ class Signup extends Controller
             $gender = Input::get('gender');
 
             $data = explode("/", $dob);
-            $data_ok = $data[2] . "/" . $data[1] . "/" . $data[0]. "<br>";
+            $data_ok = $data[2] . "/" . $data[1] . "/" . $data[0] . "<br>";
 
             //inicia validacao dos campos
             $erros = $this->validData($user, $mail, $pass, $passagain);
 
             //se 0 erros, inicia o cadastro
-            if (count($erros) == 0)
-            {
+            if (count($erros) == 0) {
                 $key = Helper::codeAtivacao();
                 //TODO
                 //fix this
@@ -83,7 +80,6 @@ class Signup extends Controller
 
                 $resultado = ['status' => 'success', 'msg' => $msg];
                 echo json_encode($resultado);
-
             } else {
                 $result = ['status' => 'error', 'errors' => $erros];
                 echo json_encode($result);
@@ -93,8 +89,7 @@ class Signup extends Controller
         }
     }
 
-    public function validData($user, $mail, $pass, $passagain)
-    {
+    public function validData($user, $mail, $pass, $passagain) {
         $erros = array();
         $valid = new Validation();
 
@@ -102,28 +97,28 @@ class Signup extends Controller
             $erros[] = "Please enter the account.";
         }
         if ($valid->isEmpty($mail)) {
-           $erros[] = "Please enter an email.";
+            $erros[] = "Please enter an email.";
         }
         if ($valid->isEmpty($pass)) {
-           $erros[] = "Please enter a password.";
+            $erros[] = "Please enter a password.";
         }
         if ($valid->isEmpty($passagain)) {
-           $erros[] = "Please enter the second password.";
+            $erros[] = "Please enter the second password.";
         }
         if ($pass != $passagain) {
-           $erros[] = "The passwords do not match.";
+            $erros[] = "The passwords do not match.";
         }
         if (strlen($pass) < 6 || strlen($passagain) > 16) {
-           $erros[] = "Password must be between 6 and 16 characters long.";
+            $erros[] = "Password must be between 6 and 16 characters long.";
         }
         if ($valid->validEmail($mail)) {
             $erros[] = "Please enter a valid email address.";
         }
         if ($valid->emailExist($mail)) {
-           $erros[] = "The email provided is already in use.";
+            $erros[] = "The email provided is already in use.";
         }
         if ($valid->userExist($user)) {
-           $erros[] = "The chosen username is already in use.";
+            $erros[] = "The chosen username is already in use.";
         }
         if (strlen($user) < 3 && strlen($user) > 25) {
             $erros[] = "User can have between 3 and 25 characters.";
@@ -133,4 +128,5 @@ class Signup extends Controller
         }
         return $erros;
     }
+
 }

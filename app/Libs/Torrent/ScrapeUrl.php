@@ -19,10 +19,9 @@ use App\Libs\Helper;
  *    - downloaded: integer - number of complete downloads
  *
  */
-class ScrapeUrl
-{
-    public function __construct($scrape, $hash)
-    {
+class ScrapeUrl {
+
+    public function __construct($scrape, $hash) {
         if (function_exists('curl_exec')) {
             $ch = curl_init();
             $timeout = 30;
@@ -60,5 +59,8 @@ class ScrapeUrl
         return $ret;
     }
 
-    public function __clone() { }
+    public function __clone() {
+        
+    }
+
 }

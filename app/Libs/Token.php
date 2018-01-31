@@ -4,19 +4,21 @@ namespace App\Libs;
 
 use App\Libs\Session;
 
-class Token
-{
-    public function __construct() { }
+class Token {
 
-    public function __clone() { }
+    public function __construct() {
+        
+    }
 
-    public static function generate()
-    {
+    public function __clone() {
+        
+    }
+
+    public static function generate() {
         return Session::set('token', sha1(uniqid()));
     }
 
-    public static function check($token)
-    {
+    public static function check($token) {
         $tokenNome = 'token';
 
         if (Session::exist($tokenNome) && $token === Session::get($tokenNome)) {
@@ -25,4 +27,5 @@ class Token
         }
         return false;
     }
+
 }

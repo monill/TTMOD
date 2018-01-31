@@ -2,10 +2,9 @@
 
 namespace App\Libs;
 
-class AntiDDos
-{
-    public function __construct()
-    {
+class AntiDDos {
+
+    public function __construct() {
         $ip = Helper::getIP();
 
         $banned = file(ROOT . "data/logs/ip-banned.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -40,5 +39,8 @@ class AntiDDos
         file_put_contents(ROOT . "data/logs/ip.txt", serialize($ips));
     }
 
-    public function __clone() { }
+    public function __clone() {
+        
+    }
+
 }

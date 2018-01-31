@@ -10,31 +10,30 @@ use App\Libs\Token;
 use App\Libs\Validation;
 use App\Models\Log;
 
-class Recover extends Controller
-{
+class Recover extends Controller {
+
     private $mailer;
     private $login;
     private $valid;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->mailer = new Email();
         $this->login = new Login();
         $this->valid = new Validation();
     }
 
-    public function __clone() { }
+    public function __clone() {
+        
+    }
 
-    public function index()
-    {
+    public function index() {
         $this->view->title = SNAME . " :: Recover Password";
         $this->view->token = Token::generate();
         $this->view->load('recover/index', true);
     }
 
-    public function in()
-    {
+    public function in() {
         if (Input::exist()) {
 
             $email = Input::get('email');
@@ -54,9 +53,7 @@ class Recover extends Controller
                     'confirmresetpwd' => 'no',
                     'resetpwd_at' => Helper::dateTime(),
                     'ip' => $ip
-                ],
-                    "`email` = :email",
-                    ["email" => $email]
+                        ], "`email` = :email", ["email" => $email]
                 );
 
                 //send the email
@@ -80,12 +77,9 @@ class Recover extends Controller
         }
     }
 
-    public function code($key = '')
-    {
-        if (isset($key))
-        {
-            if ($this->valid->validKey($key))
-            {
+    public function code($key = '') {
+        if (isset($key)) {
+            if ($this->valid->validKey($key)) {
                 $this->view->title = SNAME . " :: Recover Password";
                 $this->view->token = Token::generate();
                 $this->view->coding = $key;
@@ -94,24 +88,20 @@ class Recover extends Controller
                 //echo "<h5 class='text-error' style='text-align: center;'> Reset key is invalid or already used. </h5>";
                 Redirect::to('/recover');
             }
-
         } else {
             Redirect::to('/signup');
         }
     }
 
-    public function on()
-    {
-        if (Input::exist())
-        {
+    public function on() {
+        if (Input::exist()) {
             $pwd = Input::get('password');
             $pwd1 = Input::get('password1');
             $key = Input::get('coding');
 
             $error = $this->validPass($pwd, $pwd1, $key);
 
-            if (count($error) == 0)
-            {
+            if (count($error) == 0) {
                 $user = $this->db->select1("SELECT `username` FROM `users` WHERE `codeactivation` = :k", ["k" => $key]);
 
                 $this->db->update('users', [
@@ -119,13 +109,12 @@ class Recover extends Controller
                     'confirmresetpwd' => 'yes',
                     'codeactivation' => null,
                     'update_at' => Helper::dateTime()
-                ], "`codeactivation` = :prk", ["prk" => $key]);
+                        ], "`codeactivation` = :prk", ["prk" => $key]);
 
                 Log::create("User: {$user->username} changed the password successfully.");
 
                 $reultado = ['status' => 'sucess', 'msg' => 'Password changed successfully!'];
                 echo json_encode($reultado);
-
             } else {
                 $result = ['status' => 'error', 'error' => $error];
                 echo json_encode($result);
@@ -135,25 +124,21 @@ class Recover extends Controller
         }
     }
 
-    public function acc($code = '')
-    {
-        if (isset($code))
-        {
-            if ($this->valid->validKey($code))
-            {
+    public function acc($code = '') {
+        if (isset($code)) {
+            if ($this->valid->validKey($code)) {
                 $user = $this->db->select1("SELECT `username` FROM `users` WHERE `codeactivation` = :k", ["k" => $code]);
 
                 $this->db->update('users', [
                     'status' => 'confirmed',
                     'codeactivation' => null,
                     'active_at' => Helper::dateTime()
-                ], "`codeactivation` = :code", ["code" => $code]);
+                        ], "`codeactivation` = :code", ["code" => $code]);
 
                 Log::create("User: {$user->username} just activated the account.");
 
                 $msg = "<h4 class='text-success'> Email Confirmed! </h4>";
                 $msg .= "<h5 class='text-success'> You can now Login!! Welcome :D </h5>";
-
             } else {
                 $msg = "<h5 class='text-error'> Activation key does not exist or account already activated. </h5>";
             }
@@ -162,8 +147,7 @@ class Recover extends Controller
         }
     }
 
-    public function validEmail($email)
-    {
+    public function validEmail($email) {
         $errors = array();
 
         if ($this->valid->isEmpty($email)) {
@@ -178,8 +162,7 @@ class Recover extends Controller
         return $errors;
     }
 
-    public function validPass($pwd, $pwd1, $key)
-    {
+    public function validPass($pwd, $pwd1, $key) {
         $errors = array();
 
         if ($this->valid->isEmpty($pwd)) {
@@ -199,4 +182,5 @@ class Recover extends Controller
         }
         return $errors;
     }
+
 }

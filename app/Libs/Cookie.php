@@ -2,8 +2,8 @@
 
 namespace App\Libs;
 
-class Cookie
-{
+class Cookie {
+
     public static function exists($name) {
         return (isset($_COOKIE[$name])) ? true : false;
     }
@@ -12,14 +12,15 @@ class Cookie
         return $_COOKIE[$name];
     }
 
-    public static function put($name, $value, $expiry) {
-        if (setcookie($name, $value, time()+$expiry, '/')) {
+    public static function set($name, $value, $expiry) {
+        if (setcookie($name, $value, time() + $expiry, '/')) {
             return true;
         }
         return false;
     }
 
     public static function delete($name) {
-        self::put($name, '', time()-1);
+        self::put($name, '', time() - 1);
     }
+
 }

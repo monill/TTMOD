@@ -2,14 +2,17 @@
 
 namespace App\Libs;
 
-class Helper
-{
-    public function __construct() { }
+class Helper {
 
-    public function __clone() { }
+    public function __construct() {
+        
+    }
 
-    public static function hashSenha($senha)
-    {
+    public function __clone() {
+        
+    }
+
+    public static function hashSenha($senha) {
         return password_hash($senha, PASSWORD_BCRYPT);
     }
 
@@ -170,27 +173,24 @@ class Helper
         return $_SERVER['HTTP_USER_AGENT'];
     }
 
-    public static function codeAtivacao()
-    {
+    public static function codeAtivacao() {
         return sha1(time() . microtime());
     }
 
-    public static function dateTime()
-    {
+    public static function dateTime() {
         return date("Y-m-d H:i:s");
     }
 
-    public static function md5Gen()
-    {
+    public static function md5Gen() {
         return md5(uniqid() . time() . microtime());
     }
 
-    public static function data()
-    {
+    public static function data() {
         return date("Y-m-d");
     }
 
     public static function validFilename($name) {
         return preg_match('/^[^\0-\x1f:\\\\\/?*\xff#<>|]+$/si', $name);
     }
+
 }

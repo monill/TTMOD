@@ -8,24 +8,23 @@ use App\Libs\Session;
 use App\Libs\Views;
 use App\Libs\Database;
 
-class Controller
-{
+class Controller {
+
     public $view = null;
     public $db;
-
     private $loginFingerPrint = LOGINFG;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->view = new Views();
         $this->db = Database::getInstance();
         $this->loggedIn();
     }
 
-    public function __clone() { }
+    public function __clone() {
+        
+    }
 
-    public function loggedIn()
-    {
+    public function loggedIn() {
         if ((Session::get('userid') || Session::get('loggedin')) == null) {
             return false;
         }
@@ -48,21 +47,20 @@ class Controller
 
     //======= PRIVATE AREA =======//
     /**
-      * Gerar uma string que será usada como impressão digital.
-      * Esta é realmente uma string criada a partir do nome do navegador do usuário e do IP do usuário
-      * Endereço, então, se alguém roubar sessão de usuários, ele não poderá acessar.
-      * @return string string gerado.
-      */
-    private function loginString()
-    {
+            * Gerar uma string que será usada como impressão digital.
+            * Esta é realmente uma string criada a partir do nome do navegador do usuário e do IP do usuário
+            * Endereço, então, se alguém roubar sessão de usuários, ele não poderá acessar.
+            * @return string string gerado.
+            */
+    private function loginString() {
         $ip = Helper::getIP();
         $browser = Helper::browser();
         return hash('sha512', $ip, $browser);
     }
 
-    private function logout()
-    {
+    private function logout() {
         Session::destroySession();
         Redirect::to('/login');
     }
+
 }
