@@ -39,7 +39,7 @@ class Decode
 
     public function __clone() { }
 
-    public function decodeNumber(array $wholefile, $start)
+    public function decodeNumber($wholefile, $start)
     {
         $ret = array();
 

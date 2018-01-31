@@ -12,6 +12,9 @@ define('SNAME', 'Test..');
 // Password key security, dont change this after install
 define('PWD_KEY', '!@#Mobiorum^&*');
 
+define('ANNOUNCE', URL . DIRECTORY_SEPARATOR .'announce' . DIRECTORY_SEPARATOR);
+define('TUPLOAD', ROOT . 'data/torrents/');
+
 // Set timezone
 date_default_timezone_set('America/Sao_Paulo');
 

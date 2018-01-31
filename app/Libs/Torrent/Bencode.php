@@ -16,7 +16,7 @@ class Bencode
         $string = "";
         $encode = new Encode();
         $encode->encodeDecide($array, $string);
-        return $string;
+        return $encode;
     }
 
     public static function decode($wholefile)

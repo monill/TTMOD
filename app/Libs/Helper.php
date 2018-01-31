@@ -189,4 +189,8 @@ class Helper
     {
         return date("Y-m-d");
     }
+
+    public static function validFilename($name) {
+        return preg_match('/^[^\0-\x1f:\\\\\/?*\xff#<>|]+$/si', $name);
+    }
 }
