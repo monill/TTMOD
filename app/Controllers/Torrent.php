@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Libs\Helper;
 use App\Libs\Input;
 use App\Libs\Redirect;
+use App\Libs\Torrent\Bencode;
 use App\Libs\Torrent\Parse;
 
 class Torrent extends Controller {
@@ -68,44 +69,44 @@ class Torrent extends Controller {
                 $torrentInfo = [];
                 $torrentInfo = new Parse("$uploadlocal");
 
-                $announce = $torrentInfo[0];
-                $infohash = $torrentInfo[1];
-                $creationdate = $torrentInfo[2];
-                $internalname = $torrentInfo[3];
-                $torrentsize = $torrentInfo[4];
-                $filecount = $torrentInfo[5];
-                $annlist = $torrentInfo[6];
-                $comment = $torrentInfo[7];
-                $filelist = $torrentInfo[8];
+//                $announce = $torrentInfo[0];
+//                $infohash = $torrentInfo[1];
+//                $creationdate = $torrentInfo[2];
+//                $internalname = $torrentInfo[3];
+//                $torrentsize = $torrentInfo[4];
+//                $filecount = $torrentInfo[5];
+//                $annlist = $torrentInfo[6];
+//                $comment = $torrentInfo[7];
+//                $filelist = $torrentInfo[8];
 
                 //for debug...
-                print ("<br>announce: " . $announce);
-                print ("<br>infohash: " . $infohash);
-                print ("<br>creationdate: " . $creationdate);
-                print ("<br>internalname: " . $internalname);
-                print ("<br>torrentsize: " . $torrentsize);
-                print ("<br>filecount: " . $filecount);
-                print ("<br>annlist: " . $annlist);
-                print ("<br>comment: " . $comment);
+//                print ("<br>announce: " . $announce);
+//                print ("<br>infohash: " . $infohash);
+//                print ("<br>creationdate: " . $creationdate);
+//                print ("<br>internalname: " . $internalname);
+//                print ("<br>torrentsize: " . $torrentsize);
+//                print ("<br>filecount: " . $filecount);
+//                print ("<br>annlist: " . $annlist);
+//                print ("<br>comment: " . $comment);
 
                 //check announce url is local or external
-                if (!in_array($announce, $this->annouce, 1)) {
-                    $external = 'yes';
-                } else {
-                    $external = 'no';
-                }
+//                if (!in_array($announce, $this->annouce, 1)) {
+//                    $external = 'yes';
+//                } else {
+//                    $external = 'no';
+//                }
             }
 
             //caso nome em branco pega o nome do arquivo
-            if (empty($name)) {
-                $name = $internalname;
-            }
-
-            if ($errors) {
-                unlink("$uploadlocal");
-                unlink($ftmp_name);
-                $errors[] = "File deleted.";
-            }
+//            if (empty($name)) {
+//                $name = $internalname;
+//            }
+//
+//            if ($errors) {
+//                unlink("$uploadlocal");
+//                unlink($ftmp_name);
+//                $errors[] = "File deleted.";
+//            }
         } else {
             Redirect::to('/torrents/upload');
         }

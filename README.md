@@ -1,5 +1,5 @@
 # TTMOD
-A Torrent Trade Modd not completed
+A Torrent Trade Modd in 'MVC' and not completed
 
 Database file is track.sql
 
