@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 30-Jan-2018 às 20:58
+-- Generation Time: 02-Fev-2018 às 12:19
 -- Versão do servidor: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -23,6 +23,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `announces`
+--
+
+CREATE TABLE IF NOT EXISTS `announces` (
+  `id` int(11) unsigned NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `seeders` int(10) unsigned NOT NULL DEFAULT '0',
+  `leechers` int(10) unsigned NOT NULL DEFAULT '0',
+  `timescompleted` int(10) unsigned NOT NULL DEFAULT '0',
+  `online` enum('yes','no') NOT NULL DEFAULT 'no',
+  `torrent_id` int(11) unsigned NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `announces`
+--
+
+INSERT INTO `announces` (`id`, `url`, `seeders`, `leechers`, `timescompleted`, `online`, `torrent_id`) VALUES
+(9, 'http://localhost/announce/passkey/', 0, 0, 0, 'no', 11);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `bruteforces`
 --
 
@@ -31,15 +54,7 @@ CREATE TABLE IF NOT EXISTS `bruteforces` (
   `ip` varchar(70) NOT NULL,
   `alltimes` int(10) unsigned NOT NULL DEFAULT '1',
   `alldate` date NOT NULL DEFAULT '0000-00-00'
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `bruteforces`
---
-
-INSERT INTO `bruteforces` (`id`, `ip`, `alltimes`, `alldate`) VALUES
-(14, '::1', 10, '2018-01-28'),
-(15, '::1', 3, '2018-01-29');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -52,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `name` varchar(45) NOT NULL,
   `slug` varchar(45) NOT NULL,
   `icon` varchar(45) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `categories`
@@ -61,7 +76,21 @@ CREATE TABLE IF NOT EXISTS `categories` (
 INSERT INTO `categories` (`id`, `name`, `slug`, `icon`) VALUES
 (1, 'Movies', 'movies', 'fa fa-film'),
 (2, 'TV', 'tv', 'fa fa-television'),
-(3, 'Music', 'music', 'fa fa-music');
+(3, 'Music', 'music', 'fa fa-music'),
+(4, 'E-Books', 'ebooks', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `completes`
+--
+
+CREATE TABLE IF NOT EXISTS `completes` (
+  `id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `torrent_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -205,6 +234,28 @@ INSERT INTO `faq_categs` (`id`, `name`, `style`, `created_at`, `update_at`) VALU
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `files`
+--
+
+CREATE TABLE IF NOT EXISTS `files` (
+  `id` bigint(20) unsigned NOT NULL,
+  `path` varchar(255) NOT NULL,
+  `length` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `torrent_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `created_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `files`
+--
+
+INSERT INTO `files` (`id`, `path`, `length`, `torrent_id`, `created_at`, `update_at`) VALUES
+(33, '2018-01-30 16-24-08.mp4', 6109835335, 11, '2018-02-01 20:23:38', '2018-02-01 20:23:38');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `layouts`
 --
 
@@ -223,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `layouts` (
 --
 
 INSERT INTO `layouts` (`id`, `named`, `name`, `position`, `description`, `enabled`, `sort`) VALUES
-(1, 'donate', 'donate', 'left', 'Description here...', 1, 11),
+(1, 'donate', 'donate', 'right', 'Description here...', 1, 11),
 (2, 'invite', 'invite', 'right', 'Description here...', 1, 2),
 (3, 'Main Navigation', 'navigate', 'left', 'Description here...', 1, 4),
 (4, 'User Block', 'user', 'left', 'Description here...', 1, 1),
@@ -284,6 +335,30 @@ INSERT INTO `news` (`id`, `userid`, `title`, `content`, `created_at`, `update_at
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `peers`
+--
+
+CREATE TABLE IF NOT EXISTS `peers` (
+  `id` int(11) unsigned NOT NULL,
+  `torrent_id` int(11) unsigned NOT NULL,
+  `peer_id` varchar(45) NOT NULL,
+  `ip` varchar(70) NOT NULL,
+  `port` smallint(7) NOT NULL DEFAULT '0',
+  `uploaded` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `downloaded` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `togo` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `seeder` enum('yes','no') NOT NULL DEFAULT 'no',
+  `connectable` enum('yes','no') NOT NULL DEFAULT 'yes',
+  `client` varchar(70) NOT NULL,
+  `userid` varchar(45) NOT NULL,
+  `passkey` varchar(45) NOT NULL,
+  `started` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `lastaction` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `rules`
 --
 
@@ -303,6 +378,53 @@ INSERT INTO `rules` (`id`, `title`, `content`, `created_at`, `update_at`) VALUES
 (1, 'General rules - Breaking these rules can and will get you banned!', '- We are a English only site, so please only talk in english! <br />\n\n- Keep your overall ratio at or above 0.5 at all times! <br />\n\n- Do not defy the moderators expressed wishes! <br />', NULL, NULL),
 (2, 'General Forum Guidelines', '- No aggressive behaviour or flaming in the forums. <br />\n- No trashing of other peoples topics (i.e. SPAM). <br />\n- No language other than English in the forums. <br />\n- No links to warez or crack sites in the forums. <br />\n- No serials, CD keys, passwords or cracks in the forums. <br />\n- No requesting if the release is over 7 days old. <br />\n- No bumping... (All bumped threads will be deleted.) <br />\n- No double posting. If you wish to post again, and yours is the last post in the thread please use the EDIT function,instead of posting a double. <br />\n- Please ensure all questions are posted in the correct section! <br />', NULL, NULL),
 (3, 'Moderating Rules', '- The most important rule!; Use your better judgement! <br />\n- Don''t defy another mod in public, instead send a PM or make a post in the "Site admin". <br />\n- Be tolerant! give the user(s) a chance to reform. <br />\n- Don''t act prematurely, Let the users make their mistake and THEN correct them. <br />\n- Try correcting any "off topics" rather then closing the thread. <br />\n- Move topics rather than locking / deleting them. <br />\n- Be tolerant when moderating the Chit-chat section. (give them some slack) <br />\n- If you lock a topic, Give a brief explanation as to why you''re locking it. <br />\n- Before banning a user, Send him/her a PM and If they reply, put them on a 2 week trial. <br />\n- Don''t ban a user until he or she has been a member for at least 4 weeks. <br />\n- Always state a reason (in the user comment box) as to why the user is being banned. <br />\n', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `torrents`
+--
+
+CREATE TABLE IF NOT EXISTS `torrents` (
+  `id` int(11) unsigned NOT NULL,
+  `infohash` varchar(45) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `filename` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `poster` varchar(200) DEFAULT NULL,
+  `image1` varchar(200) DEFAULT NULL,
+  `image2` varchar(200) DEFAULT NULL,
+  `image3` varchar(200) DEFAULT NULL,
+  `category_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `size` int(10) unsigned NOT NULL DEFAULT '0',
+  `numfiles` int(10) unsigned NOT NULL DEFAULT '0',
+  `comments` int(10) unsigned NOT NULL DEFAULT '0',
+  `views` int(10) unsigned NOT NULL DEFAULT '0',
+  `downs` int(10) unsigned NOT NULL DEFAULT '0',
+  `timescompleted` int(10) unsigned NOT NULL DEFAULT '0',
+  `leechers` int(10) unsigned NOT NULL DEFAULT '0',
+  `seeders` int(10) unsigned NOT NULL DEFAULT '0',
+  `visible` enum('yes','no') NOT NULL DEFAULT 'no',
+  `banned` enum('yes','no') NOT NULL DEFAULT 'no',
+  `numratings` int(10) unsigned NOT NULL DEFAULT '0',
+  `ratingsum` int(10) unsigned NOT NULL DEFAULT '0',
+  `anon` enum('yes','no') NOT NULL DEFAULT 'no',
+  `nfo` enum('yes','no') NOT NULL DEFAULT 'no',
+  `announce` varchar(255) NOT NULL,
+  `external` enum('yes','no') NOT NULL DEFAULT 'no',
+  `freeleech` enum('yes','no') NOT NULL DEFAULT 'no',
+  `thanks` int(10) unsigned NOT NULL DEFAULT '0',
+  `uploader_id` int(11) unsigned NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `torrents`
+--
+
+INSERT INTO `torrents` (`id`, `infohash`, `name`, `filename`, `description`, `poster`, `image1`, `image2`, `image3`, `category_id`, `size`, `numfiles`, `comments`, `views`, `downs`, `timescompleted`, `leechers`, `seeders`, `visible`, `banned`, `numratings`, `ratingsum`, `anon`, `nfo`, `announce`, `external`, `freeleech`, `thanks`, `uploader_id`, `created_at`, `update_at`) VALUES
+(11, '870cbd4be2f9c901847c91bf7c6484ed4d3f2c49', '2018-01-3016-24-08', '2018-01-30 16-24-08.mp4', 'dasdasdasd', '', '', '', '', 1, 4294967295, 1, 0, 0, 14, 0, 0, 0, 'no', 'no', 0, 0, 'no', '', 'http://localhost/announce/passkey/', 'no', 'no', 0, 1, '2018-02-01 20:23:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -335,6 +457,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `points` int(10) NOT NULL DEFAULT '1000',
   `invites` tinyint(3) unsigned DEFAULT '0',
   `warn` enum('yes','no') NOT NULL DEFAULT 'no',
+  `maxslots` tinyint(5) unsigned NOT NULL DEFAULT '1',
   `lastlogin` datetime DEFAULT '0000-00-00 00:00:00',
   `created_at` datetime DEFAULT '0000-00-00 00:00:00',
   `update_at` datetime DEFAULT '0000-00-00 00:00:00',
@@ -346,14 +469,21 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `status`, `banned`, `privacy`, `class`, `dob`, `info`, `acceptpms`, `codeactivation`, `confirmresetpwd`, `ip`, `avatar`, `uploaded`, `downloaded`, `title`, `estate_id`, `sex`, `passkey`, `points`, `invites`, `warn`, `lastlogin`, `created_at`, `update_at`, `active_at`, `resetpwd_at`) VALUES
-(1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'normal', 'member', '0000-00-00', NULL, 'yes', NULL, NULL, '::1', NULL, 0, 0, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1020, 0, 'no', '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'normal', 'member', '0000-00-00', NULL, 'yes', NULL, NULL, '::1', NULL, 0, 0, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1030, 0, 'no', '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'normal', 'member', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, 0, 0, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1450, 1, 'no', '2018-01-29 15:58:49', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
+INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `status`, `banned`, `privacy`, `class`, `dob`, `info`, `acceptpms`, `codeactivation`, `confirmresetpwd`, `ip`, `avatar`, `uploaded`, `downloaded`, `title`, `estate_id`, `sex`, `passkey`, `points`, `invites`, `warn`, `maxslots`, `lastlogin`, `created_at`, `update_at`, `active_at`, `resetpwd_at`) VALUES
+(1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'normal', 'member', '0000-00-00', NULL, 'yes', NULL, NULL, '::1', NULL, 0, 0, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1020, 0, 'no', 4, '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'normal', 'member', '0000-00-00', NULL, 'yes', NULL, NULL, '::1', NULL, 0, 0, NULL, 17, 'na', '501237503104ff5394131a12102c61bb', 1030, 0, 'no', 4, '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'normal', 'member', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, 0, 0, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1450, 1, 'no', 4, '2018-01-29 15:58:49', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `announces`
+--
+ALTER TABLE `announces`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `torrent_id` (`torrent_id`);
 
 --
 -- Indexes for table `bruteforces`
@@ -365,6 +495,12 @@ ALTER TABLE `bruteforces`
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `completes`
+--
+ALTER TABLE `completes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -387,6 +523,13 @@ ALTER TABLE `faq_categs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `files`
+--
+ALTER TABLE `files`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `torrent_id` (`torrent_id`);
+
+--
 -- Indexes for table `layouts`
 --
 ALTER TABLE `layouts`
@@ -406,10 +549,25 @@ ALTER TABLE `news`
   ADD KEY `userid` (`userid`);
 
 --
+-- Indexes for table `peers`
+--
+ALTER TABLE `peers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `torrent_id` (`torrent_id`);
+
+--
 -- Indexes for table `rules`
 --
 ALTER TABLE `rules`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `torrents`
+--
+ALTER TABLE `torrents`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_id` (`category_id`),
+  ADD KEY `uploader` (`uploader_id`);
 
 --
 -- Indexes for table `users`
@@ -423,15 +581,25 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `announces`
+--
+ALTER TABLE `announces`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
 -- AUTO_INCREMENT for table `bruteforces`
 --
 ALTER TABLE `bruteforces`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `completes`
+--
+ALTER TABLE `completes`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `estates`
 --
@@ -448,6 +616,11 @@ ALTER TABLE `faqs`
 ALTER TABLE `faq_categs`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
+-- AUTO_INCREMENT for table `files`
+--
+ALTER TABLE `files`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
+--
 -- AUTO_INCREMENT for table `layouts`
 --
 ALTER TABLE `layouts`
@@ -463,10 +636,20 @@ ALTER TABLE `logs`
 ALTER TABLE `news`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `peers`
+--
+ALTER TABLE `peers`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
 -- AUTO_INCREMENT for table `rules`
 --
 ALTER TABLE `rules`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `torrents`
+--
+ALTER TABLE `torrents`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -477,16 +660,35 @@ ALTER TABLE `users`
 --
 
 --
+-- Limitadores para a tabela `announces`
+--
+ALTER TABLE `announces`
+  ADD CONSTRAINT `announces_ibfk_1` FOREIGN KEY (`torrent_id`) REFERENCES `torrents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Limitadores para a tabela `faqs`
 --
 ALTER TABLE `faqs`
   ADD CONSTRAINT `faqs_ibfk_1` FOREIGN KEY (`categ_id`) REFERENCES `faq_categs` (`id`);
 
 --
+-- Limitadores para a tabela `files`
+--
+ALTER TABLE `files`
+  ADD CONSTRAINT `files_ibfk_1` FOREIGN KEY (`torrent_id`) REFERENCES `torrents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Limitadores para a tabela `news`
 --
 ALTER TABLE `news`
   ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`);
+
+--
+-- Limitadores para a tabela `torrents`
+--
+ALTER TABLE `torrents`
+  ADD CONSTRAINT `torrents_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
+  ADD CONSTRAINT `torrents_ibfk_2` FOREIGN KEY (`uploader_id`) REFERENCES `users` (`id`);
 
 --
 -- Limitadores para a tabela `users`
