@@ -10,5 +10,6 @@ Index page
 <br /><br />
 
 <?php
-echo date("Y-m-d H:i:s");
- ?>
+
+
+?>

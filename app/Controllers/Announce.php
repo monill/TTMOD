@@ -106,18 +106,18 @@ class Announce extends Controller {
 
         unset($self);
 
-        while ($peer) {
-            if ($peer->peer_id === $peerid) {
-                $self = $peer;
+        while ($row = $peer) {
+            if ($row->peer_id === $peerid) {
+                $self = $row;
                 continue;
             }
 
-            $peers = "d" . $this->bencStr("ip") . $this->bencStr($peer->ip);
+            $peers = "d" . $this->bencStr("ip") . $this->bencStr($row->ip);
 
             if (!$no_peer_id) {
-                $peers .= $this->bencStr("peer id") . $this->bencStr($peer->peer_id);
+                $peers .= $this->bencStr("peer id") . $this->bencStr($row->peer_id);
             }
-            $peers .= $this->bencStr("port") . "i" . $peer->port . "ee";
+            $peers .= $this->bencStr("port") . "i" . $row->port . "ee";
 
             $resp .=  "l{$peers}e";
             $resp .= "ee";
@@ -138,7 +138,7 @@ class Announce extends Controller {
                 $datet = strtotime(Helper::dateTime());
                 $created = $torrent->created_at;
                 $gigs = $user->uploaded / (1024 * 1024 * 1024);
-                $elapsed = floor( $datet - $created / 3600);
+                $elapsed = floor(round($datet) - round($created) / 3600);
                 $ratio = (($user->downloaded > 0) ? ($user->uploaded / $user->downloaded) : 1);
 
                 if ($ratio == 0 && $gigs == 0) { // Minimum ratio || Minimum gigs
@@ -233,22 +233,22 @@ class Announce extends Controller {
                 }
             }
         } else {
-            //TODO
+
             $ret = $this->db->insert('peers', [
-                'connectable' => '',
-                'torrent_id' => '',
-                'peer_id' => '',
-                'ip' => '',
-                'passkey' => '',
-                'port' => '',
-                'uploaded' => '',
-                'downloaded' => '',
-                'togo' => '',
-                'started' => '',
-                'lastaction' => '',
-                'seeder' => '',
-                'userid' => '',
-                'client' => ''
+                'connectable' => $connectable,
+                'torrent_id' => $torrent->id,
+                'peer_id' => $peerid,
+                'ip' => $ip,
+                'passkey' => $passkey,
+                'port' => $port,
+                'uploaded' => $uploaded,
+                'downloaded' => $downloaded,
+                'togo' => $left,
+                'started' => Helper::dateTime(),
+                'lastaction' => Helper::dateTime(),
+                'seeder' => $seeder,
+                'userid' => $user->id,
+                'client' => $agent
             ]);
 
             if ($ret) {
@@ -273,7 +273,7 @@ class Announce extends Controller {
                $this->err("Connection limit exceeded!");
            }
         }
-        
+
         // SEEDED, LETS MAKE IT VISIBLE THEN
         if ($seeder == 'yes') {
             if ($torrent->banned != "yes") {
@@ -283,6 +283,8 @@ class Announce extends Controller {
         }
 
         // NOW WE UPDATE THE TORRENT AS PER ABOVE
+        //TODO
+        //fix this
 //        if (count($updateset)) {
 //            $this->db->update('torrents', [
 //                join(",", $updateset)
@@ -290,11 +292,12 @@ class Announce extends Controller {
 //        }
 
         // NOW BENC THE DATA AND SEND TO CLIENT???
-        return $this->bencRespRaw($resp);
+        return Bencode::encode($this->bencRespRaw($resp));
     }
 
     public function bencRespRaw($value)
     {
+        header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
         header("Content-Type: text/plain");
         header("Pragma: no-cache");
         print $value;

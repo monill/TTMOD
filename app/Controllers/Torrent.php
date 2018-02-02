@@ -287,6 +287,7 @@ class Torrent extends Controller {
 
                     $data = Bencode::encode($decoded);
 
+                    header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
                     header("Cache-Control: public"); // needed for internet explorer
                     header("Content-Type: application/x-bittorrent");
                     //header("Content-Length:" . filesize($data)); //error if uncomment this
