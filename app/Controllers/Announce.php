@@ -18,7 +18,7 @@ class Announce extends Controller {
     }
 
     public function __clone() {
-        
+
     }
 
     public function index() {
@@ -41,10 +41,10 @@ class Announce extends Controller {
         $infohash = Input::get('info_hash');
         $peerid = Input::get('peer_id');
         $ip = Input::get('ip');
-        $port = Input::get('port');
-        $uploaded = Input::get('uploaded');
-        $downloaded = Input::get('downloaded');
-        $left = Input::get('left');
+        $port = (int)Input::get('port');
+        $uploaded = (float)Input::get('uploaded');
+        $downloaded = (float)Input::get('downloaded');
+        $left = (float)Input::get('left');
         $event = Input::get('event');
 
         $no_peer_id = Input::get('no_peer_id');
@@ -52,11 +52,7 @@ class Announce extends Controller {
         $browser = new BrowserDetection();
         $agent = $browser->getUserAgent();
 
-//        foreach (array("passkey", "info_hash", "peer_id", "port", "downloaded", "uploaded", "left") as $x) {
-//            if (!isset($$x)) {
-//                $this->err("Missing key: $x.");
-//            }
-//        }
+
         if (strlen($peerid) != 20) {
             $this->err("Invalid Peer ID.");
         }
@@ -79,11 +75,17 @@ class Announce extends Controller {
             $this->err("Port $port is blacklisted.");
         }
 
-        $torrent = $this->db->select1("SELECT id, infohash, banned, freeleech, seeders + leechers AS numpeers, UNIX_TIMESTAMP(created_at) AS ts, seeders, leechers, timescompleted FROM `torrents` WHERE `infohash` = :ihash", ["ihash" => $infohash]) or $this->err("Cannot Get Torrent Details");
+        $torrent = $this->db->select1("SELECT id, infohash, banned, freeleech, seeders + leechers AS numpeers, created_at, seeders, leechers, timescompleted FROM `torrents` WHERE `infohash` = :ihash", ["ihash" => $infohash]) or $this->err("Cannot Get Torrent Details");
         $user = $this->db->select1("SELECT * FROM `users` WHERE `passkey` = :passkey LIMIT 1", ["passkey" => $passkey]) or $this->err("Cannot Get User Details");
 
         if (!$user) {
-            return $this->err("Passkey is invalid.");
+            $this->err("Passkey is invalid.");
+        }
+        if ($user->status != 'confirmed') {
+            $this->err("Your account is not activated.");
+        }
+        if ($user->banned == 'yes') {
+            $this->err("You are no longer welcome here.");
         }
         if (!$torrent) {
             $this->err("Torrent not found on this tracker - hash = " . $infohash);
@@ -91,7 +93,6 @@ class Announce extends Controller {
         if ($torrent->banned == 'yes') {
             $this->err("Torrent has been banned - hash = " . $infohash);
         }
-
         if ($torrent->numpeers > 50) {
             $limit = "ORDER BY RAND() LIMIT 50";
         } else {
@@ -122,25 +123,65 @@ class Announce extends Controller {
             $resp .= "ee";
         }
 
-
-        // FILL $SELF WITH DETAILS FROM PEERS TABLE (CONNECTING PEERS DETAILS)
-        if (!isset($self))
-        {
-            $valid = $this->db->select("SELECT COUNT(*) FROM `peers` WHERE `torrent_id` = :tid AND `passkey` = :pkey", ["tid" => $torrent->id, "pkey" => $passkey]);
-
-//            if ($valid >= 1 && $seeder != "no") {
-//                $this->err("Connection limit exceeded! You may only leech from one location at a time.");
-//            }
-//            if ($valid >= 3 && $seeder == 'yes') {
-//                $this->err("Connection limit exceeded!");
-//            }
-        }
-
         if ($seeder != "yes") {
             $query = $this->db->select("SELECT COUNT(DISTINCT torrent_id) FROM `peers` WHERE `userid` = :uid AND `seeder` = 'no'", ["uid" => $user->id]);
             $maxslot = $this->maxSlots($user->id);
-            if ($query[0] >= $maxslot) {
+            if (count($query) >= $maxslot) {
                 $this->err("Maximum $maxslot Slot exceeded! You dont have any more download slots available, wait for 1 or more to finish then you can download this.");
+            }
+        }
+
+        if (!isset($self))
+        {
+            if (true && true)
+            {
+                $datet = strtotime(Helper::dateTime());
+                $created = $torrent->created_at;
+                $gigs = $user->uploaded / (1024 * 1024 * 1024);
+                $elapsed = floor( $datet - $created / 3600);
+                $ratio = (($user->downloaded > 0) ? ($user->uploaded / $user->downloaded) : 1);
+
+                if ($ratio == 0 && $gigs == 0) { // Minimum ratio || Minimum gigs
+                    $wait = 24;  // Wait time in hours
+                } elseif ($ratio < 0.50 || $gigs < 1) {
+                    $wait = 23;
+                } elseif ($ratio < 0.65 || $gigs < 3) {
+                    $wait = 11;
+                } elseif ($ratio <0.80 || $gigs < 5) {
+                    $wait = 6;
+                } elseif ($ratio < 0.95 || $gigs < 7) {
+                    $wait = 2;
+                } else {
+                    $wait = 0;
+                }
+
+                if ($elapsed < $wait) {
+                    $this->err("Wait Time (" . ($wait - $elapsed) . " hours) Visit the forum for more info.");
+                }
+            }
+            $sockets = fsockopen($ip, $port, $errno,$errstr, 5);
+            if (!$sockets) {
+                $connectable = "no";
+            } else {
+                $connectable = "yes";
+            }
+            fclose($sockets);
+
+        } else {
+            $upthis = max(0, $uploaded - $self["uploaded"]);
+            $downthis = max(0, $downloaded - $self["downloaded"]);
+
+            if (($upthis > 0 || $downthis) && $user->id) {
+                if ($torrent->freeleech == 'yes') {
+                    $this->db->update('users', [
+                        'uploaded' => "uploaded + $upthis"
+                    ], "`id` = :id", ["id" => $user->id]);
+                } else {
+                    $this->db->update('users', [
+                        'uploaded' => "uploaded + $upthis",
+                        'downloaded' => "downloaded + $downthis"
+                    ], "`id` = :id", ["id" => $user->id]) or $this->err("Tracker error: Unable to update stats");
+                }
             }
         }
 
@@ -220,6 +261,19 @@ class Announce extends Controller {
         }
         //////////////////    END TRACKER EVENT UPDATES ///////////////////
 
+        // FILL $SELF WITH DETAILS FROM PEERS TABLE (CONNECTING PEERS DETAILS)
+        if (!isset($self))
+        {
+            $valid = $this->db->select("SELECT COUNT(*) FROM `peers` WHERE `torrent_id` = :tid AND `passkey` = :pkey", ["tid" => $torrent->id, "pkey" => $passkey]);
+
+           if ($valid >= 1 && $seeder != "no") {
+               $this->err("Connection limit exceeded! You may only leech from one location at a time.");
+           }
+           if ($valid >= 3 && $seeder == 'yes') {
+               $this->err("Connection limit exceeded!");
+           }
+        }
+        
         // SEEDED, LETS MAKE IT VISIBLE THEN
         if ($seeder == 'yes') {
             if ($torrent->banned != "yes") {
@@ -243,13 +297,6 @@ class Announce extends Controller {
     {
         header("Content-Type: text/plain");
         header("Pragma: no-cache");
-
-//        if (extension_loaded('zlib') && !ini_get('zlib.output_compression') && $_SERVER["HTTP_ACCEPT_ENCODING"] == "gzip") {
-//            header("Content-Encoding: gzip");
-//            echo gzencode($value, 9, FORCE_GZIP);
-//        } else {
-//            print $value;
-//        }
         print $value;
         exit();
     }

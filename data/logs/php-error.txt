@@ -1,6 +1,60 @@
-[02-Feb-2018 02:35:40 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Call to a member function rowCount() on null in D:\Ampps\www\app\Controllers\Announce.php:150
-Stack trace:
-#0 D:\Ampps\www\bootstrap\Autoload.php(40): App\Controllers\Announce->passkey('506007503104ff5...')
-#1 D:\Ampps\www\public\index.php(31): Autoload->__construct()
-#2 {main}
-  thrown in D:\Ampps\www\app\Controllers\Announce.php on line 150
+[02-Feb-2018 11:56:48 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\app\Controllers\Announce.php on line 140
+[02-Feb-2018 11:56:48 America/Sao_Paulo] PHP Stack trace:
+[02-Feb-2018 11:56:48 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[02-Feb-2018 11:56:48 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[02-Feb-2018 11:56:48 America/Sao_Paulo] PHP   3. App\Controllers\Announce->passkey() D:\Ampps\www\bootstrap\Autoload.php:40
+[02-Feb-2018 11:56:59 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\app\Controllers\Announce.php on line 140
+[02-Feb-2018 11:56:59 America/Sao_Paulo] PHP Stack trace:
+[02-Feb-2018 11:56:59 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[02-Feb-2018 11:56:59 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[02-Feb-2018 11:56:59 America/Sao_Paulo] PHP   3. App\Controllers\Announce->passkey() D:\Ampps\www\bootstrap\Autoload.php:40
+[02-Feb-2018 11:58:18 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\app\Controllers\Announce.php on line 140
+[02-Feb-2018 11:58:18 America/Sao_Paulo] PHP Stack trace:
+[02-Feb-2018 11:58:18 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[02-Feb-2018 11:58:18 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[02-Feb-2018 11:58:18 America/Sao_Paulo] PHP   3. App\Controllers\Announce->passkey() D:\Ampps\www\bootstrap\Autoload.php:40
+[02-Feb-2018 11:58:18 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\app\Controllers\Announce.php on line 140
+[02-Feb-2018 11:58:18 America/Sao_Paulo] PHP Stack trace:
+[02-Feb-2018 11:58:18 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[02-Feb-2018 11:58:18 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[02-Feb-2018 11:58:18 America/Sao_Paulo] PHP   3. App\Controllers\Announce->passkey() D:\Ampps\www\bootstrap\Autoload.php:40
+[02-Feb-2018 12:06:53 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\app\Controllers\Announce.php on line 141
+[02-Feb-2018 12:06:53 America/Sao_Paulo] PHP Stack trace:
+[02-Feb-2018 12:06:53 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[02-Feb-2018 12:06:53 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[02-Feb-2018 12:06:53 America/Sao_Paulo] PHP   3. App\Controllers\Announce->passkey() D:\Ampps\www\bootstrap\Autoload.php:40
+[02-Feb-2018 12:08:24 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\app\Controllers\Announce.php on line 141
+[02-Feb-2018 12:08:24 America/Sao_Paulo] PHP Stack trace:
+[02-Feb-2018 12:08:24 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[02-Feb-2018 12:08:24 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[02-Feb-2018 12:08:24 America/Sao_Paulo] PHP   3. App\Controllers\Announce->passkey() D:\Ampps\www\bootstrap\Autoload.php:40
+[02-Feb-2018 12:11:13 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\app\Controllers\Announce.php on line 141
+[02-Feb-2018 12:11:13 America/Sao_Paulo] PHP Stack trace:
+[02-Feb-2018 12:11:13 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[02-Feb-2018 12:11:13 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[02-Feb-2018 12:11:13 America/Sao_Paulo] PHP   3. App\Controllers\Announce->passkey() D:\Ampps\www\bootstrap\Autoload.php:40
+[02-Feb-2018 12:11:13 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\app\Controllers\Announce.php on line 141
+[02-Feb-2018 12:11:13 America/Sao_Paulo] PHP Stack trace:
+[02-Feb-2018 12:11:13 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[02-Feb-2018 12:11:13 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[02-Feb-2018 12:11:13 America/Sao_Paulo] PHP   3. App\Controllers\Announce->passkey() D:\Ampps\www\bootstrap\Autoload.php:40
+[02-Feb-2018 12:12:48 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\app\Controllers\Announce.php on line 141
+[02-Feb-2018 12:12:48 America/Sao_Paulo] PHP Stack trace:
+[02-Feb-2018 12:12:48 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[02-Feb-2018 12:12:48 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[02-Feb-2018 12:12:48 America/Sao_Paulo] PHP   3. App\Controllers\Announce->passkey() D:\Ampps\www\bootstrap\Autoload.php:40
+[02-Feb-2018 12:12:48 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\app\Controllers\Announce.php on line 141
+[02-Feb-2018 12:12:48 America/Sao_Paulo] PHP Stack trace:
+[02-Feb-2018 12:12:48 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[02-Feb-2018 12:12:48 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[02-Feb-2018 12:12:48 America/Sao_Paulo] PHP   3. App\Controllers\Announce->passkey() D:\Ampps\www\bootstrap\Autoload.php:40
+[02-Feb-2018 12:17:32 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\app\Controllers\Announce.php on line 141
+[02-Feb-2018 12:17:32 America/Sao_Paulo] PHP Stack trace:
+[02-Feb-2018 12:17:32 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[02-Feb-2018 12:17:32 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[02-Feb-2018 12:17:32 America/Sao_Paulo] PHP   3. App\Controllers\Announce->passkey() D:\Ampps\www\bootstrap\Autoload.php:40
+[02-Feb-2018 12:21:47 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\app\Controllers\Announce.php on line 141
+[02-Feb-2018 12:21:47 America/Sao_Paulo] PHP Stack trace:
+[02-Feb-2018 12:21:47 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[02-Feb-2018 12:21:47 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[02-Feb-2018 12:21:47 America/Sao_Paulo] PHP   3. App\Controllers\Announce->passkey() D:\Ampps\www\bootstrap\Autoload.php:40
