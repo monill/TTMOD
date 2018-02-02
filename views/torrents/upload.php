@@ -82,7 +82,7 @@ $blockId = 'b-' . sha1($title);
             <div class="form-group">
                 <label class="col-lg-2 col-sm-2" for="category">Category:</label>
                 <div class="col-md-3">
-                    <select name="category" id="category" class="form-control">
+                    <select name="category" id="category" class="form-control" required>
                         <option selected disabled="disabled">Select a category</option>
                         <?php foreach (isset($this->categories) ? $this->categories : $this->categories as $categ): ?>
                             <option value="<?= intval($categ->id); ?>"><?= $categ->name; ?></option>
@@ -108,7 +108,7 @@ $blockId = 'b-' . sha1($title);
             <div class="form-group">
                 <label class="col-lg-2 col-sm-2" for="descr"> Description: </label>
                 <div class="col-md-8">
-                    <textarea class="form-control" name="descr" id="descr" rows="4"></textarea>
+                    <textarea class="form-control" name="descr" id="descr" rows="4" required></textarea>
                 </div>
             </div>
 

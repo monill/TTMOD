@@ -59,7 +59,7 @@
                                         <select name="estate" id="estate" class="form-control" size="1">
                                             <option selected disabled="disabled"> Select a estate </option>
                                             <?php foreach (isset($this->estates) ? $this->estates : $this->estates as $estate): ?>
-                                                <option value="<?= intval($estate->id); ?>"><?= $estate->name; ?></option>
+                                                <option value="<?= intval($estate->id); ?>"><?= \App\Libs\Helper::escape($estate->name); ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>

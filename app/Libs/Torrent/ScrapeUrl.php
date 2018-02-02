@@ -21,7 +21,16 @@ use App\Libs\Helper;
  */
 class ScrapeUrl {
 
-    public function __construct($scrape, $hash) {
+    public function __construct() {
+
+    }
+
+    public function __clone() {
+        
+    }
+
+    public function torrent($scrape, $hash)
+    {
         if (function_exists('curl_exec')) {
             $ch = curl_init();
             $timeout = 30;
@@ -57,10 +66,6 @@ class ScrapeUrl {
             $ret['downloaded'] = -1;
         }
         return $ret;
-    }
-
-    public function __clone() {
-        
     }
 
 }

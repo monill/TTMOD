@@ -12,7 +12,7 @@ define('SNAME', 'Test..');
 // Password key security, dont change this after install
 define('PWD_KEY', '!@#Mobiorum^&*');
 
-define('ANNOUNCE', URL . DIRECTORY_SEPARATOR . 'announce' . DIRECTORY_SEPARATOR);
+define('ANNOUNCE', URL . '/announce/passkey/');
 define('TUPLOAD', ROOT . 'data/torrents/');
 
 // Set timezone

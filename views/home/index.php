@@ -10,7 +10,7 @@
     <div class="card-body slidingDiv<?= $blockN; ?>">
     <!-- content -->
 
-    Welcome To TTMOD<br /><br />The complete open source torrent tracter view our <a href="<?= url('/forum'); ?>">forum</a> for support
+    Welcome To TTMOD<br /><br />The modd open source torrent tracker view our <a href="<?= url('/forum'); ?>">forum</a> for support
 
     <!-- end content -->
     </div>

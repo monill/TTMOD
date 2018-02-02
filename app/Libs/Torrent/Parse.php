@@ -4,10 +4,19 @@ namespace App\Libs\Torrent;
 
 class Parse {
 
-    public function __construct($filename = '') {
+    public function __construct() {
+
+    }
+
+    public function __clone() {
+
+    }
+
+    public function torr($filename = '')
+    {
         $torrentInfo = array();
 
-        //global $array;
+        $array = array();
 
         //check file type is a torrents
         $torrent = explode(".", $filename);
@@ -15,7 +24,7 @@ class Parse {
         $fileend = strtolower($fileend);
 
         if ($fileend == "torrent") {
-            $parse = file_get_contents("$filename");
+            $parse = file_get_contents("$filename", FILE_BINARY);
 
             if ($parse == false) {
                 echo "Parser Error: Error Opening torrents, unable to get contents.<br>";
@@ -41,41 +50,34 @@ class Parse {
                         }
 
                         //Read info, store as (infovariable)
-                        $infovariable = $array["info"];
+                        $info = $array["info"];
 
                         //Calculates SHA1 Hash
-                        $infohash = sha1(Bencode::encode($infovariable));
-                        $torrentInfo[1] = $infohash;
+                        $torrentInfo[1] = sha1(Bencode::encode($info));
 
                         // Calculates date from UNIX Epoch
                         $torrentInfo[2] = date('r', $array["creation date"]);
 
                         // The name of the torrents is different to the file name
-                        $torrentInfo[3] = $infovariable['name'];
+                        $torrentInfo[3] = $info['name'];
 
                         //Get file list
-                        if (isset($infovariable["files"]) && is_array($infovariable["files"])) {
+                        if (isset($info["files"]) && is_array($info["files"])) {
                             //Multi file torrents
                             $filecount = 0;
-                            $torrentsize = 0;
 
                             //Get filenames here
-                            $torrentInfo[8] = $infovariable["files"];
+                            $torrentInfo[8] = $info["files"];
 
-                            foreach ($infovariable["files"] as $file) {
-                                //var_dump($file);
-                                $filecount = ++$filecount;
-                                $multiname = $file['path']; //Not needed here really
-                                $multitorrentsize = $file['length'];
-                                $torrentsize += $file['length'];
+                            foreach ($info["files"] as $file) {
+                                $torrentInfo[5] = $filecount++; //Get file count
+                                $torrentInfo[4] += $file['length'];
                             }
 
-                            $torrentInfo[4] = $torrentsize; //Add all parts sizes to get total
-                            $torrentInfo[5] = $filecount; //Get file count
                         } else {
                             // Single File Torrent
-                            $torrentsize = $infovariable['length'];
-                            $torrentInfo[4] = $torrentsize; //Get file count
+                            $torrentInfo[3] = $info['name'];
+                            $torrentInfo[4] = $info['length'];
                             $torrentInfo[5] = 1;
                         }
 
@@ -87,12 +89,8 @@ class Parse {
                 }
             }
         }
-        //return $torrentInfo;
-        var_dump($torrentInfo);
-    }
-
-    public function __clone() {
-
+        return $torrentInfo;
+        //print_r($torrentInfo);
     }
 
 }
