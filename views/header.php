@@ -1,5 +1,8 @@
 <?php
 use App\Models\Layout;
+use App\Libs\Database;
+$startime =  array_sum(explode(" ", microtime()));
+$db = Database::getInstance();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,21 +28,21 @@ use App\Models\Layout;
 
     <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand" href="<?= url('/home'); ?>">TTMOD</a>
+            <a class="navbar-brand" href="<?= url("/home"); ?>">TTMOD</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="<?= url('/home'); ?>"> Home </a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= url('/forum'); ?>"> Forum </a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= url('/torrents/upload'); ?>"> Upload Torrents </a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= url('/torrents'); ?>"> Torrents </a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/home"); ?>"> Home </a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/forum"); ?>"> Forum </a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/torrents/upload"); ?>"> Upload Torrents </a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/torrents"); ?>"> Torrents </a></li>
                     <li class="nav-item"><a class="nav-link" href="torrents-today.php"> TODAYS_TORRENTS </a></li>
                     <li class="nav-item"><a class="nav-link" href="torrents-search.php"> SEARCH_TORRENTS </a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= url('/admin'); ?>"> AdminCP </a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= url('/logout'); ?>">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/admin"); ?>"> AdminCP </a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/logout"); ?>">Logout</a></li>
                 </ul>
 
                 <form method="get" action="torrents-search.php" class="form-inline my-2 my-lg-0">
@@ -55,7 +58,38 @@ use App\Models\Layout;
 
             <div class="collapse navbar-collapse" id="statsnavbar">
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-user text-black"></i> <strong> username </strong>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-arrow-up text-green text-bold"></i> Up: 0.0 </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-arrow-down text-red text-bold"></i> Down: 0.0 </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-signal text-blue text-bold"></i> Ratio: --- </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-user text-purple text-bold"></i> Account </a>
+                    </li>
 
+                    <?php
+                    //TODO
+                    //fix this userid
+                    $message =  $db->select("SELECT COUNT(*) FROM `messages` WHERE `receiver` = :uid AND `readed` = 0", ["uid" => 7]);
+                    ?>
+                    <?php if(count($message) > 0): ?>
+                        <li class="nav-item"> <a class="nav-link" href="<?= url("/messages"); ?>"> <i class="fa fa-envelope text-red faa-shake animated text-bold"></i> <font color="red">[<?php echo count($message); ?>]</font>Message</a> </li>
+                    <?php else: ?>
+                        <li class="nav-item"> <a class="nav-link" href="<?= url("/messages"); ?>"> <i class="fa fa-envelope text-red text-bold"></i> Messages </a> </li>
+                    <?php endif; ?>
 
                 </ul>
             </div>

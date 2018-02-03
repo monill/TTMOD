@@ -17,7 +17,7 @@ class Torrents extends Controller {
     }
 
     public function __clone() {
-        
+
     }
 
     public function index() {
@@ -32,9 +32,6 @@ class Torrents extends Controller {
         $this->view->load('torrents/upload', false);
     }
 
-    public function torrent($id) {
-        echo $id;
-    }
 
     public function search() {
         if (Input::exist()) {
@@ -46,14 +43,14 @@ class Torrents extends Controller {
 
     public function advsearch() {
         if (Input::exist()) {
-            
+
         } else {
             Redirect::to('/torrents');
         }
     }
 
     public function categ($slug = '') {
-        
+
     }
 
 }

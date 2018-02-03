@@ -18,6 +18,8 @@ use App\Models\Layout;
     <footer class="footer">
         <div class="container-fluid">
             Copyright &copy; <?= date('Y'); ?> - Powered by <a href="<?= url('/home'); ?>"> TTMOD </a>
+            <?php $endtime = array_sum(explode(" ", microtime()));
+            printf("Page generated in %f secs.", $endtime - $startime); ?>
         </div>
     </footer>
 
@@ -28,3 +30,4 @@ use App\Models\Layout;
 
   </body>
 </html>
+<?php ob_end_flush(); ?>

@@ -8,7 +8,7 @@ $avatar = "https://placehold.it/192x300";
 
 <div class="card">
     <div class="card-header">
-        <?php echo $title ?>
+        <?php echo $title ?> username
         <a data-toggle="collapse" href="#" class="showHide" id="<?php echo $blockId; ?>" style="float: right;"></a>
     </div>
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
