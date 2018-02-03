@@ -6,12 +6,14 @@ use App\Libs\Database;
 
 class Rules extends Model {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function __clone() {
-        
+    public function __clone()
+    {
+
     }
 
     public static function all() {

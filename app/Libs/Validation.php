@@ -6,12 +6,14 @@ class Validation {
 
     public $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = Database::getInstance();
     }
 
-    public function __clone() {
-        
+    public function __clone()
+    {
+
     }
 
     public function isEmpty($data) {

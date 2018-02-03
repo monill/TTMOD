@@ -39,8 +39,8 @@ $db = Database::getInstance();
                     <li class="nav-item"><a class="nav-link" href="<?= url("/forum"); ?>"> Forum </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/torrents/upload"); ?>"> Upload Torrents </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/torrents"); ?>"> Torrents </a></li>
-                    <li class="nav-item"><a class="nav-link" href="torrents-today.php"> TODAYS_TORRENTS </a></li>
-                    <li class="nav-item"><a class="nav-link" href="torrents-search.php"> SEARCH_TORRENTS </a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/faq"); ?>"> F.A.Q </a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/rules"); ?>"> Rules </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/admin"); ?>"> AdminCP </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/logout"); ?>">Logout</a></li>
                 </ul>
@@ -83,7 +83,7 @@ $db = Database::getInstance();
                     <?php
                     //TODO
                     //fix this userid
-                    $message =  $db->select("SELECT COUNT(*) FROM `messages` WHERE `receiver` = :uid AND `readed` = 0", ["uid" => 7]);
+                    $message =  $db->select("SELECT COUNT(*) FROM `messages` WHERE `receiver` = :uid AND `readed` = '0'", ["uid" => 7]);
                     ?>
                     <?php if(count($message) > 0): ?>
                         <li class="nav-item"> <a class="nav-link" href="<?= url("/messages"); ?>"> <i class="fa fa-envelope text-red faa-shake animated text-bold"></i> <font color="red">[<?php echo count($message); ?>]</font>Message</a> </li>

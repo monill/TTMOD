@@ -1,6 +1,6 @@
 <?php
 
-//esse nao lembro o que faz
+//I can not remember what this does.
 if (preg_match('/(?:\< *(?:java|script)|script\:|\+document\.)/i', serialize($_SERVER))) {
     die('Forbidden');
 }

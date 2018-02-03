@@ -16,24 +16,28 @@ class Recover extends Controller {
     private $login;
     private $valid;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->mailer = new Email();
         $this->login = new Login();
         $this->valid = new Validation();
     }
 
-    public function __clone() {
-        
+    public function __clone()
+    {
+
     }
 
-    public function index() {
+    public function index()
+    {
         $this->view->title = SNAME . " :: Recover Password";
         $this->view->token = Token::generate();
         $this->view->load('recover/index', true);
     }
 
-    public function in() {
+    public function in()
+    {
         if (Input::exist()) {
 
             $email = Input::get('email');
@@ -77,7 +81,8 @@ class Recover extends Controller {
         }
     }
 
-    public function code($key = '') {
+    public function code($key = '')
+    {
         if (isset($key)) {
             if ($this->valid->validKey($key)) {
                 $this->view->title = SNAME . " :: Recover Password";
@@ -93,7 +98,8 @@ class Recover extends Controller {
         }
     }
 
-    public function on() {
+    public function on()
+    {
         if (Input::exist()) {
             $pwd = Input::get('password');
             $pwd1 = Input::get('password1');
@@ -109,7 +115,7 @@ class Recover extends Controller {
                     'confirmresetpwd' => 'yes',
                     'codeactivation' => null,
                     'update_at' => Helper::dateTime()
-                        ], "`codeactivation` = :prk", ["prk" => $key]);
+                ], "`codeactivation` = :prk", ["prk" => $key]);
 
                 Log::create("User: {$user->username} changed the password successfully.");
 
@@ -124,8 +130,10 @@ class Recover extends Controller {
         }
     }
 
-    public function acc($code = '') {
-        if (isset($code)) {
+    public function acc($code = '')
+    {
+        if (isset($code))
+        {
             if ($this->valid->validKey($code)) {
                 $user = $this->db->select1("SELECT `username` FROM `users` WHERE `codeactivation` = :k", ["k" => $code]);
 
@@ -133,7 +141,7 @@ class Recover extends Controller {
                     'status' => 'confirmed',
                     'codeactivation' => null,
                     'active_at' => Helper::dateTime()
-                        ], "`codeactivation` = :code", ["code" => $code]);
+                ], "`codeactivation` = :code", ["code" => $code]);
 
                 Log::create("User: {$user->username} just activated the account.");
 
@@ -147,7 +155,8 @@ class Recover extends Controller {
         }
     }
 
-    public function validEmail($email) {
+    public function validEmail($email)
+    {
         $errors = array();
 
         if ($this->valid->isEmpty($email)) {

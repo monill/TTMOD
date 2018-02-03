@@ -11,7 +11,7 @@ $blockId = 'b-' . sha1($title);
     <div class="card-body slidingDiv<?= $blockId; ?>">
     <!-- content -->
 
-    <img class="embed-responsive" src="<?= URL; ?>/img/dev_page_badges.png" alt="Powered By">
+    <img class="embed-responsive" src="<?= URL; ?>/imgs/dev_page_badges.png" alt="Powered By">
 
     <!-- end content -->
     </div>

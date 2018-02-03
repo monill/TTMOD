@@ -24,7 +24,7 @@
 				<div class="row justify-content-md-center h-100">
 					<div class="card-wrapper">
 						<div class="brand">
-							<img src="<?= URL; ?>/img/logo.jpg" alt="Logo" />
+							<img src="<?= URL; ?>/imgs/logo.jpg" alt="Logo" />
 						</div>
 						<div class="card fat">
 							<div class="card-body">

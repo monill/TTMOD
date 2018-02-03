@@ -17,7 +17,8 @@ class Autoload {
      * "Start" the application:
      * Analyze the URL elements and calls the according controller/method or the fallback
      */
-    public function __construct() {
+    public function __construct()
+    {
         // create array with URL parts in $url
         $this->splitUrl();
 
@@ -58,7 +59,8 @@ class Autoload {
     /**
      * Get and split the URL
      */
-    private function splitUrl() {
+    private function splitUrl()
+    {
         if (isset($_GET['url'])) {
             // split URL
             $url = trim(rtrim(isset($_GET['url']) ? $_GET['url'] : '', '/'));
@@ -86,8 +88,9 @@ class Autoload {
         }
     }
 
-    public function __clone() {
-        
+    public function __clone()
+    {
+
     }
 
 }

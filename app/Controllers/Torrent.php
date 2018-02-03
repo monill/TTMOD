@@ -11,28 +11,34 @@ use App\Libs\Torrent\ScrapeUrl;
 
 class Torrent extends Controller {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         // if (!$this->loggedIn()) {
         //     Redirect::to('/login');
         // }
     }
 
-    public function __clone() {
+    public function __clone()
+    {
 
     }
 
-    public function index() {
+    public function index()
+    {
         Redirect::to('/torrents');
     }
 
-    public function view($id) {
+    public function view($id)
+    {
         $this->view->title = SNAME . " :: tal";
         $this->view->load('torrents/torrent', false);
     }
 
-    public function upload() {
-        if (Input::exist()) {
+    public function upload()
+    {
+        if (Input::exist())
+        {
             $errors = array();
 
             $torrent = $_FILES['torrent'];
@@ -235,18 +241,20 @@ class Torrent extends Controller {
         }
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
 
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
 
     }
 
     public function download($id)
     {
         //TODO
-        //fix this
+        //fix this passkey on users
         $user = $this->db->select1("SELECT `passkey` FROM `users` WHERE `id` = :idd AND `status` = 'confirmed' LIMIT 1", ["idd" => 1]);
 
         $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `id` = :id LIMIT 1", ["id" => $id]);

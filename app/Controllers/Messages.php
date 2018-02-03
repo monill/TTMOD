@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Libs\Redirect;
 use App\Models\Message;
+use App\Libs\Token;
 
 class Messages extends Controller {
 
@@ -43,7 +44,7 @@ class Messages extends Controller {
     public function compose()
     {
         $this->view->title = SNAME . " :: Messages Compose";
-
+        $this->view->token = Token::generate();
         $this->view->load('messages/compose', false);
     }
 

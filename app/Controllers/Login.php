@@ -13,13 +13,15 @@ use App\Libs\Validation;
 class Login extends Controller {
 
     private $loginFingerPrint = LOGINFG;
+    public $valid;
 
     public function __construct() {
         parent::__construct();
+        $this->valid = new Validation();
     }
 
     public function __clone() {
-        
+
     }
 
     public function index() {
@@ -98,15 +100,14 @@ class Login extends Controller {
 
     public function validLogin($user, $pass) {
         $erro = array();
-        $valid = new Validation();
 
-        if ($valid->isEmpty($user)) {
+        if ($this->valid->isEmpty($user)) {
             $erro[] = "Please enter the account!";
         }
-        if ($valid->isEmpty($pass)) {
+        if ($this->valid->isEmpty($pass)) {
             $erro[] = "Please enter the password!";
         }
-        if (!$valid->userExist($user)) {
+        if (!$this->valid->userExist($user)) {
             $erro[] = "Username not exists...";
         }
         if (!ctype_alnum($user)) {

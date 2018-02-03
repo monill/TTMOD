@@ -17,13 +17,13 @@ class Message extends Model {
     public static function inbox($userid)
     {
         $db = Database::getInstance();
-        return $db->select("SELECT * FROM `messages` WHERE `receiver` = :uid AND `whereis` = 'inbox' ORDER BY id ASC", ["uid" => $userid]);
+        return $db->select("SELECT * FROM `messages` WHERE `receiver` = :uid AND `wherein` = 'inbox' ORDER BY id DESC", ["uid" => $userid]);
     }
 
     public static function outbox($userid)
     {
         $db = Database::getInstance();
-        return $db->select("SELECT * FROM `messages` WHERE `sender` = :uid AND `whereis` = 'outbox'", ["uid" => $userid]);
+        return $db->select("SELECT * FROM `messages` WHERE `sender` = :uid AND `whereout` = 'inbox' ORDER BY id DESC", ["uid" => $userid]);
     }
 
 }

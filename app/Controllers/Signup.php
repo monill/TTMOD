@@ -15,25 +15,32 @@ use App\Models\Log;
 class Signup extends Controller {
 
     private $mailer;
+    public $valid;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->mailer = new Email();
+        $this->valid = new Validation();
     }
 
-    public function __clone() {
-        
+    public function __clone()
+    {
+
     }
 
-    public function index() {
-        $this->view->token = Token::generate();
+    public function index()
+    {
         $this->view->title = SNAME . " :: Signup";
+        $this->view->token = Token::generate();
         $this->view->estates = Estate::all();
         $this->view->load('auth/signup', true);
     }
 
-    public function in() {
-        if (Input::exist()) {
+    public function in()
+    {
+        if (Input::exist())
+        {
             $user = Input::get('username');
             $pass = Input::get('password');
             $passagain = Input::get('passagain');
@@ -89,20 +96,20 @@ class Signup extends Controller {
         }
     }
 
-    public function validData($user, $mail, $pass, $passagain) {
+    public function validData($user, $mail, $pass, $passagain)
+    {
         $erros = array();
-        $valid = new Validation();
 
-        if ($valid->isEmpty($user)) {
+        if ($this->valid->isEmpty($user)) {
             $erros[] = "Please enter the account.";
         }
-        if ($valid->isEmpty($mail)) {
+        if ($this->valid->isEmpty($mail)) {
             $erros[] = "Please enter an email.";
         }
-        if ($valid->isEmpty($pass)) {
+        if ($this->valid->isEmpty($pass)) {
             $erros[] = "Please enter a password.";
         }
-        if ($valid->isEmpty($passagain)) {
+        if ($this->valid->isEmpty($passagain)) {
             $erros[] = "Please enter the second password.";
         }
         if ($pass != $passagain) {
@@ -111,13 +118,13 @@ class Signup extends Controller {
         if (strlen($pass) < 6 || strlen($passagain) > 16) {
             $erros[] = "Password must be between 6 and 16 characters long.";
         }
-        if ($valid->validEmail($mail)) {
+        if ($this->valid->validEmail($mail)) {
             $erros[] = "Please enter a valid email address.";
         }
-        if ($valid->emailExist($mail)) {
+        if ($this->valid->emailExist($mail)) {
             $erros[] = "The email provided is already in use.";
         }
-        if ($valid->userExist($user)) {
+        if ($this->valid->userExist($user)) {
             $erros[] = "The chosen username is already in use.";
         }
         if (strlen($user) < 3 && strlen($user) > 25) {
