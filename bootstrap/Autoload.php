@@ -1,6 +1,7 @@
 <?php
 
-use \App\Controllers\Index;
+use App\Controllers\Index;
+
 
 class Autoload {
 
@@ -92,5 +93,7 @@ class Autoload {
     {
 
     }
+
+    
 
 }

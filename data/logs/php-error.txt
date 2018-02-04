@@ -1,60 +1,77 @@
-[04-Feb-2018 11:56:12 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected 'New' (T_NEW), expecting identifier (T_STRING) or '{' in D:\Ampps\www\app\Controllers\Home.php on line 6
-[04-Feb-2018 11:57:32 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected 'New' (T_NEW), expecting identifier (T_STRING) or '{' in D:\Ampps\www\app\Controllers\Home.php on line 6
-[04-Feb-2018 11:58:03 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM) in D:\Ampps\www\app\Controllers\Home.php on line 25
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP Notice:  Undefined property: App\Libs\Views::$news in D:\Ampps\www\views\home\index.php on line 31
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\home\index.php on line 31
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
-[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP Notice:  Undefined property: App\Libs\Views::$news in D:\Ampps\www\views\home\index.php on line 31
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\home\index.php on line 31
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
-[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP Notice:  Undefined property: App\Libs\Views::$news in D:\Ampps\www\views\home\index.php on line 31
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\home\index.php on line 31
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
-[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP Notice:  Undefined property: App\Libs\Views::$news in D:\Ampps\www\views\home\index.php on line 31
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\home\index.php on line 31
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
-[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 12:00:40 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected 'New' (T_NEW), expecting identifier (T_STRING) or '{' in D:\Ampps\www\app\Controllers\Home.php on line 6
+[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in D:\Ampps\www\views\layouts\advancestats_layout.php on line 50
+[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   3. App\Controllers\Torrents->upload() D:\Ampps\www\bootstrap\Autoload.php:45
+[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Torrents.php:36
+[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:17
+[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   6. App\Models\Layout::left() D:\Ampps\www\views\header.php:103
+[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:23
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Warning:  preg_match(): Null byte in regex in D:\Ampps\www\app\Libs\Helper.php on line 195
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   4. App\Libs\Helper::validFilename() D:\Ampps\www\app\Controllers\Torrent.php:55
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   5. preg_match() D:\Ampps\www\app\Libs\Helper.php:195
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: internalname in D:\Ampps\www\app\Controllers\Torrent.php on line 106
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Warning:  unlink(D:\Ampps\www\data/torrents/Arrow.S06E06.REPACK.720p.HDTV.x264-AVS[rartv]-[rarbg.to].torrent): No such file or directory in D:\Ampps\www\app\Controllers\Torrent.php on line 110
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   4. unlink() D:\Ampps\www\app\Controllers\Torrent.php:110
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: infohash in D:\Ampps\www\app\Controllers\Torrent.php on line 125
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: internalname in D:\Ampps\www\app\Controllers\Torrent.php on line 127
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: torrentsize in D:\Ampps\www\app\Controllers\Torrent.php on line 134
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: filecount in D:\Ampps\www\app\Controllers\Torrent.php on line 135
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: announce in D:\Ampps\www\app\Controllers\Torrent.php on line 138
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: external in D:\Ampps\www\app\Controllers\Torrent.php on line 139
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
+[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'announce' cannot be null in D:\Ampps\www\app\Libs\Database.php:79
+Stack trace:
+#0 D:\Ampps\www\app\Libs\Database.php(79): PDOStatement->execute()
+#1 D:\Ampps\www\app\Controllers\Torrent.php(141): App\Libs\Database->insert('torrents', Array)
+#2 D:\Ampps\www\bootstrap\Autoload.php(45): App\Controllers\Torrent->upload()
+#3 D:\Ampps\www\public\index.php(31): Autoload->__construct()
+#4 {main}
+  thrown in D:\Ampps\www\app\Libs\Database.php on line 79
+[04-Feb-2018 15:18:58 America/Sao_Paulo] PHP Notice:  Undefined offset: 4 in D:\Ampps\www\app\Libs\Torrent\Parse.php on line 74
+[04-Feb-2018 15:18:58 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 15:18:58 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 15:18:58 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 15:18:58 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
+[04-Feb-2018 15:18:58 America/Sao_Paulo] PHP   4. App\Libs\Torrent\Parse->torr() D:\Ampps\www\app\Controllers\Torrent.php:74
+[04-Feb-2018 15:19:20 America/Sao_Paulo] PHP Notice:  Undefined index: seeds in D:\Ampps\www\app\Libs\Torrent\ScrapeUrl.php on line 63
+[04-Feb-2018 15:19:20 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 15:19:20 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 15:19:20 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 15:19:20 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
+[04-Feb-2018 15:19:20 America/Sao_Paulo] PHP   4. App\Libs\Torrent\ScrapeUrl->torrent() D:\Ampps\www\app\Controllers\Torrent.php:208

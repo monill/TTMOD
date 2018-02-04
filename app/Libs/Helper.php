@@ -2,6 +2,8 @@
 
 namespace App\Libs;
 
+use App\Libs\Database;
+
 class Helper {
 
     public function __construct() {
@@ -190,7 +192,36 @@ class Helper {
     }
 
     public static function validFilename($name) {
-        return preg_match("/^[^\0-\x1f:\\\\\/?*\xff#<>|]+$/si", $name);
+        return preg_match('/^[^\0-\x1f:\\\\\/?*\xff#<>|]+$/si', $name);
+    }
+
+    public static function sql_timestamp_to_unix_timestamp($s)
+    {
+        return mktime(substr($s, 11, 2), substr($s, 14, 2), substr($s, 17, 2), substr($s, 5, 2), substr($s, 8, 2), substr($s, 0, 4));
+    }
+
+    public static function gmtime()
+    {
+        return self::sql_timestamp_to_unix_timestamp(self::dateTime());
+    }
+
+    public static function rowCount($table, $suffix = '')
+    {
+        $ret = array();
+        $db = Database::getInstance();
+        $ret = $db->select("SELECT COUNT(*) FROM `$table` {$suffix}");
+        $t = $ret[0];
+
+        return json_encode($t);
+    }
+
+    public static function getGuests()
+    {
+        $past = self::gmtime();
+        $db = Database::getInstance();
+        $db->delete("guests", "time < :tim", ["tim" => $past]);
+
+        return self::rowCount("guests");
     }
 
 }

@@ -26,7 +26,7 @@ class Database extends PDO {
     }
 
     private function __clone() {
-        
+
     }
 
     public static function getInstance() {
@@ -62,7 +62,7 @@ class Database extends PDO {
         return $sth->fetchObject();
     }
 
-    public function insert($tabela, $data = []) {
+    public function insert($table, $data = []) {
         $db = self::getInstance();
 
         ksort($data);
@@ -70,7 +70,7 @@ class Database extends PDO {
         $fileNames = implode('`, `', array_keys($data));
         $fieldValues = ':' . implode(', :', array_keys($data));
 
-        $sth = $db->prepare("INSERT INTO $tabela (`$fileNames`) VALUES ($fieldValues)");
+        $sth = $db->prepare("INSERT INTO $table (`$fileNames`) VALUES ($fieldValues)");
 
         foreach ($data as $key => $value) {
             $sth->bindValue(":$key", $value);
@@ -79,7 +79,7 @@ class Database extends PDO {
         $sth->execute();
     }
 
-    public function update($tabela, $data, $where, $whereBindArray = array()) {
+    public function update($table, $data, $where, $whereBindArray = array()) {
         $db = self::getInstance();
 
         ksort($data);
@@ -92,7 +92,7 @@ class Database extends PDO {
 
         $fieldDetails = rtrim($fieldDetails, ',');
 
-        $sth = $db->prepare("UPDATE $tabela SET $fieldDetails WHERE $where");
+        $sth = $db->prepare("UPDATE $table SET $fieldDetails WHERE $where");
 
         foreach ($data as $key => $value) {
             $sth->bindValue(":$key", $value);
@@ -105,10 +105,10 @@ class Database extends PDO {
         $sth->execute();
     }
 
-    public function delete($tabela, $where, $bind = [], $limit = 1) {
+    public function delete($table, $where, $bind = [], $limit = 1) {
         $db = self::getInstance();
 
-        $sth = $db->prepare("DELETE FROM $tabela WHERE $where LIMIT $limit");
+        $sth = $db->prepare("DELETE FROM $table WHERE $where LIMIT $limit");
 
         foreach ($bind as $key => $value) {
             $sth->bindValue(":$key", $value);

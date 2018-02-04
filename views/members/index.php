@@ -63,21 +63,10 @@ use App\Models\User;
             <tbody>
                 <?php foreach (isset($this->members) ? $this->members : $this->members as $member): ?>
                     <tr>
-                        <th>
-                            <a href="<?= url("/user/id/") . $member->id; ?>">
-                                <?= $member->username; ?>
-                            </a>
-                        </th>
-                        <td>
-                            <?= date("d-m-Y", strtotime($member->created_at)); ?>
-                        </td>
-                        <td>
-                            <?= User::classes($member->class); ?>
-                        </td>
-                        <td>
-                            <?= $member->estate_id; ?>
-                            <!-- <img src="<?= URL; ?>/imgs/estates/.png" class="estates" alt="Estate" /> -->
-                        </td>
+                        <th> <a href="<?= url("/user/id/") . $member->id; ?>"> <?= $member->username; ?> </a> </th>
+                        <td> <?= date("d-m-Y", strtotime($member->created_at)); ?> </td>
+                        <td> <?= User::classes($member->class); ?> </td>
+                        <td> <img src="<?= URL; ?>/imgs/estates/<?= $member->estate_id; ?>.png" class="estates" alt="Estate" /> </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
