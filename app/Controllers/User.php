@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Libs\Redirect;
 
-class Invite extends Controller {
+class User extends Controller {
 
     public function __construct()
     {
@@ -21,8 +21,13 @@ class Invite extends Controller {
 
     public function index()
     {
-        $this->view->title = SNAME . " :: Invites";
-        $this->view->load('invite/index', false);
+        $this->view->title = SNAME . " :: Staff";
+        $this->view->load('staff/index', false);
+    }
+
+    public function id($id = '')
+    {
+        echo $id;
     }
 
 }

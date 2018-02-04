@@ -7,7 +7,7 @@ define('RUT', $_SERVER['DOCUMENT_ROOT']);
 // Page name
 define('PNAME', 'Mobile');
 // Server name
-define('SNAME', 'Test..');
+define('SNAME', 'TTMOD');
 
 // Password key security, dont change this after install
 define('PWD_KEY', '!@#Mobiorum^&*');

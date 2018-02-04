@@ -22,7 +22,7 @@ $blockId = "b-" . sha1($title);
     	<a href="<?= url('/members'); ?>" class="list-group-item"><i class="fa fa-chevron-right"></i> Members </a>
     	<a href="<?= url('/rules'); ?>" class="list-group-item"><i class="fa fa-chevron-right"></i> Rules </a>
     	<a href="<?= url('/faq'); ?>" class="list-group-item"><i class="fa fa-chevron-right"></i> F.A.Q </a>
-    	<a href="staff.php" class="list-group-item"><i class="fa fa-chevron-right"></i> STAFF </a>
+    	<a href="<?= url('/staff'); ?>" class="list-group-item"><i class="fa fa-chevron-right"></i> Staff </a>
     </div>
 
     <!-- end content -->
