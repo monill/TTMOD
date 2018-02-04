@@ -1,77 +1,301 @@
-[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in D:\Ampps\www\views\layouts\advancestats_layout.php on line 50
-[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   3. App\Controllers\Torrents->upload() D:\Ampps\www\bootstrap\Autoload.php:45
-[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Torrents.php:36
-[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:17
-[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   6. App\Models\Layout::left() D:\Ampps\www\views\header.php:103
-[04-Feb-2018 15:07:27 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:23
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Warning:  preg_match(): Null byte in regex in D:\Ampps\www\app\Libs\Helper.php on line 195
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   4. App\Libs\Helper::validFilename() D:\Ampps\www\app\Controllers\Torrent.php:55
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   5. preg_match() D:\Ampps\www\app\Libs\Helper.php:195
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: internalname in D:\Ampps\www\app\Controllers\Torrent.php on line 106
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Warning:  unlink(D:\Ampps\www\data/torrents/Arrow.S06E06.REPACK.720p.HDTV.x264-AVS[rartv]-[rarbg.to].torrent): No such file or directory in D:\Ampps\www\app\Controllers\Torrent.php on line 110
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   4. unlink() D:\Ampps\www\app\Controllers\Torrent.php:110
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: infohash in D:\Ampps\www\app\Controllers\Torrent.php on line 125
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: internalname in D:\Ampps\www\app\Controllers\Torrent.php on line 127
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: torrentsize in D:\Ampps\www\app\Controllers\Torrent.php on line 134
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: filecount in D:\Ampps\www\app\Controllers\Torrent.php on line 135
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: announce in D:\Ampps\www\app\Controllers\Torrent.php on line 138
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Notice:  Undefined variable: external in D:\Ampps\www\app\Controllers\Torrent.php on line 139
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
-[04-Feb-2018 15:17:56 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'announce' cannot be null in D:\Ampps\www\app\Libs\Database.php:79
+[04-Feb-2018 18:27:27 America/Sao_Paulo] PHP Notice:  Undefined variable: ramtotal in D:\Ampps\www\views\layouts\serverload_layout.php on line 99
+[04-Feb-2018 18:27:27 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:27:27 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:27:27 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:27:27 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:27:27 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:27:27 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:27:27 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:27:27 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:27:27 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Call to undefined function mksize() in D:\Ampps\www\views\layouts\serverload_layout.php:101
 Stack trace:
-#0 D:\Ampps\www\app\Libs\Database.php(79): PDOStatement->execute()
-#1 D:\Ampps\www\app\Controllers\Torrent.php(141): App\Libs\Database->insert('torrents', Array)
-#2 D:\Ampps\www\bootstrap\Autoload.php(45): App\Controllers\Torrent->upload()
-#3 D:\Ampps\www\public\index.php(31): Autoload->__construct()
-#4 {main}
-  thrown in D:\Ampps\www\app\Libs\Database.php on line 79
-[04-Feb-2018 15:18:58 America/Sao_Paulo] PHP Notice:  Undefined offset: 4 in D:\Ampps\www\app\Libs\Torrent\Parse.php on line 74
-[04-Feb-2018 15:18:58 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 15:18:58 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 15:18:58 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 15:18:58 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
-[04-Feb-2018 15:18:58 America/Sao_Paulo] PHP   4. App\Libs\Torrent\Parse->torr() D:\Ampps\www\app\Controllers\Torrent.php:74
-[04-Feb-2018 15:19:20 America/Sao_Paulo] PHP Notice:  Undefined index: seeds in D:\Ampps\www\app\Libs\Torrent\ScrapeUrl.php on line 63
-[04-Feb-2018 15:19:20 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 15:19:20 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 15:19:20 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 15:19:20 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->upload() D:\Ampps\www\bootstrap\Autoload.php:45
-[04-Feb-2018 15:19:20 America/Sao_Paulo] PHP   4. App\Libs\Torrent\ScrapeUrl->torrent() D:\Ampps\www\app\Controllers\Torrent.php:208
+#0 D:\Ampps\www\app\Models\Layout.php(33): include()
+#1 D:\Ampps\www\views\footer.php(11): App\Models\Layout::right()
+#2 D:\Ampps\www\app\Libs\Views.php(19): require_once('D:\\Ampps\\www\\vi...')
+#3 D:\Ampps\www\app\Controllers\Home.php(27): App\Libs\Views->load('home/index', false)
+#4 D:\Ampps\www\bootstrap\Autoload.php(50): App\Controllers\Home->index()
+#5 D:\Ampps\www\public\index.php(31): Autoload->__construct()
+#6 {main}
+  thrown in D:\Ampps\www\views\layouts\serverload_layout.php on line 101
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP Notice:  Undefined variable: ramtotal in D:\Ampps\www\views\layouts\serverload_layout.php on line 99
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP Notice:  Undefined variable: ramtotal in D:\Ampps\www\views\layouts\serverload_layout.php on line 102
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:28:25 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP Notice:  Undefined index: week in D:\Ampps\www\views\layouts\serverload_layout.php on line 36
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   8. mkPrettyTime() D:\Ampps\www\views\layouts\serverload_layout.php:106
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP Notice:  Undefined index: week in D:\Ampps\www\views\layouts\serverload_layout.php on line 36
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   8. mkPrettyTime() D:\Ampps\www\views\layouts\serverload_layout.php:106
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP Notice:  Undefined index: month in D:\Ampps\www\views\layouts\serverload_layout.php on line 62
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   8. mkPrettyTime() D:\Ampps\www\views\layouts\serverload_layout.php:106
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP Notice:  Undefined index: week in D:\Ampps\www\views\layouts\serverload_layout.php on line 65
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   8. mkPrettyTime() D:\Ampps\www\views\layouts\serverload_layout.php:106
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP Notice:  Undefined variable: totalusage in D:\Ampps\www\views\layouts\serverload_layout.php on line 111
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:28:26 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Notice:  Undefined variable: ramtotal in D:\Ampps\www\views\layouts\serverload_layout.php on line 101
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Notice:  Undefined variable: ramtotal in D:\Ampps\www\views\layouts\serverload_layout.php on line 104
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Notice:  Undefined index: week in D:\Ampps\www\views\layouts\serverload_layout.php on line 36
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   8. mkPrettyTime() D:\Ampps\www\views\layouts\serverload_layout.php:109
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Notice:  Undefined index: week in D:\Ampps\www\views\layouts\serverload_layout.php on line 36
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   8. mkPrettyTime() D:\Ampps\www\views\layouts\serverload_layout.php:109
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Notice:  Undefined index: month in D:\Ampps\www\views\layouts\serverload_layout.php on line 62
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   8. mkPrettyTime() D:\Ampps\www\views\layouts\serverload_layout.php:109
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Notice:  Undefined index: week in D:\Ampps\www\views\layouts\serverload_layout.php on line 65
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   8. mkPrettyTime() D:\Ampps\www\views\layouts\serverload_layout.php:109
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Notice:  Undefined variable: totalusage in D:\Ampps\www\views\layouts\serverload_layout.php on line 114
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:32:15 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP Warning:  file_get_contents(/proc/version): failed to open stream: No such file or directory in D:\Ampps\www\views\layouts\serverload_layout.php on line 39
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   8. file_get_contents() D:\Ampps\www\views\layouts\serverload_layout.php:39
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP Warning:  file_get_contents(/proc/meminfo): failed to open stream: No such file or directory in D:\Ampps\www\views\layouts\serverload_layout.php on line 84
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   8. file_get_contents() D:\Ampps\www\views\layouts\serverload_layout.php:84
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP Notice:  Undefined offset: 1 in D:\Ampps\www\views\layouts\serverload_layout.php on line 86
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP Notice:  Undefined offset: 1 in D:\Ampps\www\views\layouts\serverload_layout.php on line 88
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP Notice:  Undefined offset: 1 in D:\Ampps\www\views\layouts\serverload_layout.php on line 90
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP Notice:  Undefined offset: 1 in D:\Ampps\www\views\layouts\serverload_layout.php on line 92
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:40:53 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP Warning:  file_get_contents(/proc/version): failed to open stream: No such file or directory in D:\Ampps\www\views\layouts\serverload_layout.php on line 39
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   8. file_get_contents() D:\Ampps\www\views\layouts\serverload_layout.php:39
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP Notice:  Undefined offset: 1 in D:\Ampps\www\views\layouts\serverload_layout.php on line 86
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP Notice:  Undefined offset: 1 in D:\Ampps\www\views\layouts\serverload_layout.php on line 88
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP Notice:  Undefined offset: 1 in D:\Ampps\www\views\layouts\serverload_layout.php on line 90
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP Notice:  Undefined offset: 1 in D:\Ampps\www\views\layouts\serverload_layout.php on line 92
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:42:04 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP Warning:  file_get_contents(/proc/version): failed to open stream: No such file or directory in D:\Ampps\www\views\layouts\serverload_layout.php on line 39
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   8. file_get_contents() D:\Ampps\www\views\layouts\serverload_layout.php:39
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP Notice:  Undefined offset: 1 in D:\Ampps\www\views\layouts\serverload_layout.php on line 93
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP Notice:  Undefined offset: 1 in D:\Ampps\www\views\layouts\serverload_layout.php on line 95
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP Notice:  Undefined offset: 1 in D:\Ampps\www\views\layouts\serverload_layout.php on line 97
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP Notice:  Undefined offset: 1 in D:\Ampps\www\views\layouts\serverload_layout.php on line 99
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:50
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:27
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:19
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   6. App\Models\Layout::right() D:\Ampps\www\views\footer.php:11
+[04-Feb-2018 18:54:58 America/Sao_Paulo] PHP   7. include() D:\Ampps\www\app\Models\Layout.php:33

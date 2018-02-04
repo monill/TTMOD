@@ -7,27 +7,27 @@ $db = Database::getInstance();
 $title = "Advanced Statistics";
 $blockId = "b-" . sha1($title);
 
-$dateTime = Helper::dateTime(Helper::gmtime() - (3600 * 24));
-
-$datet = Helper::dateTime();
-
+$dateTime = date('Y-m-d H:i:s', strtotime(date("Y-m-d H:i:s")) - 3600 * 24);
 
 $users = Helper::rowCount("users");
 $registered =  number_format($users[13]);
+
 $comments = Helper::rowCount("comments");
 $ncomments = number_format($comments[13]);
+
 $messages = Helper::rowCount("messages");
 $nmessages = number_format($messages[13]);
+
 $tor = Helper::rowCount("torrents");
 $ntor = number_format($tor[13]);
 
-$totaltoda = Helper::rowCount("users", "WHERE users.lastlogin >= '$dateTime'");
+$totaltoda = Helper::rowCount("users", "WHERE lastlogin >= '$dateTime'");
 $totaltoday = number_format($totaltoda[13]);
 
-$regtoda = Helper::rowCount("users", "WHERE users.created_at >= '$dateTime'");
+$regtoda = Helper::rowCount("users", "WHERE created_at >= '$dateTime'");
 $regtoday = number_format($regtoda[13]);
 
-$todayto = Helper::rowCount("torrents", "WHERE torrents.created_at >= '$dateTime'");
+$todayto = Helper::rowCount("torrents", "WHERE created_at >= '$dateTime'");
 $todaytor = number_format($todayto[13]);
 
 $guest = Helper::getGuests();
@@ -39,23 +39,16 @@ $seeders = $seeder[13];
 $leecher = Helper::rowCount("peers", "WHERE seeder = 'no'");
 $leechers = $leecher[13];
 
-$member = Helper::rowCount("users", "WHERE UNIX_TIMESTAMP('" . $datet . "') - UNIX_TIMESTAMP(users.lastlogin) < 900");
+$member = Helper::rowCount("users", "WHERE UNIX_TIMESTAMP('" . $dateTime . "') - UNIX_TIMESTAMP(users.lastlogin) < 900");
 $members = number_format($member[13]);
 
 $totalonline = $members + $guests;
 
 $downs = $db->select1("SELECT SUM(downloaded) AS totaldl FROM `users`");
+$totaldownloaded = $downs->totaldl;
 
-while ($a = $downs) {
-    $totaldownloaded = $downs->totaldl;
-    break;
-}
-
-$ups =  $db->select1("SELECT SUM(uploaded) AS totalul FROM `users`");
-while ($row = $ups) {
-	$totaluploaded = $ups->totalul;
-    break;
-}
+$ups =  $db->select1("SELECT SUM(uploaded) AS totalup FROM `users`");
+$totaluploaded = $ups->totalup;
 
 $localpeers = $leechers + $seeders;
 

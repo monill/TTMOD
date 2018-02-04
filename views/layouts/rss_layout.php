@@ -1,6 +1,9 @@
 <?php
+use App\Libs\RSS;
+
 $title = "RSS";
 $blockId = "b-" . sha1($title);
+$feedUrl = "";
 ?>
 
 <div class="card">
@@ -11,6 +14,11 @@ $blockId = "b-" . sha1($title);
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
 
+        <?php if (!$feedUrl): ?>
+            <p class="text-center">This would need editing with an rss feed of your choice.</p>
+        <?php else: ?>
+            <?php $xml = new RSS($feedUrl); ?>
+        <?php endif; ?>
 
     <!-- end content -->
     </div>

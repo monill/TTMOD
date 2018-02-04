@@ -32,6 +32,7 @@ class Torrent extends Controller {
     public function view($id)
     {
         $this->view->title = SNAME . " :: tal";
+        $this->view->torrents = $id;
         $this->view->load("torrents/torrent", false);
     }
 
