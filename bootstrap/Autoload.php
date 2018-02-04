@@ -1,7 +1,7 @@
 <?php
 
 use App\Controllers\Index;
-
+use App\Libs\Session;
 
 class Autoload {
 
@@ -22,6 +22,8 @@ class Autoload {
     {
         // create array with URL parts in $url
         $this->splitUrl();
+
+        Session::startSession();
 
         // check for controller: no controller given ? then load start-page
         if (!$this->url_controller) {
@@ -94,6 +96,6 @@ class Autoload {
 
     }
 
-    
+
 
 }

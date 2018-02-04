@@ -17,7 +17,7 @@ $db = Database::getInstance();
 
     <?php $res = $db->select("SELECT * FROM `news` ORDER BY `created_at` DESC LIMIT 10"); ?>
 
-    <script type="text/javascript">
+    <script>
     /***********************************************
      * Cross browser Marquee II- ? Dynamic Drive (www.dynamicdrive.com)
      * This notice MUST stay intact for legal use
