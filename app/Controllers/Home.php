@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Libs\Redirect;
-use App\Models\New;
+use App\Models\News;
 
 class Home extends Controller {
 
@@ -23,7 +23,7 @@ class Home extends Controller {
     public function index()
     {
         $this->view->title = SNAME . " :: Home";
-        $this->view->news = New::all();
+        $this->view->news = News::all();
         $this->view->load("home/index", false);
     }
 
