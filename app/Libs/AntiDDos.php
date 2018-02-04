@@ -17,7 +17,7 @@ class AntiDDos {
         $file = file_get_contents(ROOT . "data/logs/ip.txt");
         $ips = unserialize($file);
 
-        $ips['' . microtime(true) . ''] = $ip;
+        $ips["" . microtime(true) . ""] = $ip;
         $count = 0;
 
         foreach ($ips as $key => $value) {
@@ -31,8 +31,8 @@ class AntiDDos {
 
         if ($count > 10) {
             file_put_contents(ROOT . "data/logs/ip-banned.txt", $ip . "\r\n");
-            if (isset($_COOKIE['hash'])) {
-                file_put_contents(ROOT . "data/logs/ip-banned.txt", $_COOKIE['hash'] . "\r\n");
+            if (isset($_COOKIE["hash"])) {
+                file_put_contents(ROOT . "data/logs/ip-banned.txt", $_COOKIE["hash"] . "\r\n");
             }
         }
 
@@ -40,7 +40,7 @@ class AntiDDos {
     }
 
     public function __clone() {
-        
+
     }
 
 }

@@ -13,7 +13,7 @@ class Torrents extends Controller {
     {
         parent::__construct();
         // if (!$this->loggedIn()) {
-        //     Redirect::to('/login');
+        //     Redirect::to("/login");
         // }
     }
 
@@ -25,7 +25,7 @@ class Torrents extends Controller {
     public function index()
     {
         $this->view->title = SNAME . " :: Torrents";
-        $this->view->load('torrents/index', false);
+        $this->view->load("torrents/index", false);
     }
 
     public function upload()
@@ -33,31 +33,33 @@ class Torrents extends Controller {
         $this->view->title = SNAME . " :: Upload Torrent";
         $this->view->categories = Torrent::categories();
         $this->view->token = Token::generate();
-        $this->view->load('torrents/upload', false);
+        $this->view->load("torrents/upload", false);
     }
 
 
     public function search()
     {
-        if (Input::exist()) {
-            $search = Input::get('search');
+        if (Input::exist())
+        {
+            $search = Input::get("search");
         } else {
-            Redirect::to('/torrents');
+            Redirect::to("/torrents");
         }
     }
 
     public function advsearch()
     {
-        if (Input::exist()) {
+        if (Input::exist())
+        {
 
         } else {
-            Redirect::to('/torrents');
+            Redirect::to("/torrents");
         }
     }
 
-    public function categ($slug = '')
+    public function categ($slug = "")
     {
-
+        echo "<br />" . $slug;
     }
 
 }

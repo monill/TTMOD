@@ -19,7 +19,7 @@ class Validation {
     public function isEmpty($data) {
         if (is_array($data)) {
             return empty($data);
-        } elseif ($data == '') {
+        } elseif ($data == "") {
             return true;
         } else {
             return false;
@@ -34,14 +34,14 @@ class Validation {
     }
 
     public function userExist($username) {
-        $table = 'users';
-        $column = 'username';
+        $table = "users";
+        $column = "username";
         return $this->exist($table, $column, $username);
     }
 
     public function emailExist($email) {
-        $table = 'users';
-        $column = 'email';
+        $table = "users";
+        $column = "email";
         return $this->exist($table, $column, $email);
     }
 
@@ -49,7 +49,7 @@ class Validation {
         return ctype_alnum($username) ? true : false;
     }
 
-    public function validDate($date, $format = 'Y-m-d') {
+    public function validDate($date, $format = "Y-m-d") {
         $d = \DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) == $date;
     }

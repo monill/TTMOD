@@ -10,7 +10,7 @@ class User extends Controller {
     {
         parent::__construct();
         // if (!$this->loggedIn()) {
-        //     Redirect::to('/login');
+        //     Redirect::to("/login");
         // }
     }
 
@@ -22,10 +22,10 @@ class User extends Controller {
     public function index()
     {
         $this->view->title = SNAME . " :: Staff";
-        $this->view->load('staff/index', false);
+        $this->view->load("staff/index", false);
     }
 
-    public function id($id = '')
+    public function id($id = "")
     {
         echo $id;
     }

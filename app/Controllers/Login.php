@@ -15,30 +15,35 @@ class Login extends Controller {
     private $loginFingerPrint = LOGINFG;
     public $valid;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->valid = new Validation();
     }
 
-    public function __clone() {
+    public function __clone()
+    {
 
     }
 
-    public function index() {
+    public function index()
+    {
         $this->view->title = SNAME . " :: Login";
         $this->view->token = Token::generate();
-        $this->view->load('auth/login', true);
+        $this->view->load("auth/login", true);
     }
 
-    public function in() {
-        if (Input::exist()) {
-            $user = Input::get('username');
-            $pass = Input::get('password');
+    public function in()
+    {
+        if (Input::exist())
+        {
+            $user = Input::get("username");
+            $pass = Input::get("password");
 
             //checa brute force no login
             if ($this->bruteForce()) {
-                Session::flash('danger', 'Brute force detected.');
-                Redirect::to('/login');
+                Session::flash("danger", "Brute force detected.");
+                Redirect::to("/login");
             }
 
             $validation = $this->validLogin($user, $pass);
@@ -65,36 +70,36 @@ class Login extends Controller {
                         $points = $sql->points;
 
                         //start sessions
-                        Session::set('loggedin', true);
-                        Session::set('userid', $sql->id);
-                        Session::set('username', $sql->username);
+                        Session::set("loggedin", true);
+                        Session::set("userid", $sql->id);
+                        Session::set("username", $sql->username);
 
                         //se usuário ok, faz o login do piao e atualiza pontos
                         $this->updateLogin($sql->id, $points);
 
                         if ($this->loginFingerPrint == true) {
-                            Session::set('login_fingerprint', $this->loginString());
+                            Session::set("login_fingerprint", $this->loginString());
                         }
                         Cookie::put(SNAME, $sql->username, 60480);
-                        Redirect::to('/home');
+                        Redirect::to("/home");
                     } else {
                         $this->triesLogin();
-                        $result1 = ['status' => 'error', 'errors' => $check];
+                        $result1 = ["status" => "error", "errors" => $check];
                         echo json_encode($result1);
                     }
                 } else {
                     $this->triesLogin();
-                    $result2 = ['status' => 'error', 'errors' => 'Account or password invalid.'];
+                    $result2 = ["status" => "error", "errors" => "Account or password invalid."];
                     echo json_encode($result2);
                 }
             } else {
                 $this->triesLogin();
-                $result3 = ['status' => 'error', 'errors' => $validation];
+                $result3 = ["status" => "error", "errors" => $validation];
                 echo json_encode($result3);
             }
         } else {
             $this->triesLogin();
-            Redirect::to('/login');
+            Redirect::to("/login");
         }
     }
 
@@ -150,7 +155,7 @@ class Login extends Controller {
     private function loginString() {
         $ip = Helper::getIP();
         $browser = Helper::browser();
-        return hash('sha512', $ip, $browser);
+        return hash("sha512", $ip, $browser);
     }
 
     private function loginTries() {

@@ -9,12 +9,12 @@ class Error extends Controller {
     }
 
     public function __clone() {
-        
+
     }
 
     public function index() {
         $this->view->title = SNAME . " :: 404";
-        $this->view->load('errors/404', true);
+        $this->view->load("errors/404", true);
     }
 
 }

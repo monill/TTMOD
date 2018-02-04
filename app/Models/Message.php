@@ -6,11 +6,13 @@ use App\Libs\Database;
 
 class Message extends Model {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    private function __clone() {
+    private function __clone()
+    {
 
     }
 

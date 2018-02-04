@@ -7,18 +7,21 @@ use App\Libs\Redirect;
 
 class Logout extends Controller {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function __clone() {
-        
+    public function __clone()
+    {
+
     }
 
-    public function index() {
+    public function index()
+    {
         // if ($_SERVER['PHP_SELF'] != $_SERVER['REQUEST_URI']) die();
         Session::destroySession();
-        Redirect::to('/login');
+        Redirect::to("/login");
     }
 
 }

@@ -40,7 +40,7 @@
 
 <?php
 $title = "Most Active";
-$blockId = 'b-' . sha1($title);
+$blockId = "b-" . sha1($title);
 ?>
 
 <div class="card">

@@ -8,12 +8,14 @@ class Model {
 
     public $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = Database::getInstance();
     }
 
-    private function __clone() {
-        
+    private function __clone()
+    {
+
     }
 
 }

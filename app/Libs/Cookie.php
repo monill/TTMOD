@@ -13,14 +13,14 @@ class Cookie {
     }
 
     public static function set($name, $value, $expiry) {
-        if (setcookie($name, $value, time() + $expiry, '/')) {
+        if (setcookie($name, $value, time() + $expiry, "/")) {
             return true;
         }
         return false;
     }
 
     public static function delete($name) {
-        self::put($name, '', time() - 1);
+        self::put($name, "", time() - 1);
     }
 
 }

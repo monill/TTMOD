@@ -1,6 +1,6 @@
 <?php
 $title = "Staff";
-$blockId = 'b-' . sha1($title);
+$blockId = "b-" . sha1($title);
 use App\Models\User;
 ?>
 

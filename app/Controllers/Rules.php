@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Libs\Redirect;
-use App\Models\Rules;
+use App\Models\Rule;
 
 class Rules extends Controller {
 
@@ -11,7 +11,7 @@ class Rules extends Controller {
     {
         parent::__construct();
         // if (!$this->loggedIn()) {
-        //     Redirect::to('/login');
+        //     Redirect::to("/login");
         // }
     }
 
@@ -23,8 +23,8 @@ class Rules extends Controller {
     public function index()
     {
         $this->view->title = SNAME . " :: Rules";
-        $this->view->rules = Rules::all();
-        $this->view->load('rules/index', false);
+        $this->view->rules = Rule::all();
+        $this->view->load("rules/index", false);
     }
 
 }

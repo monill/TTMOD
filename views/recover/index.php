@@ -29,20 +29,20 @@
                         <div class="card fat">
                             <div class="card-body">
                                 <h4 class="card-title">Recover Password</h4>
-                                <form method="post" action="<?= url('/recover/in'); ?>">
+                                <form method="post" action="<?= url("/recover/in"); ?>">
                                     <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
                                     <div class="form-group">
                                         <label for="email"> E-mail </label>
                                         <input id="email" type="email" class="form-control" name="email" required data-eye>
                                     </div>
                                     <div class="form-group no-margin">
-                                        <button class="btn btn-default" onclick="location.href='<?= url('/login'); ?>'" type="button">Cancel</button>
+                                        <button class="btn btn-default" onclick="location.href='<?= url("/login"); ?>'" type="button">Cancel</button>
                                         <button type="submit" class="btn btn-primary "> Recover </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <div class="footer"> Copyright &copy; <?= date('Y'); ?> - TTMOD </div>
+                        <div class="footer"> Copyright &copy; <?= date("Y"); ?> - TTMOD </div>
                     </div>
                 </div>
             </div>

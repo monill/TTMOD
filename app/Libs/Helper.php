@@ -5,11 +5,11 @@ namespace App\Libs;
 class Helper {
 
     public function __construct() {
-        
+
     }
 
     public function __clone() {
-        
+
     }
 
     public static function hashSenha($senha) {
@@ -190,7 +190,7 @@ class Helper {
     }
 
     public static function validFilename($name) {
-        return preg_match('/^[^\0-\x1f:\\\\\/?*\xff#<>|]+$/si', $name);
+        return preg_match("/^[^\0-\x1f:\\\\\/?*\xff#<>|]+$/si", $name);
     }
 
 }

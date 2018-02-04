@@ -31,7 +31,7 @@
                         <div class="card fat">
                             <div class="card-body">
                                 <h4 class="card-title">Signup</h4>
-                                <form method="post" action="<?= url('/signup/in'); ?>" autocomplete="off">
+                                <form method="post" action="<?= url("/signup/in"); ?>" autocomplete="off">
                                     <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
 
                                     <div class="form-group">
@@ -82,13 +82,13 @@
         								<button type="submit" class="btn btn-primary btn-block"> Signup </button>
         							</div>
         							<div class="margin-top20 text-center">
-        								Have an account? <a href="<?= url('/login'); ?>">Login</a>
+        								Have an account? <a href="<?= url("/login"); ?>">Login</a>
         							</div>
                                 </form>
                             </div>
                         </div>
     					<div class="footer">
-    						Copyright &copy; <?= date('Y'); ?> &mdash; TTMOD
+    						Copyright &copy; <?= date("Y"); ?> &mdash; TTMOD
     					</div>
 	               </div>
                 </div>
@@ -104,15 +104,15 @@
         <script>
             $( function() {
                 $( "#dob" ).datepicker({
-                    dateFormat: 'dd/mm/yy',
-                    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-                    dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-                    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-                    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    dateFormat: "dd/mm/yy",
+                    dayNames: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
+                    dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S", "D"],
+                    dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
+                    monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                    monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
                     changeMonth: true,
                     changeYear: true,
-                    yearRange: "1930:<?= date('Y'); ?>"
+                    yearRange: "1930:<?= date("Y"); ?>"
                 });
             } );
         </script>

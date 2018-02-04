@@ -15,7 +15,7 @@ class Torrent extends Controller {
     {
         parent::__construct();
         // if (!$this->loggedIn()) {
-        //     Redirect::to('/login');
+        //     Redirect::to("/login");
         // }
     }
 
@@ -26,13 +26,13 @@ class Torrent extends Controller {
 
     public function index()
     {
-        Redirect::to('/torrents');
+        Redirect::to("/torrents");
     }
 
     public function view($id)
     {
         $this->view->title = SNAME . " :: tal";
-        $this->view->load('torrents/torrent', false);
+        $this->view->load("torrents/torrent", false);
     }
 
     public function upload()
@@ -56,14 +56,14 @@ class Torrent extends Controller {
                 $errors[] = "Invalid filename.";
             }
 
-            if (!preg_match('/^(.+)\.torrent$/si', $fname)) {
+            if (!preg_match("/^(.+)\.torrent$/si", $fname)) {
                 $errors[] = "Invalid filename not (.torrent).";
             }
 
-            $name = Input::get('tname');
-            $categ = Input::get('category');
-            $uploader = Input::get('showuploader');
-            $descr = Input::get('descr');
+            $name = Input::get("tname");
+            $categ = Input::get("category");
+            $uploader = Input::get("showuploader");
+            $descr = Input::get("descr");
 
             if (!$errors) {
                 if (!move_uploaded_file($ftmp_name, $uploadlocal)) {
@@ -95,9 +95,9 @@ class Torrent extends Controller {
 
                 //check announce url is local or external
                if ($announce !== ANNOUNCE) {
-                    $external = 'yes';
+                    $external = "yes";
                } else {
-                    $external = 'no';
+                    $external = "no";
                }
             }
 
@@ -141,7 +141,7 @@ class Torrent extends Controller {
                 'created_at' => Helper::dateTime()
             ]);
 
-            $idd = $this->db->lastInsertId('id');
+            $idd = $this->db->lastInsertId("id");
 
             if ($idd == 0) {
                 unlink("$uploadlocal");
@@ -155,7 +155,7 @@ class Torrent extends Controller {
 
             if (count($filelist)) {
                 foreach ($filelist as $file) {
-                    $dir = '';
+                    $dir = "";
                     $size = $file['length'];
                     $count = count($file['path']);
 
@@ -201,9 +201,9 @@ class Torrent extends Controller {
             }
 
             //External scrape
-            if ($external == 'yes') {
-                $tracker    = str_replace(['udp://', '/announce', ':80/'], ['http://', '/scrape', '/'], $announce);
-                //$tracker    = str_replace('/announce', '/scrape', $announce);
+            if ($external == "yes") {
+                $tracker    = str_replace(["udp://", "/announce", ":80/"], ["http://", "/scrape", "/"], $announce);
+                //$tracker    = str_replace("/announce", "/scrape", $announce);
                 $stat = new ScrapeUrl();
                 $stats = $stat->torrent($tracker, $infohash);
                 $seeders    = intval(strip_tags($stats['seeds']));
@@ -220,7 +220,7 @@ class Torrent extends Controller {
             }
             //End Scrape
 
-            if ($external == 'yes') {
+            if ($external == "yes") {
                 $message = printf("Torrent Upado OK:<br><br />%s foi carregado.<br><br> Lembre-se de voltar a baixar para que sua passkey seja adicionada e você pode semear este torrents.<br><br><a href='" . url('/torrent/download/') . "%d'>Baixar Agora</a><br><a href='" . url('/torrent/view/') . "%d'>Ver Torrent Upado </a><br><br>", $name, $idd, $idd);
             } else {
                 $message = printf("Torrent Upado OK:<br><br>%s foi carregado.<br><br><a href='" . url('/torrent/view/') . "%d'>Ver Torrent Upado</a><br><br>", $name, $idd);
@@ -230,14 +230,14 @@ class Torrent extends Controller {
             echo $message;
 
 //            if ($errors) {
-//                $result = ['status' => 'error', 'errors' => $errors];
+//                $result = ["status" => "error", "errors" => $errors];
 //                echo json_encode($result);
 //            }
 
             die();
 
         } else {
-            Redirect::to('/torrents/upload');
+            Redirect::to("/torrents/upload");
         }
     }
 
@@ -253,76 +253,82 @@ class Torrent extends Controller {
 
     public function download($id)
     {
-        //TODO
-        //fix this passkey on users
-        $user = $this->db->select1("SELECT `passkey` FROM `users` WHERE `id` = :idd AND `status` = 'confirmed' LIMIT 1", ["idd" => 1]);
-
-        $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `id` = :id LIMIT 1", ["id" => $id]);
-
-        $errors = array();
-
-        if (count($torrent) === 1)
+        if (isset($id))
         {
-            $file = TUPLOAD . "$id.torrent";
+            //TODO
+            //fix this passkey on users
+            $user = $this->db->select1("SELECT `passkey` FROM `users` WHERE `id` = :idd AND `status` = 'confirmed' LIMIT 1", ["idd" => 1]);
 
-            if ($torrent->banned == 'yes') {
-                $errors[] = "Torrent banned. <br>";
-            }
+            $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `id` = :id LIMIT 1", ["id" => $id]);
 
-            if (!is_file($file)) {
-                $errors[] = "File not found <br>";
-                $errors[] = "The ID has been found on the Database, but the torrents has gone! <br> Check Server Paths and CHMODs Are Correct! <br>";
-            }
+            $errors = array();
 
-            if (!is_readable($file)) {
-                $errors[] = "File not found <br>";
-                $errors[] = "The ID and torrents were found, but the torrents is NOT readable! <br>";
-            }
-
-            if (count($errors) == 0)
+            if (count($torrent) === 1)
             {
-                $name = $torrent->name . "[" . SNAME . "]";
+                $file = TUPLOAD . "$id.torrent";
 
-                $downs = (int)$torrent->downs;
-                $this->db->update('torrents', ['downs' => $downs + 1], 'id = :id', ['id' => $id]);
-
-                if ($torrent->external != 'yes')
-                {
-                    $arq = file_get_contents("$file");
-                    $decoded = Bencode::decode($arq);
-                    echo $decoded["announce"] = ANNOUNCE . $user->passkey;
-                    unset($decoded["announce-list"]);
-
-                    $data = Bencode::encode($decoded);
-
-                    header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
-                    header("Cache-Control: public"); // needed for internet explorer
-                    header("Content-Type: application/x-bittorrent");
-                    //header("Content-Length:" . filesize($data)); //error if uncomment this
-                    header("Content-Disposition: attachment; filename=" . $name . ".torrent");
-                    ob_clean();
-                    flush();
-                    print $data;
-                    exit();
-
-                } else {
-
-                    header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
-                    header("Cache-Control: public"); // needed for internet explorer
-                    header("Content-Type: application/x-bittorrent");
-                    header("Content-Length:" . filesize($file));
-                    header("Content-Disposition: attachment; filename=" . $name . ".torrent");
-                    ob_clean();
-                    flush();
-                    readfile($file);
-                    exit();
+                if ($torrent->banned == "yes") {
+                    $errors[] = "Torrent banned. <br>";
                 }
 
-            } else {
-                $result = ['status' => 'error', 'errors' => $errors];
-                echo json_encode($result);
+                if (!is_file($file)) {
+                    $errors[] = "File not found <br>";
+                    $errors[] = "The ID has been found on the Database, but the torrents has gone! <br> Check Server Paths and CHMODs Are Correct! <br>";
+                }
+
+                if (!is_readable($file)) {
+                    $errors[] = "File not found <br>";
+                    $errors[] = "The ID and torrents were found, but the torrents is NOT readable! <br>";
+                }
+
+                if (count($errors) == 0)
+                {
+                    $name = $torrent->name . "[" . SNAME . "]";
+
+                    $downs = (int)$torrent->downs;
+                    $this->db->update('torrents', ['downs' => $downs + 1], "id = :id", ["id" => $id]);
+
+                    if ($torrent->external != "yes")
+                    {
+                        $arq = file_get_contents("$file");
+                        $decoded = Bencode::decode($arq);
+                        echo $decoded["announce"] = ANNOUNCE . $user->passkey;
+                        unset($decoded["announce-list"]);
+
+                        $data = Bencode::encode($decoded);
+
+                        header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
+                        header("Cache-Control: public"); // needed for internet explorer
+                        header("Content-Type: application/x-bittorrent");
+                        //header("Content-Length:" . filesize($data)); //error if uncomment this
+                        header("Content-Disposition: attachment; filename=" . $name . ".torrent");
+                        ob_clean();
+                        flush();
+                        print $data;
+                        exit();
+
+                    } else {
+
+                        header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
+                        header("Cache-Control: public"); // needed for internet explorer
+                        header("Content-Type: application/x-bittorrent");
+                        header("Content-Length:" . filesize($file));
+                        header("Content-Disposition: attachment; filename=" . $name . ".torrent");
+                        ob_clean();
+                        flush();
+                        readfile($file);
+                        exit();
+                    }
+
+                } else {
+                    $result = ["status" => "error", "errors" => $errors];
+                    echo json_encode($result);
+                }
             }
+        } else {
+            Redirect::to("/torrents");
         }
+
     }
 
 }

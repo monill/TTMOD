@@ -2,7 +2,7 @@
 
 <?php
 $title = "Latest Torrents";
-$blockId = 'b-' . sha1($title);
+$blockId = "b-" . sha1($title);
 ?>
 
 <div class="card">

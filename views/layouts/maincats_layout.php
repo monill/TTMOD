@@ -1,6 +1,6 @@
 <?php
 $title = "Browse Torrents";
-$blockId = 'b-' . sha1($title);
+$blockId = "b-" . sha1($title);
 use App\Models\Torrent;
 ?>
 
@@ -13,10 +13,10 @@ use App\Models\Torrent;
     <!-- content -->
 
         <div class="list-group">
-            <a href="<?= url('/torrents'); ?>" class="list-group-item">
+            <a href="<?= url("/torrents"); ?>" class="list-group-item">
                 <i class="fa fa-folder-open"></i> Show all </a>
                 <?php foreach (Torrent::categories() as $c): ?>
-                    <a href="<?= url('/torrents/categ/' . $c->slug) ?>" class="list-group-item">
+                    <a href="<?= url("/torrents/categ/" . $c->slug) ?>" class="list-group-item">
                         <i class="fa fa-folder-open"></i> <?= $c->name;?> </a>
                 <?php endforeach; ?>
         </div>

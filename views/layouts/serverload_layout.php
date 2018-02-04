@@ -1,6 +1,6 @@
 <?php
 $title = "Server Load";
-$blockId = 'b-' . sha1($title);
+$blockId = "b-" . sha1($title);
 ?>
 
 <div class="card">
@@ -10,7 +10,7 @@ $blockId = 'b-' . sha1($title);
     </div>
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
-    
+
 
     <!-- end content -->
     </div>

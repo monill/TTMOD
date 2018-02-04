@@ -34,20 +34,20 @@ class Signup extends Controller {
         $this->view->title = SNAME . " :: Signup";
         $this->view->token = Token::generate();
         $this->view->estates = Estate::all();
-        $this->view->load('auth/signup', true);
+        $this->view->load("auth/signup", true);
     }
 
     public function in()
     {
         if (Input::exist())
         {
-            $user = Input::get('username');
-            $pass = Input::get('password');
-            $passagain = Input::get('passagain');
-            $mail = Input::get('email');
-            $dob = Input::get('dob');
-            $estate = Input::get('estate');
-            $gender = Input::get('gender');
+            $user = Input::get("username");
+            $pass = Input::get("password");
+            $passagain = Input::get("passagain");
+            $mail = Input::get("email");
+            $dob = Input::get("dob");
+            $estate = Input::get("estate");
+            $gender = Input::get("gender");
 
             $data = explode("/", $dob);
             $data_ok = $data[2] . "/" . $data[1] . "/" . $data[0] . "<br>";
@@ -74,8 +74,8 @@ class Signup extends Controller {
                         'created_at' => Helper::dateTime()
                     ]);
                 } catch (\Exception $exc) {
-                    Session::flash('info', 'There was an error creating your account.');
-                    Redirect::to('/signup');
+                    Session::flash("info", "There was an error creating your account.");
+                    Redirect::to("/signup");
                     //die($exc->getMessage());
                 }
 
@@ -85,14 +85,14 @@ class Signup extends Controller {
 
                 Log::create("New member with nick: <b> {$user} </b>");
 
-                $resultado = ['status' => 'success', 'msg' => $msg];
+                $resultado = ["status" => "success", "msg" => $msg];
                 echo json_encode($resultado);
             } else {
-                $result = ['status' => 'error', 'errors' => $erros];
+                $result = ["status" => "error", "errors" => $erros];
                 echo json_encode($result);
             }
         } else {
-            Redirect::to('/signup');
+            Redirect::to("/signup");
         }
     }
 

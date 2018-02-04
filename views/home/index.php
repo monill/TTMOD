@@ -3,14 +3,14 @@
     <div class="card-header">
         <?php
         echo $NOTICE = "NOTICE";
-        $blockN = 'b-' . sha1($NOTICE);
+        $blockN = "b-" . sha1($NOTICE);
         ?>
         <a data-toggle="collapse" href="#" class="showHide" id="<?= $blockN; ?>" style="float: right;"></a>
     </div>
     <div class="card-body slidingDiv<?= $blockN; ?>">
     <!-- content -->
 
-    Welcome To TTMOD<br /><br />The modd open source torrent tracker view our <a href="<?= url('/forum'); ?>">forum</a> for support
+    Welcome To TTMOD<br /><br />The modd open source torrent tracker view our <a href="<?= url("/forum"); ?>">forum</a> for support
 
     <!-- end content -->
     </div>
@@ -21,14 +21,14 @@
     <div class="card-header">
         <?php
         echo $News = "News";
-        $blockNw = 'b-' . sha1($News);
+        $blockNw = "b-" . sha1($News);
         ?>
         <a data-toggle="collapse" href="#" class="showHide" id="<?= $blockNw; ?>" style="float: right;"></a>
     </div>
     <div class="card-body slidingDiv<?= $blockNw; ?>">
     <!-- content -->
 
-        <?php foreach ($this->news as $nw): ?>
+        <?php foreach (isset($this->news) ? $this->news : $this->news as $nw): ?>
             <b><?= $nw->title; ?></b><br />
             <?php echo date("d-m-Y", strtotime($nw->created_at)); ?>
             <p><?= $nw->content; ?></p>
@@ -43,7 +43,7 @@
     <div class="card-header">
         <?php
         echo $Disclaimer = "Disclaimer";
-        $blockId = 'b-' . sha1($Disclaimer);
+        $blockId = "b-" . sha1($Disclaimer);
         ?>
         <a data-toggle="collapse" href="#" class="showHide" id="<?= $blockId; ?>" style="float: right;"></a>
     </div>

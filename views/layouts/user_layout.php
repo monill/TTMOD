@@ -1,7 +1,7 @@
 <?php
 use App\Libs\Session;
-$title = Session::get('username');
-$blockId = 'b-' . sha1($title);
+$title = Session::get("username");
+$blockId = "b-" . sha1($title);
 
 $avatar = "https://placehold.it/200x300";
 ?>
@@ -25,7 +25,7 @@ $avatar = "https://placehold.it/200x300";
         <br />
         <div class="text-center">
             <a href="account.php" class="btn btn-primary"> Account </a>
-            <a href="<?= url('/admin'); ?>" class="btn btn-warning"> Admin Panel </a>
+            <a href="<?= url("/admin"); ?>" class="btn btn-warning"> Admin Panel </a>
         </div>
         <br />
 

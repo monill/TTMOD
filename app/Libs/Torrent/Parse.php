@@ -12,7 +12,7 @@ class Parse {
 
     }
 
-    public function torr($filename = '')
+    public function torr($filename = "")
     {
         $torrentInfo = array();
 

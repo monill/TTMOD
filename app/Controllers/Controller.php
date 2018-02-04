@@ -21,17 +21,17 @@ class Controller {
     }
 
     public function __clone() {
-        
+
     }
 
     public function loggedIn() {
-        if ((Session::get('userid') || Session::get('loggedin')) == null) {
+        if ((Session::get("userid") || Session::get("loggedin")) == null) {
             return false;
         }
 
         if ($this->loginFingerPrint == true) {
             $loginString = $this->loginString();
-            $stringNow = Session::get('login_fingerprint');
+            $stringNow = Session::get("login_fingerprint");
 
             if ($stringNow != null && $stringNow == $loginString) {
                 return true;
@@ -55,12 +55,12 @@ class Controller {
     private function loginString() {
         $ip = Helper::getIP();
         $browser = Helper::browser();
-        return hash('sha512', $ip, $browser);
+        return hash("sha512", $ip, $browser);
     }
 
     private function logout() {
         Session::destroySession();
-        Redirect::to('/login');
+        Redirect::to("/login");
     }
 
 }

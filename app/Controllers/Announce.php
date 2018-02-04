@@ -12,7 +12,7 @@ class Announce extends Controller {
     public function __construct() {
         parent::__construct();
         // if (!$this->loggedIn()) {
-        //     Redirect::to('/login');
+        //     Redirect::to("/login");
         // }
 
     }
@@ -34,20 +34,20 @@ class Announce extends Controller {
 
     }
 
-    public function passkey($passkey = '')
+    public function passkey($passkey = "")
     {
         $uip = Helper::getIP();
 
-        $infohash = Input::get('info_hash');
-        $peerid = Input::get('peer_id');
-        $ip = Input::get('ip');
-        $port = (int)Input::get('port');
-        $uploaded = (float)Input::get('uploaded');
-        $downloaded = (float)Input::get('downloaded');
-        $left = (float)Input::get('left');
-        $event = Input::get('event');
+        $infohash = Input::get("info_hash");
+        $peerid = Input::get("peer_id");
+        $ip = Input::get("ip");
+        $port = (int)Input::get("port");
+        $uploaded = (float)Input::get("uploaded");
+        $downloaded = (float)Input::get("downloaded");
+        $left = (float)Input::get("left");
+        $event = Input::get("event");
 
-        $no_peer_id = Input::get('no_peer_id');
+        $no_peer_id = Input::get("no_peer_id");
 
         $browser = new BrowserDetection();
         $agent = $browser->getUserAgent();
@@ -81,16 +81,16 @@ class Announce extends Controller {
         if (!$user) {
             $this->err("Passkey is invalid.");
         }
-        if ($user->status != 'confirmed') {
+        if ($user->status != "confirmed") {
             $this->err("Your account is not activated.");
         }
-        if ($user->banned == 'yes') {
+        if ($user->banned == "yes") {
             $this->err("You are no longer welcome here.");
         }
         if (!$torrent) {
             $this->err("Torrent not found on this tracker - hash = " . $infohash);
         }
-        if ($torrent->banned == 'yes') {
+        if ($torrent->banned == "yes") {
             $this->err("Torrent has been banned - hash = " . $infohash);
         }
         if ($torrent->numpeers > 50) {
@@ -172,7 +172,7 @@ class Announce extends Controller {
             $downthis = max(0, $downloaded - $self["downloaded"]);
 
             if (($upthis > 0 || $downthis) && $user->id) {
-                if ($torrent->freeleech == 'yes') {
+                if ($torrent->freeleech == "yes") {
                     $this->db->update('users', [
                         'uploaded' => "uploaded + $upthis"
                     ], "`id` = :id", ["id" => $user->id]);
@@ -269,15 +269,15 @@ class Announce extends Controller {
            if ($valid >= 1 && $seeder != "no") {
                $this->err("Connection limit exceeded! You may only leech from one location at a time.");
            }
-           if ($valid >= 3 && $seeder == 'yes') {
+           if ($valid >= 3 && $seeder == "yes") {
                $this->err("Connection limit exceeded!");
            }
         }
 
         // SEEDED, LETS MAKE IT VISIBLE THEN
-        if ($seeder == 'yes') {
+        if ($seeder == "yes") {
             if ($torrent->banned != "yes") {
-                $updateset = "visible = 'yes'";
+                $updateset = "visible = "yes"";
             }
             $updateset = "lastaction = '" . Helper::dateTime() . "'";
         }
@@ -342,7 +342,7 @@ class Announce extends Controller {
     public function maxSlots($userid)
     {
         $user = $this->db->select1("SELECT `id`, `warn`, `maxslots` FROM `users` WHERE `id` = :idd", ["idd" => $userid]);
-        if ($user->warn == 'yes') {
+        if ($user->warn == "yes") {
             $maxslot = 1;
         } else {
             $maxslot = (int)$user->maxslots;

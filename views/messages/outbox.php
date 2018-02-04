@@ -1,6 +1,6 @@
 <?php
 $title = "Outbox";
-$blockId = 'b-' . sha1($title);
+$blockId = "b-" . sha1($title);
 ?>
 
 <div class="card">

@@ -1,6 +1,6 @@
 
 <?php foreach ($this->categs as $categ): ?>
-<?php $blockId = 'b-' . sha1($categ->name); ?>
+<?php $blockId = "b-" . sha1($categ->name); ?>
 
 <div class="card">
     <div class="card-header <?= $categ->style; ?>">
@@ -12,7 +12,7 @@
 
     <?php foreach($this->answers as $answer): ?>
         <?php if ($answer->categ_id == $categ->id): ?>
-            <?php $blockd = 'b-' . sha1($answer->question); ?>
+            <?php $blockd = "b-" . sha1($answer->question); ?>
             <div class="card">
                 <div class="card-header <?= $answer->style; ?>">
                     <b><?= $answer->question ?></b>

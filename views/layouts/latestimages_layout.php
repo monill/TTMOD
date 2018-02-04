@@ -2,7 +2,7 @@
 
 <?php
 $title = "Latest Posters";
-$blockId = 'b-' . sha1($title);
+$blockId = "b-" . sha1($title);
 ?>
 
 <div class="card">

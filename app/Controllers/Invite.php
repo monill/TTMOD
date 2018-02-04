@@ -10,7 +10,7 @@ class Invite extends Controller {
     {
         parent::__construct();
         // if (!$this->loggedIn()) {
-        //     Redirect::to('/login');
+        //     Redirect::to("/login");
         // }
     }
 
@@ -22,7 +22,7 @@ class Invite extends Controller {
     public function index()
     {
         $this->view->title = SNAME . " :: Invites";
-        $this->view->load('invite/index', false);
+        $this->view->load("invite/index", false);
     }
 
 }

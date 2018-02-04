@@ -1,6 +1,6 @@
 <?php
 $title1 = "Upload Rules";
-$blockId1 = 'b-' . sha1($title1);
+$blockId1 = "b-" . sha1($title1);
 ?>
 
 <div class="card">
@@ -22,7 +22,7 @@ $blockId1 = 'b-' . sha1($title1);
 
 <?php
 $title = "Upload";
-$blockId = 'b-' . sha1($title);
+$blockId = "b-" . sha1($title);
 ?>
 <div class="card">
     <div class="card-header">
@@ -32,7 +32,7 @@ $blockId = 'b-' . sha1($title);
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
         <!-- content -->
 
-        <form class="form-horizontal" enctype="multipart/form-data" action="<?= url('/torrent/upload'); ?>" method="post" autocomplete="off">
+        <form class="form-horizontal" enctype="multipart/form-data" action="<?= url("/torrent/upload"); ?>" method="post" autocomplete="off">
             <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
 
             <div class="form-group">

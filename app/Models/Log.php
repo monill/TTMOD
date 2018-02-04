@@ -8,15 +8,18 @@ use App\Libs\Helper;
 
 class Log extends Model {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    private function __clone() {
-        
+    private function __clone()
+    {
+
     }
 
-    public static function create($text) {
+    public static function create($text)
+    {
         $db = Database::getInstance();
 
         $browser = new BrowserDetection();

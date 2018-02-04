@@ -5,21 +5,21 @@ namespace App\Libs;
 class Views {
 
     public function __construct() {
-        
+
     }
 
     public function __clone() {
-        
+
     }
 
     public function load($file, $inc = false) {
         if (!$inc) {
-            require_once ROOT . 'views/header.php';
-            require_once ROOT . 'views/' . $file . '.php';
-            require_once ROOT . 'views/footer.php';
+            require_once ROOT . "views/header.php";
+            require_once ROOT . "views/" . $file . ".php";
+            require_once ROOT . "views/footer.php";
             exit();
         } else {
-            require_once ROOT . 'views/' . $file . '.php';
+            require_once ROOT . "views/" . $file . ".php";
             exit();
         }
     }

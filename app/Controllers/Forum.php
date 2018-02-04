@@ -6,24 +6,28 @@ use App\Libs\Redirect;
 
 class Forum extends Controller {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         // if (!$this->loggedIn()) {
-        //     Redirect::to('/login');
+        //     Redirect::to("/login");
         // }
     }
 
-    public function __clone() {
-        
+    public function __clone()
+    {
+
     }
 
-    public function index() {
+    public function index()
+    {
         $this->view->title = SNAME . " :: Forum";
-        $this->view->load('forum/index', false);
+        $this->view->load("forum/index", false);
     }
 
-    public function topic($slug = '') {
-        $this->view->load('forum/topic', false);
+    public function topic($slug = "")
+    {
+        $this->view->load("forum/topic", false);
     }
 
 }

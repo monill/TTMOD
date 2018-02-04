@@ -1,6 +1,6 @@
 <?php
 $title = "RSS";
-$blockId = 'b-' . sha1($title);
+$blockId = "b-" . sha1($title);
 ?>
 
 <div class="card">

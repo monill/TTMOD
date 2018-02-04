@@ -33,14 +33,15 @@ class Recover extends Controller {
     {
         $this->view->title = SNAME . " :: Recover Password";
         $this->view->token = Token::generate();
-        $this->view->load('recover/index', true);
+        $this->view->load("recover/index", true);
     }
 
     public function in()
     {
-        if (Input::exist()) {
+        if (Input::exist())
+        {
 
-            $email = Input::get('email');
+            $email = Input::get("email");
 
             $errors = $this->validEmail($email);
 
@@ -68,42 +69,43 @@ class Recover extends Controller {
 
                 $msg = "Check your email to reset your password, Inbox or SPAM.";
 
-                $result = ['status' => 'success', 'msg' => $msg];
+                $result = ["status" => "success", "msg" => $msg];
                 echo json_encode($result);
             } else {
                 //increment bruteForce
                 $this->login->triesLogin();
-                Redirect::to('/login');
+                Redirect::to("/login");
                 echo json_encode($errors);
             }
         } else {
-            Redirect::to('/login');
+            Redirect::to("/login");
         }
     }
 
-    public function code($key = '')
+    public function code($key = "")
     {
         if (isset($key)) {
             if ($this->valid->validKey($key)) {
                 $this->view->title = SNAME . " :: Recover Password";
                 $this->view->token = Token::generate();
                 $this->view->coding = $key;
-                $this->view->load('recover/recover', true);
+                $this->view->load("recover/recover", true);
             } else {
                 //echo "<h5 class='text-error' style='text-align: center;'> Reset key is invalid or already used. </h5>";
-                Redirect::to('/recover');
+                Redirect::to("/recover");
             }
         } else {
-            Redirect::to('/signup');
+            Redirect::to("/signup");
         }
     }
 
     public function on()
     {
-        if (Input::exist()) {
-            $pwd = Input::get('password');
-            $pwd1 = Input::get('password1');
-            $key = Input::get('coding');
+        if (Input::exist())
+        {
+            $pwd = Input::get("password");
+            $pwd1 = Input::get("password1");
+            $key = Input::get("coding");
 
             $error = $this->validPass($pwd, $pwd1, $key);
 
@@ -119,18 +121,18 @@ class Recover extends Controller {
 
                 Log::create("User: {$user->username} changed the password successfully.");
 
-                $reultado = ['status' => 'sucess', 'msg' => 'Password changed successfully!'];
+                $reultado = ["status" => "sucess", "msg" => "Password changed successfully!"];
                 echo json_encode($reultado);
             } else {
-                $result = ['status' => 'error', 'error' => $error];
+                $result = ["status" => "error", "error" => $error];
                 echo json_encode($result);
             }
         } else {
-            Redirect::to('/signup');
+            Redirect::to("/signup");
         }
     }
 
-    public function acc($code = '')
+    public function acc($code = "")
     {
         if (isset($code))
         {
@@ -151,7 +153,7 @@ class Recover extends Controller {
                 $msg = "<h5 class='text-error'> Activation key does not exist or account already activated. </h5>";
             }
         } else {
-            Redirect::to('/signup');
+            Redirect::to("/signup");
         }
     }
 
@@ -171,7 +173,8 @@ class Recover extends Controller {
         return $errors;
     }
 
-    public function validPass($pwd, $pwd1, $key) {
+    public function validPass($pwd, $pwd1, $key)
+    {
         $errors = array();
 
         if ($this->valid->isEmpty($pwd)) {

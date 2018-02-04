@@ -38,11 +38,11 @@ use App\Models\User;
             <button type="submit" class="btn btn-primary"> Search </button>
         </form>
 
-        <p align='center'>
+        <p align="center">
             <a href="<?= url("/members"); ?>"> <b> ALL </b> </a> -
-            <?php foreach (range('a', 'z') as $l): ?>
+            <?php foreach (range("a", "z") as $l): ?>
                 <?php $L = strtoupper($l); ?>
-                <?php if ($l == ''): ?>
+                <?php if ($l == ""): ?>
                     <b><?= $L; ?></b>
                 <?php  else: ?>
                     <a href="<?= url("/members/letter/") . $l; ?>"> <b> <?= $L; ?> </b> </a>

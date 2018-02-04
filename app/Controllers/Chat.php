@@ -9,17 +9,17 @@ class Chat extends Controller {
     public function __construct() {
         parent::__construct();
         // if (!$this->loggedIn()) {
-        //     Redirect::to('/login');
+        //     Redirect::to("/login");
         // }
     }
 
     public function __clone() {
-        
+
     }
 
     public function index() {
         $this->view->title = SNAME . " :: Chat";
-        $this->view->load('chat/index', false);
+        $this->view->load("chat/index", false);
     }
 
 }

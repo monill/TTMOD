@@ -29,7 +29,7 @@
                         <div class="card fat">
                             <div class="card-body">
                                 <h4 class="card-title">Recover Password</h4>
-                                <form method="post" action="<?= url('/recover/on'); ?>">
+                                <form method="post" action="<?= url("/recover/on"); ?>">
                                     <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
                                     <input type="hidden" name="coding" value="<?php echo isset($this->coding) ? $this->coding : $this->coding; ?>" />
                                     <div class="form-group">
@@ -46,7 +46,7 @@
                                 </form>
                             </div>
                         </div>
-						<div class="footer"> Copyright &copy; <?= date('Y'); ?> - TTMOD </div>
+						<div class="footer"> Copyright &copy; <?= date("Y"); ?> - TTMOD </div>
                     </div>
                 </div>
             </div>

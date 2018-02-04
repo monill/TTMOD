@@ -10,7 +10,7 @@ class Staff extends Controller {
     {
         parent::__construct();
         // if (!$this->loggedIn()) {
-        //     Redirect::to('/login');
+        //     Redirect::to("/login");
         // }
     }
 
@@ -24,7 +24,7 @@ class Staff extends Controller {
         $staffs = $this->db->select("SELECT `id`, `username`, `class` FROM `users` WHERE `status` = 'confirmed' AND `class` IN ('moderator', 'moderatorplus', 'admin') ORDER BY `username` ASC");
         $this->view->title = SNAME . " :: Staff";
         $this->view->staffs = $staffs;
-        $this->view->load('staff/index', false);
+        $this->view->load("staff/index", false);
     }
 
 }

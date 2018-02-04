@@ -3,12 +3,12 @@ use App\Libs\Session;
 use App\Libs\Database;
 
 $db = Database::getInstance(); //TODO fix this
-$user = $db->select1("SELECT invites FROM `users` WHERE `id` = :idd LIMIT 1", ["idd" => 7]); //Session::get('userid')
+$user = $db->select1("SELECT invites FROM `users` WHERE `id` = :idd LIMIT 1", ["idd" => 7]); //Session::get("userid")
 $invites = $user->invites;
 $inv = $invites > 1 ? "s" : "";
 
 $title = "Invites";
-$blockId = 'b-' . sha1($title);
+$blockId = "b-" . sha1($title);
 ?>
 
 <div class="card">

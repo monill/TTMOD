@@ -30,7 +30,7 @@
 							<div class="card-body">
 								<h4 class="card-title">Login</h4>
 
-	                            <form method="post" action="<?= url('/login/in'); ?>" autocomplete="off">
+	                            <form method="post" action="<?= url("/login/in"); ?>" autocomplete="off">
 	                                <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
 	                                <div class="form-group">
 	                                	<label for="name">Username</label>
@@ -44,13 +44,13 @@
 										<button type="submit" class="btn btn-primary btn-block"> Login </button>
 		                            </div>
 									<div class="margin-top20 text-center">
-										<a href="<?= url('/signup'); ?>">Create Account</a> Or <a href="<?= url('/recover'); ?>">Recover Account</a>
+										<a href="<?= url("/signup"); ?>">Create Account</a> Or <a href="<?= url("/recover"); ?>">Recover Account</a>
 									</div>
 	                            </form>
-                                <?php include VIEWS . 'flash.php' ?>
+                                <?php include VIEWS . "flash.php" ?>
 	                        </div>
 						</div>
-						<div class="footer"> &copy; <?= date('Y'); ?> - TTMOD </div>
+						<div class="footer"> &copy; <?= date("Y"); ?> - TTMOD </div>
 					</div>
 				</div>
 			</div>

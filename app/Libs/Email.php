@@ -15,13 +15,13 @@ class Email extends PHPMailer {
         $mail->addAddress($email);
         // link for email confirmation
         //TODO fix link
-        $link = URL . '/confirmacc.php?k=' . $key;
+        $link = URL . "/confirmacc.php?k=" . $key;
         // load email HTML template
-        $body = file_get_contents(VIEWS . 'emails/confirmacc.php');
+        $body = file_get_contents(VIEWS . "emails/confirmacc.php");
 
         // replace appropriate placeholders
-        $body = str_replace('{{website_name}}', "Track", $body);
-        $body = str_replace('{{link}}', $link, $body);
+        $body = str_replace("{{website_name}}", "Track", $body);
+        $body = str_replace("{{link}}", $link, $body);
 
         // set subject and body
         $mail->Subject = SNAME . " - Email confirmation.";
@@ -29,8 +29,8 @@ class Email extends PHPMailer {
 
         // try to send the email
         if (!$mail->send()) {
-            echo 'Message can not be sent. <br />';
-            echo 'Mail error: ' . $mail->ErrorInfo;
+            echo "Message can not be sent. <br />";
+            echo "Mail error: " . $mail->ErrorInfo;
             exit();
         }
     }
@@ -42,20 +42,20 @@ class Email extends PHPMailer {
         $mail->addAddress($email);
         // link for email confirmation
         //TODO fix link
-        $link = URL . '/resetpass.php?k=' . $key;
+        $link = URL . "/resetpass.php?k=" . $key;
         // load email HTML template
-        $body = file_get_contents(VIEWS . 'emails/resetpass.php');
+        $body = file_get_contents(VIEWS . "emails/resetpass.php");
 
-        $body = str_replace('{{ip}}', Helper::getIP(), $body);
-        $body = str_replace('{{website_name}}', SNAME, $body);
-        $body = str_replace('{{link}}', $link, $body);
+        $body = str_replace("{{ip}}", Helper::getIP(), $body);
+        $body = str_replace("{{website_name}}", SNAME, $body);
+        $body = str_replace("{{link}}", $link, $body);
 
         $mail->Subject = SNAME . " - Password Reset.";
         $mail->Body = $body;
 
         if (!$mail->send()) {
-            echo 'Message can not be sent. <br />';
-            echo 'Mail error: ' . $mail->ErrorInfo;
+            echo "Message can not be sent. <br />";
+            echo "Mail error: " . $mail->ErrorInfo;
             exit();
         }
     }
@@ -72,15 +72,15 @@ class Email extends PHPMailer {
             $email->Port = SMTP_PORT;
         }
 
-        $email->CharSet = 'UTF-8';
+        $email->CharSet = "UTF-8";
         // tell mailer that we are sending HTML email
         $email->isHTML(true);
 
         //TODO
         //fix website_domain
-        $email->From = '123456@inbox.mailtrap.io';
+        $email->From = "123456@inbox.mailtrap.io";
         $email->FromName = SNAME;
-        $email->addReplyTo('123456@inbox.mailtrap.io', SNAME);
+        $email->addReplyTo("123456@inbox.mailtrap.io", SNAME);
 
         return $email;
     }

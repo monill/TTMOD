@@ -1,6 +1,6 @@
 <?php
 $title = "Advanced Search";
-$blockId = 'b-' . sha1($title);
+$blockId = "b-" . sha1($title);
 use App\Models\Torrent;
 ?>
 
@@ -12,7 +12,7 @@ use App\Models\Torrent;
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
 
-    <form method="post" action="<?= url('/torrents/advsearch'); ?>">
+    <form method="post" action="<?= url("/torrents/advsearch"); ?>">
 		<input type="text" name="search" class="form-control" placeholder="Search.." />
         <br />
 		<select name="cat" class="form-control">

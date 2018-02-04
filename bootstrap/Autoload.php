@@ -26,7 +26,7 @@ class Autoload {
         if (!$this->url_controller) {
             $page = new Index();
             $page->index();
-        } elseif (file_exists(CTRL . ucfirst($this->url_controller) . '.php')) {
+        } elseif (file_exists(CTRL . ucfirst($this->url_controller) . ".php")) {
             // here we did check for controller: does such a controller exist ?
             // if so, then load this file and create this controller like \App\Controllers\Index
             $controller = "\\App\\Controllers\\" . ucfirst($this->url_controller);
@@ -48,11 +48,11 @@ class Autoload {
                     // no action defined: call the default index() method of a selected controller
                     $this->url_controller->index();
                 } else {
-                    header('location: ' . URL . '/error');
+                    header("location: " . URL . "/error");
                 }
             }
         } else {
-            header('location: ' . URL . '/error');
+            header("location: " . URL . "/error");
         }
     }
 
@@ -61,11 +61,11 @@ class Autoload {
      */
     private function splitUrl()
     {
-        if (isset($_GET['url'])) {
+        if (isset($_GET["url"])) {
             // split URL
-            $url = trim(rtrim(isset($_GET['url']) ? $_GET['url'] : '', '/'));
+            $url = trim(rtrim(isset($_GET["url"]) ? $_GET["url"] : "", "/"));
             $url = filter_var($url, FILTER_SANITIZE_URL);
-            $url = explode('/', $url);
+            $url = explode("/", $url);
 
             // Put URL parts into according properties
             // By the way, the syntax here is just a short form of if/else, called "Ternary Operators"
@@ -80,11 +80,11 @@ class Autoload {
             $this->url_params = array_values($url);
 
             ##For debugging
-            // echo count($url). '<br />';
+            // echo count($url). "<br />";
             // for debugging. uncomment this if you have problems with the URL
-            // echo 'Controller: ' . $this->url_controller . '<br />';
-            // echo 'Action: ' . $this->url_action . '<br />';
-            // echo 'Parameters: ' . print_r($this->url_params, true) . '<br />';
+            // echo "Controller: " . $this->url_controller . "<br />";
+            // echo "Action: " . $this->url_action . "<br />";
+            // echo "Parameters: " . print_r($this->url_params, true) . "<br />";
         }
     }
 

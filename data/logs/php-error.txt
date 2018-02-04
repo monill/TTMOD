@@ -1,200 +1,60 @@
-[03-Feb-2018 22:51:10 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORBER BY `username` ASC' at line 1 in D:\Ampps\www\app\Libs\Database.php:48
-Stack trace:
-#0 D:\Ampps\www\app\Libs\Database.php(48): PDOStatement->execute()
-#1 D:\Ampps\www\app\Controllers\Staff.php(24): App\Libs\Database->select('SELECT `id`, `u...')
-#2 D:\Ampps\www\bootstrap\Autoload.php(49): App\Controllers\Staff->index()
-#3 D:\Ampps\www\public\index.php(31): Autoload->__construct()
-#4 {main}
-  thrown in D:\Ampps\www\app\Libs\Database.php on line 48
-[03-Feb-2018 22:51:34 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORBER BY username ASC' at line 1 in D:\Ampps\www\app\Libs\Database.php:48
-Stack trace:
-#0 D:\Ampps\www\app\Libs\Database.php(48): PDOStatement->execute()
-#1 D:\Ampps\www\app\Controllers\Staff.php(24): App\Libs\Database->select('SELECT `id`, `u...')
-#2 D:\Ampps\www\bootstrap\Autoload.php(49): App\Controllers\Staff->index()
-#3 D:\Ampps\www\public\index.php(31): Autoload->__construct()
-#4 {main}
-  thrown in D:\Ampps\www\app\Libs\Database.php on line 48
-[03-Feb-2018 22:51:53 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORBER BY username' at line 1 in D:\Ampps\www\app\Libs\Database.php:48
-Stack trace:
-#0 D:\Ampps\www\app\Libs\Database.php(48): PDOStatement->execute()
-#1 D:\Ampps\www\app\Controllers\Staff.php(24): App\Libs\Database->select('SELECT `id`, `u...')
-#2 D:\Ampps\www\bootstrap\Autoload.php(49): App\Controllers\Staff->index()
-#3 D:\Ampps\www\public\index.php(31): Autoload->__construct()
-#4 {main}
-  thrown in D:\Ampps\www\app\Libs\Database.php on line 48
-[03-Feb-2018 23:04:55 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in D:\Ampps\www\app\Libs\Database.php:48
-Stack trace:
-#0 D:\Ampps\www\app\Libs\Database.php(48): PDOStatement->execute()
-#1 D:\Ampps\www\app\Controllers\Staff.php(24): App\Libs\Database->select('SELECT `id`, `u...')
-#2 D:\Ampps\www\bootstrap\Autoload.php(49): App\Controllers\Staff->index()
-#3 D:\Ampps\www\public\index.php(31): Autoload->__construct()
-#4 {main}
-  thrown in D:\Ampps\www\app\Libs\Database.php on line 48
-[03-Feb-2018 23:23:32 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\staff\index.php on line 14
-[03-Feb-2018 23:23:32 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:23:32 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:23:32 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:23:32 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:23:32 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:23:32 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[03-Feb-2018 23:32:17 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' 'moderatorplus', 'admin' ORDER BY `username` ASC' at line 1 in D:\Ampps\www\app\Libs\Database.php:48
-Stack trace:
-#0 D:\Ampps\www\app\Libs\Database.php(48): PDOStatement->execute()
-#1 D:\Ampps\www\app\Controllers\Staff.php(24): App\Libs\Database->select('SELECT `id`, `u...')
-#2 D:\Ampps\www\bootstrap\Autoload.php(49): App\Controllers\Staff->index()
-#3 D:\Ampps\www\public\index.php(31): Autoload->__construct()
-#4 {main}
-  thrown in D:\Ampps\www\app\Libs\Database.php on line 48
-[03-Feb-2018 23:32:31 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in D:\Ampps\www\app\Libs\Database.php:48
-Stack trace:
-#0 D:\Ampps\www\app\Libs\Database.php(48): PDOStatement->execute()
-#1 D:\Ampps\www\app\Controllers\Staff.php(24): App\Libs\Database->select('SELECT `id`, `u...')
-#2 D:\Ampps\www\bootstrap\Autoload.php(49): App\Controllers\Staff->index()
-#3 D:\Ampps\www\public\index.php(31): Autoload->__construct()
-#4 {main}
-  thrown in D:\Ampps\www\app\Libs\Database.php on line 48
-[03-Feb-2018 23:40:08 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Call to undefined method App\Models\User::class() in D:\Ampps\www\views\staff\index.php:17
-Stack trace:
-#0 D:\Ampps\www\app\Libs\Views.php(18): require_once()
-#1 D:\Ampps\www\app\Controllers\Staff.php(27): App\Libs\Views->load('staff/index', false)
-#2 D:\Ampps\www\bootstrap\Autoload.php(49): App\Controllers\Staff->index()
-#3 D:\Ampps\www\public\index.php(31): Autoload->__construct()
-#4 {main}
-  thrown in D:\Ampps\www\views\staff\index.php on line 17
-[03-Feb-2018 23:48:25 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Call to undefined method App\Models\User::class() in D:\Ampps\www\views\staff\index.php:17
-Stack trace:
-#0 D:\Ampps\www\app\Libs\Views.php(18): require_once()
-#1 D:\Ampps\www\app\Controllers\Staff.php(27): App\Libs\Views->load('staff/index', false)
-#2 D:\Ampps\www\bootstrap\Autoload.php(49): App\Controllers\Staff->index()
-#3 D:\Ampps\www\public\index.php(31): Autoload->__construct()
-#4 {main}
-  thrown in D:\Ampps\www\views\staff\index.php on line 17
-[03-Feb-2018 23:56:00 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW) in D:\Ampps\www\views\staff\index.php on line 15
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\staff\index.php on line 16
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\staff\index.php on line 16
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\staff\index.php on line 16
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:56:17 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Notice:  Trying to get property of non-object in D:\Ampps\www\views\staff\index.php on line 17
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Notice:  Trying to get property of non-object in D:\Ampps\www\views\staff\index.php on line 17
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Notice:  Trying to get property of non-object in D:\Ampps\www\views\staff\index.php on line 17
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Notice:  Trying to get property of non-object in D:\Ampps\www\views\staff\index.php on line 17
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Notice:  Trying to get property of non-object in D:\Ampps\www\views\staff\index.php on line 17
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Notice:  Trying to get property of non-object in D:\Ampps\www\views\staff\index.php on line 17
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Notice:  Trying to get property of non-object in D:\Ampps\www\views\staff\index.php on line 17
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Notice:  Trying to get property of non-object in D:\Ampps\www\views\staff\index.php on line 17
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Notice:  Trying to get property of non-object in D:\Ampps\www\views\staff\index.php on line 17
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP Stack trace:
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[03-Feb-2018 23:56:47 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\staff\index.php on line 16
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\staff\index.php on line 16
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\staff\index.php on line 16
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[04-Feb-2018 00:19:33 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\staff\index.php on line 16
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\staff\index.php on line 16
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\staff\index.php on line 16
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP Stack trace:
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   3. App\Controllers\Staff->index() D:\Ampps\www\bootstrap\Autoload.php:49
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Staff.php:27
-[04-Feb-2018 00:20:58 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
-[04-Feb-2018 00:29:08 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected '<' in D:\Ampps\www\views\staff\index.php on line 25
-[04-Feb-2018 00:36:39 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in D:\Ampps\www\views\staff\index.php on line 18
+[04-Feb-2018 11:56:12 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected 'New' (T_NEW), expecting identifier (T_STRING) or '{' in D:\Ampps\www\app\Controllers\Home.php on line 6
+[04-Feb-2018 11:57:32 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected 'New' (T_NEW), expecting identifier (T_STRING) or '{' in D:\Ampps\www\app\Controllers\Home.php on line 6
+[04-Feb-2018 11:58:03 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM) in D:\Ampps\www\app\Controllers\Home.php on line 25
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP Notice:  Undefined property: App\Libs\Views::$news in D:\Ampps\www\views\home\index.php on line 31
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\home\index.php on line 31
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
+[04-Feb-2018 11:58:11 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP Notice:  Undefined property: App\Libs\Views::$news in D:\Ampps\www\views\home\index.php on line 31
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\home\index.php on line 31
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
+[04-Feb-2018 11:58:46 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP Notice:  Undefined property: App\Libs\Views::$news in D:\Ampps\www\views\home\index.php on line 31
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\home\index.php on line 31
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
+[04-Feb-2018 11:59:27 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP Notice:  Undefined property: App\Libs\Views::$news in D:\Ampps\www\views\home\index.php on line 31
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP Warning:  Invalid argument supplied for foreach() in D:\Ampps\www\views\home\index.php on line 31
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP Stack trace:
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:31
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   3. App\Controllers\Home->index() D:\Ampps\www\bootstrap\Autoload.php:49
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Home.php:26
+[04-Feb-2018 11:59:46 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:18
+[04-Feb-2018 12:00:40 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected 'New' (T_NEW), expecting identifier (T_STRING) or '{' in D:\Ampps\www\app\Controllers\Home.php on line 6

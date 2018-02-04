@@ -5,7 +5,7 @@
 
 <?php
 foreach ($this->rules as $rule):
-$blockId = 'f-' . sha1($rule->title);
+$blockId = "f-" . sha1($rule->title);
 ?>
     <div class="card">
         <div class="card-header">
