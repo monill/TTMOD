@@ -12,7 +12,7 @@ $dateTime = date('Y-m-d H:i:s', strtotime(date("Y-m-d H:i:s")) - 3600 * 24);
 $users = Helper::rowCount("users");
 $registered =  number_format($users[13]);
 
-$comments = Helper::rowCount("comments");
+$comments = Helper::rowCount("torrent_comments");
 $ncomments = number_format($comments[13]);
 
 $messages = Helper::rowCount("messages");
@@ -33,10 +33,10 @@ $todaytor = number_format($todayto[13]);
 $guest = Helper::getGuests();
 $guests = number_format($guest[13]);
 
-$seeder = Helper::rowCount("peers", "WHERE seeder = 'yes'");
+$seeder = Helper::rowCount("torrent_peers", "WHERE seeder = 'yes'");
 $seeders = $seeder[13];
 
-$leecher = Helper::rowCount("peers", "WHERE seeder = 'no'");
+$leecher = Helper::rowCount("torrent_peers", "WHERE seeder = 'no'");
 $leechers = $leecher[13];
 
 $member = Helper::rowCount("users", "WHERE UNIX_TIMESTAMP('" . $dateTime . "') - UNIX_TIMESTAMP(users.lastlogin) < 900");

@@ -2,5 +2,4 @@
 /.idea
 *.txt
 *.torrent
-data/logs/php-error.txt
-/nbproject/private/
+/nbproject

@@ -168,19 +168,19 @@ class Torrent extends Controller {
                         }
                     }
 
-                    $this->db->insert('files', [
+                    $this->db->insert('torrent_files', [
                         'path' => Helper::escape($fname),
-                        'length' => $size,
-                        'torrent_id' => $idd,
+                        'length' => (int) $size,
+                        'torrent_id' => (int) $idd,
                         'created_at' => Helper::dateTime(),
                         'update_at' => Helper::dateTime()
                     ]);
                 }
             } else {
-                $this->db->insert('files', [
+                $this->db->insert('torrent_files', [
                     'path' => Helper::escape($tor[3]),
-                    'length' => $torrentsize,
-                    'torrent_id' => $idd,
+                    'length' => (int) $torrentsize,
+                    'torrent_id' => (int) $idd,
                     'created_at' => Helper::dateTime(),
                     'update_at' => Helper::dateTime()
                 ]);
@@ -193,9 +193,9 @@ class Torrent extends Controller {
             foreach ($annlist as $ann) {
                 foreach ($ann as $value) {
                     if (strtolower(substr($value, 0, 4)) != "udp:") {
-                        $this->db->insert('announces', [
+                        $this->db->insert('torrent_announces', [
                             'url' => Helper::escape($value),
-                            'torrent_id' => $idd
+                            'torrent_id' => (int) $idd
                         ]);
                     }
                 }

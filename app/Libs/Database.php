@@ -9,8 +9,8 @@ class Database extends PDO {
 
     private $type = "mysql";
     private $host = "localhost";
-    private $username = "root";
-    private $passwd = "mysql";
+    private $username = "me";
+    private $passwd = "123123";
     private $datab = "track";
     private static $instance;
 

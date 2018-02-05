@@ -99,7 +99,7 @@ class Announce extends Controller {
             $limit = "";
         }
 
-        $peer = $this->db->select("SELECT * FROM `peers` WHERE `torrent_id` = :tid $limit", ["tid" => $torrent->id]);
+        $peer = $this->db->select("SELECT * FROM `torrent_peers` WHERE `torrent_id` = :tid $limit", ["tid" => $torrent->id]);
 
         $resp = "d8:completei" . $torrent->seeders . "e10:downloadedi" . $torrent->timescompleted . "e10:incompletei" . $torrent->leechers . "e";
         $resp .= $this->bencStr("interval") . "i" . 900 . "e" . $this->bencStr("min interval") . "i300e" . $this->bencStr("peers");
@@ -124,7 +124,7 @@ class Announce extends Controller {
         }
 
         if ($seeder != "yes") {
-            $query = $this->db->select("SELECT COUNT(DISTINCT torrent_id) FROM `peers` WHERE `userid` = :uid AND `seeder` = 'no'", ["uid" => $user->id]);
+            $query = $this->db->select("SELECT COUNT(DISTINCT torrent_id) FROM `torrent_peers` WHERE `userid` = :uid AND `seeder` = 'no'", ["uid" => $user->id]);
             $maxslot = $this->maxSlots($user->id);
             if (count($query) >= $maxslot) {
                 $this->err("Maximum $maxslot Slot exceeded! You dont have any more download slots available, wait for 1 or more to finish then you can download this.");
@@ -187,7 +187,7 @@ class Announce extends Controller {
 
         ////////////////// NOW WE DO THE TRACKER EVENT UPDATES ///////////////////
         if ($event == "stopped") {
-            $stopped = $this->db->delete('peers', "`torrent_id` = :tid AND `peer_id` = :pid", ["tid" => $torrent->id, "pid" => $peerid]);
+            $stopped = $this->db->delete('torrent_peers', "`torrent_id` = :tid AND `peer_id` = :pid", ["tid" => $torrent->id, "pid" => $peerid]);
             if (count($stopped)) {
                 if ($self["seeder"] == "yes") {
                     $updateset = "seeders = seeders - 1";
@@ -200,16 +200,16 @@ class Announce extends Controller {
         if ($event == "completed") { // UPDATE "COMPLETED" EVENT
             $updateset = "timescompleted = timescompleted + 1";
 
-            $this->db->insert('completes', [
-                'user_id' => $user->id,
-                'torrent_id' => $torrent->id,
+            $this->db->insert('torrent_completes', [
+                'user_id' => (int) $user->id,
+                'torrent_id' => (int) $torrent->id,
                 'created_at' => Helper::dateTime()
             ]);
         } //END COMPLETED
 
         if (isset($self)) // NO EVENT? THEN WE MUST BE A NEW PEER OR ARE NOW SEEDING A COMPLETED TORRENT
         {
-            $atualiza = $this->db->update('peers', [
+            $atualiza = $this->db->update('torrent_peers', [
                 'ip' => $ip,
                 'passkey' => $passkey,
                 'port' => $port,
@@ -234,7 +234,7 @@ class Announce extends Controller {
             }
         } else {
 
-            $ret = $this->db->insert('peers', [
+            $ret = $this->db->insert('torrent_peers', [
                 'connectable' => $connectable,
                 'torrent_id' => $torrent->id,
                 'peer_id' => $peerid,
@@ -261,10 +261,10 @@ class Announce extends Controller {
         }
         //////////////////    END TRACKER EVENT UPDATES ///////////////////
 
-        // FILL $SELF WITH DETAILS FROM PEERS TABLE (CONNECTING PEERS DETAILS)
+        // FILL $SELF WITH DETAILS FROM torrent_peers TABLE (CONNECTING torrent_peers DETAILS)
         if (!isset($self))
         {
-            $valid = $this->db->select("SELECT COUNT(*) FROM `peers` WHERE `torrent_id` = :tid AND `passkey` = :pkey", ["tid" => $torrent->id, "pkey" => $passkey]);
+            $valid = $this->db->select("SELECT COUNT(*) FROM `torrent_peers` WHERE `torrent_id` = :tid AND `passkey` = :pkey", ["tid" => $torrent->id, "pkey" => $passkey]);
 
            if ($valid >= 1 && $seeder != "no") {
                $this->err("Connection limit exceeded! You may only leech from one location at a time.");
