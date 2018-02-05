@@ -1,5 +1,3 @@
-
-
 <?php
 $title = "Latest Posters";
 $blockId = "b-" . sha1($title);

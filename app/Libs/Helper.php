@@ -6,19 +6,23 @@ use App\Libs\Database;
 
 class Helper {
 
-    public function __construct() {
+    public function __construct()
+    {
 
     }
 
-    public function __clone() {
+    public function __clone()
+    {
 
     }
 
-    public static function hashSenha($senha) {
+    public static function hashSenha($senha)
+    {
         return password_hash($senha, PASSWORD_BCRYPT);
     }
 
-    public static function validIP($ip) {
+    public static function validIP($ip)
+    {
         if (strtolower($ip) === "unknown") {
             return false;
         }
@@ -58,7 +62,8 @@ class Helper {
         return true;
     }
 
-    public static function getIP() {
+    public static function getIP()
+    {
         // check for shared internet/ISP IP
         if (!empty($_SERVER['HTTP_CLIENT_IP']) && self::validIP($_SERVER['HTTP_CLIENT_IP'])) {
             return $_SERVER['HTTP_CLIENT_IP'];
@@ -96,7 +101,8 @@ class Helper {
         return $_SERVER['REMOTE_ADDR'];
     }
 
-    public static function escape($string) {
+    public static function escape($string)
+    {
         return htmlentities($string, ENT_QUOTES, 'UTF-8');
     }
 
@@ -105,21 +111,23 @@ class Helper {
      *
      * @param $s
      *   integer: bytes
-     * @param int $calculo
+     * @param int $calc
      *   (optional) integer: decimal precision (default: 2)
      * @return string: formatted size
      */
-    public static function makeSize($s, $calculo = 2) {
-        $tamanho = [' B', ' kB', ' MB', ' GB', ' TB', ' PB', ' EB', ' ZB', ' YB'];
-        for ($i = 1, $x = 0; $i <= count($tamanho); $i++, $x++) {
-            if ($s < pow(1024, $i) || $i == count($tamanho)) {
+    public static function makeSize($s, $calc = 2)
+    {
+        $size = [' B', ' kB', ' MB', ' GB', ' TB', ' PB', ' EB', ' ZB', ' YB'];
+        for ($i = 1, $x = 0; $i <= count($size); $i++, $x++) {
+            if ($s < pow(1024, $i) || $i == count($size)) {
                 // Change 1024 to 1000 if you want 0.98GB instead of 1,0000MB
-                return number_format($s / pow(1024, $x), $calculo) . $tamanho[$x];
+                return number_format($s / pow(1024, $x), $calc) . $size[$x];
             }
         }
     }
 
-    public static function tempoDecorrido($datetime, $full = false) {
+    public static function tempoDecorrido($datetime, $full = false)
+    {
         $now = new \DateTime();
         $ago = new \DateTime($datetime);
         $diff = $now->diff($ago);
@@ -149,7 +157,8 @@ class Helper {
         return $string ? implode(', ', $string) . ' atrás' : ' agora mesmo';
     }
 
-    public static function escapeUrl($url) {
+    public static function escapeUrl($url)
+    {
         $ret = '';
         for ($i = 0; $i < strlen($url); $i += 2) {
             $ret .= '%' . $url[$i] . $url[$i + 1];
@@ -157,41 +166,51 @@ class Helper {
         return $ret;
     }
 
-    public static function htmlsafechars($txt = '') {
+    public static function htmlsafechars($txt = '')
+    {
         $txt = preg_replace("/&(?!#[0-9]+;)(?:amp;)?/s", '&amp;', $txt);
         $txt = str_replace(["<", ">", '"', "'"], ["&lt;", "&gt;", "&quot;", '&#039;'], $txt);
         return $txt;
     }
 
-    public static function validID($id) {
+    public static function validID($id)
+    {
         return is_numeric($id) && ($id > 0) && (floor($id) == $id) ? true : false;
     }
 
-    public static function validINT($id) {
+    public static function validINT($id)
+    {
         return is_numeric($id) && (floor($id) == $id) ? true : false;
     }
 
-    public static function browser() {
+    public static function browser()
+    {
         return $_SERVER['HTTP_USER_AGENT'];
     }
 
-    public static function codeAtivacao() {
+    public static function codeAtivacao()
+    {
         return sha1(time() . microtime());
     }
 
-    public static function dateTime() {
+    public static function dateTime()
+    {
         return date("Y-m-d H:i:s");
     }
 
-    public static function md5Gen() {
+    public static function md5Gen()
+    {
         return md5(uniqid() . time() . microtime());
     }
 
-    public static function data() {
+    public static function data()
+    {
         return date("Y-m-d");
     }
 
-    public static function validFilename($name) {
+    public static function validFilename($name)
+    {
+        //only works with single ''
         return preg_match('/^[^\0-\x1f:\\\\\/?*\xff#<>|]+$/si', $name);
     }
 

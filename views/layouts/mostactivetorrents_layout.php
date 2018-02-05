@@ -15,9 +15,7 @@ $db = Database::getInstance();
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
 
-	<?php
-        $activetor = $db->select("SELECT `id`, `name`, `seeders`, `leechers` FROM `torrents` WHERE `banned` = 'no' AND `visible` = 'yes' ORDER BY `seeders` + `leechers` DESC, `seeders` DESC, `created_at` ASC LIMIT 10");
-	?>
+        <?php $activetor = $db->select("SELECT `id`, `name`, `seeders`, `leechers` FROM `torrents` WHERE `banned` = 'no' AND `visible` = 'yes' ORDER BY `seeders` + `leechers` DESC, `seeders` DESC, `created_at` ASC LIMIT 10"); ?>
 
     <?php if ($activetor): ?>
 		<?php foreach ($activetor as $row): ?>

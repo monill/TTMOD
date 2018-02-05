@@ -11,7 +11,7 @@ class Torrent extends Model {
         parent::__construct();
     }
 
-    private function __clone()
+    public function __clone()
     {
 
     }

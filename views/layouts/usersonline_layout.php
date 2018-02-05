@@ -17,6 +17,7 @@ $user = $db->select("SELECT `id`, `username` FROM `users` WHERE status = 'confir
     </div>
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
+
         <?php if (!$user): ?>
             <p class="text-center"> No Users Online </p>
         <?php else: ?>
@@ -24,7 +25,8 @@ $user = $db->select("SELECT `id`, `username` FROM `users` WHERE status = 'confir
                 <a href="<?= url("/user/id/" . $u->id ); ?>"> <?= $u->username . ", " ?> </a>
             <?php endforeach; ?>
         <?php endif; ?>
-    <!-- end content -->
+
+        <!-- end content -->
     </div>
 </div>
 <br />

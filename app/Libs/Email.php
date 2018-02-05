@@ -8,7 +8,8 @@ use App\Libs\Helper;
 
 class Email extends PHPMailer {
 
-    public function confirmEmail($email, $key) {
+    public function confirmEmail($email, $key)
+    {
         // get instance of PHPMailer (including some additional info)
         $mail = $this->getMailer();
         // where you want to send confirmation email
@@ -35,7 +36,8 @@ class Email extends PHPMailer {
         }
     }
 
-    public function resetPass($email, $key) {
+    public function resetPass($email, $key)
+    {
         // get instance of PHPMailer (including some additional info)
         $mail = $this->getMailer();
         // where you want to send confirmation email
@@ -60,7 +62,8 @@ class Email extends PHPMailer {
         }
     }
 
-    private function getMailer() {
+    private function getMailer()
+    {
         $email = new PHPMailer();
 
         if (MAILER == "smtp") {

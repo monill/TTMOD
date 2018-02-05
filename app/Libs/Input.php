@@ -4,15 +4,18 @@ namespace App\Libs;
 
 class Input {
 
-    public function __construct() {
+    public function __construct()
+    {
 
     }
 
-    public function __clone() {
+    public function __clone()
+    {
 
     }
 
-    public static function exist($type = "POST") {
+    public static function exist($type = "POST")
+    {
         switch ($type) {
             case "POST":
                 return (!empty($_POST)) ? true : false;
@@ -28,7 +31,8 @@ class Input {
         }
     }
 
-    public static function get($value) {
+    public static function get($value)
+    {
         if (isset($_POST[$value])) {
             return trim(strip_tags(filter_input(INPUT_POST, $value)));
         } elseif (isset($_GET[$value])) {

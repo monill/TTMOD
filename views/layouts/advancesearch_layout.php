@@ -16,7 +16,7 @@ use App\Models\Torrent;
 		<input type="text" name="search" class="form-control" placeholder="Search.." />
         <br />
 		<select name="cat" class="form-control">
-			<option selected disabled="disabled"> All types </option>
+            <option selected disabled="disabled"> All types</option>
             <?php foreach (Torrent::categories() as $c): ?>
                 <option value="<?= $c->id; ?>"><?= $c->name; ?></option>
             <?php endforeach; ?>

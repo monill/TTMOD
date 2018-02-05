@@ -22,7 +22,7 @@ class Autoload {
     {
         // create array with URL parts in $url
         $this->splitUrl();
-
+        //start session
         Session::startSession();
 
         // check for controller: no controller given ? then load start-page
@@ -95,7 +95,5 @@ class Autoload {
     {
 
     }
-
-
 
 }

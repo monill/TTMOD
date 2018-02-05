@@ -31,7 +31,8 @@ class UdpScraper extends ScraperException {
      * $url: Tracker url like: udp://tracker.tld:port or udp://tracker.tld:port/announce
      * $infohash: Infohash string or array (max 74 items). 40 char long infohash.
      */
-    public function scrape($url, $infohash) {
+    public function scrape($url, $infohash)
+    {
         if (!is_array($infohash)) {
             $infohash = array($infohash);
         }

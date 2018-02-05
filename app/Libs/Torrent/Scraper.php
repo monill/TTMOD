@@ -18,11 +18,13 @@ abstract class Scraper {
 
     protected $timeout;
 
-    public function __construct($timeout = 2) {
+    public function __construct($timeout = 2)
+    {
         $this->timeout = $timeout;
     }
 
-    public static function scrapeUrl($scrape, $hash) {
+    public static function scrapeUrl($scrape, $hash)
+    {
         return $scrape . $hash;
     }
 

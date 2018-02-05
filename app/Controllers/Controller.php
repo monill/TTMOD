@@ -14,17 +14,20 @@ class Controller {
     public $db;
     private $loginFingerPrint = LOGINFG;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->view = new Views();
         $this->db = Database::getInstance();
         $this->loggedIn();
     }
 
-    public function __clone() {
+    public function __clone()
+    {
 
     }
 
-    public function loggedIn() {
+    public function loggedIn()
+    {
         if ((Session::get("userid") || Session::get("loggedin")) == null) {
             return false;
         }
@@ -52,13 +55,15 @@ class Controller {
             * Endereço, então, se alguém roubar sessão de usuários, ele não poderá acessar.
             * @return string string gerado.
             */
-    private function loginString() {
+    private function loginString()
+    {
         $ip = Helper::getIP();
         $browser = Helper::browser();
         return hash("sha512", $ip, $browser);
     }
 
-    private function logout() {
+    private function logout()
+    {
         Session::destroySession();
         Redirect::to("/login");
     }

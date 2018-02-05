@@ -21,7 +21,7 @@ class User extends Controller {
 
     public function index()
     {
-        $this->view->title = SNAME . " :: Staff";
+        $this->view->title = SNAME . " :: User";
         $this->view->load("staff/index", false);
     }
 

@@ -4,11 +4,13 @@ namespace App\Libs\Torrent;
 
 class Parse {
 
-    public function __construct() {
+    public function __construct()
+    {
 
     }
 
-    public function __clone() {
+    public function __clone()
+    {
 
     }
 

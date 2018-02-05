@@ -103,7 +103,8 @@ class Login extends Controller {
         }
     }
 
-    public function validLogin($user, $pass) {
+    public function validLogin($user, $pass)
+    {
         $erro = array();
 
         if ($this->valid->isEmpty($user)) {
@@ -121,11 +122,13 @@ class Login extends Controller {
         return $erro;
     }
 
-    public function bruteForce() {
+    public function bruteForce()
+    {
         return $this->loginTries() > 10 ? true : false;
     }
 
-    public function triesLogin() {
+    public function triesLogin()
+    {
         //obtem o numero atual de tentativas daquele IP
         $logins = $this->loginTries();
 
@@ -137,7 +140,8 @@ class Login extends Controller {
         }
     }
 
-    public function updateLogin($userid, $points) {
+    public function updateLogin($userid, $points)
+    {
         $this->db->update('users', [
             'lastlogin' => Helper::dateTime(),
             'points' => $points + 10,
@@ -152,13 +156,15 @@ class Login extends Controller {
             * Endereço, então, se alguém roubar sessão de usuários, ele não poderá acessar.
             * @return string string gerado.
             */
-    private function loginString() {
+    private function loginString()
+    {
         $ip = Helper::getIP();
         $browser = Helper::browser();
         return hash("sha512", $ip, $browser);
     }
 
-    private function loginTries() {
+    private function loginTries()
+    {
         $query = $this->db->select1("SELECT `alltimes` FROM `bruteforces` WHERE `ip` = :ipp AND `alldate` = :em", ["ipp" => Helper::getIP(), "em" => Helper::data()]);
         return count($query) == 0 ? 0 : $query->alltimes;
     }

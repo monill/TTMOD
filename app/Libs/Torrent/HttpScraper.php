@@ -34,20 +34,23 @@ class HttpScraper extends Scraper {
 
     protected $maxreadsize;
 
-    public function __construct($timeout = 2, $maxreadsize = 4096) {
+    public function __construct($timeout = 2, $maxreadsize = 4096)
+    {
         parent::__construct($timeout);
         $this->maxreadsize = $maxreadsize;
     }
 
-    public function __clone() {
-        
+    public function __clone()
+    {
+
     }
 
     /**
      * $url: Tracker url like: http://tracker.tld:port/announce or http://tracker.tld:port/scrape
      * $infohash: Infohash string or array. 40 char long infohash.
      */
-    public function scrape($url, $infohash) {
+    public function scrape($url, $infohash)
+    {
         if (!is_array($infohash)) {
             $infohash = array($infohash);
         }

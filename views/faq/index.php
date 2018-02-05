@@ -10,25 +10,26 @@
     <div class="card-body slidingDiv<?= $blockId; ?>">
     <!-- content -->
 
-    <?php foreach($this->answers as $answer): ?>
-        <?php if ($answer->categ_id == $categ->id): ?>
-            <?php $blockd = "b-" . sha1($answer->question); ?>
-            <div class="card">
-                <div class="card-header <?= $answer->style; ?>">
-                    <b><?= $answer->question ?></b>
-                    <a data-toggle="collapse" href="#" class="showHide" id="<?= $blockd; ?>" style="float: right;"></a>
-                </div>
-                <div class="card-body slidingDiv<?= $blockd; ?>">
-                <!-- content -->
+        <?php foreach ($this->answers as $answer): ?>
+            <?php if ($answer->categ_id == $categ->id): ?>
+                <?php $blockd = "b-" . sha1($answer->question); ?>
+                <div class="card">
+                    <div class="card-header <?= $answer->style; ?>">
+                        <b><?= $answer->question ?></b>
+                        <a data-toggle="collapse" href="#" class="showHide" id="<?= $blockd; ?>"
+                           style="float: right;"></a>
+                    </div>
+                    <div class="card-body slidingDiv<?= $blockd; ?>">
+                        <!-- content -->
 
-                <?= $answer->answer ?>
+                        <?= $answer->answer ?>
 
-                <!-- end content -->
+                        <!-- end content -->
+                    </div>
                 </div>
-            </div>
-            <br />
-        <?php endif; ?>
-    <?php endforeach; ?>
+                <br/>
+            <?php endif; ?>
+        <?php endforeach; ?>
 
     <!-- end content -->
     </div>

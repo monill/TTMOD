@@ -15,9 +15,7 @@ $db = Database::getInstance();
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
 
-    <?php
-        $res = $db->select("SELECT `id`, `name`, `seeders`, `leechers` FROM `torrents` WHERE `seeders` = 0 AND `leechers` > 0 AND `banned` = 'no' AND `external` = 'no' ORDER BY `leechers` DESC LIMIT 5");
-	?>
+        <?php $res = $db->select("SELECT `id`, `name`, `seeders`, `leechers` FROM `torrents` WHERE `seeders` = 0 AND `leechers` > 0 AND `banned` = 'no' AND `external` = 'no' ORDER BY `leechers` DESC LIMIT 5"); ?>
 
     <?php if ($res): ?>
         <?php foreach ($res as $row): ?>

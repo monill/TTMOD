@@ -35,15 +35,18 @@ namespace App\Libs\Torrent;
  */
 class Decode {
 
-    public function __construct() {
-        
+    public function __construct()
+    {
+
     }
 
-    public function __clone() {
-        
+    public function __clone()
+    {
+
     }
 
-    public function decodeNumber($wholefile, $start) {
+    public function decodeNumber($wholefile, $start)
+    {
         $ret = array();
 
         $ret[0] = 0;
@@ -90,7 +93,8 @@ class Decode {
         return $ret; //nao estava aqui antes - soh coloquei pq pedia retorno de algo
     }
 
-    public function decodeEntry($wholefile, $offset = 0) {
+    public function decodeEntry($wholefile, $offset = 0)
+    {
         if ($wholefile[$offset] == "d") {
             return $this->decodeDict($wholefile, $offset);
         }
@@ -111,7 +115,8 @@ class Decode {
         return $ret;
     }
 
-    public function decodeList($wholefile, $start) {
+    public function decodeList($wholefile, $start)
+    {
         $offset = $start + 1;
         $i = 0;
         if ($wholefile[$start] != "l") {
@@ -136,7 +141,8 @@ class Decode {
         return $final;
     }
 
-    public function decodeDict($wholefile, $start = 0) {
+    public function decodeDict($wholefile, $start = 0)
+    {
         $offset = $start;
         if ($wholefile[$offset] == "l") {
             return $this->decodeList($wholefile, $start);

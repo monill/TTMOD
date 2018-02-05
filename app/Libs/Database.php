@@ -14,7 +14,8 @@ class Database extends PDO {
     private $datab = "track";
     private static $instance;
 
-    public function __construct() {
+    public function __construct()
+    {
         try {
             parent::__construct($this->type . ':host=' . $this->host . ';dbname=' . $this->datab . ';charset=UTF8', $this->username, $this->passwd);
             // comente esta linha se você não quiser relatórios de erros
@@ -25,18 +26,21 @@ class Database extends PDO {
         }
     }
 
-    private function __clone() {
+    private function __clone()
+    {
 
     }
 
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (!isset(self::$instance)) {
             self::$instance = new self();
         }
         return self::$instance;
     }
 
-    public function select($sql, $array = [], $fetchMode = PDO::FETCH_OBJ) {
+    public function select($sql, $array = [], $fetchMode = PDO::FETCH_OBJ)
+    {
         $db = self::getInstance();
 
         $sth = $db->prepare($sql);
@@ -49,7 +53,8 @@ class Database extends PDO {
         return $sth->fetchAll($fetchMode);
     }
 
-    public function select1($sql, $array = array()) {
+    public function select1($sql, $array = array())
+    {
         $db = self::getInstance();
 
         $sth = $db->prepare($sql);
@@ -62,7 +67,8 @@ class Database extends PDO {
         return $sth->fetchObject();
     }
 
-    public function insert($table, $data = []) {
+    public function insert($table, $data = [])
+    {
         $db = self::getInstance();
 
         ksort($data);
@@ -79,7 +85,8 @@ class Database extends PDO {
         $sth->execute();
     }
 
-    public function update($table, $data, $where, $whereBindArray = array()) {
+    public function update($table, $data, $where, $whereBindArray = array())
+    {
         $db = self::getInstance();
 
         ksort($data);
@@ -105,7 +112,8 @@ class Database extends PDO {
         $sth->execute();
     }
 
-    public function delete($table, $where, $bind = [], $limit = 1) {
+    public function delete($table, $where, $bind = [], $limit = 1)
+    {
         $db = self::getInstance();
 
         $sth = $db->prepare("DELETE FROM $table WHERE $where LIMIT $limit");

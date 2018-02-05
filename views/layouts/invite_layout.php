@@ -2,7 +2,7 @@
 use App\Libs\Session;
 use App\Libs\Database;
 
-$db = Database::getInstance(); //TODO fix this
+$db = Database::getInstance(); //TODO fix this to user session id
 $user = $db->select1("SELECT invites FROM `users` WHERE `id` = :idd LIMIT 1", ["idd" => 7]); //Session::get("userid")
 $invites = $user->invites;
 $inv = $invites > 1 ? "s" : "";

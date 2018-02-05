@@ -11,7 +11,7 @@ $blockId = "b-" . sha1($title);
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
 
-        <form method="get" action="<?= url("/torrents/search"); ?>" class="form-inline">
+        <form method="post" action="<?= url("/torrents/search"); ?>" class="form-inline">
             <div class="input-group">
                 <input type="text" name="search" class="form-control" value="" />
                 <span class="input-group-btn">

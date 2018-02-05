@@ -74,15 +74,15 @@ class Torrent extends Controller {
                 $torInfo = new Parse();
                 $tor = $torInfo->torr("$uploadlocal");
 
-               $announce = $tor[0];
-               $infohash = $tor[1];
-               $creationdate = $tor[2];
-               $internalname = $tor[3];
-               $torrentsize = $tor[4];
-               $filecount = $tor[5];
-               $annlist = $tor[6];
-               $comment = $tor[7];
-               $filelist = $tor[8];
+                $announce = $tor[0];
+                $infohash = $tor[1];
+                $creationdate = $tor[2];
+                $internalname = $tor[3];
+                $torrentsize = $tor[4];
+                $filecount = $tor[5];
+                $annlist = $tor[6];
+                $comment = $tor[7];
+                $filelist = $tor[8];
 
                 //for debug...
                // print ("<br>announce: " . $announce);
@@ -329,7 +329,6 @@ class Torrent extends Controller {
         } else {
             Redirect::to("/torrents");
         }
-
     }
 
 }

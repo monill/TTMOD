@@ -21,12 +21,14 @@ use App\Libs\Helper;
  */
 class ScrapeUrl {
 
-    public function __construct() {
+    public function __construct()
+    {
 
     }
 
-    public function __clone() {
-        
+    public function __clone()
+    {
+
     }
 
     public function torrent($scrape, $hash)

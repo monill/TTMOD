@@ -13,7 +13,7 @@ class Model {
         $this->db = Database::getInstance();
     }
 
-    private function __clone()
+    public function __clone()
     {
 
     }

@@ -16,7 +16,7 @@ class RSS
     public $pubDate = "";
     public $insideitem = false;
     public $tag = "";
-    
+
     public function __construct($myFeed)
     {
         //To begin, I create an instance of the XML parser
@@ -56,8 +56,10 @@ class RSS
     {
         //The Function Will be called, when ever the XML_PARSER Encounters a end Tag, in the XML File
         if ($tagName == "ITEM") {
-            printf("<dt><strong><a href='%s'>%s</a></strong></dt>", trim($this->link), htmlspecialchars(trim($this->title)));    //Display the Title Element from the XML file to HTML
-            //printf("<dd>%s</dd>",htmlspecialchars(trim($this->description)));  // Description element is made to display in HTML
+            //Display the Title Element from the XML file to HTML
+            printf("<dt><strong><a href='%s'>%s</a></strong></dt><br>", trim($this->link), htmlspecialchars(trim($this->title)));
+            //printf("<dd>%s</dd>",htmlspecialchars(trim($this->description)));
+            // Description element is made to display in HTML
             // Deallocation of all Global Variables
             $this->title = "";
             $this->description = "";

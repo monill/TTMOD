@@ -71,7 +71,7 @@ $db = Database::getInstance();
 
 	<div id="marqueecontainer" onmouseover="copyspeed=pausespeed" onmouseout="copyspeed=marqueespeed">
         <div id="vmarquee">
-               <!--YOUR SCROLL CONTENT HERE-->
+            <!--YOUR SCROLL CONTENT HERE-->
 
         <?php if (count($res)): ?>
             <dl>

@@ -6,15 +6,18 @@ use App\Libs\Database;
 
 class Layout extends Model {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    private function __clone() {
+    public function __clone()
+    {
 
     }
 
-    public static function left() {
+    public static function left()
+    {
         $db = Database::getInstance();
 
         $test = $db->select("SELECT * FROM `layouts` WHERE `position` = 'left' AND `enabled` = 1 ORDER BY `sort`");
@@ -24,7 +27,8 @@ class Layout extends Model {
         }
     }
 
-    public static function right() {
+    public static function right()
+    {
         $db = Database::getInstance();
 
         $test = $db->select("SELECT * FROM `layouts` WHERE `position` = 'right' AND `enabled` = 1 ORDER BY `sort`");
@@ -34,7 +38,8 @@ class Layout extends Model {
         }
     }
 
-    public static function middle() {
+    public static function middle()
+    {
         $db = Database::getInstance();
 
         $test = $db->select("SELECT * FROM `layouts` WHERE `position` = 'middle' AND `enabled` = 1 ORDER BY `sort`");

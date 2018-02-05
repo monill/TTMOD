@@ -7,7 +7,7 @@ $blockId = "b-" . sha1($title);
 
 $db = Database::getInstance();
 $datetime = Helper::dateTime();
-$user = $db->select("SELECT `id`, `username` FROM `users` WHERE status = 'confirmed' AND privacy != 'private' ORDER BY id DESC LIMIT 7");
+$user = $db->select("SELECT `id`, `username` FROM `users` WHERE `status` = 'confirmed' AND `privacy` != 'private' ORDER BY `id` DESC LIMIT 7");
 ?>
 
 <div class="card">

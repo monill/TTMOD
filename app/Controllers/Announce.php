@@ -9,7 +9,8 @@ use App\Libs\Torrent\Bencode;
 
 class Announce extends Controller {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         // if (!$this->loggedIn()) {
         //     Redirect::to("/login");
@@ -17,11 +18,13 @@ class Announce extends Controller {
 
     }
 
-    public function __clone() {
+    public function __clone()
+    {
 
     }
 
-    public function index() {
+    public function index()
+    {
 
         $browser = new BrowserDetection();
 
