@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 03, 2018 at 10:44 PM
+-- Generation Time: Feb 05, 2018 at 12:07 AM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `announces` (
   `timescompleted` int(10) unsigned NOT NULL DEFAULT '0',
   `online` enum('yes','no') NOT NULL DEFAULT 'no',
   `torrent_id` int(11) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `announces`
@@ -42,7 +42,8 @@ CREATE TABLE IF NOT EXISTS `announces` (
 
 INSERT INTO `announces` (`id`, `url`, `seeders`, `leechers`, `timescompleted`, `online`, `torrent_id`) VALUES
 (9, 'http://localhost/announce/passkey/', 0, 0, 0, 'no', 11),
-(10, 'http://localhost/announce/passkey/', 0, 0, 0, 'no', 12);
+(10, 'http://localhost/announce/passkey/', 0, 0, 0, 'no', 12),
+(11, 'http://tracker.trackerfix.com:80/announce', 0, 0, 0, 'no', 13);
 
 -- --------------------------------------------------------
 
@@ -79,6 +80,21 @@ INSERT INTO `categories` (`id`, `name`, `slug`, `icon`) VALUES
 (2, 'TV', 'tv', 'fa fa-television'),
 (3, 'Music', 'music', 'fa fa-music'),
 (4, 'E-Books', 'ebooks', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `torrent_id` int(11) unsigned NOT NULL,
+  `comment` text NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -245,7 +261,7 @@ CREATE TABLE IF NOT EXISTS `files` (
   `torrent_id` int(11) unsigned NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `files`
@@ -253,7 +269,21 @@ CREATE TABLE IF NOT EXISTS `files` (
 
 INSERT INTO `files` (`id`, `path`, `length`, `torrent_id`, `created_at`, `update_at`) VALUES
 (33, '2018-01-30 16-24-08.mp4', 6109835335, 11, '2018-02-01 20:23:38', '2018-02-01 20:23:38'),
-(34, 'TeamViewer_Setup.exe', 19315456, 12, '2018-02-02 15:41:47', '2018-02-02 15:41:47');
+(34, 'TeamViewer_Setup.exe', 19315456, 12, '2018-02-02 15:41:47', '2018-02-02 15:41:47'),
+(35, 'Arrow.S06E06.REPACK.720p.HDTV.x264-AVS.mkv', 986343813, 13, '2018-02-04 15:18:58', '2018-02-04 15:18:58'),
+(36, 'RARBG.txt', 30, 13, '2018-02-04 15:18:58', '2018-02-04 15:18:58'),
+(37, 'arrow.s06e06.repack.720p.hdtv.x264-avs.nfo', 83, 13, '2018-02-04 15:18:58', '2018-02-04 15:18:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guests`
+--
+
+CREATE TABLE IF NOT EXISTS `guests` (
+  `ip` varchar(70) NOT NULL,
+  `time` decimal(20,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -280,7 +310,7 @@ INSERT INTO `layouts` (`id`, `named`, `name`, `position`, `description`, `enable
 (2, 'invite', 'invite', 'right', 'Description here...', 1, 2),
 (3, 'Main Navigation', 'navigate', 'left', 'Description here...', 1, 4),
 (4, 'User Block', 'user', 'left', 'Description here...', 1, 1),
-(5, 'rss', 'rss', 'right', 'Description here...', 0, 0),
+(5, 'rss', 'rss', 'right', 'Description here...', 1, 0),
 (6, 'latestuploads', 'latestuploads', 'right', 'Description here...', 1, 1),
 (7, 'advancestats', 'advancestats', 'left', 'Description here...', 1, 5),
 (8, 'serverload', 'serverload', 'right', 'Description here...', 1, 5),
@@ -455,7 +485,7 @@ CREATE TABLE IF NOT EXISTS `torrents` (
   `uploader_id` int(11) unsigned NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `torrents`
@@ -463,7 +493,8 @@ CREATE TABLE IF NOT EXISTS `torrents` (
 
 INSERT INTO `torrents` (`id`, `infohash`, `name`, `filename`, `description`, `poster`, `image1`, `image2`, `image3`, `category_id`, `size`, `numfiles`, `comments`, `views`, `downs`, `timescompleted`, `leechers`, `seeders`, `visible`, `banned`, `numratings`, `ratingsum`, `anon`, `nfo`, `announce`, `external`, `freeleech`, `thanks`, `uploader_id`, `created_at`, `update_at`) VALUES
 (11, '870cbd4be2f9c901847c91bf7c6484ed4d3f2c49', '2018-01-3016-24-08', '2018-01-30 16-24-08.mp4', 'dasdasdasd', '', '', '', '', 1, 4294967295, 1, 0, 0, 14, 0, 0, 0, 'no', 'no', 0, 0, 'no', '', 'http://localhost/announce/passkey/', 'no', 'no', 0, 1, '2018-02-01 20:23:38', NULL),
-(12, 'b4eec7d4424127e4b8d295612ce4a3d770f3f427', 'TeamViewerSetup', 'TeamViewer_Setup.exe', '258452452545245', '', '', '', '', 3, 19315456, 1, 0, 0, 1, 0, 0, 0, 'no', 'no', 0, 0, 'yes', '', 'http://localhost/announce/passkey/', 'no', 'no', 0, 1, '2018-02-02 15:41:47', NULL);
+(12, 'b4eec7d4424127e4b8d295612ce4a3d770f3f427', 'TeamViewerSetup', 'TeamViewer_Setup.exe', '258452452545245', '', '', '', '', 3, 19315456, 1, 0, 0, 1, 0, 0, 0, 'no', 'no', 0, 0, 'yes', '', 'http://localhost/announce/passkey/', 'no', 'no', 0, 1, '2018-02-02 15:41:47', NULL),
+(13, 'e9bee20b36f71027483ef67047f6364f339c6e8c', 'Arrow.S06E06.REPACK.720p.HDTV.x264-AVS[rarbg]', 'Arrow.S06E06.REPACK.720p.HDTV.x264-AVS[rarbg]', 'dasdasdasd', '', '', '', '', 2, 986343926, 2, 0, 0, 0, 0, 0, 0, 'yes', 'no', 0, 0, 'no', '', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 1, '2018-02-04 15:18:58', '2018-02-04 15:19:20');
 
 -- --------------------------------------------------------
 
@@ -509,9 +540,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `status`, `banned`, `privacy`, `class`, `dob`, `info`, `acceptpms`, `codeactivation`, `confirmresetpwd`, `ip`, `avatar`, `uploaded`, `downloaded`, `title`, `estate_id`, `sex`, `passkey`, `points`, `invites`, `warn`, `maxslots`, `lastlogin`, `created_at`, `update_at`, `active_at`, `resetpwd_at`) VALUES
-(1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'boss', '0000-00-00', NULL, 'yes', NULL, NULL, '::1', NULL, 0, 0, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1020, 0, 'no', 4, '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'boss', '0000-00-00', NULL, 'yes', NULL, NULL, '::1', NULL, 0, 0, NULL, 17, 'na', '501237503104ff5394131a12102c61bb', 1030, 0, 'no', 4, '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'public', 'member', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, 0, 0, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1450, 1, 'no', 4, '2018-01-29 15:58:49', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
+(1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'moderator', '0000-00-00', NULL, 'yes', NULL, NULL, '::1', NULL, 0, 2, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1020, 0, 'no', 4, '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'moderatorplus', '0000-00-00', NULL, 'yes', NULL, NULL, '::1', NULL, 0, 4, NULL, 17, 'na', '501237503104ff5394131a12102c61bb', 1030, 0, 'no', 4, '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'public', 'moderatorplus', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, 0, 6, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1450, 1, 'no', 4, '2018-01-29 15:58:49', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
 
 --
 -- Indexes for dumped tables
@@ -534,6 +565,12 @@ ALTER TABLE `bruteforces`
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -631,7 +668,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `announces`
 --
 ALTER TABLE `announces`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `bruteforces`
 --
@@ -642,6 +679,11 @@ ALTER TABLE `bruteforces`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `completes`
 --
@@ -666,7 +708,7 @@ ALTER TABLE `faq_categs`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `layouts`
 --
@@ -701,7 +743,7 @@ ALTER TABLE `rules`
 -- AUTO_INCREMENT for table `torrents`
 --
 ALTER TABLE `torrents`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `users`
 --
