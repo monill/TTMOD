@@ -108,7 +108,7 @@ $blockId = "b-" . sha1($title);
 <!--                <li> Load 5 mins ago: <strong> --><?php //echo $load5; ?><!-- </strong> </li>-->
 <!--                <li> Load 15 mins ago: <strong> --><?php //echo $load15; ?><!-- </strong> </li>-->
 <!--                <hr />-->
-<!--                <li>OS: <strong> --><?php //echo $operatingsystem; ?><!-- </strong> </li>-->
+<!--                <li> OS: <strong> --><?php //echo $operatingsystem; ?><!-- </strong> </li>-->
 <!--                <li> RAM Used: <strong> --><?php //echo $memused; ?><!-- / --><?php //echo $memtotal; ?><!-- </strong> </li>-->
 <!--                <li> Uptime: <strong> --><?php //echo $up; ?><!-- </strong> </li>-->
 <!--            </ul>-->
