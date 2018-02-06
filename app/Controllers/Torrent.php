@@ -6,9 +6,11 @@ use App\Libs\Helper;
 use App\Libs\Input;
 use App\Libs\Redirect;
 use App\Libs\Torrent\Bencode;
+use App\Libs\Torrent\HttpScraper;
 use App\Libs\Torrent\Parse;
 use App\Libs\Torrent\ScrapeUrl;
 
+use App\Libs\Torrent\UdpScraper;
 use App\Models\Log;
 
 class Torrent extends Controller {
@@ -140,7 +142,7 @@ class Torrent extends Controller {
                 'nfo' => '',
                 'announce' => $announce,
                 'external' => $external,
-                'uploader_id' => 1,
+                'uploader_id' => 7,
                 'created_at' => Helper::dateTime()
             ]);
 
@@ -151,8 +153,6 @@ class Torrent extends Controller {
                 unlink($ftmp_name);
                 $errors[] = "No ID. Server error, please report.";
             } else {
-                //TODO
-                //fix this name nothing change
                 rename("$uploaddir/$fname", "$uploaddir/$idd.torrent");
             }
 
@@ -392,95 +392,110 @@ class Torrent extends Controller {
                     $anon = "no";
                 }
 
-                $this->db->insert('torrents', [
-                    'infohash' => Helper::escape($infohash),
-                    'name' => Helper::escape($name),
-                    'filename' => Helper::escape($fname),
-                    'description' => "No descrption given",
-                    'category_id' => (int) $cat,
-                    'size' => (int) $torrentsize,
-                    'numfiles' => (int) $filecount,
-                    'anon' => $anon,
-                    'announce' => $announce,
-                    'external' => $external,
-                    'uploader_id' => (int) 7,
-                    'created_at' => Helper::dateTime()
-                ]);
+//                $this->db->insert('torrents', [
+//                    'infohash' => Helper::escape($infohash),
+//                    'name' => Helper::escape($name),
+//                    'filename' => Helper::escape($fname),
+//                    'description' => "No descrption given",
+//                    'category_id' => (int) $cat,
+//                    'size' => (int) $torrentsize,
+//                    'numfiles' => (int) $filecount,
+//                    'anon' => $anon,
+//                    'announce' => $announce,
+//                    'external' => $external,
+//                    'uploader_id' => (int) 7,
+//                    'created_at' => Helper::dateTime()
+//                ]);
+//
+//                $idd = $this->db->lastInsertId("id");
+//
+//                if ($idd == 0) {
+//                    $errors[] = "No ID. Server error, please report.";
+//                } else {
+//                    copy("$dir/$files[$i]", "$uploaddir/$idd.torrent");
+//                }
 
-                $idd = $this->db->lastInsertId("id");
-
-                if ($idd == 0) {
-                    $errors[] = "No ID. Server error, please report.";
-                } else {
-                    copy("$dir/$files[$i]", "$uploaddir/$idd.torrent");
-                }
-
-                if (count($filelist)) {
-                    foreach ($filelist as $file) {
-                        $dir = "";
-                        $size = $file['length'];
-                        $count = count($file['path']);
-
-                        for ($i = 0; $i < $count; $i++) {
-                            if (($i + 1) == $count) {
-                                $fname = $dir.$file['path'][$i];
-                            } else {
-                                $dir .= $file['path'][$i] . "/";
-                            }
-                        }
-
-                        $this->db->insert('torrent_files', [
-                            'path' => Helper::escape($fname),
-                            'length' => (int) $size,
-                            'torrent_id' => (int) $idd,
-                            'created_at' => Helper::dateTime(),
-                            'update_at' => Helper::dateTime()
-                        ]);
-                    }
-                } else {
-                    $this->db->insert('torrent_files', [
-                        'path' => Helper::escape($tor[3]),
-                        'length' => (int) $torrentsize,
-                        'torrent_id' => (int) $idd,
-                        'created_at' => Helper::dateTime(),
-                        'update_at' => Helper::dateTime()
-                    ]);
-                }
-
-                if (!count($annlist)) {
-                    $annlist = [[$announce]];
-                }
-
-                foreach ($annlist as $ann) {
-                    foreach ($ann as $value) {
-                        if (strtolower(substr($value, 0, 4)) != "udp:") {
-                            $this->db->insert('torrent_announces', [
-                                'url' => Helper::escape($value),
-                                'torrent_id' => (int) $idd
-                            ]);
-                        }
-                    }
-                }
+//                if (count($filelist)) {
+//                    foreach ($filelist as $file) {
+//                        $dir = "";
+//                        $size = $file['length'];
+//                        $count = count($file['path']);
+//
+//                        for ($i = 0; $i < $count; $i++) {
+//                            if (($i + 1) == $count) {
+//                                $fname = $dir.$file['path'][$i];
+//                            } else {
+//                                $dir .= $file['path'][$i] . "/";
+//                            }
+//                        }
+//
+//                        $this->db->insert('torrent_files', [
+//                            'path' => Helper::escape($fname),
+//                            'length' => (int) $size,
+//                            'torrent_id' => (int) $idd,
+//                            'created_at' => Helper::dateTime(),
+//                            'update_at' => Helper::dateTime()
+//                        ]);
+//                    }
+//                } else {
+//                    $this->db->insert('torrent_files', [
+//                        'path' => Helper::escape($tor[3]),
+//                        'length' => (int) $torrentsize,
+//                        'torrent_id' => (int) $idd,
+//                        'created_at' => Helper::dateTime(),
+//                        'update_at' => Helper::dateTime()
+//                    ]);
+//                }
+//
+//                if (!count($annlist)) {
+//                    $annlist = [[$announce]];
+//                }
+//
+//                foreach ($annlist as $ann) {
+//                    foreach ($ann as $value) {
+//                        if (strtolower(substr($value, 0, 4)) != "udp:") {
+//                            $this->db->insert('torrent_announces', [
+//                                'url' => Helper::escape($value),
+//                                'torrent_id' => (int) $idd
+//                            ]);
+//                        }
+//                    }
+//                }
 
                 //External scrape
-                if ($external == "yes") {
-                    //$tracker    = str_replace(["udp://", "/announce", ":80/"], ["http://", "/scrape", "/"], $announce);
-                    $tracker    = str_replace("/announce", "/scrape", $announce);
-                    $stat = new ScrapeUrl();
-                    $stats = $stat->torrent($tracker, $infohash);
-                    $seeders    = intval(strip_tags($stats['seeds']));
-                    $leechers 	= intval(strip_tags($stats['peers']));
-                    $downloaded = intval(strip_tags($stats['downloaded']));
-
-                    $this->db->update('torrents', [
-                        'timescompleted' => $downloaded,
-                        'leechers' => $leechers,
-                        'seeders' => $seeders,
-                        'visible' => 'yes',
-                        'update_at' => Helper::dateTime()
-                    ], "`id` = :id", ["id" => $idd]);
-                }
+//                if ($external == "yes") {
+//                    //$tracker    = str_replace(["udp://", "/announce", ":80/"], ["http://", "/scrape", "/"], $announce);
+//                    //$tracker    = str_replace("/announce", "/scrape", $announce);
+//                    $stat = new ScrapeUrl();
+//                    $stats = $stat->torrent($tracker, $infohash);
+//                    $seeders    = intval(strip_tags($stats['seeds']));
+//                    $leechers 	= intval(strip_tags($stats['peers']));
+//                    $downloaded = intval(strip_tags($stats['downloaded']));
+//
+//                    $this->db->update('torrents', [
+//                        'timescompleted' => $downloaded,
+//                        'leechers' => $leechers,
+//                        'seeders' => $seeders,
+//                        'visible' => 'yes',
+//                        'update_at' => Helper::dateTime()
+//                    ], "`id` = :id", ["id" => $idd]);
+//                }
                 //End Scrape
+
+                if ($external == "yes")
+                {
+                    var_dump(parse_url('udp://9.rarbg.to:2710/scrape'));
+
+                    $tracker    = str_replace("/announce", "/scrape", $announce);
+
+
+                    print_r('udp://9.rarbg.to:2710/scrape' . '?info_hash=' . $infohash);
+                    //$stat = new ScrapeUrl();
+                    //$t = $stat->torrent($tracker, $infohash);
+
+                }
+
+                die();
 
                 //TODO
                 //fix username

@@ -32,84 +32,86 @@ namespace App\Libs\Torrent;
 
 class HttpScraper extends Scraper {
 
+    /**
+     * @var int
+     */
     protected $maxreadsize;
 
+    /**
+     * HttpScraper constructor.
+     * @param int $timeout
+     * @param int $maxreadsize
+     */
     public function __construct($timeout = 2, $maxreadsize = 4096)
     {
-        parent::__construct($timeout);
         $this->maxreadsize = $maxreadsize;
+        parent::__construct($timeout);
     }
 
-    public function __clone()
-    {
-
-    }
 
     /**
      * $url: Tracker url like: http://tracker.tld:port/announce or http://tracker.tld:port/scrape
      * $infohash: Infohash string or array. 40 char long infohash.
      */
-    public function scrape($url, $infohash)
+    /**
+     * @param string $url
+     * @param string $info_hash
+     * @return array
+     * @throws Exception\ScraperException
+     */
+    public function scrape($url, $info_hash)
     {
-        if (!is_array($infohash)) {
-            $infohash = array($infohash);
+        if (!is_array($info_hash)) {
+            $info_hash = array($info_hash);
         }
-        foreach ($infohash as $hash) {
-            if (!preg_match("#^[a-f0-9]{40}$#i", $hash)) {
-                throw new ScraperException("Invalid infohash: " . $hash . ".");
+        foreach ($info_hash as $hash) {
+            if (!preg_match('#^[a-f0-9]{40}$#i', $hash)) {
+                throw new Exception\ScraperException('Invalid infohash: ' . $hash . '.');
             }
         }
         $url = trim($url);
-        if (preg_match("%(http://.*?/)announce([^/]*)$%i", $url, $m)) {
-            $url = $m[1] . "scrape" . $m[2];
-        } else if (preg_match("%(http://.*?/)scrape([^/]*)$%i", $url, $m)) {
-            //
+        if (preg_match('%(http://.*?/)announce([^/]*)$%i', $url, $m)) {
+            $url = $m[1] . 'scrape' . $m[2];
+        } elseif (preg_match('%(http://.*?/)scrape([^/]*)$%i', $url, $m)) {
         } else {
-            throw new ScraperException("Invalid tracker url.");
+            throw new Exception\ScraperException('Invalid tracker url: ' . $url);
         }
-        $sep = preg_match("/\?.{1,}?/i", $url) ? "&" : "?";
-        $requesturl = $url;
-        foreach ($infohash as $hash) {
-            $requesturl .= $sep . "info_hash=" . rawurlencode(pack("H*", $hash));
-            $sep = "&";
+        $sep = preg_match('/\?.{1,}?/i', $url) ? '&' : '?';
+        $request_url = $url;
+        foreach ($info_hash as $hash) {
+            $request_url .= $sep . 'info_hash=' . rawurlencode(pack('H*', $hash));
+            $sep = '&';
         }
-        ini_set("default_socket_timeout", $this->timeout);
-        $rh = @fopen($requesturl, "r");
-        // var_dump($url);
+        ini_set('default_socket_timeout', $this->timeout);
+        $rh = @fopen($request_url, 'r');
         if (!$rh) {
-            throw new ScraperException("Could not open HTTP connection.", 0, true);
+            throw new Exception\ScraperException('Could not open HTTP connection.', 0, true);
         }
         stream_set_timeout($rh, $this->timeout);
-        $return = "";
+        $return = '';
         $pos = 0;
         while (!feof($rh) && $pos < $this->maxreadsize) {
             $return .= fread($rh, 1024);
         }
         fclose($rh);
-        if (!substr($return, 0, 1) == "d") {
-            throw new ScraperException("Invalid scrape response.");
+        if (!substr($return, 0, 1) == 'd') {
+            throw new Exception\ScraperException('Invalid scrape response.');
         }
         $arr_scrape_data = Bencode::decode($return);
         $torrents = array();
-        foreach ($infohash as $hash) {
-            $ehash = pack("H*", $hash);
-            if (isset($arr_scrape_data["files"][$ehash])) {
-                if (array_key_exists("downloaded", $arr_scrape_data["files"][$ehash])) {
-                    $completed = $arr_scrape_data["files"][$ehash]["downloaded"];
-                } else {
-                    $completed = "0";
-                }
-                $torrents[$hash] = [
-                    "infohash" => $hash,
-                    "seeders" => (int) $arr_scrape_data["files"][$ehash]["complete"],
-                    "completed" => (int) $completed,
-                    "leechers" => (int) $arr_scrape_data["files"][$ehash]["incomplete"]
-                ];
+        foreach ($info_hash as $hash) {
+            $ehash = pack('H*', $hash);
+            if (isset($arr_scrape_data['files'][$ehash])) {
+                $torrents[$hash] = array(
+                    'infohash' => $hash,
+                    'seeders' => (int)$arr_scrape_data['files'][$ehash]['complete'],
+                    'completed' => (int)$arr_scrape_data['files'][$ehash]['downloaded'],
+                    'leechers' => (int)$arr_scrape_data['files'][$ehash]['incomplete'],
+                );
             } else {
                 $torrents[$hash] = false;
             }
         }
-        // var_dump($torrents);
         return $torrents;
     }
 

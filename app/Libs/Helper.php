@@ -161,7 +161,7 @@ class Helper {
     {
         $ret = '';
         for ($i = 0; $i < strlen($url); $i += 2) {
-            $ret .= '%' . $url[$i] . $url[$i + 1];
+            $ret .= '&' . $url[$i] . $url[$i + 1];
         }
         return $ret;
     }

@@ -2,8 +2,6 @@
 
 namespace App\Libs\Torrent;
 
-use App\Libs\Torrent\ScraperException;
-
 /**
  * 	Torrent UDP Scraper
  * v1.2
@@ -25,86 +23,94 @@ use App\Libs\Torrent\ScraperException;
  *      echo('Connection error: ' . ($e->isConnectionError() ? 'yes' : 'no') . "<br />\n");
  * }
  */
-class UdpScraper extends ScraperException {
+class UdpScraper extends Scraper {
 
+    /* 	$url: Tracker url like: udp://tracker.tld:port or udp://tracker.tld:port/announce
+        $infohash: Infohash string or array (max 74 items). 40 char long infohash.
+        */
     /**
-     * $url: Tracker url like: udp://tracker.tld:port or udp://tracker.tld:port/announce
-     * $infohash: Infohash string or array (max 74 items). 40 char long infohash.
+     * @param $url
+     * @param $info_hash
+     * @return array
+     * @throws Exception\ScraperException
      */
-    public function scrape($url, $infohash)
+    public function scrape($url, $info_hash)
     {
-        if (!is_array($infohash)) {
-            $infohash = array($infohash);
+        if (!is_array($info_hash)) {
+            $info_hash = array($info_hash);
         }
-        foreach ($infohash as $hash) {
-            if (!preg_match("#^[a-f0-9]{40}$#i", $hash)) {
-                throw new ScraperException("Invalid infohash: " . $hash . ".");
+        foreach ($info_hash as $hash) {
+            if (!preg_match('#^[a-f0-9]{40}$#i', $hash)) {
+                throw new Exception\ScraperException('Invalid infohash: ' . $hash . '.');
             }
         }
-        if (count($infohash) > 74) {
-            throw new ScraperException("Too many infohashes provided.");
+        if (count($info_hash) > 74) {
+            throw new Exception\ScraperException('Too many infohashes provided.');
         }
-        if (!preg_match("%udp://([^:/]*)(?::([0-9]*))?(?:/)?%si", $url, $m)) {
-            throw new ScraperException("Invalid tracker url.");
+        if (!preg_match('%udp://([^:/]*)(?::([0-9]*))?(?:/)?%si', $url, $m)) {
+            throw new Exception\ScraperException('Invalid tracker url.');
         }
-        $tracker = "udp://" . $m[1];
+        $tracker = 'udp://' . $m[1];
         $port = isset($m[2]) ? $m[2] : 80;
         $transaction_id = mt_rand(0, 65535);
-        $fp = fsockopen($tracker, $port, $errno, $errstr);
+        try {
+            $fp = fsockopen($tracker, $port, $errno, $errstr);
+        } catch (\Exception $e) {
+            throw new Exception\ScraperException('Could not open UDP connection: ' . $errno . ' - ' . $errstr, 0, true);
+        }
         if (!$fp) {
-            throw new ScraperException("Could not open UDP connection: " . $errno . " - " . $errstr, 0, true);
+            throw new Exception\ScraperException('Could not open UDP connection: ' . $errno . ' - ' . $errstr, 0, true);
         }
         stream_set_timeout($fp, $this->timeout);
         $current_connid = "\x00\x00\x04\x17\x27\x10\x19\x80";
         //Connection request
-        $packet = $current_connid . pack("N", 0) . pack("N", $transaction_id);
+        $packet = $current_connid . pack('N', 0) . pack('N', $transaction_id);
         fwrite($fp, $packet);
         //Connection response
         $ret = fread($fp, 16);
         if (strlen($ret) < 1) {
-            throw new ScraperException("No connection response.", 0, true);
+            throw new Exception\ScraperException('No connection response.', 0, true);
         }
         if (strlen($ret) < 16) {
-            throw new ScraperException("Too short connection response.");
+            throw new Exception\ScraperException('Too short connection response.');
         }
-        $retd = unpack("Naction/Ntransid", $ret);
-        if ($retd["action"] != 0 || $retd["transid"] != $transaction_id) {
-            throw new ScraperException("Invalid connection response.");
+        $retd = unpack('Naction/Ntransid', $ret);
+        if ($retd['action'] != 0 || $retd['transid'] != $transaction_id) {
+            throw new Exception\ScraperException('Invalid connection response.');
         }
         $current_connid = substr($ret, 8, 8);
         //Scrape request
-        $hashes = "";
-        foreach ($infohash as $hash) {
-            $hashes .= pack("H*", $hash);
+        $hashes = '';
+        foreach ($info_hash as $hash) {
+            $hashes .= pack('H*', $hash);
         }
-        $packet = $current_connid . pack("N", 2) . pack("N", $transaction_id) . $hashes;
+        $packet = $current_connid . pack('N', 2) . pack('N', $transaction_id) . $hashes;
         fwrite($fp, $packet);
         //Scrape response
-        $readlength = 8 + (12 * count($infohash));
+        $readlength = 8 + (12 * count($info_hash));
         $ret = fread($fp, $readlength);
         if (strlen($ret) < 1) {
-            throw new ScraperException("No scrape response.", 0, true);
+            throw new Exception\ScraperException('No scrape response.', 0, true);
         }
         if (strlen($ret) < 8) {
-            throw new ScraperException("Too short scrape response.");
+            throw new Exception\ScraperException('Too short scrape response.');
         }
-        $retd = unpack("Naction/Ntransid", $ret);
-        // TODO check for error string if response = 3
-        if ($retd["action"] != 2 || $retd["transid"] != $transaction_id) {
-            throw new ScraperException("Invalid scrape response.");
+        $retd = unpack('Naction/Ntransid', $ret);
+        // Todo check for error string if response = 3
+        if ($retd['action'] != 2 || $retd['transid'] != $transaction_id) {
+            throw new Exception\ScraperException('Invalid scrape response.');
         }
         if (strlen($ret) < $readlength) {
-            throw new ScraperException("Too short scrape response.");
+            throw new Exception\ScraperException('Too short scrape response.');
         }
         $torrents = array();
         $index = 8;
-        foreach ($infohash as $hash) {
-            $retd = unpack("Nseeders/Ncompleted/Nleechers", substr($ret, $index, 12));
-            $retd["infohash"] = $hash;
+        foreach ($info_hash as $hash) {
+            $retd = unpack('Nseeders/Ncompleted/Nleechers', substr($ret, $index, 12));
+            $retd['infohash'] = $hash;
             $torrents[$hash] = $retd;
             $index = $index + 12;
         }
         return $torrents;
     }
-
 }

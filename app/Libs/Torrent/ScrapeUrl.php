@@ -49,23 +49,25 @@ class ScrapeUrl {
         } else {
 
             ini_set('default_socket_timeout', 10);
-            $fp = file_get_contents($scrape . '?info_hash=' . Helper::escapeUrl($hash));
+            $fp = @file_get_contents($scrape . '?info_hash=' . Helper::escapeUrl($hash));
         }
+
+        var_dump($fp);
 
         $ret = array();
 
         if ($fp) {
             $stats = Bencode::decode($fp);
-            $binhash = pack("H*", $hash);
-            $binhash = addslashes($binhash);
+            $binhash = addslashes(pack("H*", $hash));
             $seeds = $stats['files'][$binhash]['complete'];
             $peers = $stats['files'][$binhash]['incomplete'];
             $downloaded = $stats['files'][$binhash]['downloaded'];
             $ret['seeds'] = $seeds;
             $ret['peers'] = $peers;
             $ret['downloaded'] = $downloaded;
-        }
-        if ($ret['seeds'] === null) {
+
+        } else {
+
             $ret['seeds'] = -1;
             $ret['peers'] = -1;
             $ret['downloaded'] = -1;

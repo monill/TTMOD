@@ -67,14 +67,20 @@ class Parse {
                         if (isset($info["files"]) && is_array($info["files"])) {
                             //Multi file torrents
                             $filecount = 0;
+                            $torrentsize = 0;
 
                             //Get filenames here
                             $torrentInfo[8] = $info["files"];
 
                             foreach ($info["files"] as $file) {
-                                $torrentInfo[5] = $filecount++; //Get file count
-                                $torrentInfo[4] += $file['length'];
+                                $filecount = $filecount++;
+                                $multitorrentsize = $file['length'];
+                                $torrentsize += $file['length'];
                             }
+
+                            $torrentInfo[4] = $torrentsize;
+                            $torrentInfo[5] = $filecount; //Get file count
+
 
                         } else {
                             // Single File Torrent
