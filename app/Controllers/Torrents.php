@@ -62,4 +62,25 @@ class Torrents extends Controller {
         echo "<br />" . $slug;
     }
 
+    public function import()
+    {
+        $dir = DATA . "import/";
+
+        $files = array();
+        $dh = opendir("$dir");
+
+        while (false !== ($file = readdir($dh))) {
+            if (preg_match("/^(.+)\.torrent$/si", $file)) {
+                $files[] = $file;
+            }
+        }
+        closedir($dh);
+
+        $this->view->title = SNAME . " :: Upload/Import Torrents";
+        $this->view->categories = Torrent::categories();
+        $this->view->token = Token::generate();
+        $this->view->files = $files;
+        $this->view->load("torrents/import", false);
+    }
+
 }

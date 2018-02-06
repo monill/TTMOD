@@ -33,20 +33,23 @@ class ScrapeUrl {
 
     public function torrent($scrape, $hash)
     {
-        if (function_exists('curl_exec')) {
+        if (function_exists('curl_exec'))
+        {
             $ch = curl_init();
-            $timeout = 30;
+            $timeout = 5;
 
-            curl_setopt($ch, CURLOPT_URL, $scrape . "?info_hash=" . Helper::escapeUrl($hash));
+            curl_setopt($ch, CURLOPT_URL, $scrape . '?info_hash=' . Helper::escapeUrl($hash));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
             curl_setopt($ch, CURLOPT_HEADER, false);
 
             $fp = curl_exec($ch);
             curl_close($ch);
+
         } else {
+
             ini_set('default_socket_timeout', 10);
-            $fp = file_get_contents($scrape . "?info_hash=" . Helper::escapeUrl($hash));
+            $fp = file_get_contents($scrape . '?info_hash=' . Helper::escapeUrl($hash));
         }
 
         $ret = array();

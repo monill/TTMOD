@@ -9,6 +9,8 @@ use App\Libs\Torrent\Bencode;
 use App\Libs\Torrent\Parse;
 use App\Libs\Torrent\ScrapeUrl;
 
+use App\Models\Log;
+
 class Torrent extends Controller {
 
     public function __construct()
@@ -85,21 +87,21 @@ class Torrent extends Controller {
                 $filelist = $tor[8];
 
                 //for debug...
-               // print ("<br>announce: " . $announce);
-               // print ("<br>infohash: " . $infohash);
-               // print ("<br>creationdate: " . $creationdate);
-               // print ("<br>internalname: " . $internalname);
-               // print ("<br>torrentsize: " . $torrentsize);
-               // print ("<br>filecount: " . $filecount);
-               // print ("<br>annlist: " . $annlist);
-               // print ("<br>comment: " . $comment);
+                // print ("<br>announce: " . $announce);
+                // print ("<br>infohash: " . $infohash);
+                // print ("<br>creationdate: " . $creationdate);
+                // print ("<br>internalname: " . $internalname);
+                // print ("<br>torrentsize: " . $torrentsize);
+                // print ("<br>filecount: " . $filecount);
+                // print ("<br>annlist: " . $annlist);
+                // print ("<br>comment: " . $comment);
 
                 //check announce url is local or external
-               if ($announce !== ANNOUNCE) {
+                if ($announce !== ANNOUNCE) {
                     $external = "yes";
-               } else {
+                } else {
                     $external = "no";
-               }
+                }
             }
 
             //case blank name takes the file name
@@ -330,5 +332,171 @@ class Torrent extends Controller {
             Redirect::to("/torrents");
         }
     }
+
+    public function import()
+    {
+        if (Input::exist())
+        {
+            $dir = DATA . "import";
+
+            $files = array();
+            $dh = opendir("$dir");
+
+            while (false !== ($file = readdir($dh))) {
+                if (preg_match("/^(.+)\.torrent$/si", $file)) {
+                    $files[] = $file;
+                }
+            }
+            closedir($dh);
+
+            $cat = Input::get("type");
+            $anonup = Input::get("anonycheck");
+
+            $uploaddir = TUPLOAD;
+
+            for ($i = 0; $i < count($files); $i++) {
+
+                $fname = $files[$i];
+
+                if (!preg_match("/^(.+)\.torrent$/si", $fname)) {
+                    $errors[] = "Invalid filename not (.torrent).";
+                }
+
+                $torInfo = new Parse();
+                $tor = $torInfo->torr("$dir/$fname");
+
+                $announce = $tor[0];
+                $infohash = $tor[1];
+                $creationdate = $tor[2];
+                $internalname = $tor[3];
+                $torrentsize = $tor[4];
+                $filecount = $tor[5];
+                $annlist = $tor[6];
+                $comment = $tor[7];
+                $filelist = $tor[8];
+
+                //check announce url is local or external
+                if ($announce !== ANNOUNCE) {
+                    $external = "yes";
+                } else {
+                    $external = "no";
+                }
+
+                $name = $internalname;
+                $name = str_replace(".torrent", "", $name);
+                $name = str_replace("_", " ", $name);
+
+                if ($anonup == "yes") {
+                    $anon = "yes";
+                } else {
+                    $anon = "no";
+                }
+
+                $this->db->insert('torrents', [
+                    'infohash' => Helper::escape($infohash),
+                    'name' => Helper::escape($name),
+                    'filename' => Helper::escape($fname),
+                    'description' => "No descrption given",
+                    'category_id' => (int) $cat,
+                    'size' => (int) $torrentsize,
+                    'numfiles' => (int) $filecount,
+                    'anon' => $anon,
+                    'announce' => $announce,
+                    'external' => $external,
+                    'uploader_id' => (int) 7,
+                    'created_at' => Helper::dateTime()
+                ]);
+
+                $idd = $this->db->lastInsertId("id");
+
+                if ($idd == 0) {
+                    $errors[] = "No ID. Server error, please report.";
+                } else {
+                    copy("$dir/$files[$i]", "$uploaddir/$idd.torrent");
+                }
+
+                if (count($filelist)) {
+                    foreach ($filelist as $file) {
+                        $dir = "";
+                        $size = $file['length'];
+                        $count = count($file['path']);
+
+                        for ($i = 0; $i < $count; $i++) {
+                            if (($i + 1) == $count) {
+                                $fname = $dir.$file['path'][$i];
+                            } else {
+                                $dir .= $file['path'][$i] . "/";
+                            }
+                        }
+
+                        $this->db->insert('torrent_files', [
+                            'path' => Helper::escape($fname),
+                            'length' => (int) $size,
+                            'torrent_id' => (int) $idd,
+                            'created_at' => Helper::dateTime(),
+                            'update_at' => Helper::dateTime()
+                        ]);
+                    }
+                } else {
+                    $this->db->insert('torrent_files', [
+                        'path' => Helper::escape($tor[3]),
+                        'length' => (int) $torrentsize,
+                        'torrent_id' => (int) $idd,
+                        'created_at' => Helper::dateTime(),
+                        'update_at' => Helper::dateTime()
+                    ]);
+                }
+
+                if (!count($annlist)) {
+                    $annlist = [[$announce]];
+                }
+
+                foreach ($annlist as $ann) {
+                    foreach ($ann as $value) {
+                        if (strtolower(substr($value, 0, 4)) != "udp:") {
+                            $this->db->insert('torrent_announces', [
+                                'url' => Helper::escape($value),
+                                'torrent_id' => (int) $idd
+                            ]);
+                        }
+                    }
+                }
+
+                //External scrape
+                if ($external == "yes") {
+                    //$tracker    = str_replace(["udp://", "/announce", ":80/"], ["http://", "/scrape", "/"], $announce);
+                    $tracker    = str_replace("/announce", "/scrape", $announce);
+                    $stat = new ScrapeUrl();
+                    $stats = $stat->torrent($tracker, $infohash);
+                    $seeders    = intval(strip_tags($stats['seeds']));
+                    $leechers 	= intval(strip_tags($stats['peers']));
+                    $downloaded = intval(strip_tags($stats['downloaded']));
+
+                    $this->db->update('torrents', [
+                        'timescompleted' => $downloaded,
+                        'leechers' => $leechers,
+                        'seeders' => $seeders,
+                        'visible' => 'yes',
+                        'update_at' => Helper::dateTime()
+                    ], "`id` = :id", ["id" => $idd]);
+                }
+                //End Scrape
+
+                //TODO
+                //fix username
+                Log::create("Torrent $idd ($name) was Uploaded by [username]");
+
+                $message = "<br /><br /><hr /><br /><b>$internalname</b><br /><br />File: " . htmlspecialchars($fname) . "<br />message: ";
+                $message .= "<br /><b>" . "UPLOAD_OK" . "</b><br /><a href='torrents-details.php?id=" . $idd . "'>" . "UPLOAD_VIEW_DL" . "</a><br /><br />";
+                echo $message;
+                //unlink("$dir/$fname");
+            }
+
+        } else {
+            Redirect::to("/torrents/import");
+        }
+    }
+
+
 
 }

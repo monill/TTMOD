@@ -24,7 +24,7 @@ $avatar = "https://placehold.it/200x300";
         </ul>
         <br />
         <div class="text-center">
-            <a href="account.php" class="btn btn-primary"> Account </a>
+            <a href="<?= url("/account"); ?>" class="btn btn-primary"> Account </a>
             <a href="<?= url("/admin"); ?>" class="btn btn-warning"> Admin Panel </a>
         </div>
         <br />
