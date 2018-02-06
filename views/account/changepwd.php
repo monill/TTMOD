@@ -19,30 +19,30 @@ $blockId = "f-" . sha1($title);
             <aside class="profile-info col-lg-9">
                 <section>
                     <div class="panel panel-primary">
-                        <div class="panel-heading"> Defina nova senha</div>
+                        <div class="panel-heading"> Set new password </div>
                         <div class="panel-body">
 
                             <form class="form-horizontal" role="form" action="" method="post" autocomplete="off">
 
 
                                 <div class="form-group">
-                                    <label  class="col-lg-2 control-label">Senha atual</label>
+                                    <label class="col-lg-2 control-label"> New password </label>
                                     <div class="col-lg-4">
-                                        <input type="password" class="form-control" name="senha" id="senha">
+                                        <input type="password" class="form-control" name="passwd" id="passwd">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label  class="col-lg-2 control-label">Nova senha</label>
+                                    <label class="col-lg-2 control-label"> Repeat password </label>
                                     <div class="col-lg-4">
-                                        <input type="password" class="form-control" name="novasenha" id="novasenha">
+                                        <input type="password" class="form-control" name="repasswd" id="repasswd">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
-                                        <button type="submit" name="updatesenha" class="btn btn-info">Save</button>
-                                        <button type="button" class="btn btn-default">Cancel</button>
+                                        <button type="submit" class="btn btn-info">Save</button>
+                                        <button class="btn btn-default">Cancel</button>
                                     </div>
                                 </div>
                             </form>

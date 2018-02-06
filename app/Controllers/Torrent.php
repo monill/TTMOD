@@ -163,7 +163,7 @@ class Torrent extends Controller {
 
                     for ($i = 0; $i < $count; $i++) {
                         if (($i + 1) == $count) {
-                            $fname = $dir.$file['path'][$i];
+                            $fname = $dir . $file['path'][$i];
                         } else {
                             $dir .= $file['path'][$i] . "/";
                         }
@@ -469,17 +469,13 @@ class Torrent extends Controller {
                 $creationdate = $tor[2];
                 $internalname = $tor[3];
                 $torrentsize = $tor[4];
-                $filecount = $tor[5];
+                $filecoun = $tor[5];
                 $annlist = $tor[6];
                 $comment = $tor[7];
                 $filelist = $tor[8];
 
                 //check announce url is local or external
-                if ($announce !== ANNOUNCE) {
-                    $external = "yes";
-                } else {
-                    $external = "no";
-                }
+                $external = $announce !== ANNOUNCE ? "yes" : "no";
 
                 $name = $internalname;
                 $name = str_replace(".torrent", "", $name);
@@ -492,13 +488,13 @@ class Torrent extends Controller {
                 }
 
                 $this->db->insert('torrents', [
-                    'infohash' => Helper::escape($infohash),
+                    'infohash' => $infohash,
                     'name' => Helper::escape($name),
                     'filename' => Helper::escape($fname),
                     'description' => "No descrption given",
                     'category_id' => $cat,
                     'size' => $torrentsize,
-                    'numfiles' => $filecount,
+                    'numfiles' => $filecoun,
                     'anon' => $anon,
                     'announce' => $announce,
                     'external' => $external,
@@ -522,7 +518,7 @@ class Torrent extends Controller {
 
                         for ($i = 0; $i < $count; $i++) {
                             if (($i + 1) == $count) {
-                                $fname = $dir.$file['path'][$i];
+                                $fname = $dir . $file['path'][$i];
                             } else {
                                 $dir .= $file['path'][$i] . "/";
                             }
@@ -684,10 +680,23 @@ class Torrent extends Controller {
                 //fix username
                 Log::create("Torrent $idd ($name) was Uploaded by [username]");
 
-                $message = "<br /><br /><hr /><br /><b>$internalname</b><br /><br />File: " . htmlspecialchars($fname) . "<br />message: ";
-                $message .= "<br /><b>" . "UPLOAD_OK" . "</b><br /><a href='torrents-details.php?id=" . $idd . "'>" . "UPLOAD_VIEW_DL" . "</a><br /><br />";
+                $message = "<br />
+                            <br />
+                            <hr />
+                            <br />
+                            <b>$internalname</b>
+                            <br />
+                            <br />
+                            File: " . htmlspecialchars($fname) . "<br />message: ";
+                $message .= "<br />
+                    <b>" . "UPLOAD_OK" . "</b>
+                    <br />
+                    <a href='torrents-details.php?id=" . $idd . "'>" . "Download" . "</a>
+                    <br /><br />";
+
                 echo $message;
-                unlink("$dir/$fname");
+
+                unlink("$dir/$fname.torrent");
             }
 
         } else {
