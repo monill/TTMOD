@@ -6,7 +6,6 @@ header("X-Content-Type-Options: nosniff");
 header("X-XSS-Protection: 1; mode=block");
 
 ob_start();
-//session_start();
 
 //ROOT
 define('ROOT', dirname(__DIR__) . DIRECTORY_SEPARATOR);
@@ -29,7 +28,3 @@ if (file_exists(ROOT . 'vendor/autoload.php')) {
 
 require_once ROOT . 'bootstrap/Autoload.php';
 $app = new Autoload();
-
-use App\Libs\Session;
-
-Session::startSession();

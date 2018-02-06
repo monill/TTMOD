@@ -1,6 +1,6 @@
 <?php
 $title1 = "Upload Rules";
-$blockId1 = "b-" . sha1($title1);
+$blockId1 = "f-" . sha1($title1);
 ?>
 
 <div class="card">
@@ -9,20 +9,20 @@ $blockId1 = "b-" . sha1($title1);
         <a data-toggle="collapse" href="#" class="showHide" id="<?php echo $blockId1; ?>" style="float: right;"></a>
     </div>
     <div class="card-body slidingDiv<?php echo $blockId1; ?>">
-        <!-- content -->
+    <!-- content -->
 
         You should also include a .nfo file wherever possible<br />
         Try to make sure your torrents are well-seeded for at least 24 hours<br />
         Do not re-release material that is still active
 
-        <!-- end content -->
+    <!-- end content -->
     </div>
 </div>
 <br />
 
 <?php
 $title = "Upload";
-$blockId = "b-" . sha1($title);
+$blockId = "f-" . sha1($title);
 ?>
 <div class="card">
     <div class="card-header">
@@ -30,7 +30,7 @@ $blockId = "b-" . sha1($title);
         <a data-toggle="collapse" href="#" class="showHide" id="<?php echo $blockId; ?>" style="float: right;"></a>
     </div>
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
-        <!-- content -->
+    <!-- content -->
 
         <form class="form-horizontal" enctype="multipart/form-data" action="<?= url("/torrent/upload"); ?>" method="post" autocomplete="off">
             <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
@@ -119,7 +119,7 @@ $blockId = "b-" . sha1($title);
             </div>
         </form>
 
-        <!-- end content -->
+    <!-- end content -->
     </div>
 </div>
 <br />

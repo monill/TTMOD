@@ -17,7 +17,7 @@ $blockId = "b-" . sha1($title);
     	<a href="torrents-today.php" class="list-group-item"><i class="fa fa-chevron-right"></i> Todays Torrents </a>
     	<a href="torrents-search.php" class="list-group-item"><i class="fa fa-chevron-right"></i> Search </a>
     	<a href="torrents-needseed.php" class="list-group-item"><i class="fa fa-chevron-right"></i> Torrents Need Seed </a>
-    	<a href="torrents-import.php" class="list-group-item"><i class="fa fa-chevron-right"></i> Mass Torrent Import </a>
+    	<a href="<?= url("/torrents/import"); ?>" class="list-group-item"><i class="fa fa-chevron-right"></i> Mass Torrent Import </a>
     	<a href="teams-view.php" class="list-group-item"><i class="fa fa-chevron-right"></i> Teams </a>
     	<a href="<?= url("/members"); ?>" class="list-group-item"><i class="fa fa-chevron-right"></i> Members </a>
     	<a href="<?= url("/rules"); ?>" class="list-group-item"><i class="fa fa-chevron-right"></i> Rules </a>
