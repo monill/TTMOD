@@ -83,7 +83,7 @@ class Signup extends Controller {
 
                 $msg = "Account created successfully check your email to activate your account, Inbox or SPAM.";
 
-                Log::create("New member with nick: <b> {$user} </b>");
+                Log::create("New member with nick: <b> {$user} </b> registered.");
 
                 $resultado = ["status" => "success", "msg" => $msg];
                 echo json_encode($resultado);

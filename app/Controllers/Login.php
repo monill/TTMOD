@@ -80,7 +80,7 @@ class Login extends Controller {
                         if ($this->loginFingerPrint == true) {
                             Session::set("login_fingerprint", $this->loginString());
                         }
-                        Cookie::put(SNAME, $sql->username, 60480);
+                        Cookie::set(SNAME, $sql->username, 60480);
                         Redirect::to("/home");
                     } else {
                         $this->triesLogin();

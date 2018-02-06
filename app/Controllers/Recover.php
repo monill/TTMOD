@@ -58,7 +58,7 @@ class Recover extends Controller {
                     'confirmresetpwd' => 'no',
                     'resetpwd_at' => Helper::dateTime(),
                     'ip' => $ip
-                        ], "`email` = :email", ["email" => $email]
+                ], "`email` = :email", ["email" => $email]
                 );
 
                 //send the email

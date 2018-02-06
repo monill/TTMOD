@@ -48,11 +48,5 @@ class User extends Model {
         }
     }
 
-    public static function estate()
-    {
-        $db = Database::getInstance();
-        $este = $db->select1("SELECT `uf` FROM `estates` WHERE id = :idd", ["idd" => 1]);
-        return $este;
-    }
 
 }

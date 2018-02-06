@@ -64,41 +64,54 @@ class HttpScraper extends Scraper {
         if (!is_array($info_hash)) {
             $info_hash = array($info_hash);
         }
+
         foreach ($info_hash as $hash) {
             if (!preg_match('#^[a-f0-9]{40}$#i', $hash)) {
                 throw new Exception\ScraperException('Invalid infohash: ' . $hash . '.');
             }
         }
+
         $url = trim($url);
+
         if (preg_match('%(http://.*?/)announce([^/]*)$%i', $url, $m)) {
             $url = $m[1] . 'scrape' . $m[2];
         } elseif (preg_match('%(http://.*?/)scrape([^/]*)$%i', $url, $m)) {
         } else {
             throw new Exception\ScraperException('Invalid tracker url: ' . $url);
         }
+
         $sep = preg_match('/\?.{1,}?/i', $url) ? '&' : '?';
         $request_url = $url;
+
         foreach ($info_hash as $hash) {
             $request_url .= $sep . 'info_hash=' . rawurlencode(pack('H*', $hash));
             $sep = '&';
         }
+
         ini_set('default_socket_timeout', $this->timeout);
         $rh = @fopen($request_url, 'r');
+
         if (!$rh) {
             throw new Exception\ScraperException('Could not open HTTP connection.', 0, true);
         }
+
         stream_set_timeout($rh, $this->timeout);
         $return = '';
         $pos = 0;
+
         while (!feof($rh) && $pos < $this->maxreadsize) {
             $return .= fread($rh, 1024);
         }
         fclose($rh);
+
         if (!substr($return, 0, 1) == 'd') {
             throw new Exception\ScraperException('Invalid scrape response.');
         }
+
         $arr_scrape_data = Bencode::decode($return);
+
         $torrents = array();
+
         foreach ($info_hash as $hash) {
             $ehash = pack('H*', $hash);
             if (isset($arr_scrape_data['files'][$ehash])) {

@@ -3,9 +3,9 @@
 namespace App\Controllers;
 
 use App\Libs\Redirect;
-use App\Models\User;
 use App\Libs\Input;
 use App\Libs\Token;
+use App\Models\User;
 
 class Members extends Controller {
 

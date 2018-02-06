@@ -55,7 +55,6 @@ class Announce extends Controller {
         $browser = new BrowserDetection();
         $agent = $browser->getUserAgent();
 
-
         if (strlen($peerid) != 20) {
             $this->err("Invalid Peer ID.");
         }

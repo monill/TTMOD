@@ -22,8 +22,8 @@ class Parse {
 
         //check file type is a torrents
         $torrent = explode(".", $filename);
-        $fileend = end($torrent);
-        $fileend = strtolower($fileend);
+        // $fileend = end($torrent);
+        $fileend = strtolower(end($torrent));
 
         if ($fileend == "torrent") {
             $parse = file_get_contents("$filename", FILE_BINARY);
@@ -74,13 +74,11 @@ class Parse {
 
                             foreach ($info["files"] as $file) {
                                 $filecount = $filecount++;
-                                $multitorrentsize = $file['length'];
                                 $torrentsize += $file['length'];
                             }
 
                             $torrentInfo[4] = $torrentsize;
                             $torrentInfo[5] = $filecount; //Get file count
-
 
                         } else {
                             // Single File Torrent

@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\Libs\Redirect;
-use App\Models\Message;
 use App\Libs\Token;
+use App\Models\Message;
 
 class Messages extends Controller {
 
