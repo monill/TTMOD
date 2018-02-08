@@ -71,7 +71,7 @@ class Login extends Controller {
 
                         //start sessions
                         Session::set("loggedin", true);
-                        Session::set("userid", $sql->id);
+                        Session::set("userid", (int) $sql->id);
                         Session::set("username", $sql->username);
 
                         //se usuário ok, faz o login do piao e atualiza pontos
