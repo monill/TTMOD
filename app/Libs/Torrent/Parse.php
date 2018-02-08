@@ -73,7 +73,7 @@ class Parse {
                             $torrentInfo[8] = $info["files"];
 
                             foreach ($info["files"] as $file) {
-                                $filecount = $filecount++;
+                                $filecount = ++$filecount;
                                 $torrentsize += $file['length'];
                             }
 
@@ -96,7 +96,7 @@ class Parse {
             }
         }
         return $torrentInfo;
-        //print_r($torrentInfo);
+        //var_dump($torrentInfo);
     }
 
 }

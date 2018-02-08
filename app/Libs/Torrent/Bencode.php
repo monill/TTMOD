@@ -18,9 +18,8 @@ class Bencode {
     }
 
     public static function encode($array) {
-        $string = "";
         $encode = new Encode();
-        return $encode->encodeDecide($array, $string);
+        return $encode->encodeDecide($array);
     }
 
     public static function decode($wholefile) {
