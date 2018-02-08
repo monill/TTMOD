@@ -73,6 +73,7 @@ class Login extends Controller {
                         Session::set("loggedin", true);
                         Session::set("userid", (int) $sql->id);
                         Session::set("username", $sql->username);
+                        Cookie::set(SNAME, $sql->username, 60480);
 
                         //se usuário ok, faz o login do piao e atualiza pontos
                         $this->updateLogin($sql->id, $points);
@@ -80,7 +81,7 @@ class Login extends Controller {
                         if ($this->loginFingerPrint == true) {
                             Session::set("login_fingerprint", $this->loginString());
                         }
-                        Cookie::set(SNAME, $sql->username, 60480);
+
                         Redirect::to("/home");
                     } else {
                         $this->triesLogin();

@@ -62,6 +62,14 @@ class Email extends PHPMailer {
         }
     }
 
+    public function invite($email)
+    {
+        //TODO
+        //finish this
+        $mail->Subject = SNAME . " - user invitation confirmation.";
+        $mail->Body = $body;
+    }
+
     private function getMailer()
     {
         $email = new PHPMailer();

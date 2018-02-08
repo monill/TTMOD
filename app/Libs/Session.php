@@ -13,6 +13,7 @@ class Session {
     public static function startSession()
     {
         ini_set("session.use_only_cookies", false);
+        ini_set('session.cookie_domain', '.localhost');
 
         $cookieParams = session_get_cookie_params();
         session_set_cookie_params(3600, $cookieParams["path"], $cookieParams["domain"], false, true);

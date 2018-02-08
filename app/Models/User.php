@@ -19,7 +19,7 @@ class User extends Model {
     public static function members()
     {
         $db = Database::getInstance();
-        return $db->select("SELECT `id`, `username`, `class`, `created_at`, `estate_id` FROM `users` WHERE status = 'confirmed' AND `privacy` != 'private' ORDER BY `username` ASC");
+        return $db->select("SELECT `id`, `username`, `class`, `created_at`, `estate_id` FROM `users` WHERE status = 'confirmed' AND `privacy` != 'private' AND `class` != 'boss' ORDER BY `username` ASC");
 
         //"SELECT * FROM users LEFT JOIN estates ON estates.id = users.estate_id WHERE users.status = 'confirmed' AND users.privacy != 'private' ORDER BY `username` ASC";
         //$db->select("SELECT `id`, `username`, `class`, `created_at`, `estate_id` FROM `users` LEFT JOIN `estates` ON estates.id = users.estate_id WHERE `users.status` = 'confirmed' AND `users.privacy` != 'strong' ORDER BY `username` ASC");
