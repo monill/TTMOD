@@ -98,11 +98,7 @@ class Torrent extends Controller {
                 // print ("<br>comment: " . $comment);
 
                 //check announce url is local or external
-                if ($announce !== ANNOUNCE) {
-                    $external = "yes";
-                } else {
-                    $external = "no";
-                }
+                $external = $announce !== ANNOUNCE ? "yes" : "no";
             }
 
             //case blank name takes the file name
@@ -126,7 +122,7 @@ class Torrent extends Controller {
             //TODO
             //fix all this
             $this->db->insert('torrents', [
-                'infohash' => $infohash,
+                'info_hash' => $infohash,
                 'name' => Helper::escape($name),
                 'filename' => Helper::escape($internalname),
                 'description' => Helper::escape($descr),
@@ -179,7 +175,7 @@ class Torrent extends Controller {
                 }
             } else {
                 $this->db->insert('torrent_files', [
-                    'path' => Helper::escape($tor[3]),
+                    'path' => Helper::escape($internalname),
                     'length' => $torrentsize,
                     'torrent_id' => $idd,
                     'created_at' => Helper::dateTime(),
@@ -215,7 +211,7 @@ class Torrent extends Controller {
 //                $this->db->update('torrents', [
 //                    'leechers' => $leechers,
 //                    'seeders' => $seeders,
-//                    'timescompleted' => $downloaded,
+//                    'times_completed' => $downloaded,
 //                    'update_at' => Helper::dateTime(),
 //                    'visible' => 'yes'
 //                ], "`id` = :id", ["id" => $idd]);
@@ -268,7 +264,7 @@ class Torrent extends Controller {
                             }
 
                             $this->db->update('torrents', [
-                                'timescompleted' => $downloaded,
+                                'times_completed' => $downloaded,
                                 'leechers' => $leechers,
                                 'seeders' => $seeders,
                                 'visible' => 'yes',
@@ -278,7 +274,7 @@ class Torrent extends Controller {
                             $this->db->update('torrent_announces', [
                                 'seeders' => $seeders,
                                 'leechers' => $leechers,
-                                'timescompleted' => $downloaded,
+                                'times_completed' => $downloaded,
                                 'online' => 'yes'
                             ], "`torrent_id` = :id", ["id" => $idd]);
 
@@ -299,7 +295,7 @@ class Torrent extends Controller {
                             }
 
                             $this->db->update('torrents', [
-                                'timescompleted' => $downloaded,
+                                'times_completed' => $downloaded,
                                 'leechers' => $leechers,
                                 'seeders' => $seeders,
                                 'visible' => 'yes',
@@ -309,7 +305,7 @@ class Torrent extends Controller {
                             $this->db->update('torrent_announces', [
                                 'seeders' => $seeders,
                                 'leechers' => $leechers,
-                                'timescompleted' => $downloaded,
+                                'times_completed' => $downloaded,
                                 'online' => 'yes'
                             ], "`torrent_id` = :id", ["id" => $idd]);
 
@@ -394,7 +390,7 @@ class Torrent extends Controller {
                     {
                         $arq = file_get_contents("$file");
                         $decoded = Bencode::decode($arq);
-                        echo $decoded["announce"] = ANNOUNCE . $user->passkey;
+                        $decoded["announce"] = ANNOUNCE . $user->passkey;
                         unset($decoded["announce-list"]);
 
                         $data = Bencode::encode($decoded);
@@ -469,7 +465,7 @@ class Torrent extends Controller {
                 $creationdate = $tor[2];
                 $internalname = $tor[3];
                 $torrentsize = $tor[4];
-                $filecoun = $tor[5];
+                $filecount = $tor[5];
                 $annlist = $tor[6];
                 $comment = $tor[7];
                 $filelist = $tor[8];
@@ -481,20 +477,16 @@ class Torrent extends Controller {
                 $name = str_replace(".torrent", "", $name);
                 $name = str_replace("_", " ", $name);
 
-                if ($anonup == "yes") {
-                    $anon = "yes";
-                } else {
-                    $anon = "no";
-                }
+                $anon = $anonup == "yes" ? "yes" : "no";
 
                 $this->db->insert('torrents', [
-                    'infohash' => $infohash,
+                    'info_hash' => $infohash,
                     'name' => Helper::escape($name),
                     'filename' => Helper::escape($fname),
                     'description' => "No descrption given",
                     'category_id' => $cat,
                     'size' => $torrentsize,
-                    'numfiles' => $filecoun,
+                    'numfiles' => $filecount,
                     'anon' => $anon,
                     'announce' => $announce,
                     'external' => $external,
@@ -518,7 +510,7 @@ class Torrent extends Controller {
 
                         for ($i = 0; $i < $count; $i++) {
                             if (($i + 1) == $count) {
-                                $fname = $dir . $file['path'][$i];
+                                $fname = $dir.$file['path'][$i];
                             } else {
                                 $dir .= $file['path'][$i] . "/";
                             }
@@ -556,26 +548,6 @@ class Torrent extends Controller {
                         }
                     }
                 }
-
-                //External scrape
-//                if ($external == "yes") {
-//                    //$tracker    = str_replace(["udp://", "/announce", ":80/"], ["http://", "/scrape", "/"], $announce);
-//                    //$tracker    = str_replace("/announce", "/scrape", $announce);
-//                    $stat = new ScrapeUrl();
-//                    $stats = $stat->torrent($tracker, $infohash);
-//                    $seeders    = intval(strip_tags($stats['seeds']));
-//                    $leechers 	= intval(strip_tags($stats['peers']));
-//                    $downloaded = intval(strip_tags($stats['downloaded']));
-//
-//                    $this->db->update('torrents', [
-//                        'timescompleted' => $downloaded,
-//                        'leechers' => $leechers,
-//                        'seeders' => $seeders,
-//                        'visible' => 'yes',
-//                        'update_at' => Helper::dateTime()
-//                    ], "`id` = :id", ["id" => $idd]);
-//                }
-                //End Scrape
 
                 //External scrape
                 if ($external == "yes")
@@ -622,7 +594,7 @@ class Torrent extends Controller {
                                 }
 
                                 $this->db->update('torrents', [
-                                    'timescompleted' => $downloaded,
+                                    'times_completed' => $downloaded,
                                     'leechers' => $leechers,
                                     'seeders' => $seeders,
                                     'visible' => 'yes',
@@ -632,7 +604,7 @@ class Torrent extends Controller {
                                 $this->db->update('torrent_announces', [
                                     'seeders' => $seeders,
                                     'leechers' => $leechers,
-                                    'timescompleted' => $downloaded,
+                                    'times_completed' => $downloaded,
                                     'online' => 'yes'
                                 ], "`torrent_id` = :id", ["id" => $idd]);
 
@@ -653,7 +625,7 @@ class Torrent extends Controller {
                                 }
 
                                 $this->db->update('torrents', [
-                                    'timescompleted' => $downloaded,
+                                    'times_completed' => $downloaded,
                                     'leechers' => $leechers,
                                     'seeders' => $seeders,
                                     'visible' => 'yes',
@@ -663,7 +635,7 @@ class Torrent extends Controller {
                                 $this->db->update('torrent_announces', [
                                     'seeders' => $seeders,
                                     'leechers' => $leechers,
-                                    'timescompleted' => $downloaded,
+                                    'times_completed' => $downloaded,
                                     'online' => 'yes'
                                 ], "`torrent_id` = :id", ["id" => $idd]);
 
@@ -680,23 +652,10 @@ class Torrent extends Controller {
                 //fix username
                 Log::create("Torrent $idd ($name) was Uploaded by [username]");
 
-                $message = "<br />
-                            <br />
-                            <hr />
-                            <br />
-                            <b>$internalname</b>
-                            <br />
-                            <br />
-                            File: " . htmlspecialchars($fname) . "<br />message: ";
-                $message .= "<br />
-                    <b>" . "UPLOAD_OK" . "</b>
-                    <br />
-                    <a href='torrents-details.php?id=" . $idd . "'>" . "Download" . "</a>
-                    <br /><br />";
-
+                $message = "<br /><br /><hr /><br /><b>$internalname</b><br /><br />File: " . htmlspecialchars($fname) . "<br />message: ";
+                $message .= "<br /><b>" . "UPLOAD_OK" . "</b><br /><a href='torrents-details.php?id=" . $idd . "'>" . "UPLOAD_VIEW_DL" . "</a><br /><br />";
                 echo $message;
-
-                unlink("$dir/$fname.torrent");
+                unlink("$dir/$fname");
             }
 
         } else {
