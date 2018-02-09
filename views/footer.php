@@ -28,7 +28,6 @@ use App\Models\Layout;
     <script src="<?= URL; ?>/js/bootstrap.min.js"></script>
     <script src="<?= URL; ?>/js/java_klappe.js"></script>
 
-
   </body>
 </html>
 <?php ob_end_flush(); ?>
