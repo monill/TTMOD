@@ -47,7 +47,7 @@ class Account extends Controller {
 
     public function mytorrents()
     {
-        $myts = $this->db->select("SELECT torrents.id, torrents.category_id, torrents.name, torrents.created_at, torrents.downs, torrents.banned, torrents.comments, torrents.seeders, torrents.leechers, torrents.timescompleted, torrent_categories.name AS catname FROM torrents LEFT JOIN torrent_categories ON torrents.category_id = torrent_categories.id WHERE torrents.uploader_id = :uploader ORDER BY torrents.created_at DESC", ["uploader" => (int) 7]);
+        $myts = $this->db->select("SELECT torrents.id, torrents.category_id, torrents.name, torrents.created_at, torrents.downs, torrents.banned, torrents.comments, torrents.seeders, torrents.leechers, torrents.times_completed, torrent_categories.name AS catname FROM torrents LEFT JOIN torrent_categories ON torrents.category_id = torrent_categories.id WHERE torrents.uploader_id = :uploader ORDER BY torrents.created_at DESC", ["uploader" => (int) 7]);
         $this->view->title = SNAME . " :: Your CPanel";
         $this->view->mytors = $myts;
         $this->view->load("account/mytorrents", false);

@@ -17,6 +17,7 @@ $user = $db->select("SELECT `id`, `username` FROM `users` WHERE `status` = 'conf
     </div>
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
+    
         <?php if (!$user): ?>
             <p class="text-center"> Nothing found </p>
         <?php else: ?>
@@ -24,6 +25,7 @@ $user = $db->select("SELECT `id`, `username` FROM `users` WHERE `status` = 'conf
                 <a href="<?= url("/user/id/" . $u->id ); ?>" class="list-group-item"> <?= $u->username . " " ?> </a>
             <?php endforeach; ?>
         <?php endif; ?>
+
     <!-- end content -->
     </div>
 </div>

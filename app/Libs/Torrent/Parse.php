@@ -26,7 +26,7 @@ class Parse {
         $fileend = strtolower(end($torrent));
 
         if ($fileend == "torrent") {
-            $parse = file_get_contents("$filename", FILE_BINARY);
+            $parse = file_get_contents("$filename");
 
             if ($parse == false) {
                 echo "Parser Error: Error Opening torrents, unable to get contents.<br>";

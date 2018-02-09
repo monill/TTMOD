@@ -16,8 +16,5 @@ echo "<br />";
 
 echo date('Y-m-d H:i:s', strtotime(date("Y-m-d H:i:s")) - 3600 * 24);
 
-$cookieParams = session_get_cookie_params();
-
-echo var_dump($cookieParams);
 
 ?>

@@ -655,7 +655,7 @@ class Torrent extends Controller {
                 $message = "<br /><br /><hr /><br /><b>$internalname</b><br /><br />File: " . htmlspecialchars($fname) . "<br />message: ";
                 $message .= "<br /><b>" . "UPLOAD_OK" . "</b><br /><a href='torrents-details.php?id=" . $idd . "'>" . "UPLOAD_VIEW_DL" . "</a><br /><br />";
                 echo $message;
-                unlink("$dir/$fname");
+                //sunlink("$dir/$fname");
             }
 
         } else {
