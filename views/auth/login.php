@@ -34,7 +34,7 @@
 	                                <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
 	                                <div class="form-group">
 	                                	<label for="name">Username</label>
-	                                    <input id="name" type="text" class="form-control" name="username" value="" minlength="3" maxlength="25" required autofocus>
+	                                    <input id="name" type="text" class="form-control" name="username" minlength="3" maxlength="25" required autofocus>
 	                                </div>
 	                                <div class="form-group">
 	                                	<label for="password">Password</label>

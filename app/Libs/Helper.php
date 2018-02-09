@@ -243,4 +243,37 @@ class Helper {
         return self::rowCount("guests");
     }
 
+    public static function health($seeders, $leechers)
+    {
+        if ($leechers == 0 && $seeders == 0 || $leechers > 0 && $seeders == 0) {
+            return 0;
+        } elseif ($seeders > $leechers) {
+            return 10;
+        }
+        
+        $ratio = $seeders / $leechers * 100;
+
+        if ($ratio > 0 && $ratio < 15) {
+            return 1;
+        } elseif ($ratio >= 15 && $ratio < 25) {
+            return 2;
+        } elseif ($ratio >= 25 && $ratio < 35) {
+            return 3;
+        } elseif ($ratio >= 35 && $ratio < 45) {
+            return 4;
+        } elseif ($ratio >= 45 && $ratio < 55) {
+            return 5;
+        } elseif ($ratio >= 55 && $ratio < 65) {
+            return 6;
+        } elseif ($ratio >= 65 && $ratio < 75) {
+            return 7;
+        } elseif ($ratio >= 75 && $ratio < 85) {
+            return 8;
+        } elseif ($ratio >= 85 && $ratio < 95) {
+            return 9;
+        } else {
+            return 10;
+        }
+    }
+
 }

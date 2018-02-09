@@ -57,7 +57,7 @@ $blockId = "f-" . sha1($title);
             <tr>
                 <td align="center" colspan="2">
                     <input type="submit" value="Upload" /><br />
-                    <i>Click Once! - Uploading a lot files may take longer.</i>
+                    <i> Click Once! - Uploading a lot files may take longer. </i>
                 </td>
             </tr>
         </table>

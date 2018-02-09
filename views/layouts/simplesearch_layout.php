@@ -13,7 +13,7 @@ $blockId = "b-" . sha1($title);
 
         <form method="post" action="<?= url("/torrents/search"); ?>" class="form-inline">
             <div class="input-group">
-                <input type="text" name="search" class="form-control" value="" />
+                <input type="text" name="search" class="form-control" />
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary"> Search </button>
                 </span>

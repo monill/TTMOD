@@ -31,6 +31,7 @@ class Torrents extends Controller {
             torrent_categories.slug AS cat_slug, users.username FROM torrents LEFT JOIN torrent_categories ON category_id = torrent_categories.id LEFT JOIN users ON torrents.uploader_id = users.id");
         $this->view->title = SNAME . " :: Torrents";
         $this->view->torrents = $torrents;
+        $this->view->token = Token::generate();
         $this->view->load("torrents/index", false);
     }
 
