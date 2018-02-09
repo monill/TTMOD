@@ -50,7 +50,7 @@ class Signup extends Controller {
             $gender = Input::get("gender");
 
             $data = explode("/", $dob);
-            $data_ok = $data[2] . "/" . $data[1] . "/" . $data[0] . "<br>";
+            $data_ok = $data[2] . "/" . $data[1] . "/" . $data[0];
 
             //inicia validacao dos campos
             $erros = $this->validData($user, $mail, $pass, $passagain);
@@ -98,42 +98,42 @@ class Signup extends Controller {
 
     public function validData($user, $mail, $pass, $passagain)
     {
-        $erros = array();
+        $errors = array();
 
         if ($this->valid->isEmpty($user)) {
-            $erros[] = "Please enter the account.";
+            $errors[] = "Please enter the account.";
         }
         if ($this->valid->isEmpty($mail)) {
-            $erros[] = "Please enter an email.";
+            $errors[] = "Please enter an email.";
         }
         if ($this->valid->isEmpty($pass)) {
-            $erros[] = "Please enter a password.";
+            $errors[] = "Please enter a password.";
         }
         if ($this->valid->isEmpty($passagain)) {
-            $erros[] = "Please enter the second password.";
+            $errors[] = "Please enter the second password.";
         }
         if ($pass != $passagain) {
-            $erros[] = "The passwords do not match.";
+            $errors[] = "The passwords do not match.";
         }
         if (strlen($pass) < 6 || strlen($passagain) > 16) {
-            $erros[] = "Password must be between 6 and 16 characters long.";
+            $errors[] = "Password must be between 6 and 16 characters long.";
         }
         if ($this->valid->validEmail($mail)) {
-            $erros[] = "Please enter a valid email address.";
+            $errors[] = "Please enter a valid email address.";
         }
         if ($this->valid->emailExist($mail)) {
-            $erros[] = "The email provided is already in use.";
+            $errors[] = "The email provided is already in use.";
         }
         if ($this->valid->userExist($user)) {
-            $erros[] = "The chosen username is already in use.";
+            $errors[] = "The chosen username is already in use.";
         }
         if (strlen($user) < 3 && strlen($user) > 25) {
-            $erros[] = "User can have between 3 and 25 characters.";
+            $errors[] = "User can have between 3 and 25 characters.";
         }
         if (!ctype_alnum($user)) {
-            $erros[] = "The username can only contain letters and numbers with no space.";
+            $errors[] = "The username can only contain letters and numbers with no space.";
         }
-        return $erros;
+        return $errors;
     }
 
 }

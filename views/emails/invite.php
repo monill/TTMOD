@@ -1,6 +1,3 @@
-//TODO
-//finish this
-
 <p>
     You have been invited to {{website_name}}. <br />
     They have specified this address {{$email}} as your email.
@@ -14,12 +11,16 @@
 
 <br/><br/>
 
-<a href="{{rlink}}"> Rules </a> <br/><br/>
-<a href="{{flink}}"> F.A.Q </a> <br/><br/>
+<a href="{{rulink}}"> Rules </a> <br/><br/>
+<a href="{{falink}}"> F.A.Q </a> <br/><br/>
 
 <p> To confirm your invitation, you have to follow this link: </p>
 
 <a href="{{invlink}}"> Confirm invitation </a> <br/><br/>
+
+<p> If you can not click on this link, just copy and paste the following URL into the address bar of your browser: </p>
+
+<p> {{invlink}} </p>
 
 <p>
     After you do this, you will be able to use your new account. If you fail to <br />

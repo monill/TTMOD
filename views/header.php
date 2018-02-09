@@ -1,8 +1,10 @@
 <?php
 use App\Models\Layout;
 use App\Libs\Database;
+
 $startime =  array_sum(explode(" ", microtime()));
 $db = Database::getInstance();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

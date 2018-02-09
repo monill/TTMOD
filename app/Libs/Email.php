@@ -62,12 +62,32 @@ class Email extends PHPMailer {
         }
     }
 
-    public function invite($email)
+    public function invite($email, $key)
     {
-        //TODO
-        //finish this
+        // get instance of PHPMailer (including some additional info)
+        $mail = $this->getMailer();
+        // where you want to send confirmation email
+        $mail->addAddress($email);
+        // link for email confirmation
+        //TODO fix link
+        $link = URL . "/resetpass.php?k=" . $key;
+        // load email HTML template
+        $body = file_get_contents(VIEWS . "emails/invite.php");
+
+        $body = str_replace("{{website_name}}", SNAME, $body);
+        $body = str_replace("{{email}}", Helper::escape($email), $body);
+        $body = str_replace("{{rulink}}", URL . '/rules', $body);
+        $body = str_replace("{{falink}}", URL . '/faq', $body);
+        $body = str_replace("{{invlink}}", $link, $body);
+
         $mail->Subject = SNAME . " - user invitation confirmation.";
         $mail->Body = $body;
+
+        if (!$mail->send()) {
+            echo "Message can not be sent. <br />";
+            echo "Mail error: " . $mail->ErrorInfo;
+            exit();
+        }
     }
 
     private function getMailer()

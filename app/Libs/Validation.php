@@ -32,7 +32,7 @@ class Validation {
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
             return false;
         }
-        return true;
+
     }
 
     public function userExist($username)
