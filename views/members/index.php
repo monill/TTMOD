@@ -14,7 +14,7 @@ use App\Models\User;
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
 
-        <form method="post" class="" action="<?= url("/members/search"); ?>" autocomplete="off">
+        <form method="post" action="<?= url("/members/search"); ?>" autocomplete="off">
             <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
             <div class="row">
                 <div class="form-group col-sm-3">

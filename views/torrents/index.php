@@ -1,4 +1,8 @@
 <?php
+
+use App\Libs\Helper;
+use App\Models\Torrent;
+
 $title = "Torrents";
 $blockId = "f-" . sha1($title);
 ?>
@@ -30,72 +34,79 @@ $blockId = "f-" . sha1($title);
         </table>
 
         <br /><br />
-        <b> YOU_ARE_IN :</b>
-        <a href="torrents.php?parent_cat=1">
-            parent_cat
-        </a>
-        <br /><b> SUB_CATS :</b>
             <a href="torrents.php?cat=1"> name </a>
             <br /><br />
 
-            SEARCH
-            <input type="text" name="search" size="40" value="" />
+            <div class="form-group col-sm-3">
+                <input id="user" type="text" class="form-control" name="search" minlength="3" maxlength="25" placeholder="Search.." autofocus />
+            </div>
 
-            IN
-            <select name="cat">
-                <option value="0"> ( ALL TYPES )</option>
+            <select name="cat" class="form-control">
+                <option selected disabled="disabled"> All Types </option>
+                <?php foreach (Torrent::categories() as $c): ?>
+                    <option value="<?= $c->id; ?>"> <?= $c->name; ?> </option>
+                <?php endforeach; ?>
+    		</select>
+            <br />
+
+            <select name="incldead" class="form-control">
+    			<option value="0"> Active </option>
+    			<option value="1"> Include dead </option>
+    			<option value="2"> Only dead </option>
+    		</select>
+            <br />
+
+            <select name="freeleech" class="form-control">
+                <option value="0"> All </option>
+                <option value="1"> Not Freeleech </option>
+                <option value="2"> Only Freeleech </option>
             </select>
+            <br />
 
-            <br /><br />
-            <select name="incldead">
-                <option value="0"> ACTIVE_TRANSFERS </option>
-                <option value="1"> INC_DEAD </option>
-                <option value="2"> ONLY_DEAD </option>
-            </select>
+            <select name="inclext" class="form-control">
+    			<option value="0"> Local / External </option>
+    			<option value="1"> Local only </option>
+    			<option value="2"> External only </option>
+    		</select>
+            <br />
 
-            <select name="freeleech">
-                <option value="0"> ALL </option>
-                <option value="1"> NOT_FREELEECH </option>
-                <option value="2"> ONLY_FREELEECH </option>
-            </select>
-
-            <select name="inclexternal">
-                <option value="0"> LOCAL_EXTERNAL </option>
-                <option value="1"> LOCAL_ONLY </option>
-                <option value="2"> EXTERNAL_ONLY </option>
-            </select>
-
-            <select name="lang">
-                <option value="0"> ALL </option>
-                <option value="1"> lang-name </option>
-            </select>
-
-            <input type="submit" value="SEARCH" />
+            <button type="submit" class="btn btn-primary">Search</button>
             <br />
         </form>
                 SEARCH_RULES <br />
     </center>
     <br /><br />
 
-
-
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Categ</th>
-                <th>Name</th>
-                <th>Added</th>
-                <th>Size</th>
-                <th>S.</th>
-                <th>L.</th>
-                <th>Ccs</th>
-                <th>Uploader</th>
+                <th scope="col"> Categ </th>
+                <th scope="col"> Name </th>
+                <th scope="col"> Added </th>
+                <th scope="col"> Size </th>
+                <th scope="col"> S. </th>
+                <th scope="col"> L. </th>
+                <th scope="col"> <i class="fa fa-comments"></i> </th>
+                <th scope="col"> Uploader </th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach (isset($this->torrents) ? $this->torrents : $this->torrents as $torrent): ?>
+            <?php foreach (isset($this->torrents) ? $this->torrents : $this->torrents as $tor): ?>
                 <tr>
-                    <th> <a href="<?= url("/user/id/") . $torrent->cat_name; ?>"> <?= $torrent->cat_name; ?> </a> </th>
+                    <th scope="row"> <a href="<?= url("/torrents/categ/") . $tor->cat_slug; ?>"> <?= $tor->cat_name; ?> </a> </th>
+                    <th> <a href="<?= url("/torrent/view/") . $tor->id; ?>"> <?= $tor->name; ?> </a> </th>
+                    <th> <?= date("d-m-Y", strtotime($tor->created_at)); ?> </th>
+                    <th> <?= Helper::makeSize($tor->size); ?> </th>
+                    <th> <?= $tor->seeders; ?> </th>
+                    <th> <?= $tor->leechers; ?> </th>
+                    <th> <?= $tor->comments; ?> </th>
+                    <th>
+                        <?php if ($tor->anon == "yes"): ?>
+                            Authorless
+                        <?php else: ?>
+                            <a href="<?= url("/user/id/") . $tor->uploader_id; ?>"> <?= $tor->username; ?> </a>
+                        <?php endif; ?>
+                    </th>
                 </tr>
             <?php endforeach; ?>
         </tbody>

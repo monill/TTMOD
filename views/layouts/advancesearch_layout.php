@@ -1,7 +1,8 @@
 <?php
+use App\Models\Torrent;
+
 $title = "Advanced Search";
 $blockId = "b-" . sha1($title);
-use App\Models\Torrent;
 ?>
 
 <div class="card">
@@ -34,7 +35,8 @@ use App\Models\Torrent;
 			<option value="0"> Local / External </option>
 			<option value="1"> Local only </option>
 			<option value="2"> External only </option>
-		</select> <br />
+		</select>
+        <br />
 
 		<button type="submit" class="btn btn-primary center-block"> Search </button>
 	</form>
