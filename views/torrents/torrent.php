@@ -1,5 +1,5 @@
 <?php
-$title = "Torrent tal";
+$title = "Torrent Details For: " . $this->tor->name;
 $blockId = "f-" . sha1($title);
 ?>
 <div class="card">
@@ -9,6 +9,8 @@ $blockId = "f-" . sha1($title);
     </div>
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
+
+        <?php var_dump($this->tor); ?>
 
 
 

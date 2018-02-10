@@ -32,10 +32,17 @@ class Torrent extends Controller {
         Redirect::to("/torrents");
     }
 
-    public function view($id)
+    public function view($tid)
     {
-        $this->view->title = SNAME . " :: tal";
-        $this->view->torrents = $id;
+        $tor = $this->db->select1("SELECT torrents.anon, torrents.seeders, torrents.banned, torrents.leechers,
+            torrents.info_hash, torrents.filename, torrents.nfo, torrents.update_at, torrents.name, torrents.uploader_id, torrents.description,
+            torrents.visible, torrents.size, torrents.created_at, torrents.views, torrents.downs, torrents.times_completed, torrents.id,
+            torrents.external, torrents.image1, torrents.image2, torrents.announce, torrents.numfiles, torrents.freeleech,
+            torrent_categories.name AS cat_name, torrent_categories.slug as cat_slug, users.username, users.privacy FROM torrents
+            LEFT JOIN torrent_categories ON torrents.category_id = torrent_categories.id LEFT JOIN users ON torrents.uploader_id = users.id
+            WHERE torrents.id = :tid", ["tid" => $tid]);
+        $this->view->title = SNAME . " :: " . $tor->name;
+        $this->view->tor = $tor;
         $this->view->load("torrents/torrent", false);
     }
 
@@ -197,27 +204,6 @@ class Torrent extends Controller {
                     }
                 }
             }
-
-            //External scrape
-//            if ($external == "yes") {
-//                $tracker    = str_replace(["udp://", "/announce", ":80/"], ["http://", "/scrape", "/"], $announce);
-//                //$tracker    = str_replace("/announce", "/scrape", $announce);
-//                $stat = new ScrapeUrl();
-//                $stats = $stat->torrent($tracker, $infohash);
-//                $seeders    = intval(strip_tags($stats['seeds']));
-//                $leechers 	= intval(strip_tags($stats['peers']));
-//                $downloaded = intval(strip_tags($stats['downloaded']));
-//
-//                $this->db->update('torrents', [
-//                    'leechers' => $leechers,
-//                    'seeders' => $seeders,
-//                    'times_completed' => $downloaded,
-//                    'update_at' => Helper::dateTime(),
-//                    'visible' => 'yes'
-//                ], "`id` = :id", ["id" => $idd]);
-//            }
-            //End Scrape
-
 
             //External scrape
             if ($external == "yes")

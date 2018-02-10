@@ -14,7 +14,7 @@ Index page
 echo strtotime(date("Y-m-d H:i:s")) - (3600 * 24);
 echo "<br />";
 
-echo date('Y-m-d H:i:s', strtotime(date("Y-m-d H:i:s")) - 3600 * 24);
+echo date('Y-m-d H:i:s', strtotime(date("Y-m-d H:i:s")) - 7200 * 24);
 
 
 ?>

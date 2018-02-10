@@ -1,0 +1,53 @@
+[09-Feb-2018 22:15:27 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'category_id.id' in 'on clause' in D:\Ampps\www\app\Libs\Database.php:52
+Stack trace:
+#0 D:\Ampps\www\app\Libs\Database.php(52): PDOStatement->execute()
+#1 D:\Ampps\www\app\Controllers\Torrent.php(43): App\Libs\Database->select('SELECT torrents...', Array)
+#2 D:\Ampps\www\bootstrap\Autoload.php(44): App\Controllers\Torrent->view('1')
+#3 D:\Ampps\www\public\index.php(30): Autoload->__construct()
+#4 {main}
+  thrown in D:\Ampps\www\app\Libs\Database.php on line 52
+[09-Feb-2018 22:24:13 America/Sao_Paulo] PHP Notice:  Trying to get property of non-object in D:\Ampps\www\views\torrents\torrent.php on line 2
+[09-Feb-2018 22:24:13 America/Sao_Paulo] PHP Stack trace:
+[09-Feb-2018 22:24:13 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[09-Feb-2018 22:24:13 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:30
+[09-Feb-2018 22:24:13 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->view() D:\Ampps\www\bootstrap\Autoload.php:44
+[09-Feb-2018 22:24:13 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Torrent.php:46
+[09-Feb-2018 22:24:13 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:21
+[09-Feb-2018 22:24:49 America/Sao_Paulo] PHP Notice:  Trying to get property of non-object in D:\Ampps\www\views\torrents\torrent.php on line 2
+[09-Feb-2018 22:24:49 America/Sao_Paulo] PHP Stack trace:
+[09-Feb-2018 22:24:49 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[09-Feb-2018 22:24:49 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:30
+[09-Feb-2018 22:24:49 America/Sao_Paulo] PHP   3. App\Controllers\Torrent->view() D:\Ampps\www\bootstrap\Autoload.php:44
+[09-Feb-2018 22:24:49 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Torrent.php:46
+[09-Feb-2018 22:24:49 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:21
+[09-Feb-2018 22:27:06 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected '"' in D:\Ampps\www\views\torrents\torrent.php on line 2
+[10-Feb-2018 14:03:52 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\views\index\index.php on line 17
+[10-Feb-2018 14:03:52 America/Sao_Paulo] PHP Stack trace:
+[10-Feb-2018 14:03:52 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[10-Feb-2018 14:03:52 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:30
+[10-Feb-2018 14:03:52 America/Sao_Paulo] PHP   3. App\Controllers\Index->index() D:\Ampps\www\bootstrap\Autoload.php:31
+[10-Feb-2018 14:03:52 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Index.php:24
+[10-Feb-2018 14:03:52 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:25
+[10-Feb-2018 14:04:27 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\views\index\index.php on line 17
+[10-Feb-2018 14:04:27 America/Sao_Paulo] PHP Stack trace:
+[10-Feb-2018 14:04:27 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[10-Feb-2018 14:04:27 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:30
+[10-Feb-2018 14:04:27 America/Sao_Paulo] PHP   3. App\Controllers\Index->index() D:\Ampps\www\bootstrap\Autoload.php:31
+[10-Feb-2018 14:04:27 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Index.php:24
+[10-Feb-2018 14:04:27 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:25
+[10-Feb-2018 14:04:52 America/Sao_Paulo] PHP Notice:  A non well formed numeric value encountered in D:\Ampps\www\views\index\index.php on line 17
+[10-Feb-2018 14:04:52 America/Sao_Paulo] PHP Stack trace:
+[10-Feb-2018 14:04:52 America/Sao_Paulo] PHP   1. {main}() D:\Ampps\www\public\index.php:0
+[10-Feb-2018 14:04:52 America/Sao_Paulo] PHP   2. Autoload->__construct() D:\Ampps\www\public\index.php:30
+[10-Feb-2018 14:04:52 America/Sao_Paulo] PHP   3. App\Controllers\Index->index() D:\Ampps\www\bootstrap\Autoload.php:31
+[10-Feb-2018 14:04:52 America/Sao_Paulo] PHP   4. App\Libs\Views->load() D:\Ampps\www\app\Controllers\Index.php:24
+[10-Feb-2018 14:04:52 America/Sao_Paulo] PHP   5. require_once() D:\Ampps\www\app\Libs\Views.php:25
+[10-Feb-2018 14:10:57 America/Sao_Paulo] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'updated_at' in 'where clause' in D:\Ampps\www\app\Libs\Database.php:52
+Stack trace:
+#0 D:\Ampps\www\app\Libs\Database.php(52): PDOStatement->execute()
+#1 D:\Ampps\www\app\Libs\Torrent\MegaScrape.php(27): App\Libs\Database->select('SELECT `id`, `i...', Array)
+#2 D:\Ampps\www\app\Controllers\Index.php(27): App\Libs\Torrent\MegaScrape->tor()
+#3 D:\Ampps\www\bootstrap\Autoload.php(31): App\Controllers\Index->index()
+#4 D:\Ampps\www\public\index.php(30): Autoload->__construct()
+#5 {main}
+  thrown in D:\Ampps\www\app\Libs\Database.php on line 52
