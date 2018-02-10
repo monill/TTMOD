@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 08, 2018 at 02:50 PM
--- Server version: 5.6.37
+-- Generation Time: 10-Fev-2018 às 16:23
+-- Versão do servidor: 5.6.37
 -- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bruteforces`
+-- Estrutura da tabela `bruteforces`
 --
 
 CREATE TABLE IF NOT EXISTS `bruteforces` (
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `bruteforces` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estates`
+-- Estrutura da tabela `estates`
 --
 
 CREATE TABLE IF NOT EXISTS `estates` (
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `estates` (
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `estates`
+-- Extraindo dados da tabela `estates`
 --
 
 INSERT INTO `estates` (`id`, `name`, `uf`) VALUES
@@ -81,7 +81,7 @@ INSERT INTO `estates` (`id`, `name`, `uf`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `faqs`
+-- Estrutura da tabela `faqs`
 --
 
 CREATE TABLE IF NOT EXISTS `faqs` (
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `faqs` (
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `faqs`
+-- Extraindo dados da tabela `faqs`
 --
 
 INSERT INTO `faqs` (`id`, `question`, `categ_id`, `style`, `answer`, `created_at`, `update_at`) VALUES
@@ -146,7 +146,7 @@ INSERT INTO `faqs` (`id`, `question`, `categ_id`, `style`, `answer`, `created_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `faq_categs`
+-- Estrutura da tabela `faq_categs`
 --
 
 CREATE TABLE IF NOT EXISTS `faq_categs` (
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `faq_categs` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `faq_categs`
+-- Extraindo dados da tabela `faq_categs`
 --
 
 INSERT INTO `faq_categs` (`id`, `name`, `style`, `created_at`, `update_at`) VALUES
@@ -175,7 +175,7 @@ INSERT INTO `faq_categs` (`id`, `name`, `style`, `created_at`, `update_at`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `guests`
+-- Estrutura da tabela `guests`
 --
 
 CREATE TABLE IF NOT EXISTS `guests` (
@@ -183,10 +183,24 @@ CREATE TABLE IF NOT EXISTS `guests` (
   `time` decimal(20,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `guests`
+--
+
+INSERT INTO `guests` (`ip`, `time`) VALUES
+('::1', '1518278632'),
+('::1', '1518278667'),
+('::1', '1518278692'),
+('::1', '1518278797'),
+('::1', '1518279057'),
+('::1', '1518279132'),
+('::1', '1518279465'),
+('::1', '1518279793');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `layouts`
+-- Estrutura da tabela `layouts`
 --
 
 CREATE TABLE IF NOT EXISTS `layouts` (
@@ -200,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `layouts` (
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `layouts`
+-- Extraindo dados da tabela `layouts`
 --
 
 INSERT INTO `layouts` (`id`, `named`, `name`, `position`, `description`, `enabled`, `sort`) VALUES
@@ -228,7 +242,7 @@ INSERT INTO `layouts` (`id`, `named`, `name`, `position`, `description`, `enable
 -- --------------------------------------------------------
 
 --
--- Table structure for table `logs`
+-- Estrutura da tabela `logs`
 --
 
 CREATE TABLE IF NOT EXISTS `logs` (
@@ -243,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `messages`
+-- Estrutura da tabela `messages`
 --
 
 CREATE TABLE IF NOT EXISTS `messages` (
@@ -259,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `messages`
+-- Extraindo dados da tabela `messages`
 --
 
 INSERT INTO `messages` (`id`, `sender`, `receiver`, `subject`, `message`, `readed`, `wherein`, `whereout`, `created_at`) VALUES
@@ -269,7 +283,7 @@ INSERT INTO `messages` (`id`, `sender`, `receiver`, `subject`, `message`, `reade
 -- --------------------------------------------------------
 
 --
--- Table structure for table `news`
+-- Estrutura da tabela `news`
 --
 
 CREATE TABLE IF NOT EXISTS `news` (
@@ -282,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `news`
+-- Extraindo dados da tabela `news`
 --
 
 INSERT INTO `news` (`id`, `userid`, `title`, `content`, `created_at`, `update_at`) VALUES
@@ -291,7 +305,7 @@ INSERT INTO `news` (`id`, `userid`, `title`, `content`, `created_at`, `update_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rules`
+-- Estrutura da tabela `rules`
 --
 
 CREATE TABLE IF NOT EXISTS `rules` (
@@ -303,7 +317,7 @@ CREATE TABLE IF NOT EXISTS `rules` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `rules`
+-- Extraindo dados da tabela `rules`
 --
 
 INSERT INTO `rules` (`id`, `title`, `content`, `created_at`, `update_at`) VALUES
@@ -317,7 +331,7 @@ INSERT INTO `rules` (`id`, `title`, `content`, `created_at`, `update_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `torrents`
+-- Estrutura da tabela `torrents`
 --
 
 CREATE TABLE IF NOT EXISTS `torrents` (
@@ -341,8 +355,6 @@ CREATE TABLE IF NOT EXISTS `torrents` (
   `seeders` int(10) unsigned NOT NULL DEFAULT '0',
   `visible` enum('yes','no') NOT NULL DEFAULT 'no',
   `banned` enum('yes','no') NOT NULL DEFAULT 'no',
-  `numratings` int(10) unsigned NOT NULL DEFAULT '0',
-  `ratingsum` int(10) unsigned NOT NULL DEFAULT '0',
   `anon` enum('yes','no') NOT NULL DEFAULT 'no',
   `nfo` enum('yes','no') NOT NULL DEFAULT 'no',
   `announce` varchar(255) NOT NULL,
@@ -352,12 +364,19 @@ CREATE TABLE IF NOT EXISTS `torrents` (
   `uploader_id` int(11) unsigned NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `torrents`
+--
+
+INSERT INTO `torrents` (`id`, `info_hash`, `name`, `filename`, `description`, `poster`, `image1`, `image2`, `image3`, `category_id`, `size`, `numfiles`, `comments`, `views`, `downs`, `times_completed`, `leechers`, `seeders`, `visible`, `banned`, `anon`, `nfo`, `announce`, `external`, `freeleech`, `thanks`, `uploader_id`, `created_at`, `update_at`) VALUES
+(1, '80e88facb22c3e8c9c0f5926380baaa4f4547861', 'Arrow.S06E08.720p.HDTV.x264-AVS[rarbg]', 'Arrow.S06E08.720p.HDTV.x264-AVS[rarbg]', '55555', '', '', '', '', 2, 1166594631, 3, 0, 0, 0, 449536, 22, 382, 'yes', 'no', 'yes', '', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-09 17:54:13', '2018-02-07 17:54:19');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `torrent_announces`
+-- Estrutura da tabela `torrent_announces`
 --
 
 CREATE TABLE IF NOT EXISTS `torrent_announces` (
@@ -368,12 +387,19 @@ CREATE TABLE IF NOT EXISTS `torrent_announces` (
   `times_completed` int(10) unsigned NOT NULL DEFAULT '0',
   `online` enum('yes','no') NOT NULL DEFAULT 'no',
   `torrent_id` int(11) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `torrent_announces`
+--
+
+INSERT INTO `torrent_announces` (`id`, `url`, `seeders`, `leechers`, `times_completed`, `online`, `torrent_id`) VALUES
+(1, 'http://tracker.trackerfix.com:80/announce', 382, 22, 449536, 'yes', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `torrent_categories`
+-- Estrutura da tabela `torrent_categories`
 --
 
 CREATE TABLE IF NOT EXISTS `torrent_categories` (
@@ -384,26 +410,27 @@ CREATE TABLE IF NOT EXISTS `torrent_categories` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `torrent_categories`
+-- Extraindo dados da tabela `torrent_categories`
 --
 
 INSERT INTO `torrent_categories` (`id`, `name`, `slug`, `icon`) VALUES
 (1, 'Movies', 'movies', 'fa fa-film'),
 (2, 'TV', 'tv', 'fa fa-television'),
 (3, 'Music', 'music', 'fa fa-music'),
-(4, 'E-Books', 'ebooks', '');
+(4, 'E-Book', 'ebook', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `torrent_comments`
+-- Estrutura da tabela `torrent_comments`
 --
 
 CREATE TABLE IF NOT EXISTS `torrent_comments` (
   `id` int(11) unsigned NOT NULL,
-  `user_id` int(11) unsigned NOT NULL,
   `torrent_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
   `comment` text NOT NULL,
+  `ip` varchar(70) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -411,20 +438,20 @@ CREATE TABLE IF NOT EXISTS `torrent_comments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `torrent_completes`
+-- Estrutura da tabela `torrent_completes`
 --
 
 CREATE TABLE IF NOT EXISTS `torrent_completes` (
   `id` int(11) unsigned NOT NULL,
-  `user_id` int(11) unsigned NOT NULL DEFAULT '0',
   `torrent_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `user_id` int(11) unsigned NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `torrent_files`
+-- Estrutura da tabela `torrent_files`
 --
 
 CREATE TABLE IF NOT EXISTS `torrent_files` (
@@ -434,12 +461,21 @@ CREATE TABLE IF NOT EXISTS `torrent_files` (
   `path` varchar(255) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `torrent_files`
+--
+
+INSERT INTO `torrent_files` (`id`, `torrent_id`, `length`, `path`, `created_at`, `update_at`) VALUES
+(1, 1, 1166594548, 'Arrow.S06E08.720p.HDTV.x264-AVS.mkv', '2018-02-09 17:54:13', '2018-02-09 17:54:13'),
+(2, 1, 30, 'RARBG.txt', '2018-02-09 17:54:13', '2018-02-09 17:54:13'),
+(3, 1, 53, 'arrow.s06e08.720p.hdtv.x264-avs.nfo', '2018-02-09 17:54:13', '2018-02-09 17:54:13');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `torrent_peers`
+-- Estrutura da tabela `torrent_peers`
 --
 
 CREATE TABLE IF NOT EXISTS `torrent_peers` (
@@ -463,7 +499,23 @@ CREATE TABLE IF NOT EXISTS `torrent_peers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estrutura da tabela `torrent_ratings`
+--
+
+CREATE TABLE IF NOT EXISTS `torrent_ratings` (
+  `id` int(11) unsigned NOT NULL,
+  `torrent_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `rating` tinyint(3) unsigned NOT NULL,
+  `ip` varchar(70) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -502,13 +554,13 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Extraindo dados da tabela `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `status`, `banned`, `privacy`, `class`, `dob`, `info`, `acceptpms`, `codeactivation`, `confirmresetpwd`, `ip`, `signature`, `avatar`, `uploaded`, `downloaded`, `title`, `estate_id`, `sex`, `passkey`, `points`, `invites`, `warn`, `donated`, `maxslots`, `lastlogin`, `created_at`, `update_at`, `active_at`, `resetpwd_at`) VALUES
 (1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'boss', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, NULL, 0, 2, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1020, 0, 'no', '0.00', 4, '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
 (2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'boss', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, NULL, 0, 4, NULL, 17, 'na', '501237503104ff5394131a12102c61bb', 1030, 0, 'no', '0.00', 4, '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'public', 'moderatorplus', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, NULL, 0, 6, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1450, 1, 'no', '0.00', 4, '2018-01-29 15:58:49', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
+(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'public', 'member', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, NULL, 0, 6, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1540, 1, 'no', '0.00', 4, '2018-02-08 15:57:39', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
 
 --
 -- Indexes for dumped tables
@@ -624,6 +676,14 @@ ALTER TABLE `torrent_peers`
   ADD KEY `torrent_id` (`torrent_id`);
 
 --
+-- Indexes for table `torrent_ratings`
+--
+ALTER TABLE `torrent_ratings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `torrent_id` (`torrent_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -683,12 +743,12 @@ ALTER TABLE `rules`
 -- AUTO_INCREMENT for table `torrents`
 --
 ALTER TABLE `torrents`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `torrent_announces`
 --
 ALTER TABLE `torrent_announces`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `torrent_categories`
 --
@@ -708,11 +768,16 @@ ALTER TABLE `torrent_completes`
 -- AUTO_INCREMENT for table `torrent_files`
 --
 ALTER TABLE `torrent_files`
-  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `torrent_peers`
 --
 ALTER TABLE `torrent_peers`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `torrent_ratings`
+--
+ALTER TABLE `torrent_ratings`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
@@ -724,59 +789,59 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `faqs`
+-- Limitadores para a tabela `faqs`
 --
 ALTER TABLE `faqs`
   ADD CONSTRAINT `faqs_ibfk_1` FOREIGN KEY (`categ_id`) REFERENCES `faq_categs` (`id`);
 
 --
--- Constraints for table `messages`
+-- Limitadores para a tabela `messages`
 --
 ALTER TABLE `messages`
   ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`sender`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`receiver`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `news`
+-- Limitadores para a tabela `news`
 --
 ALTER TABLE `news`
   ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `torrents`
+-- Limitadores para a tabela `torrents`
 --
 ALTER TABLE `torrents`
   ADD CONSTRAINT `torrents_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `torrent_categories` (`id`),
   ADD CONSTRAINT `torrents_ibfk_2` FOREIGN KEY (`uploader_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `torrent_announces`
+-- Limitadores para a tabela `torrent_announces`
 --
 ALTER TABLE `torrent_announces`
   ADD CONSTRAINT `torrent_announces_ibfk_1` FOREIGN KEY (`torrent_id`) REFERENCES `torrents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `torrent_comments`
+-- Limitadores para a tabela `torrent_comments`
 --
 ALTER TABLE `torrent_comments`
   ADD CONSTRAINT `torrent_comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `torrent_comments_ibfk_2` FOREIGN KEY (`torrent_id`) REFERENCES `torrents` (`id`);
 
 --
--- Constraints for table `torrent_completes`
+-- Limitadores para a tabela `torrent_completes`
 --
 ALTER TABLE `torrent_completes`
   ADD CONSTRAINT `torrent_completes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `torrent_completes_ibfk_2` FOREIGN KEY (`torrent_id`) REFERENCES `torrents` (`id`);
 
 --
--- Constraints for table `torrent_files`
+-- Limitadores para a tabela `torrent_files`
 --
 ALTER TABLE `torrent_files`
   ADD CONSTRAINT `torrent_files_ibfk_1` FOREIGN KEY (`torrent_id`) REFERENCES `torrents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `users`
+-- Limitadores para a tabela `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`estate_id`) REFERENCES `estates` (`id`);
