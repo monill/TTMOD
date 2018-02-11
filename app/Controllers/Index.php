@@ -4,16 +4,12 @@ namespace App\Controllers;
 
 use App\Libs\Database;
 use App\Libs\Helper;
-use App\Libs\Torrent\MegaScrape;
 
 class Index extends Controller {
-
-    private $megaScrape;
 
     public function __construct()
     {
         parent::__construct();
-        $this->megaScrape = new MegaScrape();
     }
 
     public function __clone()
@@ -24,7 +20,6 @@ class Index extends Controller {
     public function index()
     {
         $this->guestAdd();
-        $this->megaScrape->tor();
         $this->view->title = "  :: Index";
         $this->view->load("index/index", true);
     }

@@ -37,12 +37,26 @@ class Torrent extends Controller {
         $tor = $this->db->select1("SELECT torrents.anon, torrents.seeders, torrents.banned, torrents.leechers,
             torrents.info_hash, torrents.filename, torrents.nfo, torrents.update_at, torrents.name, torrents.uploader_id, torrents.description,
             torrents.visible, torrents.size, torrents.created_at, torrents.views, torrents.downs, torrents.times_completed, torrents.id,
-            torrents.external, torrents.image1, torrents.image2, torrents.announce, torrents.numfiles, torrents.freeleech,
+            torrents.external, torrents.poster, torrents.image1, torrents.image2, torrents.image3, torrents.announce, torrents.numfiles, torrents.freeleech,
             torrent_categories.name AS cat_name, torrent_categories.slug as cat_slug, users.username, users.privacy FROM torrents
             LEFT JOIN torrent_categories ON torrents.category_id = torrent_categories.id LEFT JOIN users ON torrents.uploader_id = users.id
             WHERE torrents.id = :tid", ["tid" => $tid]);
+
+        if ($tor->leechers >= 1 && $tor->seeders >= 1 && $tor->external != "yes") {
+            $speed = $this->db->select1("SELECT (SUM(p.downloaded)) / (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(created_at)) AS totalspeed FROM torrents AS t LEFT JOIN torrent_peers AS p ON t.id = p.torrent WHERE p.seeder = 'no' AND p.torrent = :tid GROUP BY t.id ORDER BY created_at ASC LIMIT 15", ["tid" => $tid]);
+            $totalspeed = Helper::makeSize($speed->totalspeed) . "/s";
+        } else {
+            $totalspeed = "No activity";
+        }
+
         $this->view->title = SNAME . " :: " . $tor->name;
         $this->view->tor = $tor;
+        $this->view->totalspeed = $totalspeed;
+
+        $this->db->update('torrents', [
+            'views' => $tor->views + 1
+        ], "`id` = :id", ["id" => $tid]);
+
         $this->view->load("torrents/torrent", false);
     }
 
@@ -325,31 +339,31 @@ class Torrent extends Controller {
         }
     }
 
-    public function edit($id)
+    public function edit($tid)
     {
 
     }
 
-    public function delete($id)
+    public function delete($tid)
     {
 
     }
 
-    public function download($id)
+    public function download($tid)
     {
-        if (isset($id))
+        if (isset($tid))
         {
             //TODO
             //fix this passkey on users
-            $user = $this->db->select1("SELECT `passkey` FROM `users` WHERE `id` = :idd AND `status` = 'confirmed' LIMIT 1", ["idd" => 1]);
+            $user = $this->db->select1("SELECT `passkey` FROM `users` WHERE `id` = :idd AND `status` = 'confirmed' LIMIT 1", ["idd" => $tid]);
 
-            $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `id` = :id LIMIT 1", ["id" => $id]);
+            $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `id` = :id LIMIT 1", ["id" => $tid]);
 
             $errors = array();
 
             if (count($torrent) === 1)
             {
-                $file = TUPLOAD . "$id.torrent";
+                $file = TUPLOAD . "$tid.torrent";
 
                 if ($torrent->banned == "yes") {
                     $errors[] = "Torrent banned. <br>";
@@ -370,7 +384,7 @@ class Torrent extends Controller {
                     $name = $torrent->name . "[" . SNAME . "]";
 
                     $downs = $torrent->downs;
-                    $this->db->update('torrents', ['downs' => $downs + 1], "id = :id", ["id" => $id]);
+                    $this->db->update('torrents', ['downs' => $downs + 1], "id = :id", ["id" => $tid]);
 
                     if ($torrent->external != "yes")
                     {
