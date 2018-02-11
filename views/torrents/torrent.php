@@ -1,5 +1,8 @@
 <?php
 use App\Libs\Helper;
+use App\LIbs\Database;
+
+$db = Database::getInstance();
 
 $title = "Torrent Details For: " . $this->tor->name;
 $blockId = "f-" . sha1($title);
@@ -144,6 +147,30 @@ $blockId = "f-" . sha1($title);
         <?php if ($this->tor->external == "yes"): ?>
             <br /> <b> Tracker: </b> <br /> <?= Helper::escape($this->tor->announce); ?> <br />
         <?php endif; ?>
+
+        <br /><br />
+        <b> File List:</b>
+        <img src='images/plus.gif' id='pic1' onclick='klappe_torrent(1)' alt='' />
+        <div id='k1' style='display: none;'>
+            <table align='center' cellpadding='0' cellspacing='0' class='table_table' border='1' width='100%'>
+                <tr>
+                    <th class='table_head' align='left'> File </th>
+                    <th width='50' class='table_head'> Size </th>
+                </tr>
+
+                <?php
+                    $fres = $db->select("SELECT * FROM `torrent_files` WHERE `torrent_id` = :id ORDER BY `path` ASC", ["id" => $this->tor->id]);
+                    var_dump($fres);
+                    // if ($fres) {
+                    //     while ($fres) {
+                    //         echo "<tr><td class='table_col1'>" . htmlspecialchars($fres->path) . "</td><td class='table_col2'>" . Helper::makeSize($fres->filesize) . "</td></tr>";
+                    //     }
+                    // } else {
+                    //     echo "<tr><td class='table_col1'>" . htmlspecialchars($fres->name) . "</td><td class='table_col2'>" . Helper::makeSize($fres->size) . "</td></tr>";
+                    // }
+                ?>
+            </table>
+        </div>
 
 
 
