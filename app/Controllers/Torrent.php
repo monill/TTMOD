@@ -42,6 +42,8 @@ class Torrent extends Controller {
             LEFT JOIN torrent_categories ON torrents.category_id = torrent_categories.id LEFT JOIN users ON torrents.uploader_id = users.id
             WHERE torrents.id = :tid", ["tid" => $tid]);
 
+        $files = $this->db->select("SELECT * FROM `torrent_files` WHERE `torrent_id` = :id ORDER BY `path` ASC", ["id" => $tid]);
+
         if ($tor->leechers >= 1 && $tor->seeders >= 1 && $tor->external != "yes") {
             $speed = $this->db->select1("SELECT (SUM(p.downloaded)) / (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(created_at)) AS totalspeed FROM torrents AS t LEFT JOIN torrent_peers AS p ON t.id = p.torrent WHERE p.seeder = 'no' AND p.torrent = :tid GROUP BY t.id ORDER BY created_at ASC LIMIT 15", ["tid" => $tid]);
             $totalspeed = Helper::makeSize($speed->totalspeed) . "/s";
@@ -52,6 +54,7 @@ class Torrent extends Controller {
         $this->view->title = SNAME . " :: " . $tor->name;
         $this->view->tor = $tor;
         $this->view->totalspeed = $totalspeed;
+        $this->view->files = $files;
 
         $this->db->update('torrents', [
             'views' => $tor->views + 1

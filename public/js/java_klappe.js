@@ -26,13 +26,14 @@ function klappe_news(id) {
 function klappe_torrent(id) {
     var klappText = document.getElementById('k' + id);
     var klappBild = document.getElementById('pic' + id);
+    var host = "http://localhost";
 
     if (klappText.style.display == 'none') {
         klappText.style.display = 'block';
-        klappBild.src = 'images/minus.gif';
+        klappBild.src = host . '/images/minus.gif';
     } else {
         klappText.style.display = 'none';
-        klappBild.src = 'images/plus.gif';
+        klappBild.src = host . '/images/plus.gif';
     }
 }
 
