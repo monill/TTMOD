@@ -6,15 +6,9 @@ use App\Libs\Database;
 
 class Helper {
 
-    public function __construct()
-    {
+    private function __construct() { }
 
-    }
-
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public static function hashSenha($senha)
     {
@@ -250,7 +244,7 @@ class Helper {
         } elseif ($seeders > $leechers) {
             return 10;
         }
-        
+
         $ratio = $seeders / $leechers * 100;
 
         if ($ratio > 0 && $ratio < 15) {

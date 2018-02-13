@@ -12,16 +12,9 @@ class Announce extends Controller {
     public function __construct()
     {
         parent::__construct();
-        // if (!$this->loggedIn()) {
-        //     Redirect::to("/login");
-        // }
-
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function index()
     {
@@ -279,9 +272,9 @@ class Announce extends Controller {
         // SEEDED, LETS MAKE IT VISIBLE THEN
         if ($seeder == "yes") {
             if ($torrent->banned != "yes") {
-                $updateset = "visible" = "yes";
+                $updateset .= "visible" = "yes";
             }
-            $updateset = "lastaction = '" . Helper::dateTime() . "'";
+            $updateset .= "lastaction = '" . Helper::dateTime() . "'";
         }
 
         // NOW WE UPDATE THE TORRENT AS PER ABOVE

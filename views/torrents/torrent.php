@@ -151,7 +151,7 @@ $blockId = "f-" . sha1($title);
             <table align="center" cellpadding="0" cellspacing="0" class="table_table" border="1" width="100%">
                 <tr>
                     <th class="table_head" align="left"> File </th>
-                    <th width="70" class="table_head"> Size </th>
+                    <th width="80" class="table_head"> Size </th>
                 </tr>
                 <?php
                     if ($this->files) {
@@ -183,7 +183,57 @@ $blockId = "f-" . sha1($title);
     <!-- content -->
 
 
-<!-- end content -->
-</div>
+        <center>
+            <form name="comment" method="post" action="<?= url("/torrent/addcomment"); ?>">
+                <input type="hidden" name="tid" value="<?= $this->tor->id; ?>">
+                <input type="hidden" name="comt" value="<?= $this->tor->comments ?>">
+                <textarea name="comment" placeholder="Give us a comment" rows="6" cols="50" required></textarea>
+                <br />
+                <button type="submit"> Send </button>
+            </form>
+        </center>
+
+        <?php if ($this->comments): ?>
+
+            <?php foreach ($this->comments as $comment): ?>
+
+                <div class="postContainer">
+                    <div class="postUserInfo">
+                        <div class="postAvatarDiv">
+                            <a href="<?= url("/user/id/") . $comment->user_id; ?>">
+                                <img class="postAvatar" src="<?= $comment->avatar; ?>"/>
+                            </a>
+                        </div>
+                        <div>
+                            <p class="postUsername">
+                                <a class="forumLatestLink" href="<?= url("/user/id/" . $comment->user_id); ?>"><?= $comment->username; ?></a>
+                            </p>
+                            <p class="textCenter"> <?= $comment->class; ?></p>
+                        </div>
+                    </div>
+                    <div class="postContentContainer">
+                        <div class="postContents"> <?= $comment->comment; ?> </div>
+                    </div>
+                </div>
+                <div class="postFooterRow">
+                    <div class="postBlankDiv"></div>
+                    <div class="postFooter">
+                        <div class="postFooterContainer">
+                            <div class="postInfo"> <?= date("d-m-Y", strtotime($comment->created_at)); ?></div>
+                            <div class="postButtons">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+            <?php endforeach; ?>
+
+        <?php else: ?>
+            <p> No comments at moment </p>
+        <?php endif; ?>
+
+        <!-- end content -->
+    </div>
 </div>
 <br />

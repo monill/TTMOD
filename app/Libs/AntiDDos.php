@@ -11,8 +11,10 @@ class AntiDDos {
         $banned = file(ROOT . "data/logs/ip-banned.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         if (in_array($ip, $banned)) {
-            header("Content-Type: text/plain; charset=UTF-8");
-            exit("Your IP has been permanently banned by DDos signs.");
+            header("Content-Type: text/html; charset=UTF-8");
+            $body = file_get_contents(VIEWS . "ipblocked.php");
+            echo str_replace("{{ip}}", $ip, $body);
+            exit();
         }
 
         $file = file_get_contents(ROOT . "data/logs/ip.txt");
@@ -40,9 +42,6 @@ class AntiDDos {
         file_put_contents(ROOT . "data/logs/ip.txt", serialize($ips));
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
 }

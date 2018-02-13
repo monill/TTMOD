@@ -15,10 +15,7 @@ class Rules extends Controller {
         // }
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function index()
     {

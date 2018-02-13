@@ -4,15 +4,9 @@ namespace App\Libs\Torrent;
 
 class Parse {
 
-    public function __construct()
-    {
+    private function __construct() { }
 
-    }
-
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function torr($filename = "")
     {

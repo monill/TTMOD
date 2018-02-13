@@ -21,10 +21,7 @@ class Controller {
         $this->loggedIn();
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function loggedIn()
     {

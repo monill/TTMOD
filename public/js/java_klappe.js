@@ -16,24 +16,23 @@ function klappe_news(id) {
 
     if (klappText.style.display == 'none') {
         klappText.style.display = 'block';
-        klappBild.src = 'images/minus.gif';
+        klappBild.src = '/images/minus.gif';
     } else {
         klappText.style.display = 'none';
-        klappBild.src = 'images/plus.gif';
+        klappBild.src = '/images/plus.gif';
     }
 }
 
 function klappe_torrent(id) {
     var klappText = document.getElementById('k' + id);
     var klappBild = document.getElementById('pic' + id);
-    var host = "http://localhost";
 
     if (klappText.style.display == 'none') {
         klappText.style.display = 'block';
-        klappBild.src = host . '/images/minus.gif';
+        klappBild.src = '/images/minus.gif';
     } else {
         klappText.style.display = 'none';
-        klappBild.src = host . '/images/plus.gif';
+        klappBild.src = '/images/plus.gif';
     }
 }
 
@@ -112,10 +111,10 @@ function read(id) {
 
     if (x.style.display == '') {
         x.style.display = 'none';
-        y.src = 'images/plus.gif';
+        y.src = '/images/plus.gif';
     } else {
         x.style.display = '';
-        y.src = 'images/minus.gif';
+        y.src = '/images/minus.gif';
     }
 }
 

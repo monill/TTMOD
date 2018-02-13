@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Libs\Helper;
 use App\Libs\Input;
 use App\Libs\Redirect;
+use App\Libs\Token;
 use App\Libs\Torrent\Bencode;
 use App\Libs\Torrent\Exception\ScraperException;
 use App\Libs\Torrent\HttpScraper;
@@ -22,10 +23,7 @@ class Torrent extends Controller {
         // }
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function index()
     {
@@ -34,7 +32,7 @@ class Torrent extends Controller {
 
     public function view($tid)
     {
-        $tor = $this->db->select1("SELECT torrents.anon, torrents.seeders, torrents.banned, torrents.leechers,
+        $tor = $this->db->select1("SELECT torrents.anon, torrents.seeders, torrents.banned, torrents.leechers, torrents.comments,
             torrents.info_hash, torrents.filename, torrents.nfo, torrents.update_at, torrents.name, torrents.uploader_id, torrents.description,
             torrents.visible, torrents.size, torrents.created_at, torrents.views, torrents.downs, torrents.times_completed, torrents.id,
             torrents.external, torrents.poster, torrents.image1, torrents.image2, torrents.image3, torrents.announce, torrents.numfiles, torrents.freeleech,
@@ -43,6 +41,9 @@ class Torrent extends Controller {
             WHERE torrents.id = :tid", ["tid" => $tid]);
 
         $files = $this->db->select("SELECT * FROM `torrent_files` WHERE `torrent_id` = :id ORDER BY `path` ASC", ["id" => $tid]);
+
+        $comments = $this->db->select("SELECT torrent_comments.comment, torrent_comments.created_at, torrent_comments.user_id,
+          users.avatar, users.username, users.class FROM torrent_comments LEFT JOIN users ON torrent_comments.user_id = users.id WHERE torrent_comments.torrent_id = :id ORDER BY torrent_comments.id DESC", ["id" => $tid]);
 
         if ($tor->leechers >= 1 && $tor->seeders >= 1 && $tor->external != "yes") {
             $speed = $this->db->select1("SELECT (SUM(p.downloaded)) / (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(created_at)) AS totalspeed FROM torrents AS t LEFT JOIN torrent_peers AS p ON t.id = p.torrent WHERE p.seeder = 'no' AND p.torrent = :tid GROUP BY t.id ORDER BY created_at ASC LIMIT 15", ["tid" => $tid]);
@@ -55,6 +56,7 @@ class Torrent extends Controller {
         $this->view->tor = $tor;
         $this->view->totalspeed = $totalspeed;
         $this->view->files = $files;
+        $this->view->comments = $comments;
 
         $this->db->update('torrents', [
             'views' => $tor->views + 1
@@ -344,7 +346,14 @@ class Torrent extends Controller {
 
     public function edit($tid)
     {
+        $tor = $this->db->select1("SELECT * FROM `torrents` WHERE `id` = :id", ["id" => $tid]);
 
+        $this->view->title = SNAME . " :: " . $tor->name;
+        $this->view->categories = \App\Models\Torrent::categories();
+        $this->view->tor = $tor;
+        $this->view->token = Token::generate();
+
+        $this->view->load("torrents/edit", false);
     }
 
     public function delete($tid)
@@ -666,6 +675,89 @@ class Torrent extends Controller {
         }
     }
 
+    public function addcomment()
+    {
+        if (Input::exist())
+        {
+            $tid = Input::get('tid');
+            $comment = Input::get('comment');
+            $comid = Input::get('comt');
+
+            //TODO
+            //this this user_id
+            $this->db->insert('torrent_comments', [
+                'torrent_id' => $tid,
+                'user_id' => 7,
+                'comment' => Helper::escape($comment),
+                'ip' => Helper::getIP(),
+                'created_at' => Helper::dateTime(),
+                'update_at' => Helper::dateTime()
+            ]);
+
+            $this->db->update('torrents', [
+                'comments' => $comid + 1
+            ], "`id` = :id", ["id" => $tid]);
+
+            Log::create("user comment on torrent $tid");
+
+            Redirect::to("/torrent/view/" . $tid);
+        } else {
+            Redirect::to("/torrents");
+        }
+
+    }
+
+    public function addupdate()
+    {
+        if (Input::exist())
+        {
+            $tid = Input::get("tid");
+
+            $name = Input::get("name");
+            $poster = Input::get("poster");
+            $image1 = Input::get("image1");
+            $image2 = Input::get("image2");
+            $image3 = Input::get("image3");
+            $categ = Input::get("category");
+
+            $banned = Input::get("banned");
+            $visible = Input::get("visible");
+            $freeleech = Input::get("freeleech");
+            $anon = Input::get("anon");
+
+            $descr = Input::get("description");
+
+            $banned = $banned == "yes" ? "yes" : "no";
+            $visible = $visible == "yes" ? "yes" : "no";
+            $freeleech = $freeleech == "yes" ? "yes" : "no";
+            $anon = $anon == "yes" ? "yes" : "no";
+
+            $this->db->update('torrents', [
+                'name' => $name,
+                'description' => $descr,
+                'poster' => $poster,
+                'image1' =>$image1,
+                'image2' => $image2,
+                'image3' => $image3,
+                'category_id' => $categ,
+                'visible' => $visible,
+                'banned' => $banned,
+                'anon' => $anon,
+                'freeleech' => $freeleech,
+                'update_at' => Helper::dateTime()
+            ], "`id` = :id", ["id" => $tid]);
+
+            Log::create("user edited the torrent $tid");
+
+            Redirect::to("/torrent/edit/" . $tid);
+
+        } else {
+            Redirect::to("/torrents");
+        }
+
+
+
+    }
 
 
 }

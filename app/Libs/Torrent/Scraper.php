@@ -30,4 +30,6 @@ abstract class Scraper {
         $this->timeout = $timeout;
     }
 
+    private function __clone() { }
+
 }

@@ -25,10 +25,7 @@ class Invite extends Controller {
         $this->mailer = new Email();
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function index()
     {

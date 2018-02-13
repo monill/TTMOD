@@ -17,10 +17,7 @@ class Members extends Controller {
         // }
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function index()
     {
@@ -34,7 +31,8 @@ class Members extends Controller {
     {
         if (isset($l)) {
 
-            $search = $this->db->select("SELECT * FROM `users` WHERE `username` LIKE :letter AND `status` = 'confirmed' AND `privacy` != 'private' ORDER BY `username` ASC", ["letter" => "$l%"]);
+            $search = $this->db->select("SELECT * FROM `users` WHERE `username` LIKE :letter AND `status` = 'confirmed'
+                AND `privacy` != 'private' ORDER BY `username` ASC", ["letter" => "$l%"]);
 
             if (count($search) > 0) {
                 $this->view->title = SNAME . " :: Members with letter " . strtoupper($l);

@@ -13,15 +13,9 @@ class Encode {
     *
     * @param array $info
     */
-    public function __construct()
-    {
+    private function __construct() { }
 
-    }
-
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     /**
     * Passes lists and dictionaries accordingly,

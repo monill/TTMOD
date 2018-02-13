@@ -10,50 +10,85 @@ class Session {
     private $sessionHttpOnly = true;
     private $sessionRegenerateID = true;
 
+    private function __construct() { }
+    
+    private function __clone() { }
+    /**
+     * Start session.
+     */
     public static function startSession()
     {
         ini_set("session.use_only_cookies", false);
-        ini_set('session.cookie_domain', '.localhost');
+        //ini_set('session.cookie_domain', '.localhost');
 
         $cookieParams = session_get_cookie_params();
-        session_set_cookie_params(3600, $cookieParams["path"], $cookieParams["domain"], false, true);
-        session_name(SNAME);
+        session_set_cookie_params(
+            $cookieParams["lifetime"],
+            $cookieParams["path"],
+            $cookieParams["domain"],
+            false,
+            true
+        );
+        //session_name(SNAME);
 
         session_start();
         session_regenerate_id(true);
     }
 
+    /**
+     * Destroy session.
+     */
     public static function destroySession()
     {
-        $_SESSION = [];
+        $_SESSION = array();
+
         $params = session_get_cookie_params();
-        setcookie(session_name(), "", time() - 420000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+
+        setcookie(
+            session_name(),
+            '',
+            time() - 420000,
+            $params["path"],
+            $params["domain"],
+            $params["secure"],
+            $params["httponly"]
+        );
         session_destroy();
     }
 
-    public static function exist($nome)
+    /**
+     * Set session data.
+     * @param mixed $key Key that will be used to store value.
+     * @param mixed $value Value that will be stored.
+     */
+    public static function set($key, $value)
     {
-        return (isset($_SESSION[$nome])) ? true : false;
+        $_SESSION[$key] = $value;
     }
 
-    public static function set($nome, $valor)
+    /**
+     * Get data from $_SESSION variable.
+     * @param mixed $key Key used to get data from session.
+     * @param mixed $default This will be returned if there is no record inside
+     * session for given key.
+     * @return mixed Session value for given key.
+     */
+    public static function get($key, $default = null)
     {
-        return $_SESSION[$nome] = $valor;
-    }
-
-    public static function get($nome, $default = null)
-    {
-        if (self::exist($nome)) {
-            return $_SESSION[$nome];
+        if (isset($_SESSION[$key])) {
+            return $_SESSION[$key];
         } else {
             return $default;
         }
     }
 
-    public static function delete($nome)
-    {
-        if (self::exist($nome)) {
-            unset($_SESSION[$nome]);
+    /**
+    * Unset session data with provided key.
+    * @param $key
+    */
+    public static function destroy($key) {
+        if ( isset($_SESSION[$key]) ) {
+            unset($_SESSION[$key]);
         }
     }
 

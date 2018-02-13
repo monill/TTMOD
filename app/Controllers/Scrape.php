@@ -9,10 +9,7 @@ class Scrape extends Controller {
         parent::__construct();
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function index()
     {

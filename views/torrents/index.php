@@ -14,7 +14,7 @@ $blockId = "f-" . sha1($title);
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
 
-        <form method="post" action="#" autocomplete="off">
+        <form method="post" action="<?= url("/torrents/advsearch"); ?>" autocomplete="off">
             <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
 
             <div class="form-group">
@@ -24,9 +24,8 @@ $blockId = "f-" . sha1($title);
             <br />
 
             <div class="form-group">
-                <label for="cat"> Categories </label>
-                <select name="cat" class="form-control">
-                    <option value="0"> All Types </option>
+                <label for="categ"> Categories </label>
+                <select name="categ" class="form-control">
                     <?php foreach (Torrent::categories() as $c): ?>
                         <option value="<?= $c->id; ?>"> <?= $c->name; ?> </option>
                     <?php endforeach; ?>
@@ -37,9 +36,8 @@ $blockId = "f-" . sha1($title);
             <div class="form-group">
                 <label for="incldead"> Deads </label>
                 <select name="incldead" class="form-control">
-        			<option value="0"> Active </option>
-        			<option value="1"> Include dead </option>
-        			<option value="2"> Only dead </option>
+        			<option value="yes"> Active </option>
+        			<option value="no"> Only dead </option>
         		</select>
             </div>
             <br />
@@ -47,9 +45,8 @@ $blockId = "f-" . sha1($title);
             <div class="form-group">
                 <label for="freeleech"> Freeleech </label>
                 <select name="freeleech" class="form-control">
-                    <option value="0"> All </option>
-                    <option value="1"> Not Freeleech </option>
-                    <option value="2"> Only Freeleech </option>
+                    <option value="no"> Not Freeleech </option>
+                    <option value="yes"> Only Freeleech </option>
                 </select>
             </div>
             <br />
@@ -57,16 +54,15 @@ $blockId = "f-" . sha1($title);
             <div class="form-group">
                 <label for="inclext"> L / E </label>
                 <select name="inclext" class="form-control">
-                    <option value="0"> Local / External </option>
-                    <option value="1"> Local only </option>
-                    <option value="2"> External only </option>
+                    <option value="no"> Local only </option>
+                    <option value="yes"> External only </option>
                 </select>
             </div>
             <br />
 
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
-        <p> You can search using phrases contained within , you can include words with + you can exclude words with - </p>
+        <br /><br />
 
         <table class="table table-hover">
             <thead>

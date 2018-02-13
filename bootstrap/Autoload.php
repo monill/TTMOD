@@ -2,6 +2,7 @@
 
 use App\Controllers\Index;
 use App\Libs\Session;
+use App\Libs\AntiDDos;
 
 class Autoload {
 
@@ -24,6 +25,8 @@ class Autoload {
         $this->splitUrl();
         //start session
         Session::startSession();
+        //start AntiDDos
+        $firewall = new AntiDDos();
 
         // check for controller: no controller given ? then load start-page
         if (!$this->url_controller) {

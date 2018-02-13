@@ -4,15 +4,9 @@ namespace App\Libs;
 
 class Views {
 
-    public function __construct()
-    {
+    private function __construct() { }
 
-    }
-
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function load($file, $inc = false)
     {

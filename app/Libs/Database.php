@@ -26,10 +26,7 @@ class Database extends PDO {
         }
     }
 
-    private function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public static function getInstance()
     {

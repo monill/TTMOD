@@ -11,10 +11,7 @@ class Estate extends Model {
         parent::__construct();
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public static function all()
     {

@@ -25,9 +25,12 @@ namespace App\Libs\Torrent;
  */
 class UdpScraper extends Scraper {
 
-    /* 	$url: Tracker url like: udp://tracker.tld:port or udp://tracker.tld:port/announce
-        $infohash: Infohash string or array (max 74 items). 40 char long infohash.
-        */
+    /** 	$url: Tracker url like: udp://tracker.tld:port or udp://tracker.tld:port/announce
+     * $infohash: Infohash string or array (max 74 items). 40 char long infohash.
+     */
+
+    private function __construct() { }
+    private function __clone() { }
     /**
      * @param $url
      * @param $info_hash

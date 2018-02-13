@@ -17,17 +17,12 @@ class Torrents extends Controller {
         // }
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function index()
     {
-        $torrents = $this->db->select("SELECT torrents.id, torrents.anon,
-            torrents.category_id, torrents.leechers, torrents.seeders,
-            torrents.name, torrents.size, torrents.created_at, torrents.comments,
-            torrents.uploader_id, torrents.freeleech, torrent_categories.name AS cat_name,
+        $torrents = $this->db->select("SELECT torrents.id, torrents.anon, torrents.category_id, torrents.leechers, torrents.seeders,
+            torrents.name, torrents.size, torrents.created_at, torrents.comments, torrents.uploader_id, torrents.freeleech, torrent_categories.name AS cat_name,
             torrent_categories.slug AS cat_slug, users.username FROM torrents LEFT JOIN torrent_categories ON category_id = torrent_categories.id LEFT JOIN users ON torrents.uploader_id = users.id");
         $this->view->title = SNAME . " :: Torrents";
         $this->view->torrents = $torrents;
@@ -49,6 +44,16 @@ class Torrents extends Controller {
         if (Input::exist())
         {
             $search = Input::get("search");
+
+            $torrents = $this->db->select("SELECT torrents.id, torrents.anon, torrents.category_id, torrents.leechers, torrents.seeders, torrents.name,
+                torrents.size, torrents.created_at, torrents.comments, torrents.uploader_id, torrents.freeleech, torrent_categories.name AS cat_name,
+                torrent_categories.slug AS cat_slug, users.username FROM torrents LEFT JOIN torrent_categories ON category_id = torrent_categories.id LEFT JOIN
+                users ON torrents.uploader_id = users.id WHERE torrents.name LIKE :tname ORDER BY name DESC", ["tname" => "%$search%"]);
+
+            $this->view->title = SNAME . " :: Torrent search";
+            $this->view->torrents = $torrents;
+            $this->view->token = Token::generate();
+            $this->view->load("torrents/index", false);
         } else {
             Redirect::to("/torrents");
         }
@@ -58,6 +63,25 @@ class Torrents extends Controller {
     {
         if (Input::exist())
         {
+            $search = Input::get("search");
+            if (!$search) {
+                unset($search);
+            }
+            $categ = Input::get("categ");
+            $incldead = Input::get("incldead");
+            $freeleech = Input::get("freeleech");
+            $inclext = Input::get("inclext");
+
+            $torrents = $this->db->select("SELECT torrents.id, torrents.anon, torrents.category_id, torrents.leechers, torrents.seeders, torrents.name,
+                torrents.size, torrents.created_at, torrents.comments, torrents.uploader_id, torrents.freeleech, torrent_categories.name AS cat_name,
+                torrent_categories.slug AS cat_slug, users.username FROM torrents LEFT JOIN torrent_categories ON category_id = torrent_categories.id LEFT JOIN
+                users ON torrents.uploader_id = users.id WHERE torrents.name LIKE :name AND torrents.category_id = :categ AND torrents.visible = :incldead AND torrents.freeleech = :freel AND torrents.external = :extern ORDER BY name DESC",
+                ["name" => "%$search%", "categ" => $categ, "incldead" => $incldead, "freel" => $freeleech, "extern" => $inclext]);
+
+            $this->view->title = SNAME . " :: Torrent search";
+            $this->view->torrents = $torrents;
+            $this->view->token = Token::generate();
+            $this->view->load("torrents/index", false);
 
         } else {
             Redirect::to("/torrents");
@@ -66,7 +90,24 @@ class Torrents extends Controller {
 
     public function categ($slug = "")
     {
-        echo "<br />" . $slug;
+        if (isset($slug))
+        {
+            $tid = $this->db->select1("SELECT id FROM torrent_categories WHERE slug = :link", ["link" => $slug]);
+            $id = $tid->id;
+
+            $torrents = $this->db->select("SELECT torrents.id, torrents.anon, torrents.category_id, torrents.leechers, torrents.seeders,
+                torrents.name, torrents.size, torrents.created_at, torrents.comments, torrents.uploader_id, torrents.freeleech, torrent_categories.name AS cat_name,
+                torrent_categories.slug AS cat_slug, users.username FROM torrents LEFT JOIN torrent_categories ON category_id = torrent_categories.id LEFT JOIN users ON torrents.uploader_id = users.id WHERE torrents.category_id = :cid", ["cid" => $id]);
+
+            $this->view->title = SNAME . " :: Torrent category";
+            $this->view->torrents = $torrents;
+            $this->view->token = Token::generate();
+            $this->view->load("torrents/index", false);
+
+        } else {
+            Redirect::to("/torrents");
+        }
+
     }
 
     public function import()

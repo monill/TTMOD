@@ -24,10 +24,7 @@ class Recover extends Controller {
         $this->valid = new Validation();
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function index()
     {

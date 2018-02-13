@@ -6,15 +6,9 @@ use App\Libs\Session;
 
 class Token {
 
-    public function __construct()
-    {
+    private function __construct() { }
 
-    }
-
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public static function generate()
     {
@@ -25,8 +19,8 @@ class Token {
     {
         $tokenNome = "token";
 
-        if (Session::exist($tokenNome) && $token === Session::get($tokenNome)) {
-            Session::delete($tokenNome);
+        if (Session::get($tokenNome) && $token === Session::get($tokenNome)) {
+            Session::destroy($tokenNome);
             return true;
         }
         return false;

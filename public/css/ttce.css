@@ -94,3 +94,74 @@ body {
   width: 18%;
   height: auto;
 }
+
+.postContainer {
+    width:100%;
+    display:table-row;
+}
+.postUserInfo,.postBlankDiv {
+    width:160px;
+    display:table-cell;
+}
+.postUserInfo {
+    padding-top:10px;
+    vertical-align: top;
+}
+.postContentContainer {
+    display:table-cell;
+    width:650px;
+    vertical-align: top;
+    padding-top:20px;
+    padding-bottom: 20px;
+    font-family: Arial,sans-serif;
+    font-size: 10pt;
+}
+.postFooterRow {
+    display:table-row;
+    width:100%;
+    border-bottom: 1px solid #92a6af;
+}
+
+.postFooter {
+    display:table-cell;
+    width:690px;
+}
+.postFooterContainer {
+    display:table-row;
+}
+.postInfo {
+    display:table-cell;
+    text-align:left;
+    width:430px;
+    font-family: 'Roboto';
+    font-size:9.5pt;
+    padding-bottom: 10px;
+}
+.postButtons {
+    display:table-cell;
+    text-align:right;
+    font-family: 'Roboto';
+    font-size: 10pt;
+    width:270px;
+    padding-bottom:20px;
+}
+.postUserInfo p {
+    margin: 0;
+    font-size: 9pt;
+}
+.postUsername {
+    font-weight: bold;
+}
+.postAvatarDiv,.postUsername,.textCenter {
+    text-align:left;
+}
+.postRatio {
+    font-weight: 500;
+}
+.postEdited {
+    font-style: italic;
+}
+.postAvatar {
+    /*max-height:120px;*/
+    max-width:120px;
+}

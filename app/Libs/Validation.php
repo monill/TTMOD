@@ -11,10 +11,7 @@ class Validation {
         $this->db = Database::getInstance();
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function isEmpty($data)
     {

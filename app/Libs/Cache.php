@@ -34,9 +34,7 @@ class Cache {
         }
     }
 
-    public function __clone() {
-        
-    }
+    private function __clone() { }
 
     public function set($var, $val, $expire = 0) {
         if ($expire == 0) {

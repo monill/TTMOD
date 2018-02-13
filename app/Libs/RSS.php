@@ -37,10 +37,7 @@ class RSS
         $this->ParseFeed();
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function XmlParserFirstElement($parser, $tagName, $attrs)
     {

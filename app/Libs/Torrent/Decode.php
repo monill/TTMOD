@@ -35,15 +35,9 @@ namespace App\Libs\Torrent;
  */
 class Decode {
 
-    public function __construct()
-    {
+    private function __construct() { }
 
-    }
-
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     /**
      * Decode torrent

@@ -48,6 +48,8 @@ class HttpScraper extends Scraper {
         parent::__construct($timeout);
     }
 
+    private function __clone() { }
+
 
     /**
      * $url: Tracker url like: http://tracker.tld:port/announce or http://tracker.tld:port/scrape

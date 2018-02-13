@@ -17,10 +17,7 @@ class MegaScrape
         $this->parse = new Parse();
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public function tor()
     {

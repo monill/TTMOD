@@ -2,16 +2,16 @@
 
 //I can not remember what this does.
 if (preg_match("/(?:\< *(?:java|script)|script\:|\+document\.)/i", serialize($_SERVER))) {
-    die("Forbidden");
+    die("Scripting is Forbidden");
 }
 if (preg_match("/(?:\< *(?:java|script)|script\:|\+document\.)/i", serialize($_GET))) {
-    die("Forbidden");
+    die("Scripting is Forbidden");
 }
 if (preg_match("/(?:\< *(?:java|script)|script\:|\+document\.)/i", serialize($_POST))) {
-    die("Forbidden");
+    die("Scripting is Forbidden");
 }
 if (preg_match("/(?:\< *(?:java|script)|script\:|\+document\.)/i", serialize($_COOKIE))) {
-    die("Forbidden");
+    die("Scripting is Forbidden");
 }
 
 function url($url) {

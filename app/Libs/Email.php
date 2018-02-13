@@ -8,6 +8,10 @@ use App\Libs\Helper;
 
 class Email extends PHPMailer {
 
+    private function __construct() { }
+    
+    private function __clone() { }
+
     public function confirmEmail($email, $key)
     {
         // get instance of PHPMailer (including some additional info)

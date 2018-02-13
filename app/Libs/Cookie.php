@@ -4,17 +4,28 @@ namespace App\Libs;
 
 class Cookie {
 
+    public function __construct()
+    {
+
+    }
+
+    private function __clone() { }
+
     public static function exists($name)
     {
         return (isset($_COOKIE[$name])) ? true : false;
     }
 
-    public static function get($name) 
+    public static function get($name)
     {
-        return $_COOKIE[$name];
+        if (isset($_COOKIE[$name])) {
+			return $_COOKIE[$name];
+		} else {
+			return $defaultValue;
+		}
     }
 
-    public static function set($name, $value, $expiry) 
+    public static function set($name, $value, $expiry)
     {
         if (setcookie($name, $value, time() + $expiry, "/")) {
             return true;
@@ -22,7 +33,7 @@ class Cookie {
         return false;
     }
 
-    public static function delete($name) 
+    public static function delete($name)
     {
         self::set($name, "", time() - 1);
     }

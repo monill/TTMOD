@@ -7,15 +7,9 @@ use App\Libs\Torrent\Decode;
 
 class Bencode {
 
-    public function __construct()
-    {
+    private function __construct() { }
 
-    }
-
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
     public static function encode($array) {
         $encode = new Encode();
