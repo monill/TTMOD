@@ -8,7 +8,7 @@ class User extends Model {
 
     public function __construct()
     {
-        parent::__construct();
+        //parent::__construct();
     }
 
     private function __clone() { }

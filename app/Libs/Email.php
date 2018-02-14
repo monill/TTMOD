@@ -8,7 +8,7 @@ use App\Libs\Helper;
 
 class Email extends PHPMailer {
 
-    private function __construct() { }
+    public function __construct() { }
     
     private function __clone() { }
 

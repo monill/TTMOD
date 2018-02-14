@@ -29,7 +29,7 @@ class UdpScraper extends Scraper {
      * $infohash: Infohash string or array (max 74 items). 40 char long infohash.
      */
 
-    private function __construct() { }
+    public function __construct() { }
     private function __clone() { }
     /**
      * @param $url

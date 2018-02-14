@@ -6,7 +6,7 @@ use App\Libs\Session;
 
 class Token {
 
-    private function __construct() { }
+    public function __construct() { }
 
     private function __clone() { }
 

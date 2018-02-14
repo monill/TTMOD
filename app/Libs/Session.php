@@ -10,7 +10,7 @@ class Session {
     private $sessionHttpOnly = true;
     private $sessionRegenerateID = true;
 
-    private function __construct() { }
+    public function __construct() { }
     
     private function __clone() { }
     /**

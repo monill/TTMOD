@@ -6,7 +6,7 @@ use App\Libs\Database;
 
 class Helper {
 
-    private function __construct() { }
+    public function __construct() { }
 
     private function __clone() { }
 

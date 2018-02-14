@@ -9,6 +9,7 @@ class Account extends Controller {
 
     //TODO
     //fix all user id in the functions
+    //finish all this
 
     public function __construct()
     {

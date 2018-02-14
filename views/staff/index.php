@@ -10,6 +10,8 @@ use App\Models\User;
         <a data-toggle="collapse" href="#" class="showHide" id="<?php echo $blockId; ?>" style="float: right;"></a>
     </div>
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
+
+
         <!-- content -->
 
         <?php foreach ($this->staffs as $value): ?>

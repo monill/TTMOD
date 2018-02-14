@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 class Scrape extends Controller {
 
+    //TODO
+    //doing or delete?
+
     public function __construct()
     {
         parent::__construct();
