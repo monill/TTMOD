@@ -42,7 +42,7 @@ class Torrent extends Controller {
 
         $files = $this->db->select("SELECT * FROM `torrent_files` WHERE `torrent_id` = :id ORDER BY `path` ASC", ["id" => $tid]);
 
-        $comments = $this->db->select("SELECT torrent_comments.comment, torrent_comments.created_at, torrent_comments.user_id,
+        $comments = $this->db->select("SELECT torrent_comments.id, torrent_comments.comment, torrent_comments.created_at, torrent_comments.user_id,
           users.avatar, users.username, users.class FROM torrent_comments LEFT JOIN users ON torrent_comments.user_id = users.id WHERE torrent_comments.torrent_id = :id ORDER BY torrent_comments.id DESC", ["id" => $tid]);
 
         if ($tor->leechers >= 1 && $tor->seeders >= 1 && $tor->external != "yes") {
@@ -52,10 +52,24 @@ class Torrent extends Controller {
             $totalspeed = "No activity";
         }
 
+        $avgRating = $this->db->select1("SELECT SUM(rating) as vote, COUNT(rating) as count FROM torrent_ratings WHERE torrent_id = :tid", ["tid" => $tid]);
+        $rates = array();
+        if ($avgRating->count > 0) {
+            $rates['rating'] = number_format($avgRating->vote / $avgRating->count, 2);
+            $rates['votes'] = $avgRating->count;
+        } else {
+            $rates['rating'] = 0;
+            $rates['votes'] = $avgRating->count;
+        }
+
+        $userRating = $this->db->select1("SELECT rating, created_at FROM torrent_ratings WHERE torrent_id = :tid AND user_id = :uid", ["tid" => $tid, "uid" => 7]);
+
         $this->view->title = SNAME . " :: " . $tor->name;
         $this->view->tor = $tor;
         $this->view->totalspeed = $totalspeed;
         $this->view->files = $files;
+        $this->view->ratings = $rates;
+        $this->view->userRts = $userRating;
         $this->view->comments = $comments;
 
         $this->db->update('torrents', [
@@ -332,10 +346,10 @@ class Torrent extends Controller {
 
             echo $message;
 
-//            if ($errors) {
-//                $result = ["status" => "error", "errors" => $errors];
-//                echo json_encode($result);
-//            }
+           if ($errors) {
+               $result = ["status" => "error", "errors" => $errors];
+               echo json_encode($result);
+           }
 
            exit();
 
@@ -760,4 +774,28 @@ class Torrent extends Controller {
     }
 
 
+    public function addrating()
+    {
+        if (Input::exist())
+        {
+            $num = Input::get("value");
+            $tid = Input::get("tid");
+
+            $this->db->insert('torrent_ratings', [
+                'torrent_id' => $tid,
+                'user_id' => 7,
+                'rating' => $num,
+                'ip' => Helper::getIP(),
+                'created_at' => Helper::dateTime(),
+                'update_at' => Helper::dateTime()
+            ]);
+
+            Log::create("User rated torrent {$tid} with {$num} stars.");
+
+            Redirect::to("/torrent/view/{$tid}");
+
+        } else {
+            Redirect::to("/torrents");
+        }
+    }
 }

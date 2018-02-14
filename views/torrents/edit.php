@@ -50,7 +50,7 @@ $blockId = "f-" . sha1($title);
                         <select name="category">
                             <option selected disabled="disabled">Select a category</option>
                             <?php foreach (isset($this->categories) ? $this->categories : $this->categories as $categ): ?>
-                                <option value="<?= intval($categ->id) ?>" <?= ($this->tor->category_id == $categ->id) ? " selected='selected'" : "" ?>"><?= $categ->name; ?></option>
+                                <option value="<?= intval($categ->id); ?>" <?= ($this->tor->category_id == $categ->id) ? " selected='selected'" : ""; ?>"> <?= $categ->name; ?> </option>
                             <?php endforeach; ?>
                         </select>
                     </td>
@@ -128,11 +128,11 @@ $blockId = "f-" . sha1($title);
 
         <center>
             <form method="post" action="#">
-                <input type="hidden" name="torrentid" value="" />
-                <input type="hidden" name="torrentname" value="" />
+                <input type="hidden" name="tid" value="" />
+                <input type="hidden" name="tname" value="" />
                 <b> Reason for deletion: </b>
                 <input type="text" size="30" name="delreason" />
-                <input type="submit" value="DELETE_TORRENT" />
+                <input type="submit" value="Delete" />
             </form>
         </center>
 

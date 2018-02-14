@@ -70,7 +70,7 @@ class Announce extends Controller {
             $this->err("Port $port is blacklisted.");
         }
 
-        $torrent = $this->db->select1("SELECT id, infohash, banned, freeleech, seeders + leechers AS numpeers, created_at, seeders, leechers, timescompleted FROM `torrents` WHERE `infohash` = :ihash", ["ihash" => $infohash]) or $this->err("Cannot Get Torrent Details");
+        $torrent = $this->db->select1("SELECT id, infohash, banned, freeleech, seeders + leechers AS numpeers, created_at, seeders, leechers, times_completed FROM `torrents` WHERE `infohash` = :ihash", ["ihash" => $infohash]) or $this->err("Cannot Get Torrent Details");
         $user = $this->db->select1("SELECT * FROM `users` WHERE `passkey` = :passkey LIMIT 1", ["passkey" => $passkey]) or $this->err("Cannot Get User Details");
 
         if (!$user) {
@@ -96,7 +96,7 @@ class Announce extends Controller {
 
         $peer = $this->db->select("SELECT * FROM `torrent_peers` WHERE `torrent_id` = :tid $limit", ["tid" => $torrent->id]);
 
-        $resp = "d8:completei" . $torrent->seeders . "e10:downloadedi" . $torrent->timescompleted . "e10:incompletei" . $torrent->leechers . "e";
+        $resp = "d8:completei" . $torrent->seeders . "e10:downloadedi" . $torrent->times_completed . "e10:incompletei" . $torrent->leechers . "e";
         $resp .= $this->bencStr("interval") . "i" . 900 . "e" . $this->bencStr("min interval") . "i300e" . $this->bencStr("peers");
 
         unset($self);
@@ -193,7 +193,7 @@ class Announce extends Controller {
         }
 
         if ($event == "completed") { // UPDATE "COMPLETED" EVENT
-            $updateset = "timescompleted = timescompleted + 1";
+            $updateset = "times_completed = times_completed + 1";
 
             $this->db->insert('torrent_completes', [
                 'user_id' => (int) $user->id,

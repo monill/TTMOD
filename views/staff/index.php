@@ -1,5 +1,5 @@
 <?php
-$title = "Staff";
+$title = "Staff's";
 $blockId = "b-" . sha1($title);
 use App\Models\User;
 ?>
@@ -10,21 +10,21 @@ use App\Models\User;
         <a data-toggle="collapse" href="#" class="showHide" id="<?php echo $blockId; ?>" style="float: right;"></a>
     </div>
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
-
-
-        <!-- content -->
+    <!-- content -->
 
         <?php foreach ($this->staffs as $value): ?>
+            <h4> <?php echo $value->class; ?> </h4>
+            <hr />
+            <?php
+                echo $value->username;
 
-            <?=
-                ($value->class = $value->class) ? $value->class : $value->class
-             ?>
+                ?>
 
-
+            <br /><br />
 
         <?php endforeach; ?>
 
-        <!-- end content -->
+    <!-- end content -->
     </div>
 </div>
 <br />

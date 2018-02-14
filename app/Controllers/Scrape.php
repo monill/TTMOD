@@ -54,7 +54,7 @@ class Scrape extends Controller {
 //            die("Invalid infohash.");
 //        }
 
-        //$query = $this->db->select1("SELECT infohash, seeders, leechers, timescompleted, filename FROM torrents WHERE infohash = :infoh ", ["infoh" => $infohash]);
+        //$query = $this->db->select1("SELECT infohash, seeders, leechers, times_completed, filename FROM torrents WHERE infohash = :infoh ", ["infoh" => $infohash]);
 
         print_r($infohash);
 

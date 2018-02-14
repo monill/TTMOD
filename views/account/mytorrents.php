@@ -38,7 +38,7 @@ $blockId = "f-" . sha1($title);
                     <td> <?= $mytor->downs; ?> </td>
                     <td> <?= $mytor->seeders; ?> </td>
                     <td> <?= $mytor->leechers; ?> </td>
-                    <td> <?= $mytor->timescompleted; ?> </td>
+                    <td> <?= $mytor->times_completed; ?> </td>
                     <td> <?= date("d-m-Y", strtotime($mytor->created_at)); ?> </td>
                     <td> <a href="<?= url("/torrent/edit/") . $mytor->id; ?>"> Edit </a> </td>
                 </tr>

@@ -164,6 +164,44 @@ $blockId = "f-" . sha1($title);
                 ?>
             </table>
         </div>
+        <br />
+
+        <?php if ($this->userRts): ?>
+            <br /> <i> ("You rated this torrent with <?= $this->userRts->rating ?> - Stars") </i>
+        <?php else: ?>
+            <br /> <i> You Not Rated Yet </i>
+            <form style="display:inline;" method="post" action="<?= url("/torrent/addrating"); ?>">
+                <input type="hidden" name="tid" value="<?= $this->tor->id; ?>">
+                <select name="value">
+                    <option selected disabled="disabled"> Add Rating </option>
+                    <option value="1"> 1 - Sucks </option>
+                    <option value="2"> 2 - Pretty Bad </option>
+                    <option value="3"> 3 - Decent </option>
+                    <option value="4"> 4 - Pretty Good </option>
+                    <option value="5"> 5 - Cool </option>
+                </select>
+                <input type="submit" value="Submit" />
+            </form>
+        <?php endif; ?>
+
+        <br /><br />
+        <div class="col-xs-12 col-md-6">
+            <div class="well well-sm">
+
+                <div class="rating-card">
+            		<div> <b> Ratings </b> </div>
+                    <br />
+            		<div class="rating">
+            			<h3> <?php echo $this->ratings['rating']; ?> / 5 </h3>
+                        <?php echo ratingpic($this->ratings['rating']); ?>
+            			<p> <i class="fa fa-users" aria-hidden="true"> </i> <?php echo $this->ratings['votes']; ?> total of votes </p>
+            		</div>
+
+            		<div style="clear:both;"></div>
+            	</div>
+
+            </div>
+        </div>
 
     <!-- end content -->
     </div>
@@ -182,11 +220,10 @@ $blockId = "f-" . sha1($title);
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
 
-
         <center>
             <form name="comment" method="post" action="<?= url("/torrent/addcomment"); ?>">
                 <input type="hidden" name="tid" value="<?= $this->tor->id; ?>">
-                <input type="hidden" name="comt" value="<?= $this->tor->comments ?>">
+                <input type="hidden" name="comt" value="<?= $this->tor->comments; ?>">
                 <textarea name="comment" placeholder="Give us a comment" rows="6" cols="50" required></textarea>
                 <br />
                 <button type="submit"> Send </button>
@@ -221,6 +258,9 @@ $blockId = "f-" . sha1($title);
                         <div class="postFooterContainer">
                             <div class="postInfo"> <?= date("d-m-Y", strtotime($comment->created_at)); ?></div>
                             <div class="postButtons">
+                                [ <a href=""> Edit </a> ] &nbsp;
+                                [ <a href=""> Delete </a> ] &nbsp;
+                                [ <a href="<?= url("/report/comment/") . $comment->id; ?>"> Report </a> ]
                             </div>
                         </div>
                     </div>

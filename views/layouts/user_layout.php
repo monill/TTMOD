@@ -14,7 +14,7 @@ $avatar = "https://placehold.it/200x300";
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
 
-        <img class="embed-responsive" src="<?php echo $avatar; ?>" alt="Avatar"  />
+        <img class="embed-responsive" src="<?= URL; ?>/imgs/200x300.png" alt="Avatar"  />
         <ul class="list-group">
             <li class="list-group-item"> Downloaded : <span class="label label-danger pull-right"> 10 BG </span></li>
             <li class="list-group-item"> Uploaded : <span class="label label-success pull-right"> 10 BG </span></li>

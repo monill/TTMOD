@@ -165,3 +165,37 @@ body {
     /*max-height:120px;*/
     max-width:120px;
 }
+
+
+
+.checked {
+  color: orange;
+}
+.rating-card h1{
+	color:#337AB7;
+	margin-bottom:30px;
+}
+.rating{
+	width: 50%;
+	float:left;
+}
+.rating p{
+	margin-top:10px;
+	font-size: 20px;
+}
+.rating h2{
+	margin:0px;
+	font-size:60px;
+	font-weight: normal;
+}
+.rating-process{
+	width: 50%;
+	text-align: left;
+	float:right;
+}
+.rating-right-part{
+	margin-bottom:3px;
+}
+.rating-right-part p{
+	margin:0px;
+}
