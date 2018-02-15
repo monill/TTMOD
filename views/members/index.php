@@ -16,6 +16,7 @@ use App\Models\User;
 
         <form method="post" action="<?= url("/members/search"); ?>" autocomplete="off">
             <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
+            
             <div class="row">
                 <div class="form-group col-sm-3">
                     <label for="user">Username</label>

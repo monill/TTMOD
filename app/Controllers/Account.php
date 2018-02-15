@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Libs\Redirect;
 use App\Models\Estate;
+use App\Libs\Token;
 
 class Account extends Controller {
 
@@ -26,6 +27,7 @@ class Account extends Controller {
         $user = $this->db->select1("SELECT `username`, `class`, `email`, `active_at`, `dob`, `sex`, `donated`, `title`, `privacy`, `signature`, `passkey` FROM `users` WHERE `id` = :id", ["id" => (int) 7]);
         $this->view->title = SNAME . " :: Your CPanel";
         $this->view->user = $user;
+        $this->view->token = Token::generate();
         $this->view->load("account/index", false);
     }
 
@@ -33,6 +35,7 @@ class Account extends Controller {
     {
         $this->view->title = SNAME . " :: Your CPanel";
         //$this->view->user = $user;
+        $this->view->token = Token::generate();
         $this->view->estates = Estate::all();
         $this->view->load("account/edit", false);
     }
@@ -40,6 +43,7 @@ class Account extends Controller {
     public function changepw()
     {
         $this->view->title = SNAME . " :: Your CPanel";
+        $this->view->token = Token::generate();
         $this->view->load("account/changepwd", false);
     }
 
@@ -48,6 +52,7 @@ class Account extends Controller {
         $myts = $this->db->select("SELECT torrents.id, torrents.category_id, torrents.name, torrents.created_at, torrents.downs, torrents.banned, torrents.comments, torrents.seeders, torrents.leechers, torrents.times_completed, torrent_categories.name AS catname FROM torrents LEFT JOIN torrent_categories ON torrents.category_id = torrent_categories.id WHERE torrents.uploader_id = :uploader ORDER BY torrents.created_at DESC", ["uploader" => (int) 7]);
         $this->view->title = SNAME . " :: Your CPanel";
         $this->view->mytors = $myts;
+        $this->view->token = Token::generate();
         $this->view->load("account/mytorrents", false);
     }
 

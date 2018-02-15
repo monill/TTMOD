@@ -19,6 +19,7 @@ $blockId = "b-" . sha1($title);
     <b> Reason </b> (required):
 
     <form method="post" action="<?= url("/report/addtreport"); ?>" autocomplete="off">
+        <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
         <input type="hidden" name="tid" value="<?= $this->tname->id; ?>" />
         <input type="text" size="100" name="reason" />
         <input type="submit" value="Confirm" />

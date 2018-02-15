@@ -37,7 +37,7 @@ $blockId = "f-" . sha1($title);
 
             <div class="form-group">
                 <div class="col-md-5">
-                    <h5> Announce Url: </h5>
+                    <b> Announce Url: </b> <?= ANNOUNCE; ?>
                 </div>
             </div>
 
@@ -61,21 +61,32 @@ $blockId = "f-" . sha1($title);
                     <input type="text" class="form-control" name="tname" id="tname">
                 </div>
             </div>
-            <div class="form-group">
-                <h5>Extensions allowed: </h5>
-            </div>
 
             <div class="form-group">
-                <label for="image1">Image 1</label>
+                <label for="tname"> Poster: </label>
                 <div class="col-md-5">
-                    <input type="file" class="form-control-file" name="image1" id="image1">
+                    <input type="text" class="form-control" name="poster" id="poster">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="image2">Image 2</label>
+                <label for="tname"> Image 1:</label>
                 <div class="col-md-5">
-                    <input type="file" class="form-control-file" name="image2" id="image2">
+                    <input type="text" class="form-control" name="image1" id="image1">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="tname"> Image 2:</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="image2" id="image2">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="tname"> Image 3:</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="image3" id="image3">
                 </div>
             </div>
 
@@ -107,7 +118,7 @@ $blockId = "f-" . sha1($title);
 
             <div class="form-group">
                 <label class="col-lg-2 col-sm-2" for="descr"> Description: </label>
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <textarea class="form-control" name="descr" id="descr" rows="4" required></textarea>
                 </div>
             </div>

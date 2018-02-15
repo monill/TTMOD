@@ -28,7 +28,7 @@ $blockId = "f-" . sha1($title);
                     <div class="panel-body bio-graph-info">
 
                         <form class="form-horizontal" role="form" action="" method="post" autocomplete="off">
-                            <input type="hidden" name="token" id="token" value="">
+                            <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
 
                             <div class="form-group">
                                 <label for="info" class="col-lg-2 control-label">Info</label>

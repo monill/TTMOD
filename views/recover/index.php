@@ -31,6 +31,7 @@
                                 <h4 class="card-title">Recover Password</h4>
                                 <form method="post" action="<?= url("/recover/in"); ?>">
                                     <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
+                                    
                                     <div class="form-group">
                                         <label for="email"> E-mail </label>
                                         <input id="email" type="email" class="form-control" name="email" required data-eye>

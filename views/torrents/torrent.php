@@ -28,7 +28,12 @@ $blockId = "f-" . sha1($title);
 
                                 <center>
                                     Download as <a href="<?= url("/torrent/download/" . $this->tor->id); ?>"> Torrent </a> or
-                                    as <a href="magnet:?xt=urn:btih:<?= $this->tor->info_hash; ?>"> Magnet </a>
+                                    as
+                                    <?php  if ($this->tor->external == "yes"): ?>
+                                        <a href="magnet:?xt=urn:btih:<?= $this->tor->info_hash; ?>&dn=<?= $this->tor->filename; ?>&tr=udp://tracker.openbittorrent.com&tr=udp://tracker.publicbt.com"> Magnet </a>
+                                    <?php else: ?>
+                                        <a href="magnet:?xt=urn:btih:<?= $this->tor->info_hash; ?>&dn=<?= $this->tor->filename; ?>&tr=<?= url("/announce/passkey/") . $user->passkey; ?>"> Magnet </a>
+                                    <?php endif; ?>
                                     <br />
 
                                     <b> Health: </b>
@@ -44,12 +49,12 @@ $blockId = "f-" . sha1($title);
                                         <b> Speed: </b> <?= $this->tor->totalspeed; ?>
                                     <?php endif; ?>
 
-                                    <b> Completed:</b> <?= $this->tor->times_completed; ?>
+                                    <b> Completed: </b> <?= $this->tor->times_completed; ?>
 
                                     <?php if ($this->tor->external != "yes" && $this->tor->times_completed > 0): ?>
-                                         [ <a href="torrents-completed.php?id=$id"> Who's Completed </a> ]
+                                         [ <a href="<?= url("/torrents/completes/") . $this->tor->id; ?>"> Who's Completed </a> ]
                                         <?php if ($this->tor->seeders <= 1): ?>
-                                            [ <a href="torrents-reseed.php?id=$id"> Request a RE-Seed </a> ]
+                                            [ <a href="<?= url("/torrents/reseed/") . $this->tor->id; ?>"> Request a Re-Seed </a> ]
                                         <?php endif; ?>
                                     <?php endif; ?>
 
@@ -171,6 +176,7 @@ $blockId = "f-" . sha1($title);
         <?php else: ?>
             <br /> <i> You Not Rated Yet </i>
             <form style="display:inline;" method="post" action="<?= url("/torrent/addrating"); ?>">
+                <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
                 <input type="hidden" name="tid" value="<?= $this->tor->id; ?>">
                 <select name="value">
                     <option selected disabled="disabled"> Add Rating </option>
@@ -222,6 +228,7 @@ $blockId = "f-" . sha1($title);
 
         <center>
             <form name="comment" method="post" action="<?= url("/torrent/addcomment"); ?>">
+                <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
                 <input type="hidden" name="tid" value="<?= $this->tor->id; ?>">
                 <input type="hidden" name="comt" value="<?= $this->tor->comments; ?>">
                 <textarea name="comment" placeholder="Give us a comment" rows="6" cols="50" required></textarea>
@@ -273,7 +280,7 @@ $blockId = "f-" . sha1($title);
             <p> No comments at moment </p>
         <?php endif; ?>
 
-        <!-- end content -->
+    <!-- end content -->
     </div>
 </div>
 <br />

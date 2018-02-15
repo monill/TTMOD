@@ -82,7 +82,12 @@ $blockId = "f-" . sha1($title);
                 <?php foreach (isset($this->torrents) ? $this->torrents : $this->torrents as $tor): ?>
                     <tr>
                         <th scope="row"> <a href="<?= url("/torrents/categ/") . $tor->cat_slug; ?>"> <?= $tor->cat_name; ?> </a> </th>
-                        <th> <a href="<?= url("/torrent/view/") . $tor->id; ?>"> <?= $tor->name; ?> </a> </th>
+                        <th>
+                            <a href="<?= url("/torrent/view/") . $tor->id; ?>"> <?= $tor->name; ?> </a>
+                            <?php if ($tor->freeleech == "yes"): ?>
+                                <img src="<?= URL; ?>/imgs/free.gif" alt="Freeleech" title="Freeleech" />
+                            <?php endif; ?>
+                        </th>
                         <th> <?= date("d-m-Y", strtotime($tor->created_at)); ?> </th>
                         <th> <?= Helper::makeSize($tor->size); ?> </th>
                         <th> <?= $tor->seeders; ?> </th>

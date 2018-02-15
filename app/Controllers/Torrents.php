@@ -131,4 +131,22 @@ class Torrents extends Controller {
         $this->view->load("torrents/import", false);
     }
 
+    public function completes($id)
+    {
+        //TODO
+        //finish this
+        echo $id . "<br>";
+        $this->view->title = SNAME . " :: Torrent completes";
+        //$this->view->torrents = $torrents;
+        //$this->view->token = Token::generate();
+        $this->view->load("torrents/completed", false);
+    }
+
+    public function reseed($id)
+    {
+        //TODO
+        //finish this
+        //send a notification to users to reseed a completed torrent
+        echo $id . "<br>";
+    }
 }

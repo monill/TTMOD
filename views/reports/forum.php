@@ -18,6 +18,7 @@ $blockId = "b-" . sha1($title);
 
         <b> Reason </b> (required):
         <form method="post" action="<?= url("/report/addfreport"); ?>" autocomplete="off">
+            <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
             <input type="hidden" name="fid" value="forumid" />
             <input type="hidden" name="forumpost" value="forumpost">
             <input type="text" size="100" name="reason" />

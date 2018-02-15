@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Libs\Redirect;
 use App\Libs\Input;
+use App\Libs\Token;
 
 class Report extends Controller
 {
@@ -34,6 +35,7 @@ class Report extends Controller
             } else {
                 $this->view->title = SNAME . " :: Report";
                 $this->view->tname = $tname;
+                $this->view->token = Token::generate();
                 $this->view->load("reports/torrent", false);
             }
         } else {
@@ -52,6 +54,7 @@ class Report extends Controller
             } else {
                 $this->view->title = SNAME . " :: Report";
                 //$this->view->fname = $tname;
+                $this->view->token = Token::generate();
                 $this->view->load("reports/forum", false);
             }
         } else {
@@ -70,6 +73,7 @@ class Report extends Controller
             } else {
                 $this->view->title = SNAME . " :: Report";
                 $this->view->user = $uname;
+                $this->view->token = Token::generate();
                 $this->view->load("reports/user", false);
             }
         } else {
@@ -88,6 +92,7 @@ class Report extends Controller
             } else {
                 $this->view->title = SNAME . " :: Report";
                 $this->view->com = $comment;
+                $this->view->token = Token::generate();
                 $this->view->load("reports/comment", false);
             }
         } else {

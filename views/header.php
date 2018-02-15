@@ -5,6 +5,7 @@ use App\Libs\Database;
 $startime =  array_sum(explode(" ", microtime()));
 $db = Database::getInstance();
 
+$user = $db->select1("SELECT * FROM users WHERE id = :id", ["id" => 7]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +48,7 @@ $db = Database::getInstance();
                     <li class="nav-item"><a class="nav-link" href="<?= url("/logout"); ?>">Logout</a></li>
                 </ul>
 
-                <form method="get" action="torrents-search.php" class="form-inline my-2 my-lg-0">
+                <form method="post" action="torrents-search.php" class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" value="Search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Search </button>
                 </form>
@@ -81,6 +82,10 @@ $db = Database::getInstance();
                         <a class="nav-link" href="#">
                             <i class="fa fa-user text-purple text-bold"></i> Account </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-info"></i> Points: ---- </a>
+                    </li>
 
                     <?php
                     //TODO
@@ -104,7 +109,7 @@ $db = Database::getInstance();
                 <div class="col-lg-2 col-sm-12">
                     <?php Layout::left(); ?>
                 </div>
-                <!--// Left Column -->
+                <!-- Left Column -->
 
                 <!-- Main Column -->
                 <div class="col-lg-8 col-sm-12">

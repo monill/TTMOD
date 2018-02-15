@@ -12,7 +12,7 @@ use App\Models\Log;
 
 class Invite extends Controller {
 
-    public $valid;
+    private $valid;
     private $mailer;
 
     public function __construct()
@@ -65,9 +65,6 @@ class Invite extends Controller {
                     'created_at' => Helper::dateTime()
                 ]);
 
-                //TODO
-                //remove -1 invites from userid
-                //add points to userid
                 $this->db->update('users', [
                     'points' => $user->points + 200,
                     'invites' => $user->invites - 1

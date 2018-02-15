@@ -12,6 +12,7 @@ $blockId = "f-" . sha1($title);
 
     <form name="upload" enctype="multipart/form-data" action="<?= url("/torrent/import"); ?>" method="post">
         <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
+        
         <table border="0" cellspacing="0" cellpadding="6" align="center">
             <tr>
                 <td align="right" valign="top">

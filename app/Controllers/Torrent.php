@@ -46,7 +46,7 @@ class Torrent extends Controller {
           users.avatar, users.username, users.class FROM torrent_comments LEFT JOIN users ON torrent_comments.user_id = users.id WHERE torrent_comments.torrent_id = :id ORDER BY torrent_comments.id DESC", ["id" => $tid]);
 
         if ($tor->leechers >= 1 && $tor->seeders >= 1 && $tor->external != "yes") {
-            $speed = $this->db->select1("SELECT (SUM(p.downloaded)) / (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(created_at)) AS totalspeed FROM torrents AS t LEFT JOIN torrent_peers AS p ON t.id = p.torrent WHERE p.seeder = 'no' AND p.torrent = :tid GROUP BY t.id ORDER BY created_at ASC LIMIT 15", ["tid" => $tid]);
+            $speed = $this->db->select1("SELECT (SUM(p.downloaded)) / (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(created_at)) AS totalspeed FROM torrents AS t LEFT JOIN torrent_peers AS p ON t.id = p.torrent_id WHERE p.seeder = 'no' AND p.torrent_id = :tid GROUP BY t.id ORDER BY created_at ASC LIMIT 15", ["tid" => $tid]);
             $totalspeed = Helper::makeSize($speed->totalspeed) . "/s";
         } else {
             $totalspeed = "No activity";
@@ -71,6 +71,7 @@ class Torrent extends Controller {
         $this->view->ratings = $rates;
         $this->view->userRts = $userRating;
         $this->view->comments = $comments;
+        $this->view->token = Token::generate();
 
         $this->db->update('torrents', [
             'views' => $tor->views + 1
@@ -166,10 +167,10 @@ class Torrent extends Controller {
                 'name' => Helper::escape($name),
                 'filename' => Helper::escape($internalname),
                 'description' => Helper::escape($descr),
-                'poster' => '',
-                'image1' => '',
-                'image2' => '',
-                'image3' => '',
+                'poster' => Input::get("poster"),
+                'image1' => Input::get("image1"),
+                'image2' => Input::get("image2"),
+                'image3' => Input::get("image3"),
                 'category_id' => $categ,
                 'size' => $torrentsize,
                 'numfiles' => $filecount,
@@ -366,7 +367,6 @@ class Torrent extends Controller {
         $this->view->categories = \App\Models\Torrent::categories();
         $this->view->tor = $tor;
         $this->view->token = Token::generate();
-
         $this->view->load("torrents/edit", false);
     }
 
@@ -768,8 +768,6 @@ class Torrent extends Controller {
         } else {
             Redirect::to("/torrents");
         }
-
-
 
     }
 
