@@ -23,7 +23,7 @@ class MegaScrape
     {
         set_time_limit(15);
         // Rescrape torrents every x seconds. (Default: 2 days)
-        $torr = $this->db->select("SELECT `id`, `info_hash`, `update_at` FROM `torrents` WHERE `external` = 'yes' AND `update_at` <= NOW() - INTERVAL 2 DAY ORDER BY id DESC LIMIT 10");
+        $torr = $this->db->select("SELECT `id`, `info_hash`, `updated_at` FROM `torrents` WHERE `external` = 'yes' AND `updated_at` <= NOW() - INTERVAL 2 DAY ORDER BY id DESC LIMIT 10");
 
         foreach ($torr as $tor) {
 
@@ -79,7 +79,7 @@ class MegaScrape
                             'leechers' => $leechers,
                             'seeders' => $seeders,
                             'visible' => 'yes',
-                            'update_at' => Helper::dateTime()
+                            'updated_at' => Helper::dateTime()
                         ], "`id` = :id", ["id" => $tor->id]);
 
                         $this->db->update('torrent_announces', [
@@ -110,7 +110,7 @@ class MegaScrape
                             'leechers' => $leechers,
                             'seeders' => $seeders,
                             'visible' => 'yes',
-                            'update_at' => Helper::dateTime()
+                            'updated_at' => Helper::dateTime()
                         ], "`id` = :id", ["id" => $tor->id]);
 
                         $this->db->update('torrent_announces', [

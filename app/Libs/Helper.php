@@ -270,4 +270,9 @@ class Helper {
         }
     }
 
+    public static function plus7Days()
+    {
+        return date("Y-m-d", strtotime("+7 days"));
+    }
+
 }

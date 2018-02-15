@@ -57,7 +57,7 @@ $blockId = "f-" . sha1($title);
                                         <b> Freeleech: </b><font color="#ff0000"> This torrent is free leech so only upload counts! </font>
                                     <?php endif; ?>
 
-                                    <b> Last Checked: </b> <?= date("d-m-Y H:i", strtotime($this->tor->update_at)); ?>
+                                    <b> Last Checked: </b> <?= date("d-m-Y H:i", strtotime($this->tor->updated_at)); ?>
                                 </center>
 
                             </table>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 14, 2018 at 12:15 AM
+-- Generation Time: Feb 15, 2018 at 01:43 AM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -90,15 +90,15 @@ CREATE TABLE IF NOT EXISTS `faqs` (
   `categ_id` int(11) unsigned NOT NULL,
   `style` varchar(30) DEFAULT NULL,
   `answer` text NOT NULL,
-  `created_at` datetime NOT NULL,
-  `update_at` datetime NOT NULL
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `faqs`
 --
 
-INSERT INTO `faqs` (`id`, `question`, `categ_id`, `style`, `answer`, `created_at`, `update_at`) VALUES
+INSERT INTO `faqs` (`id`, `question`, `categ_id`, `style`, `answer`, `created_at`, `updated_at`) VALUES
 (1, 'What is this bittorrent all about anyway? How do I get the files? ', 1, NULL, 'Check out <a href="http://www.btfaq.com/">Brian''s BitTorrent FAQ and Guide</a>', '2018-01-28 13:13:17', '2018-01-28 13:13:17'),
 (2, 'I registered an account but did not receive the confirmation e-mail!', 2, NULL, 'You can use <a href="account-delete.php">this form</a> to delete the account so you can re-register.\r\nNote though that if you didn''t receive the email the first time it will probably not\r\nsucceed the second time either so you should really try another email address.', '2018-01-28 13:20:16', '2018-01-28 13:20:16'),
 (3, 'Why is my port number reported as "---"? (And why should I care?)', 2, NULL, 'The tracker has determined that you are firewalled or NATed and cannot accept incoming connections.\r\n<br />\r\n<br />\r\nThis means that other peers in the swarm will be unable to connect to you, only you to them. Even worse,\r\nif two peers are both in this state they will not be able to connect at all. This has obviously a\r\ndetrimental effect on the overall speed.\r\n<br />\r\n<br />\r\nThe way to solve the problem involves opening the ports used for incoming connections\r\n(the same range you defined in your client) on the firewall and/or configuring your\r\nNAT server to use a basic form of NAT\r\nfor that range instead of NAPT (the actual process differs widely between different router models.\r\nCheck your router documentation and/or support forum. You will also find lots of information on the\r\nsubject at <a href="http://portforward.com/">PortForward</a>).', '2018-01-28 13:21:36', '2018-01-28 13:21:36'),
@@ -154,14 +154,14 @@ CREATE TABLE IF NOT EXISTS `faq_categs` (
   `name` varchar(200) NOT NULL,
   `style` varchar(30) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `faq_categs`
 --
 
-INSERT INTO `faq_categs` (`id`, `name`, `style`, `created_at`, `update_at`) VALUES
+INSERT INTO `faq_categs` (`id`, `name`, `style`, `created_at`, `updated_at`) VALUES
 (1, 'Site information', 'bg-primary', '2018-01-28 11:45:12', '2018-01-28 11:45:12'),
 (2, 'User information', 'bg-info', '2018-01-28 11:45:12', '2018-01-28 11:45:12'),
 (3, 'Stats', 'bg-success', '2018-01-28 11:45:12', '2018-01-28 11:45:12'),
@@ -188,57 +188,40 @@ CREATE TABLE IF NOT EXISTS `guests` (
 --
 
 INSERT INTO `guests` (`ip`, `time`) VALUES
-('::1', '1518563248'),
-('::1', '1518563256'),
-('::1', '1518563299'),
-('::1', '1518563373'),
-('::1', '1518563392'),
-('::1', '1518563413'),
-('::1', '1518563419'),
-('::1', '1518563491'),
-('::1', '1518563573'),
-('::1', '1518563592'),
-('::1', '1518563634'),
-('::1', '1518563895'),
-('::1', '1518563914'),
-('::1', '1518563936'),
-('::1', '1518564090'),
-('::1', '1518564110'),
-('::1', '1518564143'),
-('::1', '1518564147'),
-('::1', '1518564279'),
-('::1', '1518564357'),
-('::1', '1518564405'),
-('::1', '1518564414'),
-('::1', '1518564581'),
-('::1', '1518564651'),
-('::1', '1518564839'),
-('::1', '1518564893'),
-('::1', '1518565120'),
-('::1', '1518565246'),
-('::1', '1518565541'),
-('::1', '1518565610'),
-('::1', '1518565622'),
-('::1', '1518565857'),
-('::1', '1518565916'),
-('::1', '1518566018'),
-('::1', '1518566059'),
-('::1', '1518566260'),
-('::1', '1518566430'),
-('::1', '1518566472'),
-('::1', '1518566562'),
-('::1', '1518566583'),
-('::1', '1518566596'),
-('::1', '1518566616'),
-('::1', '1518566680'),
-('::1', '1518566766'),
-('::1', '1518566769'),
-('::1', '1518566846'),
-('::1', '1518566888'),
-('::1', '1518566902'),
-('::1', '1518566903'),
-('::1', '1518566953'),
-('::1', '1518566971');
+('::1', '1518657697'),
+('::1', '1518657803'),
+('::1', '1518658044'),
+('::1', '1518658047'),
+('::1', '1518658052'),
+('::1', '1518658099'),
+('::1', '1518658107'),
+('::1', '1518658173'),
+('::1', '1518658207');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invites`
+--
+
+CREATE TABLE IF NOT EXISTS `invites` (
+  `id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `code` varchar(45) NOT NULL,
+  `expires_on` date NOT NULL,
+  `accepted_by` int(11) unsigned DEFAULT NULL,
+  `accepted_at` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `invites`
+--
+
+INSERT INTO `invites` (`id`, `user_id`, `email`, `code`, `expires_on`, `accepted_by`, `accepted_at`, `created_at`, `update_at`) VALUES
+(1, 7, 'test@me.com', 'b83cbbf73933580db7bfe85aa9724c28fa6b9c10', '2018-02-21', NULL, NULL, '2018-02-14 23:34:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -294,8 +277,16 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `ip` varchar(70) NOT NULL,
   `browser` varchar(190) NOT NULL,
   `os_system` varchar(100) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  `created_at` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `logs`
+--
+
+INSERT INTO `logs` (`id`, `text`, `ip`, `browser`, `os_system`, `created_at`) VALUES
+(1, 'User rated torrent 2 with 4 stars.', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36', 'Windows 10', '2018-02-14 19:02:11'),
+(2, 'A member with nick: &lt;b&gt; {user} &lt;/b&gt; send a invite to email &lt;b&gt; juaorok@hotmail.com &lt;/b&gt;.', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36', 'Windows 10', '2018-02-14 23:34:46');
 
 -- --------------------------------------------------------
 
@@ -335,14 +326,14 @@ CREATE TABLE IF NOT EXISTS `news` (
   `title` varchar(200) NOT NULL,
   `content` text NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `userid`, `title`, `content`, `created_at`, `update_at`) VALUES
+INSERT INTO `news` (`id`, `userid`, `title`, `content`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Testingd...', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat nunc eget neque iaculis, ac iaculis diam laoreet. Maecenas porta pulvinar nulla lacinia imperdiet. Nam et dignissim ex. Phasellus pretium tempor erat non accumsan. Nullam at nunc ipsum. Donec lorem libero, convallis id orci ut, fringilla vestibulum justo. Fusce sit amet lobortis turpis.', '2018-01-29 17:58:50', '2018-01-29 17:58:50');
 
 -- --------------------------------------------------------
@@ -469,14 +460,14 @@ CREATE TABLE IF NOT EXISTS `rules` (
   `title` text NOT NULL,
   `content` text NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `rules`
 --
 
-INSERT INTO `rules` (`id`, `title`, `content`, `created_at`, `update_at`) VALUES
+INSERT INTO `rules` (`id`, `title`, `content`, `created_at`, `updated_at`) VALUES
 (1, 'General Rules', '<b> Breaking these rules can and will get you banned! </b> <br>\n\n- We are a English only site, so please only talk in english! <br />\n\n- Do not defy the moderators expressed wishes! <br />\n\n- Respect staff members at all given times. <br>\n\n- No aggressive behavior, flaming, defamation, advertising, requesting, pictures and text which include racism/nudity/sexism/religion or foul language in Personal Messages. <br>\n\n- No query regarding ranks, if we feel like you deserve it you will be promoted. <br>', NULL, NULL),
 (2, 'Forum Rules', '- No other language than English. <br>\n- No aggressive behaviour or flaming or defamation. <br />\n- No trashing of other peoples topics (i.e. SPAM). <br />\n- No links to warez or crack sites. <br />\n- No serials, CD keys, passwords or crack, trackers or money-making sites. <br />\n- No requesting if the release is over 7 days old. <br />\n- No bumping... (All bumped threads will be deleted.) <br />\n- No double posting. If you wish to post again, and yours is the last post in the thread please use the EDIT function,instead of posting a double. <br />\n- Please ensure all questions are posted in the correct section! <br />\n- No advertising. <br />\n- Mentioning other sites is allowed as long as you are not promoting it <br />\n- No requesting of downloads. <br />\n- No questions about when anything will be uploaded. <br />\n-No pictures with racism/nudity/sexism/religion are to be posted in the forum.\n[If you really need to post it, only post the link with a **18+** tag around it.] <br>\n- Use the search before posting anything, your thread will get locked if you dont. <br>', NULL, NULL),
 (3, 'Moderating Rules', '- The most important rule!; Use your better judgement! <br />\n- Don''t defy another mod in public, instead send a PM or make a post in the "Site admin". <br />\n- Be tolerant! give the user(s) a chance to reform. <br />\n- Don''t act prematurely, Let the users make their mistake and THEN correct them. <br />\n- Try correcting any "off topics" rather then closing the thread. <br />\n- Move topics rather than locking / deleting them. <br />\n- Be tolerant when moderating the Chit-chat section. (give them some slack) <br />\n- If you lock a topic, Give a brief explanation as to why you''re locking it. <br />\n- Before banning a user, Send him/her a PM and If they reply, put them on a 2 week trial. <br />\n- Don''t ban a user until he or she has been a member for at least 4 weeks. <br />\n- Always state a reason (in the user comment box) as to why the user is being banned. <br />\n', NULL, NULL),
@@ -519,17 +510,17 @@ CREATE TABLE IF NOT EXISTS `torrents` (
   `thanks` int(10) unsigned NOT NULL DEFAULT '0',
   `uploader_id` int(11) unsigned NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `torrents`
 --
 
-INSERT INTO `torrents` (`id`, `info_hash`, `name`, `filename`, `description`, `poster`, `image1`, `image2`, `image3`, `category_id`, `size`, `numfiles`, `views`, `comments`, `downs`, `times_completed`, `leechers`, `seeders`, `visible`, `banned`, `anon`, `nfo`, `announce`, `external`, `freeleech`, `thanks`, `uploader_id`, `created_at`, `update_at`) VALUES
-(2, '42ac71d699dad7d14a10c3fcf6363f693a884e9a', 'New.Girl.S06E18.HDTV.720p', 'New.Girl.S06E18.720p.HDTV.x264-AVS[rarbg]', 'aaaaaaaaaaaa dasdas dasd', '', '', '', '', 2, 519968111, 3, 41, 1, 1, 9, 2, 6, 'yes', 'no', 'no', '', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-10 15:33:41', '2018-02-13 14:17:54'),
-(3, '71ff9e05e9606e379d1f1fea13a5ed5a2360c06c', 'The.Expanse.S02E05.720p.HDTV.x264-SVA[rarbg]', 'The.Expanse.S02E05.720p.HDTV.x264-SVA[rarbg]', '222222222222222222', 'https://www.space.ca/wp-content/uploads/2016/12/The-Expanse-1200x675.jpg', 'https://cdn.imagecurl.com/images/26567124274805533901.jpg', '', '', 2, 1118214143, 3, 111, 2, 0, 8, 0, 24, 'yes', 'no', 'no', '', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-10 15:34:11', '2018-02-05 17:11:48'),
-(4, '66e7bedb32d44432ad9750faf095328330d4a167', 'The.Big.Bang.Theory.S11E13.720p.HDTV.x264-AVS[rarbg]', 'The.Big.Bang.Theory.S11E13.720p.HDTV.x264-AVS[rarbg]', '999999999999999', '', '', '', '', 2, 656104607, 3, 6, 0, 0, 211184, 82, 768, 'yes', 'no', 'yes', '', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-10 15:58:42', '2018-02-10 17:14:55');
+INSERT INTO `torrents` (`id`, `info_hash`, `name`, `filename`, `description`, `poster`, `image1`, `image2`, `image3`, `category_id`, `size`, `numfiles`, `views`, `comments`, `downs`, `times_completed`, `leechers`, `seeders`, `visible`, `banned`, `anon`, `nfo`, `announce`, `external`, `freeleech`, `thanks`, `uploader_id`, `created_at`, `updated_at`) VALUES
+(2, '42ac71d699dad7d14a10c3fcf6363f693a884e9a', 'New.Girl.S06E18.HDTV.720p', 'New.Girl.S06E18.720p.HDTV.x264-AVS[rarbg]', 'aaaaaaaaaaaa dasdas dasd', '', '', '', '', 2, 519968111, 3, 69, 1, 1, 9, 2, 6, 'yes', 'no', 'no', '', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-10 15:33:41', '2018-02-13 14:17:54'),
+(3, '71ff9e05e9606e379d1f1fea13a5ed5a2360c06c', 'The.Expanse.S02E05.720p.HDTV.x264-SVA[rarbg]', 'The.Expanse.S02E05.720p.HDTV.x264-SVA[rarbg]', '222222222222222222', 'https://www.space.ca/wp-content/uploads/2016/12/The-Expanse-1200x675.jpg', 'https://cdn.imagecurl.com/images/26567124274805533901.jpg', '', '', 2, 1118214143, 3, 269, 2, 0, 8, 0, 24, 'yes', 'no', 'no', '', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-10 15:34:11', '2018-02-05 17:11:48'),
+(4, '66e7bedb32d44432ad9750faf095328330d4a167', 'The.Big.Bang.Theory.S11E13.720p.HDTV.x264-AVS[rarbg]', 'The.Big.Bang.Theory.S11E13.720p.HDTV.x264-AVS[rarbg]', '999999999999999', '', '', '', '', 2, 656104607, 3, 47, 0, 0, 211184, 82, 768, 'yes', 'no', 'yes', '', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-10 15:58:42', '2018-02-10 17:14:55');
 
 -- --------------------------------------------------------
 
@@ -592,14 +583,14 @@ CREATE TABLE IF NOT EXISTS `torrent_comments` (
   `comment` text NOT NULL,
   `ip` varchar(70) NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `torrent_comments`
 --
 
-INSERT INTO `torrent_comments` (`id`, `torrent_id`, `user_id`, `comment`, `ip`, `created_at`, `update_at`) VALUES
+INSERT INTO `torrent_comments` (`id`, `torrent_id`, `user_id`, `comment`, `ip`, `created_at`, `updated_at`) VALUES
 (10, 2, 7, 'comment on T2', '::1', '2018-02-12 18:12:27', '2018-02-12 18:12:27'),
 (11, 3, 7, 'comment on t3', '::1', '2018-02-12 18:13:08', '2018-02-12 18:13:08'),
 (12, 3, 7, 'comment testing', '::1', '2018-02-12 18:13:26', '2018-02-12 18:13:26');
@@ -629,14 +620,14 @@ CREATE TABLE IF NOT EXISTS `torrent_files` (
   `length` bigint(20) unsigned NOT NULL DEFAULT '0',
   `path` varchar(255) NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `torrent_files`
 --
 
-INSERT INTO `torrent_files` (`id`, `torrent_id`, `length`, `path`, `created_at`, `update_at`) VALUES
+INSERT INTO `torrent_files` (`id`, `torrent_id`, `length`, `path`, `created_at`, `updated_at`) VALUES
 (4, 2, 519968025, 'New.Girl.S06E18.720p.HDTV.x264-AVS.mkv', '2018-02-10 15:33:41', '2018-02-10 15:33:41'),
 (5, 2, 30, 'RARBG.txt', '2018-02-10 15:33:41', '2018-02-10 15:33:41'),
 (6, 2, 56, 'new.girl.s06e18.720p.hdtv.x264-avs.nfo', '2018-02-10 15:33:41', '2018-02-10 15:33:41'),
@@ -667,8 +658,8 @@ CREATE TABLE IF NOT EXISTS `torrent_peers` (
   `client` varchar(70) NOT NULL,
   `userid` varchar(45) NOT NULL,
   `passkey` varchar(45) NOT NULL,
-  `started` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `lastaction` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `started` datetime DEFAULT NULL,
+  `lastaction` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -684,8 +675,18 @@ CREATE TABLE IF NOT EXISTS `torrent_ratings` (
   `rating` tinyint(3) unsigned NOT NULL,
   `ip` varchar(70) NOT NULL,
   `created_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `torrent_ratings`
+--
+
+INSERT INTO `torrent_ratings` (`id`, `torrent_id`, `user_id`, `rating`, `ip`, `created_at`, `updated_at`) VALUES
+(1, 3, 7, 2, '123123123', NULL, NULL),
+(2, 2, 2, 4, '3123', NULL, NULL),
+(3, 3, 1, 4, '3123', NULL, NULL),
+(4, 2, 7, 4, '::1', '2018-02-14 19:02:11', '2018-02-14 19:02:11');
 
 -- --------------------------------------------------------
 
@@ -721,21 +722,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   `warn` enum('yes','no') NOT NULL DEFAULT 'no',
   `donated` decimal(10,2) NOT NULL DEFAULT '0.00',
   `maxslots` tinyint(5) unsigned NOT NULL DEFAULT '1',
-  `lastlogin` datetime DEFAULT '0000-00-00 00:00:00',
-  `created_at` datetime DEFAULT '0000-00-00 00:00:00',
-  `update_at` datetime DEFAULT '0000-00-00 00:00:00',
-  `active_at` datetime DEFAULT '0000-00-00 00:00:00',
-  `resetpwd_at` datetime DEFAULT '0000-00-00 00:00:00'
+  `lastlogin` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `active_at` datetime DEFAULT NULL,
+  `resetpwd_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `status`, `banned`, `privacy`, `class`, `dob`, `info`, `acceptpms`, `codeactivation`, `confirmresetpwd`, `ip`, `signature`, `avatar`, `uploaded`, `downloaded`, `title`, `estate_id`, `sex`, `passkey`, `points`, `invites`, `warn`, `donated`, `maxslots`, `lastlogin`, `created_at`, `update_at`, `active_at`, `resetpwd_at`) VALUES
-(1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'boss', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, NULL, 0, 2, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1020, 0, 'no', '0.00', 4, '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'boss', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, NULL, 0, 4, NULL, 17, 'na', '501237503104ff5394131a12102c61bb', 1030, 0, 'no', '0.00', 4, '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'public', 'member', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, 'http://localhost/imgs/default_avatar.jpg', 0, 6, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1590, 1, 'no', '0.00', 4, '2018-02-13 13:03:21', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
+INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `status`, `banned`, `privacy`, `class`, `dob`, `info`, `acceptpms`, `codeactivation`, `confirmresetpwd`, `ip`, `signature`, `avatar`, `uploaded`, `downloaded`, `title`, `estate_id`, `sex`, `passkey`, `points`, `invites`, `warn`, `donated`, `maxslots`, `lastlogin`, `created_at`, `updated_at`, `active_at`, `resetpwd_at`) VALUES
+(1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'moderatorplus', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, NULL, 0, 2, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1020, 0, 'no', '0.00', 4, '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'admin', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, NULL, 0, 4, NULL, 17, 'na', '501237503104ff5394131a12102c61bb', 1030, 0, 'no', '0.00', 4, '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'public', 'admin', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, 'http://localhost/imgs/default_avatar.jpg', 0, 6, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1590, 1, 'no', '0.00', 4, '2018-02-13 13:03:21', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
 
 -- --------------------------------------------------------
 
@@ -784,6 +785,14 @@ ALTER TABLE `faqs`
 --
 ALTER TABLE `faq_categs`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `invites`
+--
+ALTER TABLE `invites`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `from_userid` (`user_id`),
+  ADD KEY `accepted_by` (`accepted_by`);
 
 --
 -- Indexes for table `layouts`
@@ -935,6 +944,11 @@ ALTER TABLE `faqs`
 ALTER TABLE `faq_categs`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
+-- AUTO_INCREMENT for table `invites`
+--
+ALTER TABLE `invites`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `layouts`
 --
 ALTER TABLE `layouts`
@@ -943,7 +957,7 @@ ALTER TABLE `layouts`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `messages`
 --
@@ -1008,7 +1022,7 @@ ALTER TABLE `torrent_peers`
 -- AUTO_INCREMENT for table `torrent_ratings`
 --
 ALTER TABLE `torrent_ratings`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -1023,6 +1037,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `faqs`
   ADD CONSTRAINT `faqs_ibfk_1` FOREIGN KEY (`categ_id`) REFERENCES `faq_categs` (`id`);
+
+--
+-- Constraints for table `invites`
+--
+ALTER TABLE `invites`
+  ADD CONSTRAINT `invites_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `messages`

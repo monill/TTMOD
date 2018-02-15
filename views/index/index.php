@@ -4,6 +4,7 @@ Index page
 <?php
 use App\Models\PrivilegedUser;
 use App\Models\Role;
+use App\Libs\Helper;
 ?>
 
 <br /><br />
@@ -21,6 +22,12 @@ use App\Models\Role;
 echo strtotime(date("Y-m-d H:i:s")) - (3600 * 24);
 echo "<br />";
 echo date('Y-m-d H:i:s', strtotime(date("Y-m-d H:i:s")) - 7200 * 24);
+echo "<br />";
+echo "<br />";
+
+echo Helper::plus7Days();
+
+
 ?>
 
 <?php $u = PrivilegedUser::getByUsername("Bot"); ?>

@@ -33,7 +33,7 @@ class Torrent extends Controller {
     public function view($tid)
     {
         $tor = $this->db->select1("SELECT torrents.anon, torrents.seeders, torrents.banned, torrents.leechers, torrents.comments,
-            torrents.info_hash, torrents.filename, torrents.nfo, torrents.update_at, torrents.name, torrents.uploader_id, torrents.description,
+            torrents.info_hash, torrents.filename, torrents.nfo, torrents.updated_at, torrents.name, torrents.uploader_id, torrents.description,
             torrents.visible, torrents.size, torrents.created_at, torrents.views, torrents.downs, torrents.times_completed, torrents.id,
             torrents.external, torrents.poster, torrents.image1, torrents.image2, torrents.image3, torrents.announce, torrents.numfiles, torrents.freeleech,
             torrent_categories.name AS cat_name, torrent_categories.slug as cat_slug, users.username, users.privacy FROM torrents
@@ -210,7 +210,7 @@ class Torrent extends Controller {
                         'length' => $size,
                         'torrent_id' => $idd,
                         'created_at' => Helper::dateTime(),
-                        'update_at' => Helper::dateTime()
+                        'updated_at' => Helper::dateTime()
                     ]);
                 }
             } else {
@@ -219,7 +219,7 @@ class Torrent extends Controller {
                     'length' => $torrentsize,
                     'torrent_id' => $idd,
                     'created_at' => Helper::dateTime(),
-                    'update_at' => Helper::dateTime()
+                    'updated_at' => Helper::dateTime()
                 ]);
             }
 
@@ -287,7 +287,7 @@ class Torrent extends Controller {
                                 'leechers' => $leechers,
                                 'seeders' => $seeders,
                                 'visible' => 'yes',
-                                'update_at' => Helper::dateTime()
+                                'updated_at' => Helper::dateTime()
                             ], "`id` = :id", ["id" => $idd]);
 
                             $this->db->update('torrent_announces', [
@@ -318,7 +318,7 @@ class Torrent extends Controller {
                                 'leechers' => $leechers,
                                 'seeders' => $seeders,
                                 'visible' => 'yes',
-                                'update_at' => Helper::dateTime()
+                                'updated_at' => Helper::dateTime()
                             ], "`id` = :id", ["id" => $idd]);
 
                             $this->db->update('torrent_announces', [
@@ -547,7 +547,7 @@ class Torrent extends Controller {
                             'length' => $size,
                             'torrent_id' => $idd,
                             'created_at' => Helper::dateTime(),
-                            'update_at' => Helper::dateTime()
+                            'updated_at' => Helper::dateTime()
                         ]);
                     }
                 } else {
@@ -556,7 +556,7 @@ class Torrent extends Controller {
                         'length' => $torrentsize,
                         'torrent_id' => $idd,
                         'created_at' => Helper::dateTime(),
-                        'update_at' => Helper::dateTime()
+                        'updated_at' => Helper::dateTime()
                     ]);
                 }
 
@@ -624,7 +624,7 @@ class Torrent extends Controller {
                                     'leechers' => $leechers,
                                     'seeders' => $seeders,
                                     'visible' => 'yes',
-                                    'update_at' => Helper::dateTime()
+                                    'updated_at' => Helper::dateTime()
                                 ], "`id` = :id", ["id" => $idd]);
 
                                 $this->db->update('torrent_announces', [
@@ -655,7 +655,7 @@ class Torrent extends Controller {
                                     'leechers' => $leechers,
                                     'seeders' => $seeders,
                                     'visible' => 'yes',
-                                    'update_at' => Helper::dateTime()
+                                    'updated_at' => Helper::dateTime()
                                 ], "`id` = :id", ["id" => $idd]);
 
                                 $this->db->update('torrent_announces', [
@@ -705,7 +705,7 @@ class Torrent extends Controller {
                 'comment' => Helper::escape($comment),
                 'ip' => Helper::getIP(),
                 'created_at' => Helper::dateTime(),
-                'update_at' => Helper::dateTime()
+                'updated_at' => Helper::dateTime()
             ]);
 
             $this->db->update('torrents', [
@@ -758,7 +758,7 @@ class Torrent extends Controller {
                 'banned' => $banned,
                 'anon' => $anon,
                 'freeleech' => $freeleech,
-                'update_at' => Helper::dateTime()
+                'updated_at' => Helper::dateTime()
             ], "`id` = :id", ["id" => $tid]);
 
             Log::create("user edited the torrent $tid");
@@ -787,7 +787,7 @@ class Torrent extends Controller {
                 'rating' => $num,
                 'ip' => Helper::getIP(),
                 'created_at' => Helper::dateTime(),
-                'update_at' => Helper::dateTime()
+                'updated_at' => Helper::dateTime()
             ]);
 
             Log::create("User rated torrent {$tid} with {$num} stars.");

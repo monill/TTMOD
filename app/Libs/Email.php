@@ -9,7 +9,7 @@ use App\Libs\Helper;
 class Email extends PHPMailer {
 
     public function __construct() { }
-    
+
     private function __clone() { }
 
     public function confirmEmail($email, $key)
@@ -37,6 +37,8 @@ class Email extends PHPMailer {
             echo "Message can not be sent. <br />";
             echo "Mail error: " . $mail->ErrorInfo;
             exit();
+        } else {
+            echo "We have registered your invite request successfully! You will be contacted soon.";
         }
     }
 
@@ -63,6 +65,8 @@ class Email extends PHPMailer {
             echo "Message can not be sent. <br />";
             echo "Mail error: " . $mail->ErrorInfo;
             exit();
+        } else {
+            echo "We have registered your invite request successfully! You will be contacted soon.";
         }
     }
 
@@ -91,6 +95,8 @@ class Email extends PHPMailer {
             echo "Message can not be sent. <br />";
             echo "Mail error: " . $mail->ErrorInfo;
             exit();
+        } else {
+            echo "We have registered your invite request successfully! You will be contacted soon.";
         }
     }
 

@@ -113,7 +113,7 @@ class Recover extends Controller {
                     'passwd' => Helper::hashSenha($pwd),
                     'confirmresetpwd' => 'yes',
                     'codeactivation' => null,
-                    'update_at' => Helper::dateTime()
+                    'updated_at' => Helper::dateTime()
                 ], "`codeactivation` = :prk", ["prk" => $key]);
 
                 Log::create("User: {$user->username} changed the password successfully.");

@@ -29,6 +29,8 @@ class Invite extends Controller {
 
     public function index()
     {
+        //TODO
+        //fix this user_id
         $invs = $this->db->select1("SELECT `invites` FROM `users` WHERE `id` = :uid AND `status` = 'confirmed' AND `banned` = 'no'", ["uid" => 7]);
         $inv = (int)$invs->invites;
 
@@ -51,17 +53,31 @@ class Invite extends Controller {
             {
                 $key = Helper::codeAtivacao();
 
+                $user = $this->db->select1("SELECT username, points, invites FROM users WHERE id = :uid", ["uid" => 7]);
+
                 //TODO
                 //finish all this
-//                $this->db->insert('invites', [
+                $this->db->insert('invites', [
+                    'user_id' => 7,
+                    'email' => $email,
+                    'code' => $key,
+                    'expires_on' => Helper::plus7Days(),
+                    'created_at' => Helper::dateTime()
+                ]);
 
-//                ]);
+                //TODO
+                //remove -1 invites from userid
+                //add points to userid
+                $this->db->update('users', [
+                    'points' => $user->points + 200,
+                    'invites' => $user->invites - 1
+                ], "`id` = :uid", ["uid" => 7]);
 
                 //$this->mailer->invite($email, $key);
 
                 $msg = "An email successfully was send to {$email} to activate the account.";
 
-                Log::create("A member with nick: <b> {user} </b> send a invite to email <b> {$email} </b>.");
+                Log::create("A member with nick: <b> {$user->username} </b> send a invite to email <b> {$email} </b>.");
 
                 $resultado = ["status" => "success", "msg" => $msg];
                 echo json_encode($resultado);
