@@ -12,7 +12,7 @@ class Token {
 
     public static function generate()
     {
-        return Session::set("token", sha1(uniqid()));
+        return Session::set("token", sha1(time()));
     }
 
     public static function check($token)

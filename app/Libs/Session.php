@@ -63,7 +63,7 @@ class Session {
      */
     public static function set($key, $value)
     {
-        $_SESSION[$key] = $value;
+        return $_SESSION[$key] = $value;
     }
 
     /**
@@ -94,9 +94,9 @@ class Session {
 
     public static function flash($nome, $mensagem = "")
     {
-        if (self::exist($nome)) {
+        if (self::get($nome)) {
             $session = self::get($nome);
-            self::delete($nome);
+            self::destroy($nome);
         } else {
             self::set($nome, $mensagem);
         }

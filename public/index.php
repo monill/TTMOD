@@ -18,13 +18,13 @@ define('VIEWS', ROOT . 'views' . DIRECTORY_SEPARATOR);
 //Cache
 define('CACHE', ROOT . 'data' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR);
 
-require_once ROOT . 'config/config.php';
-require_once ROOT . 'config/email.php';
-require_once ROOT . 'app/functions.php';
+require ROOT . 'config/config.php';
+require ROOT . 'config/email.php';
+require ROOT . 'app/functions.php';
 
 if (file_exists(ROOT . 'vendor/autoload.php')) {
     require ROOT . 'vendor/autoload.php';
 }
 
-require_once ROOT . 'bootstrap/Autoload.php';
+require ROOT . 'bootstrap/Autoload.php';
 $app = new Autoload();

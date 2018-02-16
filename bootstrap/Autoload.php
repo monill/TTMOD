@@ -94,9 +94,6 @@ class Autoload {
         }
     }
 
-    public function __clone()
-    {
-
-    }
+    private function __clone() { }
 
 }

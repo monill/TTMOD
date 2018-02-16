@@ -28,17 +28,17 @@
                         </div>
                         <div class="card fat">
                             <div class="card-body">
-                                <h4 class="card-title">Recover Password</h4>
+                                <h4 class="card-title">Forgot Password</h4>
                                 <form method="post" action="<?= url("/recover/in"); ?>">
                                     <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
-                                    
+                                    <p> Please provide the email you signed with </p>
                                     <div class="form-group">
                                         <label for="email"> E-mail </label>
                                         <input id="email" type="email" class="form-control" name="email" required data-eye>
                                     </div>
                                     <div class="form-group no-margin">
                                         <button class="btn btn-default" onclick="location.href='<?= url("/login"); ?>'" type="button">Cancel</button>
-                                        <button type="submit" class="btn btn-primary "> Recover </button>
+                                        <button type="submit" class="btn btn-primary "> Submit </button>
                                     </div>
                                 </form>
                             </div>
