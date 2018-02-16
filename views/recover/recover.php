@@ -33,7 +33,7 @@
                                     <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
                                     <input type="hidden" name="coding" value="<?php echo isset($this->coding) ? $this->coding : $this->coding; ?>" />
                                     <div class="form-group">
-                                        <label for="password">Password</label>
+                                        <label for="password">New Password</label>
                                         <input id="password" type="password" class="form-control" name="password" required data-eye>
                                     </div>
                                     <div class="form-group">

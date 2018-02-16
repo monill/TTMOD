@@ -37,7 +37,6 @@ class Recover extends Controller {
     {
         if (Input::exist())
         {
-
             $email = Input::get("email");
 
             $errors = $this->validEmail($email);
@@ -55,8 +54,7 @@ class Recover extends Controller {
                     'confirmresetpwd' => 'no',
                     'resetpwd_at' => Helper::dateTime(),
                     'ip' => $ip
-                ], "`email` = :email", ["email" => $email]
-                );
+                ], "`email` = :email", ["email" => $email]);
 
                 //send the email
                 $this->mailer->resetPass($email, $key);
@@ -88,11 +86,11 @@ class Recover extends Controller {
                 $this->view->coding = $key;
                 $this->view->load("recover/recover", true);
             } else {
-                //echo "<h5 class='text-error' style='text-align: center;'> Reset key is invalid or already used. </h5>";
-                Redirect::to("/recover");
+                echo "<h5 class='text-error' style='text-align: center;'> Reset key is invalid or already used. </h5>";
+               // Redirect::to("/recover");
             }
         } else {
-            Redirect::to("/signup");
+            Redirect::to("/recover");
         }
     }
 
@@ -129,31 +127,6 @@ class Recover extends Controller {
         }
     }
 
-    public function acc($code = "")
-    {
-        if (isset($code))
-        {
-            if ($this->valid->validKey($code)) {
-                $user = $this->db->select1("SELECT `username` FROM `users` WHERE `codeactivation` = :k", ["k" => $code]);
-
-                $this->db->update('users', [
-                    'status' => 'confirmed',
-                    'codeactivation' => null,
-                    'active_at' => Helper::dateTime()
-                ], "`codeactivation` = :code", ["code" => $code]);
-
-                Log::create("User: {$user->username} just activated the account.");
-
-                $msg = "<h4 class='text-success'> Email Confirmed! </h4>";
-                $msg .= "<h5 class='text-success'> You can now Login!! Welcome :D </h5>";
-            } else {
-                $msg = "<h5 class='text-error'> Activation key does not exist or account already activated. </h5>";
-            }
-        } else {
-            Redirect::to("/signup");
-        }
-    }
-
     public function validEmail($email)
     {
         $errors = array();
@@ -161,7 +134,7 @@ class Recover extends Controller {
         if ($this->valid->isEmpty($email)) {
             $errors[] = "Blank email is not worth.";
         }
-        if (!$this->valid->validEmail($email)) {
+        if ($this->valid->validEmail($email)) {
             $errors[] = "Invalid email.";
         }
         if (!$this->valid->emailExist($email)) {

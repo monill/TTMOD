@@ -15,9 +15,6 @@ $registered =  number_format($users[13]);
 $comments = Helper::rowCount("torrent_comments");
 $ncomments = number_format($comments[13]);
 
-$messages = Helper::rowCount("messages");
-$nmessages = number_format($messages[13]);
-
 $tor = Helper::rowCount("torrents");
 $ntor = number_format($tor[13]);
 
@@ -86,7 +83,6 @@ $localpeers = $leechers + $seeders;
         	<li> Member List: <strong> <?= $members; ?> </strong> </li>
         	<li> Guests Online: <strong> <?= $guests; ?> </strong> </li>
         	<li> Comments Posted: <strong> <?= $ncomments; ?> </strong> </li>
-        	<li> Messages Sent: <strong> <?= $nmessages; ?> </strong> </li>
         </ul>
 
         <!-- end content -->

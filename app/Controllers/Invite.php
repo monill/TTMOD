@@ -47,7 +47,7 @@ class Invite extends Controller {
             $email = Input::get("email");
 
             //check for erros
-            $error = $this->validInv($email);
+            $error = $this->validMail($email);
 
             if (count($error) == 0)
             {
@@ -70,14 +70,14 @@ class Invite extends Controller {
                     'invites' => $user->invites - 1
                 ], "`id` = :uid", ["uid" => 7]);
 
-                //$this->mailer->invite($email, $key);
+                $this->mailer->invite($email, $key);
 
                 $msg = "An email successfully was send to {$email} to activate the account.";
 
                 Log::create("A member with nick: <b> {$user->username} </b> send a invite to email <b> {$email} </b>.");
 
-                $resultado = ["status" => "success", "msg" => $msg];
-                echo json_encode($resultado);
+                $result = ["status" => "success", "msg" => $msg];
+                echo json_encode($result);
             } else {
                 $result = ["status" => "error", "errors" => $error];
                 echo json_encode($result);
@@ -89,7 +89,7 @@ class Invite extends Controller {
 
     }
 
-    public function validInv($email)
+    public function validMail($email)
     {
         $errors = array();
 
@@ -100,7 +100,7 @@ class Invite extends Controller {
             $errors[] = "Please enter a valid email address.";
         }
         if ($this->valid->emailExist($email)) {
-            $errors[] = "The email provided is already in use.";
+            $errors[] = "The email provided is already invited.";
         }
         return $errors;
     }

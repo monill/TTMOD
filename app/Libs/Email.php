@@ -17,6 +17,7 @@ class Email extends PHPMailer {
     {
         $mail = $this->getMailer();                                         // get instance of PHPMailer (including some additional info)
         $mail->addAddress($email);                                          // where you want to send confirmation email
+
         $link = URL . "/signup/activeacc/" . $key;                          // link for email confirmation
         $body = file_get_contents(VIEWS . "emails/confirmacc.php"); // load email HTML template
 
@@ -42,8 +43,8 @@ class Email extends PHPMailer {
     {
         $mail = $this->getMailer();
         $mail->addAddress($email);
-        //TODO fix link
-        $link = URL . "/resetpass.php?k=" . $key;
+
+        $link = URL . "/recover/code/" . $key;
         $body = file_get_contents(VIEWS . "emails/resetpass.php");
 
         $body = str_replace("{{ip}}", Helper::getIP(), $body);
@@ -66,20 +67,13 @@ class Email extends PHPMailer {
 
     public function invite($email, $key)
     {
-
         $mail = $this->getMailer();
-
         $mail->addAddress($email);
 
-        //TODO fix link
-        $link = URL . "/resetpass.php?k=" . $key;
-
+        $link = URL . "/signup/invite/" . $key;
         $body = file_get_contents(VIEWS . "emails/invite.php");
 
         $body = str_replace("{{website_name}}", SNAME, $body);
-        $body = str_replace("{{email}}", Helper::escape($email), $body);
-        $body = str_replace("{{rulink}}", URL . '/rules', $body);
-        $body = str_replace("{{falink}}", URL . '/faq', $body);
         $body = str_replace("{{invlink}}", $link, $body);
 
         $mail->Subject = SNAME . " - user invitation confirmation.";
@@ -96,7 +90,33 @@ class Email extends PHPMailer {
         $mail->clearAllRecipients();
     }
 
-    public function getMailer()
+    public function thanks($email)
+    {
+        $mail = $this->getMailer();
+
+        $mail->addAddress($email);
+
+        $body = file_get_contents(VIEWS . "emails/thanks.php");
+
+        $body = str_replace("{{website_name}}", SNAME, $body);
+        $body = str_replace("{{rulink}}", URL . '/rules', $body);
+        $body = str_replace("{{falink}}", URL . '/faq', $body);
+
+        $mail->Subject = SNAME . " - Thank you for sign-up.";
+        $mail->Body = $body;
+
+        if (!$mail->send()) {
+            echo "Message can not be sent. <br />";
+            echo "Mail error: " . $mail->ErrorInfo;
+            exit();
+        } else {
+            echo "We have registered your account.";
+        }
+
+        $mail->clearAllRecipients();
+    }
+
+    private function getMailer()
     {
         $mail = new PHPMailer(true);
 

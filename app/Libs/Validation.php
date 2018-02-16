@@ -34,16 +34,12 @@ class Validation {
 
     public function userExist($username)
     {
-        $table = "users";
-        $column = "username";
-        return $this->exist($table, $column, $username);
+        return $this->exist("users", "username", $username);
     }
 
     public function emailExist($email)
     {
-        $table = "users";
-        $column = "email";
-        return $this->exist($table, $column, $email);
+        return $this->exist("users", "email", $email);
     }
 
     public function userAlfNum($username)
@@ -63,7 +59,7 @@ class Validation {
             return false;
         }
 
-        $result = $this->db->select("SELECT * FROM `users` WHERE `codeactivation` = :code", ["code" => $key]);
+        $result = $this->db->select1("SELECT * FROM `users` WHERE `codeactivation` = :code", ["code" => $key]);
 
         if (count($result) !== 1) {
             return false;
@@ -82,7 +78,7 @@ class Validation {
     private function exist($table, $column, $value)
     {
         $db = Database::getInstance();
-        $result = $db->select("SELECT * FROM `$table` WHERE `$column` = :val", ["val" => $value]);
+        $result = $db->select("SELECT * FROM `$table` WHERE `$column` = :value", ["value" => $value]);
         return count($result) > 0 ? true : false;
     }
 
