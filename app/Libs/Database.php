@@ -10,14 +10,15 @@ class Database extends PDO {
     private $type = "mysql";
     private $host = "localhost";
     private $username = "root";
-    private $passwd = "mysql";
+    private $passwd = "";
     private $datab = "track";
+    private $port = 3307;
     private static $instance;
 
     public function __construct()
     {
         try {
-            parent::__construct($this->type . ':host=' . $this->host . ';dbname=' . $this->datab . ';charset=UTF8', $this->username, $this->passwd);
+            parent::__construct($this->type . ':host=' . $this->host . ';port=' . $this->port . ';dbname=' . $this->datab . ';charset=UTF8', $this->username, $this->passwd);
             // comente esta linha se você não quiser relatórios de erros
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->exec("SET CHARACTER SET utf8");

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 15-Fev-2018 às 18:33
+-- Generation Time: 16-Fev-2018 às 18:50
 -- Versão do servidor: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -31,7 +31,14 @@ CREATE TABLE IF NOT EXISTS `bruteforces` (
   `ip` varchar(70) NOT NULL,
   `alltimes` int(10) unsigned NOT NULL DEFAULT '1',
   `alldate` date NOT NULL DEFAULT '0000-00-00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `bruteforces`
+--
+
+INSERT INTO `bruteforces` (`id`, `ip`, `alltimes`, `alldate`) VALUES
+(1, '::1', 4, '2018-02-16');
 
 -- --------------------------------------------------------
 
@@ -170,7 +177,7 @@ INSERT INTO `faq_categs` (`id`, `name`, `style`, `created_at`, `updated_at`) VAL
 (6, 'How can I improve my download speed?', 'bg-secondary', '2018-01-28 11:45:12', '2018-01-28 11:45:12'),
 (7, 'My ISP uses a transparent proxy. What should I do?', 'bg-danger', '2018-01-28 11:45:12', '2018-01-28 11:45:12'),
 (8, 'Why can''t I connect? Is the site blocking me?', 'bg-danger', '2018-01-28 11:45:12', '2018-01-28 11:45:12'),
-(9, 'What if I can''t find the answer to my problem here?', 'bg-dark', '2018-01-28 11:45:12', '2018-01-28 11:45:12');
+(9, 'What if I can''t find the answer to my problem here?', 'bg-light', '2018-01-28 11:45:12', '2018-01-28 11:45:12');
 
 -- --------------------------------------------------------
 
@@ -182,6 +189,18 @@ CREATE TABLE IF NOT EXISTS `guests` (
   `ip` varchar(70) NOT NULL,
   `time` decimal(20,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `guests`
+--
+
+INSERT INTO `guests` (`ip`, `time`) VALUES
+('::1', '1518803899'),
+('::1', '1518804153'),
+('::1', '1518804158'),
+('::1', '1518804164'),
+('::1', '1518804195'),
+('::1', '1518805216');
 
 -- --------------------------------------------------------
 
@@ -199,14 +218,14 @@ CREATE TABLE IF NOT EXISTS `invites` (
   `accepted_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `invites`
 --
 
 INSERT INTO `invites` (`id`, `user_id`, `email`, `code`, `expires_on`, `accepted_by`, `accepted_at`, `created_at`, `update_at`) VALUES
-(1, 7, 'test@me.com', 'b83cbbf73933580db7bfe85aa9724c28fa6b9c10', '2018-02-21', NULL, NULL, '2018-02-14 23:34:46', NULL);
+(2, 7, 'juaorok@hotmail.com', '', '0000-00-00', 21, '2018-02-16 14:42:59', '2018-02-16 13:49:02', '2018-02-16 14:42:59');
 
 -- --------------------------------------------------------
 
@@ -263,15 +282,21 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `browser` varchar(190) NOT NULL,
   `os_system` varchar(100) NOT NULL,
   `created_at` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `logs`
 --
 
 INSERT INTO `logs` (`id`, `text`, `ip`, `browser`, `os_system`, `created_at`) VALUES
-(1, 'User rated torrent 2 with 4 stars.', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36', 'Windows 10', '2018-02-14 19:02:11'),
-(2, 'A member with nick: &lt;b&gt; {user} &lt;/b&gt; send a invite to email &lt;b&gt; juaorok@hotmail.com &lt;/b&gt;.', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36', 'Windows 10', '2018-02-14 23:34:46');
+(12, 'User: monil just activated the account.', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36', 'Windows 10', '2018-02-15 22:52:37'),
+(13, 'New member with nick: &lt;b&gt; momo &lt;/b&gt; registered.', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36', 'Windows 10', '2018-02-15 23:23:49'),
+(14, 'User: momo just activated the account.', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36', 'Windows 10', '2018-02-15 23:25:12'),
+(15, 'User with an email: momo@me.com requested password reset.', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36', 'Windows 10', '2018-02-16 11:13:33'),
+(16, 'User with an email: momo@me.com requested password reset.', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36', 'Windows 10', '2018-02-16 11:29:27'),
+(17, 'User: momo changed the password successfully.', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36', 'Windows 10', '2018-02-16 11:45:52'),
+(18, 'A member with nick: &lt;b&gt; admin &lt;/b&gt; send a invite to email &lt;b&gt; juaorok@hotmail.com &lt;/b&gt;.', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36', 'Windows 10', '2018-02-16 13:49:05'),
+(19, 'New member with nick: &lt;b&gt; HikoSan &lt;/b&gt; registered. Invited by 7', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36', 'Windows 10', '2018-02-16 14:43:01');
 
 -- --------------------------------------------------------
 
@@ -713,7 +738,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `confirmresetpwd` enum('yes','no') DEFAULT NULL,
   `ip` varchar(70) NOT NULL,
   `signature` varchar(200) DEFAULT NULL,
-  `avatar` varchar(190) DEFAULT NULL,
+  `avatar` varchar(190) DEFAULT 'http://localhost/imgs/default_avatar.jpg',
   `uploaded` bigint(20) NOT NULL DEFAULT '0',
   `downloaded` bigint(20) NOT NULL DEFAULT '0',
   `title` tinytext,
@@ -728,18 +753,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lastlogin` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `active_at` datetime DEFAULT NULL,
+  `actived_at` datetime DEFAULT NULL,
   `resetpwd_at` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `status`, `banned`, `privacy`, `class`, `dob`, `info`, `acceptpms`, `codeactivation`, `confirmresetpwd`, `ip`, `signature`, `avatar`, `uploaded`, `downloaded`, `title`, `estate_id`, `sex`, `passkey`, `points`, `invites`, `warn`, `donated`, `maxslots`, `lastlogin`, `created_at`, `updated_at`, `active_at`, `resetpwd_at`) VALUES
+INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `status`, `banned`, `privacy`, `class`, `dob`, `info`, `acceptpms`, `codeactivation`, `confirmresetpwd`, `ip`, `signature`, `avatar`, `uploaded`, `downloaded`, `title`, `estate_id`, `sex`, `passkey`, `points`, `invites`, `warn`, `donated`, `maxslots`, `lastlogin`, `created_at`, `updated_at`, `actived_at`, `resetpwd_at`) VALUES
 (1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'moderatorplus', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, NULL, 0, 2, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1020, 0, 'no', '0.00', 4, '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
 (2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'admin', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, NULL, 0, 4, NULL, 17, 'na', '501237503104ff5394131a12102c61bb', 1030, 0, 'no', '0.00', 4, '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'public', 'admin', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, 'http://localhost/imgs/default_avatar.jpg', 0, 6, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1590, 1, 'no', '0.00', 4, '2018-02-13 13:03:21', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
+(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'public', 'admin', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, 'http://localhost/imgs/default_avatar.jpg', 0, 6, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1790, 0, 'no', '0.00', 4, '2018-02-13 13:03:21', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40'),
+(19, 'monil', 'monil@me.com', '$2y$10$bhLRsilA5pMWOCzsOmpXOuNWR.E.3j7TaxkvfskTMIbBMHNACwcqi', 'confirmed', 'no', 'public', 'member', '2001-02-08', NULL, 'yes', NULL, NULL, '::1', NULL, NULL, 0, 0, NULL, 18, 'male', 'f18257bc6217c6b6a80d5621c541dd5e', 1000, 0, 'no', '0.00', 1, NULL, '2018-02-15 22:45:51', NULL, '2018-02-15 22:52:36', NULL),
+(20, 'momo', 'momo@me.com', '$2y$10$bttZL6KkAQy1Xcipiv2IiuwprRkF8yGSu.DRaJuCyCcgn/Q.Ual/m', 'confirmed', 'no', 'public', 'member', '1955-02-02', NULL, 'yes', NULL, 'yes', '::1', NULL, NULL, 0, 0, NULL, 25, 'female', '49b5ec4c7a7b48068e57f41919bc0ac9', 1000, 0, 'no', '0.00', 1, NULL, '2018-02-15 23:23:47', '2018-02-16 11:45:52', '2018-02-15 23:25:12', '2018-02-16 11:29:25'),
+(21, 'HikoSan', 'juaorok@hotmail.com', '$2y$10$K/McZuyzJhPSkwYyEzj80eFUn7e.eNn.bFmyzDb5cQBbhNwplmgFi', 'confirmed', 'no', 'public', 'member', '1999-02-04', NULL, 'yes', NULL, NULL, '::1', NULL, 'http://localhost/imgs/default_avatar.jpg', 0, 0, NULL, 25, 'male', '1605dcde573c888c1aad3b56693b451c', 1000, 0, 'no', '0.00', 1, NULL, '2018-02-16 14:42:59', NULL, '2018-02-16 14:42:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -964,7 +992,7 @@ ALTER TABLE `user_warnings`
 -- AUTO_INCREMENT for table `bruteforces`
 --
 ALTER TABLE `bruteforces`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `estates`
 --
@@ -984,7 +1012,7 @@ ALTER TABLE `faq_categs`
 -- AUTO_INCREMENT for table `invites`
 --
 ALTER TABLE `invites`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `layouts`
 --
@@ -994,7 +1022,7 @@ ALTER TABLE `layouts`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `messages`
 --
@@ -1069,7 +1097,7 @@ ALTER TABLE `torrent_ratings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `user_warnings`
 --
@@ -1089,7 +1117,8 @@ ALTER TABLE `faqs`
 -- Limitadores para a tabela `invites`
 --
 ALTER TABLE `invites`
-  ADD CONSTRAINT `invites_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `invites_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `invites_ibfk_2` FOREIGN KEY (`accepted_by`) REFERENCES `users` (`id`);
 
 --
 -- Limitadores para a tabela `messages`
