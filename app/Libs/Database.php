@@ -12,7 +12,7 @@ class Database extends PDO {
     private $username = "root";
     private $passwd = "";
     private $datab = "track";
-    private $port = 3307;
+    private $port = 3306;
     private static $instance;
 
     public function __construct()
