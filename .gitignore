@@ -3,4 +3,3 @@
 *.torrent
 /nbproject
 config/email.php
-config/email.php
