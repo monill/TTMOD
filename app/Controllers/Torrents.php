@@ -21,11 +21,8 @@ class Torrents extends Controller {
 
     public function index()
     {
-        $torrents = $this->db->select("SELECT torrents.id, torrents.anon, torrents.category_id, torrents.leechers, torrents.seeders,
-            torrents.name, torrents.size, torrents.created_at, torrents.comments, torrents.uploader_id, torrents.freeleech, torrent_categories.name AS cat_name,
-            torrent_categories.slug AS cat_slug, users.username FROM torrents LEFT JOIN torrent_categories ON category_id = torrent_categories.id LEFT JOIN users ON torrents.uploader_id = users.id");
         $this->view->title = SNAME . " :: Torrents";
-        $this->view->torrents = $torrents;
+        $this->view->torrents = Torrent::all();
         $this->view->token = Token::generate();
         $this->view->load("torrents/index", false);
     }
@@ -65,7 +62,7 @@ class Torrents extends Controller {
         {
             $search = Input::get("search");
             if (!$search) {
-                unset($search);
+                $search = "";
             }
             $categ = Input::get("categ");
             $incldead = Input::get("incldead");

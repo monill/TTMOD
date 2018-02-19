@@ -23,7 +23,9 @@ class Database extends PDO {
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->exec("SET CHARACTER SET utf8");
         } catch (PDOException $exc) {
-            die("Connection error: " . $exc->getMessage());
+            echo "<b>Connection error:</b> " . $exc->getMessage() . "<br>\n";
+            echo "<br>\nPHP Version : " . phpversion() . "<br>\n";
+            exit();
         }
     }
 

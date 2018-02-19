@@ -149,11 +149,11 @@ class Login extends Controller {
 
     //======= PRIVATE AREA =======//
     /**
-            * Gerar uma string que será usada como impressão digital.
-            * Esta é realmente uma string criada a partir do nome do navegador do usuário e do IP do usuário
-            * Endereço, então, se alguém roubar sessão de usuários, ele não poderá acessar.
-            * @return string string gerado.
-            */
+    * Generate a string that will be used as a fingerprint.
+    * This is actually a string created from the user's browser name and the user's IP
+    * Address, so if someone steals users session, he will not be able to access.
+    * @return string generated string.
+    */
     private function loginString()
     {
         $ip = Helper::getIP();

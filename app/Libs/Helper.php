@@ -10,9 +10,9 @@ class Helper {
 
     private function __clone() { }
 
-    public static function hashSenha($senha)
+    public static function hashPass($pass)
     {
-        return password_hash($senha, PASSWORD_BCRYPT);
+        return password_hash($pass, PASSWORD_BCRYPT);
     }
 
     public static function validIP($ip)

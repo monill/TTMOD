@@ -22,6 +22,12 @@ class User extends Model {
         //$db->select("SELECT `id`, `username`, `class`, `created_at`, `estate_id` FROM `users` LEFT JOIN `estates` ON estates.id = users.estate_id WHERE `users.status` = 'confirmed' AND `users.privacy` != 'strong' ORDER BY `username` ASC");
     }
 
+    public static function staffs()
+    {
+        $db = Database::getInstance();
+        return $db->select("SELECT `id`, `username`, `class` FROM `users` WHERE `status` = 'confirmed' AND `class` IN ('moderator', 'moderatorplus', 'admin') ORDER BY `username` ASC");
+    }
+
     public static function classes($class)
     {
         if ($class == "member") {

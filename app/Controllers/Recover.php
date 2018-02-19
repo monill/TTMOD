@@ -108,7 +108,7 @@ class Recover extends Controller {
                 $user = $this->db->select1("SELECT `username` FROM `users` WHERE `codeactivation` = :k", ["k" => $key]);
 
                 $this->db->update('users', [
-                    'passwd' => Helper::hashSenha($pwd),
+                    'passwd' => Helper::hashPass($pwd),
                     'confirmresetpwd' => 'yes',
                     'codeactivation' => null,
                     'updated_at' => Helper::dateTime()

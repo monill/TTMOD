@@ -100,7 +100,6 @@ $user = $db->select1("SELECT * FROM users WHERE id = :id", ["id" => 7]);
 
                 </ul>
             </div>
-
         </nav>
 
         <div class="container-fluid" style="padding-top: 100px;">

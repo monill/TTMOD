@@ -9,9 +9,9 @@ use App\Libs\Helper;
 
 class Email extends PHPMailer {
 
-    //public function __construct() { }
+    public function __construct() { }
 
-    //private function __clone() { }
+    private function __clone() { }
 
     public function confirmEmail($email, $key)
     {
@@ -19,9 +19,9 @@ class Email extends PHPMailer {
         $mail->addAddress($email);                                          // where you want to send confirmation email
 
         $link = URL . "/signup/activeacc/" . $key;                          // link for email confirmation
-        $body = file_get_contents(VIEWS . "emails/confirmacc.php"); // load email HTML template
+        $body = file_get_contents(VIEWS . "emails/confirmacc.php");         // load email HTML template
 
-        $body = str_replace("{{website_name}}", SNAME, $body); // replace appropriate placeholders
+        $body = str_replace("{{website_name}}", SNAME, $body);              // replace appropriate placeholders
         $body = str_replace("{{link}}", $link, $body);
 
         $mail->Subject = SNAME . " - Email confirmation.";                  // set subject and body
@@ -116,6 +116,9 @@ class Email extends PHPMailer {
         $mail->clearAllRecipients();
     }
 
+    /**
+    * Private area
+    */
     private function getMailer()
     {
         $mail = new PHPMailer(true);
@@ -132,7 +135,7 @@ class Email extends PHPMailer {
             $mail->Port = SMTP_PORT;                              // TCP port to connect to
 
             $mail->CharSet = "UTF-8";
-            $mail->isHTML(true);                            // tell mailer that we are sending HTML email
+            $mail->isHTML(true);                                    // tell mailer that we are sending HTML email
 
             $mail->From = FROM_MAIL;
             $mail->FromName = SNAME;

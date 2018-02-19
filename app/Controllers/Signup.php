@@ -63,7 +63,7 @@ class Signup extends Controller {
                         $this->db->insert('users', [
                             'username' => $user,
                             'email' => $mail,
-                            'passwd' => Helper::hashSenha($pass),
+                            'passwd' => Helper::hashPass($pass),
                             'dob' => $data_ok,
                             'codeactivation' => $key,
                             'ip' => Helper::getIP(),
@@ -232,7 +232,7 @@ class Signup extends Controller {
                         $this->db->insert('users', [
                             'username' => $user,
                             'email' => $inv->email,
-                            'passwd' => Helper::hashSenha($pass),
+                            'passwd' => Helper::hashPass($pass),
                             'status' => 'confirmed',
                             'dob' => $data_ok,
                             'ip' => Helper::getIP(),

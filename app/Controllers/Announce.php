@@ -272,7 +272,7 @@ class Announce extends Controller {
         // SEEDED, LETS MAKE IT VISIBLE THEN
         if ($seeder == "yes") {
             if ($torrent->banned != "yes") {
-                $updateset .= "visible" = "yes";
+                //$updateset .= "visible" = "yes";
             }
             $updateset .= "lastaction = '" . Helper::dateTime() . "'";
         }
