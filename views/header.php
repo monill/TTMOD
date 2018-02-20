@@ -44,6 +44,7 @@ $user = $db->select1("SELECT * FROM users WHERE id = :id", ["id" => 7]);
                     <li class="nav-item"><a class="nav-link" href="<?= url("/torrents"); ?>"> Torrents </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/faq"); ?>"> F.A.Q </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/rules"); ?>"> Rules </a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/polls"); ?>"> Polls </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/admin"); ?>"> AdminCP </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/logout"); ?>">Logout</a></li>
                 </ul>
