@@ -6,8 +6,11 @@ use App\Libs\Redirect;
 use App\Libs\Input;
 use App\Libs\Token;
 use App\Models\Torrent;
+use App\Libs\Torrent\MegaScrape;
 
 class Torrents extends Controller {
+
+    private $megaScrape;
 
     public function __construct()
     {
@@ -15,12 +18,14 @@ class Torrents extends Controller {
         // if (!$this->loggedIn()) {
         //     Redirect::to("/login");
         // }
+        $this->megaScrape = new MegaScrape();
     }
 
     private function __clone() { }
 
     public function index()
     {
+        $this->megaScrape->tor();
         $this->view->title = SNAME . " :: Torrents";
         $this->view->torrents = Torrent::all();
         $this->view->token = Token::generate();
@@ -34,7 +39,6 @@ class Torrents extends Controller {
         $this->view->token = Token::generate();
         $this->view->load("torrents/upload", false);
     }
-
 
     public function search()
     {

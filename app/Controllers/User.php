@@ -22,7 +22,7 @@ class User extends Controller {
         $this->view->load("staff/index", false);
     }
 
-    public function id($id = "")
+    public function id($id = '')
     {
         echo $id;
     }

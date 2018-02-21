@@ -1,5 +1,2 @@
 /vendor
 /.idea
-*.torrent
-/nbproject
-config/email.php

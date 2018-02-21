@@ -22,7 +22,7 @@ class Announce extends Controller {
         $browser = new BrowserDetection();
 
         echo $browser->getName();
-
+        echo "<br />";
         echo $browser->getUserAgent();
 
         //TODO

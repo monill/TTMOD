@@ -380,7 +380,7 @@ class Torrent extends Controller {
         if (isset($tid))
         {
             //TODO
-            //fix this passkey on users
+            //fix this passkey from user
             $user = $this->db->select1("SELECT `passkey` FROM `users` WHERE `id` = :idd AND `status` = 'confirmed' LIMIT 1", ["idd" => $tid]);
 
             $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `id` = :id LIMIT 1", ["id" => $tid]);
@@ -770,7 +770,6 @@ class Torrent extends Controller {
         }
 
     }
-
 
     public function addrating()
     {
