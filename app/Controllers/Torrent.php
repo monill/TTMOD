@@ -40,6 +40,10 @@ class Torrent extends Controller {
             LEFT JOIN torrent_categories ON torrents.category_id = torrent_categories.id LEFT JOIN users ON torrents.uploader_id = users.id
             WHERE torrents.id = :tid", ["tid" => $tid]);
 
+        if (empty($tor)) {
+            Redirect::to("/error");
+        }
+
         $files = $this->db->select("SELECT * FROM `torrent_files` WHERE `torrent_id` = :id ORDER BY `path` ASC", ["id" => $tid]);
 
         $comments = $this->db->select("SELECT torrent_comments.id, torrent_comments.comment, torrent_comments.created_at, torrent_comments.user_id,
@@ -175,7 +179,7 @@ class Torrent extends Controller {
                 'size' => $torrentsize,
                 'numfiles' => $filecount,
                 'anon' => $uploader,
-                'nfo' => '',
+                //'nfo' => '',
                 'announce' => $announce,
                 'external' => $external,
                 'uploader_id' => 7,
