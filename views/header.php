@@ -46,13 +46,8 @@ $user = $db->select1("SELECT * FROM users WHERE id = :id", ["id" => 7]);
                     <li class="nav-item"><a class="nav-link" href="<?= url("/rules"); ?>"> Rules </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/polls"); ?>"> Polls </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/admin"); ?>"> AdminCP </a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= url("/logout"); ?>">Logout</a></li>
                 </ul>
-
-                <form method="post" action="torrents-search.php" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" value="Search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Search </button>
-                </form>
+                <a class="btn btn-outline-success my-2 my-sm-0" href="<?= url("/logout"); ?>">Logout</a>
             </div>
         </nav>
         <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -80,24 +75,13 @@ $user = $db->select1("SELECT * FROM users WHERE id = :id", ["id" => 7]);
                             <i class="fa fa-signal text-blue text-bold"></i> Ratio: --- </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="<?= url("/account"); ?>">
                             <i class="fa fa-user text-purple text-bold"></i> Account </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class="fa fa-info"></i> Points: ---- </a>
                     </li>
-
-                    <?php
-                    //TODO
-                    //fix this userid
-                    $message =  $db->select("SELECT COUNT(*) FROM `messages` WHERE `receiver` = :uid AND `readed` = '0'", ["uid" => 7]);
-                    ?>
-                    <?php if(count($message) > 0): ?>
-                        <li class="nav-item"> <a class="nav-link" href="<?= url("/messages"); ?>"> <i class="fa fa-envelope text-red faa-shake animated text-bold"></i> <font color="red">[<?php echo count($message); ?>]</font>Message</a> </li>
-                    <?php else: ?>
-                        <li class="nav-item"> <a class="nav-link" href="<?= url("/messages"); ?>"> <i class="fa fa-envelope text-red text-bold"></i> Messages </a> </li>
-                    <?php endif; ?>
 
                 </ul>
             </div>

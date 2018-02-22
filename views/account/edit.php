@@ -1,6 +1,6 @@
 <?php
 
-$title = "this->user->username";
+$title = $this->user->username;
 $blockId = "f-" . sha1($title);
 
 ?>
@@ -24,16 +24,15 @@ $blockId = "f-" . sha1($title);
 
             <aside class="profile-info col-lg-9">
                 <section class="panel">
-
                     <div class="panel-body bio-graph-info">
 
-                        <form class="form-horizontal" role="form" action="" method="post" autocomplete="off">
+                        <form class="form-horizontal" role="form" action="<?= url("/account/saveedit"); ?>" method="post" autocomplete="off">
                             <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
 
                             <div class="form-group">
                                 <label for="info" class="col-lg-2 control-label">Info</label>
                                 <div class="col-lg-7">
-                                    <textarea name="info" id="info" class="form-control" cols="7" rows="4" placeholder="Info.."></textarea>
+                                    <textarea name="info" id="info" class="form-control" maxlength="1000" cols="7" rows="4"><?= $this->user->info; ?></textarea>
                                 </div>
                             </div>
                             <br />
@@ -44,11 +43,11 @@ $blockId = "f-" . sha1($title);
 
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="acceptpms" value="yes"> From All
+                                            <input type="radio" name="acceptpms" value="yes" <?php if ($this->user->acceptpms == 'yes'): ?> checked <?php endif; ?>> From All
                                         </label>
 
                                         <label>
-                                            <input type="radio" name="acceptpms" value="no"> From staff members only
+                                            <input type="radio" name="acceptpms" value="no" <?php if ($this->user->acceptpms == 'no'): ?> checked <?php endif; ?>> From staff members only
                                         </label>
                                         <p class="small">Determines what users can send you private messages.</p>
                                     </div>
@@ -62,15 +61,15 @@ $blockId = "f-" . sha1($title);
                                 <div class="col-lg-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="privacidade" value="forte"> Private
+                                            <input type="radio" name="privacy" value="private" <?php if ($this->user->privacy == 'private'): ?> checked <?php endif; ?>> Private
                                         </label>
 
                                         <label>
-                                            <input type="radio" name="privacidade" value="normal"> Friends
+                                            <input type="radio" name="privacy" value="friends" <?php if ($this->user->privacy == 'friends'): ?> checked <?php endif; ?>> Friends
                                         </label>
 
                                         <label>
-                                            <input type="radio" name="privacidade" value="fraca"> Public
+                                            <input type="radio" name="privacy" value="public" <?php if ($this->user->privacy == 'public'): ?> checked <?php endif; ?>> Public
                                         </label>
                                         <p class="small">Determines where your username and details are displayed.</p>
                                     </div>
@@ -93,7 +92,7 @@ $blockId = "f-" . sha1($title);
                             <div class="form-group">
                                 <label  class="col-lg-2 control-label">Avatar</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" name="avatar" id="avatar" value="">
+                                    <input type="text" class="form-control" name="avatar" id="avatar" value="<?= $this->user->avatar; ?>">
                                     <p class="small">The width should be 200px-300px (will be resized if necessary). <br>
                                         If you need a HOST for the image, use the: <a href="https://imgur.com/" target="_blank">ImgUr</a>.</p>
                                 </div>
@@ -103,7 +102,15 @@ $blockId = "f-" . sha1($title);
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Title</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" name="title" value="">
+                                    <input type="text" class="form-control" name="title" maxlength="240" value="<?= $this->user->title; ?>">
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Signature</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" name="signature" maxlength="240" value="<?= $this->user->signature; ?>">
                                 </div>
                             </div>
                             <br />
@@ -111,17 +118,12 @@ $blockId = "f-" . sha1($title);
                             <div class="form-group">
                                 <label class="control-label col-lg-2">Estate</label>
                                 <div class="col-lg-4">
-                                    <select class="form-control" name="estadoid">
-                                        <?php foreach (isset($this->estates) ? $this->estates : $this->estates as $estate): ?>
-                                            <option value="<?= intval($estate->id); ?>"><?= $estate->name; ?></option>
-                                        <?php endforeach; ?>
-
-                                        <?php foreach ($estados as $estado): ?>
-                                            <option value="<?= (int)$estado['id']; ?>"
-                                                <?php if(isset($usuario['estado_id']) && (int)$estado['id'] == $usuario['estado_id']): ?>
-                                                    selected
-                                                <?php endif; ?>
-                                            > <?= $estado['estado'] ?> </option>
+                                    <select class="form-control" name="estate_id">
+                                        <?php foreach ($this->estates as $estate): ?>
+                                            <option value="<?= $estate->id; ?>"
+                                            <?php if ($this->user->estate_id && intval($estate->id) == $this->user->estate_id): ?>
+                                                selected
+                                            <?php endif; ?>> <?= $estate->name; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -132,9 +134,9 @@ $blockId = "f-" . sha1($title);
                                 <label for="gender" class="col-lg-2 control-label"> Gender </label>
                                 <div class="col-lg-4">
                                     <select name="gender" id="gender" class="form-control" size="1">
-                                        <option value="na">N/A</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        <option value="na" <?php if ($this->user->sex == 'na'): ?> selected <?php endif; ?>>N/A</option>
+                                        <option value="male" <?php if ($this->user->sex == 'male'): ?> selected <?php endif; ?>>Male</option>
+                                        <option value="female" <?php if ($this->user->sex == 'female'): ?> selected <?php endif; ?>>Female</option>
                                     </select>
                                 </div>
                             </div>
@@ -142,12 +144,12 @@ $blockId = "f-" . sha1($title);
 
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
-                                    <button type="submit" name="updateperfil" class="btn btn-success">Save</button>
+                                    <button type="submit" class="btn btn-success">Save</button>
                                     <button type="button" class="btn btn-default">Cancel</button>
                                 </div>
                             </div>
                         </form>
-                        </div>
+                    </div>
                 </section>
             </aside>
         </div>

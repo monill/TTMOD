@@ -1,6 +1,6 @@
 <?php
-use App\Libs\Session;
-$title = Session::get("username");
+
+$title = \App\Libs\Session::get("username");
 $blockId = "b-" . sha1($title);
 
 $avatar = "https://placehold.it/200x300";

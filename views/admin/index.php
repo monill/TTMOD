@@ -1,4 +1,3 @@
-
-
-
-Admin area
+<?php
+include 'menus.php';
+?>

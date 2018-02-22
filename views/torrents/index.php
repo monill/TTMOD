@@ -56,18 +56,18 @@ $blockId = "f-" . sha1($title);
                     <?php foreach (isset($this->torrents) ? $this->torrents : $this->torrents as $tor): ?>
                         <tr>
                             <th scope="row"> <a href="<?= url("/torrents/categ/") . $tor->cat_slug; ?>"> <?= $tor->cat_name; ?> </a> </th>
-                            <th>
+                            <td>
                                 <a href="<?= url("/torrent/view/") . $tor->id; ?>"> <?= $tor->name; ?> </a>
                                 <?php if ($tor->freeleech == "yes"): ?>
                                     <img src="<?= URL; ?>/imgs/free.gif" alt="Freeleech" title="Freeleech" />
                                 <?php endif; ?>
-                            </th>
-                            <th> <?= date("d-m-Y", strtotime($tor->created_at)); ?> </th>
-                            <th> <?= Helper::makeSize($tor->size); ?> </th>
-                            <th> <?= $tor->seeders; ?> </th>
-                            <th> <?= $tor->leechers; ?> </th>
-                            <th> <?= $tor->comments; ?> </th>
-                            <th> <img src="<?= URL . '/imgs/health/health_' . Helper::health($tor->seeders, $tor->leechers) . '.gif'; ?>" alt="Health"/> </th>
+                            </td>
+                            <td> <?= date("d-m-Y", strtotime($tor->created_at)); ?> </td>
+                            <td> <?= Helper::makeSize($tor->size); ?> </td>
+                            <td> <?= $tor->seeders; ?> </td>
+                            <td> <?= $tor->leechers; ?> </td>
+                            <td> <?= $tor->comments; ?> </td>
+                            <td> <img src="<?= URL . '/imgs/health/health_' . Helper::health($tor->seeders, $tor->leechers) . '.gif'; ?>" alt="Health"/> </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

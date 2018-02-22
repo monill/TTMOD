@@ -22,7 +22,7 @@ $blockId = "f-" . sha1($title);
                 <b> Username: </b> <?= $this->user->username; ?> <br /> <br />
                 <b> Class: </b> <?= ucfirst($this->user->class); ?> <br /> <br />
                 <b> Email: </b> <?= $this->user->email; ?> <br /> <br />
-                <b> Joined: </b> <?= date("d-m-Y", strtotime($this->user->active_at)); ?> <br /><br />
+                <b> Joined: </b> <?= date("d-m-Y", strtotime($this->user->actived_at)); ?> <br /><br />
                 <b> Age: </b> <?= $this->user->dob; ?> <br /><br />
                 <b> Gender: </b> <?= ucfirst($this->user->sex); ?> <br /><br />
 
@@ -31,6 +31,11 @@ $blockId = "f-" . sha1($title);
                 <b> Privacy Level: </b> <?= ucfirst($this->user->privacy); ?> <br /><br />
                 <b> Signature: </b> <?= $this->user->signature; ?> <br /><br />
                 <b> Passkey: </b> <?= $this->user->passkey; ?> <br /><br />
+
+                <b> Points: </b> <?= $this->user->points; ?> <br /><br />
+                <b> Signature: </b> <?= $this->user->signature; ?> <br /><br />
+
+                <b> Info: </b> <?= $this->user->info; ?> <br /><br />
 
                 <?php
                 //TODO

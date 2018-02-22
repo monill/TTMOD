@@ -1,6 +1,6 @@
 <?php
 
-$title = "this->user->username";
+$title = \App\Libs\Session::get("username"); //username
 $blockId = "f-" . sha1($title);
 
 ?>
@@ -22,20 +22,20 @@ $blockId = "f-" . sha1($title);
                         <div class="panel-heading"> Set new password </div>
                         <div class="panel-body">
 
-                            <form class="form-horizontal" role="form" action="" method="post" autocomplete="off">
+                            <form class="form-horizontal" role="form" action="<?= url("/account/updatepass"); ?>" method="post" autocomplete="off">
                                 <input type="hidden" name="token" value="<?php echo isset($this->token) ? $this->token : $this->token; ?>" />
 
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label"> New password </label>
                                     <div class="col-lg-4">
-                                        <input type="password" class="form-control" name="passwd" id="passwd">
+                                        <input type="password" class="form-control" minlength="6" maxlength="16" name="passwd" id="passwd">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label"> Repeat password </label>
                                     <div class="col-lg-4">
-                                        <input type="password" class="form-control" name="repasswd" id="repasswd">
+                                        <input type="password" class="form-control" minlength="6" maxlength="16" name="repasswd" id="repasswd">
                                     </div>
                                 </div>
 

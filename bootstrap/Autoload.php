@@ -24,9 +24,9 @@ class Autoload {
         // create array with URL parts in $url
         $this->splitUrl();
         //start session
-        Session::startSession();
+        //Session::startSession();
         //start AntiDDos
-        $firewall = new AntiDDos();
+        //$firewall = new AntiDDos();
 
         // check for controller: no controller given ? then load start-page
         if (!$this->url_controller) {

@@ -32,7 +32,7 @@ class AntiDDos {
             }
         }
 
-        if ($count > 10) {
+        if ($count > 15) {
             file_put_contents(ROOT . "data/logs/ip-banned.txt", $ip . "\r\n");
             if (isset($_COOKIE["hash"])) {
                 file_put_contents(ROOT . "data/logs/ip-banned.txt", $_COOKIE["hash"] . "\r\n");
