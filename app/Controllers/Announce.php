@@ -7,7 +7,8 @@ use App\Libs\Helper;
 use App\Libs\Input;
 use App\Libs\Torrent\Bencode;
 
-class Announce extends Controller {
+class Announce extends Controller
+{
 
     public function __construct()
     {

@@ -26,7 +26,7 @@ class Autoload {
         //start session
         //Session::startSession();
         //start AntiDDos
-        //$firewall = new AntiDDos();
+        //AntiDDos::start();
 
         // check for controller: no controller given ? then load start-page
         if (!$this->url_controller) {

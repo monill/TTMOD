@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Libs\Database;
 
-class User extends Model {
-
+class User extends Model
+{
     public function __construct()
     {
         //parent::__construct();

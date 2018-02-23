@@ -6,8 +6,8 @@ use App\Libs\BrowserDetection;
 use App\Libs\Database;
 use App\Libs\Helper;
 
-class Log extends Model {
-
+class Log extends Model
+{
     public function __construct()
     {
         parent::__construct();
@@ -22,11 +22,11 @@ class Log extends Model {
         $browser = new BrowserDetection();
 
         return $db->insert('logs', [
-                    'text' => Helper::escape($text),
-                    'ip' => Helper::getIP(),
-                    'browser' => $browser->getUserAgent(),
-                    'os_system' => $browser->getPlatformVersion(),
-                    'created_at' => Helper::dateTime()
+            'text' => Helper::escape($text),
+            'ip' => Helper::getIP(),
+            'browser' => $browser->getUserAgent(),
+            'os_system' => $browser->getPlatformVersion(),
+            'created_at' => Helper::dateTime()
         ]);
     }
 

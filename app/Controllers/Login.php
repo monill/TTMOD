@@ -10,8 +10,8 @@ use App\Libs\Session;
 use App\Libs\Token;
 use App\Libs\Validation;
 
-class Login extends Controller {
-
+class Login extends Controller
+{
     private $loginFingerPrint = LOGINFG;
     public $valid;
 

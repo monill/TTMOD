@@ -2,12 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Libs\Helper;
 use App\Libs\Redirect;
 use App\Libs\Input;
+use App\Libs\Session;
 use App\Libs\Token;
+use App\Models\Log;
 
 class Report extends Controller
 {
+    private $username;
 
     public function __construct()
     {
@@ -15,6 +19,7 @@ class Report extends Controller
         // if (!$this->loggedIn()) {
         //     Redirect::to("/login");
         // }
+        $this->username = Session::get("username");
     }
 
     private function __clone() { }
@@ -100,48 +105,104 @@ class Report extends Controller
         }
     }
 
-    public function addtreport()
+    public function addtreport() //Report a Torrent
     {
         if (Input::exist())
         {
             $tid = Input::get("tid");
             $reason = Input::get("reason");
 
+            $this->db->insert('reports', [
+                'added_by' => Session::get("userid"),
+                'link_id' => $tid,
+                'type' => 'torrent',
+                'reason' => Helper::escape($reason),
+                'created_at' => Helper::dateTime()
+            ]);
+
+            Log::create("User: {$this->username} reported the torrent {$tid}");
+
+            $msg = "Thank you for you comment";
+
+            Redirect::to("/torrents");
+
         } else {
             Redirect::to("/torrents");
         }
     }
 
-    public function addfreport()
+    public function addfreport() //Report a Topic
     {
         if (Input::exist())
         {
             $fid = Input::get("fid");
             $reason = Input::get("reason");
 
+            $this->db->insert('reports', [
+                'added_by' => Session::get("userid"),
+                'link_id' => $fid,
+                'type' => 'forum',
+                'reason' => Helper::escape($reason),
+                'created_at' => Helper::dateTime()
+            ]);
+
+            Log::create("User: {$this->username} reported the topic {$fid}");
+
+            $msg = "Thank you for you comment";
+
+            Redirect::to("/torrents");
+
         } else {
             Redirect::to("/torrents");
         }
     }
 
-    public function addureport()
+    public function addureport() //Report a User
     {
         if (Input::exist())
         {
             $uid = Input::get("uid");
             $reason = Input::get("reason");
 
+            $this->db->insert('reports', [
+                'added_by' => Session::get("userid"),
+                'link_id' => $uid,
+                'type' => 'user',
+                'reason' => Helper::escape($reason),
+                'created_at' => Helper::dateTime()
+            ]);
+
+            Log::create("User: {$this->username} reported the user {$uid}");
+
+            $msg = "Thank you for you comment";
+
+            Redirect::to("/members");
+
         } else {
             Redirect::to("/members");
         }
     }
 
-    public function addcreport()
+    public function addcreport() //Report a Comment
     {
         if (Input::exist())
         {
             $cid = Input::get("cid");
             $reason = Input::get("reason");
+
+            $this->db->insert('reports', [
+                'added_by' => Session::get("userid"),
+                'link_id' => $cid,
+                'type' => 'comment',
+                'reason' => Helper::escape($reason),
+                'created_at' => Helper::dateTime()
+            ]);
+
+            Log::create("User: {$this->username} reported the comment {$cid}");
+
+            $msg = "Thank you for you comment";
+
+            Redirect::to("/torrents");
 
         } else {
             Redirect::to("/torrents");

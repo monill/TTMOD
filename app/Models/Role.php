@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Libs\Database;
 
-class Role {
-
+class Role
+{
     protected $permissions;
     public $db;
 
@@ -68,10 +68,7 @@ class Role {
     {
         $db = Database::getInstance();
 
-        $sql = "DELETE t1, t2, t3 FROM roles as t1
-            JOIN user_roles as t2 on t1.role_id = t2.role_id
-            JOIN role_perms as t3 on t1.role_id = t3.role_id
-            WHERE t1.role_id = :role_id";
+        $sql = "DELETE t1, t2, t3 FROM roles as t1 JOIN user_roles as t2 on t1.role_id = t2.role_id JOIN role_perms as t3 on t1.role_id = t3.role_id WHERE t1.role_id = :role_id";
 
         $sth = $db->prepare($sql);
         $sth->bindParam(":role_id", $role_id, \PDO::PARAM_INT);

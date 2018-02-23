@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use App\Libs\Redirect;
 
-class Forum extends Controller {
-
+class Forum extends Controller
+{
     public function __construct()
     {
         parent::__construct();

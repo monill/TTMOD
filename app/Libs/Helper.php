@@ -2,9 +2,8 @@
 
 namespace App\Libs;
 
-use App\Libs\Database;
-
-class Helper {
+class Helper
+{
 
     public function __construct() { }
 

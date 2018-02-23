@@ -12,8 +12,8 @@ use App\Libs\Validation;
 use App\Models\Estate;
 use App\Models\Log;
 
-class Signup extends Controller {
-
+class Signup extends Controller
+{
     private $mailer;
     private $valid;
 

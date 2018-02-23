@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-class Error extends Controller {
-
+class Error extends Controller
+{
     public function __construct()
     {
         parent::__construct();

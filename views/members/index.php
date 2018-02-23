@@ -40,13 +40,12 @@ use App\Models\User;
         </form>
 
         <p align="center">
-            <a href="<?= url("/members"); ?>"> <b> ALL </b> </a> -
+            <a href="<?= url("/members"); ?>"> <b> ALL </b> </a>
             <?php foreach (range("a", "z") as $l): ?>
-                <?php $L = strtoupper($l); ?>
-                <?php if ($l == ""): ?>
-                    <b><?= $L; ?></b>
+                <?php if ($l == $this->letter): ?>
+                    - <b><?= strtoupper($l); ?></b>
                 <?php  else: ?>
-                    <a href="<?= url("/members/letter/") . $l; ?>"> <b> <?= $L; ?> </b> </a>
+                    - <a href="<?= url("/members/letter/") . $l; ?>"> <b> <?= strtoupper($l); ?> </b> </a>
                 <?php endif; ?>
             <?php endforeach; ?>
         </p>
@@ -62,7 +61,7 @@ use App\Models\User;
                 </tr>
             </thead>
             <tbody>
-                <?php foreach (isset($this->members) ? $this->members : $this->members as $member): ?>
+                <?php foreach ($this->members as $member): ?>
                     <tr>
                         <th> <a href="<?= url("/user/id/") . $member->id; ?>"> <?= $member->username; ?> </a> </th>
                         <td> <?= date("d-m-Y", strtotime($member->created_at)); ?> </td>

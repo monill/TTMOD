@@ -5,8 +5,8 @@ namespace App\Controllers;
 use App\Libs\Redirect;
 use App\Models\News;
 
-class Home extends Controller {
-
+class Home extends Controller
+{
     public function __construct()
     {
         parent::__construct();

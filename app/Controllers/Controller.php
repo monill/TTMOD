@@ -8,8 +8,8 @@ use App\Libs\Session;
 use App\Libs\Views;
 use App\Libs\Database;
 
-class Controller {
-
+class Controller
+{
     public $view = null;
     public $db;
     private $loginFingerPrint = LOGINFG;

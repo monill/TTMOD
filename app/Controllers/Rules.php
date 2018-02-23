@@ -5,8 +5,8 @@ namespace App\Controllers;
 use App\Libs\Redirect;
 use App\Models\Rule;
 
-class Rules extends Controller {
-
+class Rules extends Controller
+{
     public function __construct()
     {
         parent::__construct();

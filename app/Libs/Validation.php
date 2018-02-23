@@ -2,8 +2,8 @@
 
 namespace App\Libs;
 
-class Validation {
-
+class Validation
+{
     public $db;
 
     public function __construct()

@@ -5,8 +5,8 @@ namespace App\Controllers;
 use App\Libs\Database;
 use App\Libs\Helper;
 
-class Index extends Controller {
-
+class Index extends Controller
+{
     public function __construct()
     {
         parent::__construct();

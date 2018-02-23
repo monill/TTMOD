@@ -8,8 +8,8 @@ use App\Libs\Token;
 use App\Models\Torrent;
 use App\Libs\Torrent\MegaScrape;
 
-class Torrents extends Controller {
-
+class Torrents extends Controller
+{
     private $megaScrape;
 
     public function __construct()

@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Libs\Database;
 
-class Rule extends Model {
-
+class Rule extends Model
+{
     public function __construct()
     {
         parent::__construct();

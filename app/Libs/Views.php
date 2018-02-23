@@ -2,8 +2,8 @@
 
 namespace App\Libs;
 
-class Views {
-
+class Views
+{
     public function __construct() { }
 
     private function __clone() { }

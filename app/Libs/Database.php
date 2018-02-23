@@ -5,8 +5,8 @@ namespace App\Libs;
 use PDO;
 use PDOException;
 
-class Database extends PDO {
-
+class Database extends PDO
+{
     private $type = "mysql";
     private $host = "localhost";
     private $username = "root";
@@ -23,8 +23,8 @@ class Database extends PDO {
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->exec("SET CHARACTER SET utf8");
         } catch (PDOException $exc) {
-            echo "<b>Connection error:</b> " . $exc->getMessage() . "<br>\n";
-            echo "<br>\nPHP Version : " . phpversion() . "<br>\n";
+            echo "<b>Connection error:</b> " . $exc->getMessage() . "<br />";
+            echo "<br /> PHP Version : " . phpversion() . "<br />";
             exit();
         }
     }

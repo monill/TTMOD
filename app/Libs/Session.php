@@ -2,8 +2,8 @@
 
 namespace App\Libs;
 
-class Session {
-
+class Session
+{
     private $onlyCookies = false;
     private $siteNome = SNAME;
     private $sessionSecure = false;
@@ -86,7 +86,8 @@ class Session {
     * Unset session data with provided key.
     * @param $key
     */
-    public static function destroy($key) {
+    public static function destroy($key)
+    {
         if ( isset($_SESSION[$key]) ) {
             unset($_SESSION[$key]);
         }

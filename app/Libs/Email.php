@@ -6,7 +6,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\Libs\Helper;
 
-
 class Email extends PHPMailer {
 
     public function __construct() { }

@@ -2,12 +2,10 @@
 
 namespace App\Libs;
 
-class Cookie {
+class Cookie
+{
 
-    public function __construct()
-    {
-
-    }
+    public function __construct() { }
 
     private function __clone() { }
 
@@ -21,7 +19,7 @@ class Cookie {
         if (isset($_COOKIE[$name])) {
 			return $_COOKIE[$name];
 		} else {
-			return $defaultValue;
+			return $name;
 		}
     }
 

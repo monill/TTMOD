@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Libs\Database;
 
-class Model {
-
+class Model
+{
     public $db;
 
     public function __construct()

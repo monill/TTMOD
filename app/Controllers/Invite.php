@@ -10,8 +10,8 @@ use App\Libs\Input;
 use App\Libs\Validation;
 use App\Models\Log;
 
-class Invite extends Controller {
-
+class Invite extends Controller
+{
     private $valid;
     private $mailer;
 

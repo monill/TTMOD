@@ -6,8 +6,8 @@ use App\Libs\Redirect;
 use App\Libs\Token;
 use App\Models\Message;
 
-class Messages extends Controller {
-
+class Messages extends Controller
+{
     public function __construct()
     {
         parent::__construct();

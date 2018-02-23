@@ -5,8 +5,8 @@ namespace App\Controllers;
 use App\Libs\Redirect;
 use App\Models\User;
 
-class Staff extends Controller {
-
+class Staff extends Controller
+{
     public function __construct()
     {
         parent::__construct();

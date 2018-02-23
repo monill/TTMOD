@@ -5,8 +5,8 @@ namespace App\Models;
 use App\Libs\Database;
 
 //if change to New dont work, because is a reserved name
-class News extends Model {
-
+class News extends Model
+{
     public function __construct()
     {
         parent::__construct();

@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-class Scrape extends Controller {
-
+class Scrape extends Controller
+{
     //TODO
     //doing or delete?
 

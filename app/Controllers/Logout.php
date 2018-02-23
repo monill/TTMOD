@@ -5,8 +5,8 @@ namespace App\Controllers;
 use App\Libs\Session;
 use App\Libs\Redirect;
 
-class Logout extends Controller {
-
+class Logout extends Controller
+{
     public function __construct()
     {
         parent::__construct();

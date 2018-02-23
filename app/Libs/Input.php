@@ -2,8 +2,8 @@
 
 namespace App\Libs;
 
-class Input {
-
+class Input
+{
     public function __construct() { }
 
     private function __clone() { }

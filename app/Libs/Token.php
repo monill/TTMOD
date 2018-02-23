@@ -4,8 +4,8 @@ namespace App\Libs;
 
 use App\Libs\Session;
 
-class Token {
-
+class Token
+{
     public function __construct() { }
 
     private function __clone() { }

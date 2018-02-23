@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Libs\Database;
 
-class Torrent extends Model {
-
+class Torrent extends Model
+{
     public function __construct()
     {
         parent::__construct();

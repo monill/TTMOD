@@ -7,8 +7,8 @@ use App\Libs\Input;
 use App\Libs\Token;
 use App\Models\User;
 
-class Members extends Controller {
-
+class Members extends Controller
+{
     public function __construct()
     {
         parent::__construct();
@@ -38,11 +38,13 @@ class Members extends Controller {
                 $this->view->title = SNAME . " :: Members with letter " . strtoupper($l);
                 $this->view->token = Token::generate();
                 $this->view->members = $search;
+                $this->view->letter = $l;
                 $this->view->load("members/index", false);
             } else {
                 $this->view->title = SNAME . " :: Members not found";
                 $this->view->token = Token::generate();
                 $this->view->members = $search;
+                $this->view->letter = $l;
                 $this->view->load("members/index", false);
             }
 

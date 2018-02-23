@@ -4,7 +4,8 @@ namespace App\Controllers;
 
 use App\Libs\Redirect;
 
-class Chat extends Controller {
+class Chat extends Controller
+{
 
     public function __construct()
     {

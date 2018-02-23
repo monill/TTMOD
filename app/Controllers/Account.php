@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Libs\Redirect;
+use App\Libs\Session;
 use App\Libs\Validation;
 use App\Models\Estate;
 use App\Libs\Token;
@@ -10,9 +11,11 @@ use App\Libs\Input;
 use App\Models\Log;
 use App\Libs\Helper;
 
-class Account extends Controller {
-
+class Account extends Controller
+{
     private $valid;
+    private $username;
+
     //TODO
     //fix all user_id in the functions
     //finish all this
@@ -24,6 +27,7 @@ class Account extends Controller {
         //     Redirect::to("/login");
         // }
         $this->valid = new Validation();
+        $this->username = Session::get("username");
     }
 
     private function __clone() { }
@@ -121,7 +125,7 @@ class Account extends Controller {
                         'msg' => 'Profile updated successfully'
                     ];
 
-                    Log::create("User {$user->username} update profile.");
+                    Log::create("User: {$user->username} update profile.");
 
                     echo json_encode($result);
 
@@ -165,7 +169,7 @@ class Account extends Controller {
                 'updated_at' => Helper::dateTime()
             ], "`id` = :uid", ["uid" => 7]);
 
-            Log::create("User {username} change the password.");
+            Log::create("User {$this->username} change the password.");
 
             $result = [
                 'status' => 'success',

@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use App\Libs\Redirect;
 
-class User extends Controller {
-
+class User extends Controller
+{
     public function __construct()
     {
         parent::__construct();

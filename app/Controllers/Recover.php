@@ -10,8 +10,8 @@ use App\Libs\Token;
 use App\Libs\Validation;
 use App\Models\Log;
 
-class Recover extends Controller {
-
+class Recover extends Controller
+{
     private $mailer;
     private $login;
     private $valid;

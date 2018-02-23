@@ -13,8 +13,8 @@ use App\Libs\Torrent\Parse;
 use App\Libs\Torrent\UdpScraper;
 use App\Models\Log;
 
-class Torrent extends Controller {
-
+class Torrent extends Controller
+{
     public function __construct()
     {
         parent::__construct();

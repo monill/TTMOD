@@ -2,9 +2,13 @@
 
 namespace App\Libs;
 
-class AntiDDos {
+class AntiDDos
+{
+    public function __construct() { }
 
-    public function __construct()
+    private function __clone() { }
+
+    public static function start()
     {
         $ip = Helper::getIP();
 
@@ -41,7 +45,5 @@ class AntiDDos {
 
         file_put_contents(ROOT . "data/logs/ip.txt", serialize($ips));
     }
-
-    private function __clone() { }
 
 }

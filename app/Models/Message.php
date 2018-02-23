@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Libs\Database;
 
-class Message extends Model {
-
+class Message extends Model
+{
     public function __construct()
     {
         parent::__construct();

@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Libs\Input;
 use App\Libs\Redirect;
 
-class Admin extends Controller {
+class Admin extends Controller
+{
 
     public function __construct()
     {
@@ -152,8 +154,26 @@ class Admin extends Controller {
 
     public function censor()
     {
-        $this->view->title = "Admin CPanel - Censor";
-        $this->view->load("admin/censor", false);
+        if (Input::exist())
+        {
+            $badwords = Input::get("badwords");
+
+            $f = fopen("censor.txt", "w+");
+            fwrite($f, $badwords);
+            fclose($f);
+
+            Redirect::to("/admin/censor");
+
+        } else {
+
+            $f = fopen("censor.txt", "r");
+            $badwords = fread($f, filesize("censor.txt"));
+            fclose($f);
+
+            $this->view->title = "Admin CPanel - Censor";
+            $this->view->badwords = $badwords;
+            $this->view->load("admin/censor", false);
+        }
     }
 
     public function forum()
@@ -170,8 +190,42 @@ class Admin extends Controller {
 
     public function privacylevel()
     {
-        $this->view->title = "Admin CPanel - Privacy Level";
-        $this->view->load("admin/privacylevel", false);
+        if (Input::exist())
+        {
+            $where = array();
+
+            $type = Input::get("type");
+
+            switch ($type) {
+                case 'public':
+                    $where[] = "privacy = 'public'";
+                    break;
+                case 'friends':
+                    $where[] = "privacy = 'friends'";
+                    break;
+                case 'private':
+                    $where[] = "privacy = 'private'";
+                    break;
+                default:
+                    break;
+            }
+
+            $where[] = "status = 'confirmed'";
+
+            $where = implode(" AND ", $where);
+
+            $users = $this->db->select("SELECT id, username, class, email, ip, created_at, lastlogin FROM users WHERE {$where} ORDER BY username DESC");
+            $this->view->title = "Admin CPanel - Privacy Level";
+            $this->view->users = $users;
+            $this->view->load("admin/privacylevel", false);
+
+        } else {
+            $users = $this->db->select("SELECT id, username, class, email, ip, created_at, lastlogin FROM users");
+            $this->view->title = "Admin CPanel - Privacy Level";
+            $this->view->users = $users;
+            $this->view->load("admin/privacylevel", false);
+        }
+
     }
 
     public function pendinginvite()
