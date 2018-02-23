@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 20, 2018 at 09:10 PM
+-- Generation Time: Feb 23, 2018 at 01:47 AM
 -- Server version: 10.2.8-MariaDB
 -- PHP Version: 7.1.9
 
@@ -202,6 +202,13 @@ CREATE TABLE IF NOT EXISTS `guests` (
   `time` decimal(20,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `guests`
+--
+
+INSERT INTO `guests` (`ip`, `time`) VALUES
+('::1', '1519229527');
+
 -- --------------------------------------------------------
 
 --
@@ -223,13 +230,6 @@ CREATE TABLE IF NOT EXISTS `invites` (
   KEY `from_userid` (`user_id`),
   KEY `accepted_by` (`accepted_by`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `invites`
---
-
-INSERT INTO `invites` (`id`, `user_id`, `email`, `code`, `expires_on`, `accepted_by`, `accepted_at`, `created_at`, `update_at`) VALUES
-(2, 7, 'juaorok@hotmail.com', '', '0000-00-00', 21, '2018-02-16 14:42:59', '2018-02-16 13:49:02', '2018-02-16 14:42:59');
 
 -- --------------------------------------------------------
 
@@ -265,7 +265,6 @@ INSERT INTO `layouts` (`id`, `named`, `name`, `position`, `description`, `enable
 (9, 'usersonline', 'usersonline', 'middle', 'Description here...', 0, 1),
 (10, 'Main Category', 'maincats', 'left', 'Description here...', 0, 3),
 (11, 'simplesearch', 'simplesearch', 'right', 'Description here...', 0, 4),
-(12, 'advancesearch', 'advancesearch', 'right', 'Description here...', 0, 6),
 (13, 'latestimages', 'latestimages', 'right', 'Description here...', 0, 7),
 (14, 'mostactivetorrents', 'mostactivetorrents', 'left', 'Description here...', 0, 10),
 (15, 'scrollingnews', 'scrollingnews', 'left', 'Description here...', 0, 9),
@@ -291,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `os_system` varchar(100) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -359,7 +358,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `perm_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `perm_desc` varchar(45) NOT NULL,
   PRIMARY KEY (`perm_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `permissions`
@@ -383,7 +382,11 @@ INSERT INTO `permissions` (`perm_id`, `perm_desc`) VALUES
 (15, 'editforum'),
 (16, 'deleteforum'),
 (17, 'createtopic'),
-(18, 'chataccess');
+(18, 'chataccess'),
+(19, 'viewpoll'),
+(20, 'editpoll'),
+(21, 'deletepoll'),
+(22, 'createpoll');
 
 -- --------------------------------------------------------
 
@@ -398,15 +401,7 @@ CREATE TABLE IF NOT EXISTS `poll_answers` (
   `answer` varchar(250) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `question_id` (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `poll_answers`
---
-
-INSERT INTO `poll_answers` (`id`, `question_id`, `answer`) VALUES
-(1, 1, 'yes'),
-(2, 1, 'no');
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -425,15 +420,7 @@ CREATE TABLE IF NOT EXISTS `poll_polls` (
   KEY `question_id` (`question_id`),
   KEY `answer_id` (`answer_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `poll_polls`
---
-
-INSERT INTO `poll_polls` (`id`, `question_id`, `answer_id`, `user_id`, `from_ip`) VALUES
-(1, 1, 2, 7, '::1'),
-(2, 1, 1, 7, NULL);
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -451,14 +438,7 @@ CREATE TABLE IF NOT EXISTS `poll_questions` (
   `active` tinyint(2) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `poll_questions`
---
-
-INSERT INTO `poll_questions` (`id`, `created_by`, `question`, `created_at`, `expery_at`, `active`) VALUES
-(1, 7, 'this is working', '2018-02-20 12:09:07', '2018-02-20 12:09:07', 1);
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -481,7 +461,14 @@ CREATE TABLE IF NOT EXISTS `reports` (
   KEY `added_by` (`added_by`),
   KEY `link_id` (`link_id`),
   KEY `dealt_by` (`dealt_by`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`id`, `added_by`, `link_id`, `type`, `reason`, `dealt_by`, `solved`, `created_at`, `updated_at`) VALUES
+(1, 7, 5, 'torrent', 'this is my', NULL, 'no', '2018-02-22 22:13:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -634,16 +621,14 @@ CREATE TABLE IF NOT EXISTS `torrents` (
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
   KEY `uploader` (`uploader_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `torrents`
 --
 
 INSERT INTO `torrents` (`id`, `info_hash`, `name`, `filename`, `description`, `poster`, `image1`, `image2`, `image3`, `category_id`, `size`, `numfiles`, `views`, `comments`, `downs`, `times_completed`, `leechers`, `seeders`, `visible`, `banned`, `anon`, `nfo`, `announce`, `external`, `freeleech`, `thanks`, `uploader_id`, `created_at`, `updated_at`) VALUES
-(2, '42ac71d699dad7d14a10c3fcf6363f693a884e9a', 'New.Girl.S06E18.HDTV.720p', 'New.Girl.S06E18.720p.HDTV.x264-AVS[rarbg]', 'aaaaaaaaaaaa dasdas dasd', '', '', '', '', 2, 519968111, 3, 81, 1, 1, 9, 2, 6, 'yes', 'no', 'no', '', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-10 15:33:41', '2018-02-13 14:17:54'),
-(3, '71ff9e05e9606e379d1f1fea13a5ed5a2360c06c', 'The.Expanse.S02E05.720p.HDTV.x264-SVA[rarbg]', 'The.Expanse.S02E05.720p.HDTV.x264-SVA[rarbg]', '222222222222222222', 'https://www.space.ca/wp-content/uploads/2016/12/The-Expanse-1200x675.jpg', 'https://cdn.imagecurl.com/images/26567124274805533901.jpg', '', '', 2, 1118214143, 3, 270, 2, 0, 8, 0, 24, 'yes', 'no', 'no', '', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-10 15:34:11', '2018-02-05 17:11:48'),
-(4, '66e7bedb32d44432ad9750faf095328330d4a167', 'The.Big.Bang.Theory.S11E13.720p.HDTV.x264-AVS[rarbg]', 'The.Big.Bang.Theory.S11E13.720p.HDTV.x264-AVS[rarbg]', '999999999999999', '', '', '', '', 2, 656104607, 3, 49, 0, 0, 211184, 82, 768, 'yes', 'no', 'yes', '', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-10 15:58:42', '2018-02-10 17:14:55');
+(5, '268c5313b21b8175b3634d85c5e28c8772e1b097', 'Arrow.S06E05.720p.HDTV.x264-AVS[rarbg]', 'Arrow.S06E05.720p.HDTV.x264-AVS[rarbg]', 'dedeedededed', '', '', '', '', 2, 990676710, 3, 7, 0, 0, 0, 0, 0, 'yes', 'no', 'yes', 'no', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-21 16:06:23', '2018-02-22 13:10:23');
 
 -- --------------------------------------------------------
 
@@ -662,16 +647,14 @@ CREATE TABLE IF NOT EXISTS `torrent_announces` (
   `online` enum('yes','no') NOT NULL DEFAULT 'no',
   PRIMARY KEY (`id`),
   KEY `torrent_id` (`torrent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `torrent_announces`
 --
 
 INSERT INTO `torrent_announces` (`id`, `torrent_id`, `url`, `seeders`, `leechers`, `times_completed`, `online`) VALUES
-(2, 2, 'http://tracker.trackerfix.com:80/announce', 6, 2, 9, 'yes'),
-(3, 3, 'http://tracker.trackerfix.com:80/announce', 24, 0, 8, 'yes'),
-(4, 4, 'http://tracker.trackerfix.com:80/announce', 768, 82, 211184, 'yes');
+(5, 5, 'http://tracker.trackerfix.com:80/announce', 0, 0, 0, 'no');
 
 -- --------------------------------------------------------
 
@@ -686,7 +669,7 @@ CREATE TABLE IF NOT EXISTS `torrent_categories` (
   `slug` varchar(45) NOT NULL,
   `icon` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `torrent_categories`
@@ -696,7 +679,9 @@ INSERT INTO `torrent_categories` (`id`, `name`, `slug`, `icon`) VALUES
 (1, 'Movies', 'movies', 'fa fa-film'),
 (2, 'TV', 'tv', 'fa fa-television'),
 (3, 'Music', 'music', 'fa fa-music'),
-(4, 'E-Book', 'ebook', '');
+(4, 'E-Book', 'ebook', ''),
+(5, 'XXX', 'xxx', ''),
+(6, 'Applications', 'applications', '');
 
 -- --------------------------------------------------------
 
@@ -717,15 +702,6 @@ CREATE TABLE IF NOT EXISTS `torrent_comments` (
   KEY `user_id` (`user_id`),
   KEY `torrent_id` (`torrent_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `torrent_comments`
---
-
-INSERT INTO `torrent_comments` (`id`, `torrent_id`, `user_id`, `comment`, `ip`, `created_at`, `updated_at`) VALUES
-(10, 2, 7, 'comment on T2', '::1', '2018-02-12 18:12:27', '2018-02-12 18:12:27'),
-(11, 3, 7, 'comment on t3', '::1', '2018-02-12 18:13:08', '2018-02-12 18:13:08'),
-(12, 3, 7, 'comment testing', '::1', '2018-02-12 18:13:26', '2018-02-12 18:13:26');
 
 -- --------------------------------------------------------
 
@@ -760,22 +736,16 @@ CREATE TABLE IF NOT EXISTS `torrent_files` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `torrent_id` (`torrent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `torrent_files`
 --
 
 INSERT INTO `torrent_files` (`id`, `torrent_id`, `length`, `path`, `created_at`, `updated_at`) VALUES
-(4, 2, 519968025, 'New.Girl.S06E18.720p.HDTV.x264-AVS.mkv', '2018-02-10 15:33:41', '2018-02-10 15:33:41'),
-(5, 2, 30, 'RARBG.txt', '2018-02-10 15:33:41', '2018-02-10 15:33:41'),
-(6, 2, 56, 'new.girl.s06e18.720p.hdtv.x264-avs.nfo', '2018-02-10 15:33:41', '2018-02-10 15:33:41'),
-(7, 3, 30, 'RARBG.txt', '2018-02-10 15:34:11', '2018-02-10 15:34:11'),
-(8, 3, 1118214054, 'The.Expanse.S02E05.720p.HDTV.x264-SVA.mkv', '2018-02-10 15:34:11', '2018-02-10 15:34:11'),
-(9, 3, 59, 'the.expanse.s02e05.720p.hdtv.x264-sva.nfo', '2018-02-10 15:34:11', '2018-02-10 15:34:11'),
-(10, 4, 30, 'RARBG.txt', '2018-02-10 15:58:42', '2018-02-10 15:58:42'),
-(11, 4, 656104510, 'The.Big.Bang.Theory.S11E13.720p.HDTV.x264-AVS.mkv', '2018-02-10 15:58:42', '2018-02-10 15:58:42'),
-(12, 4, 67, 'the.big.bang.theory.s11e13.720p.hdtv.x264-avs.nfo', '2018-02-10 15:58:42', '2018-02-10 15:58:42');
+(13, 5, 990676626, 'Arrow.S06E05.720p.HDTV.x264-AVS.mkv', '2018-02-21 16:06:23', '2018-02-21 16:06:23'),
+(14, 5, 30, 'RARBG.txt', '2018-02-21 16:06:23', '2018-02-21 16:06:23'),
+(15, 5, 54, 'arrow.s06e05.720p.hdtv.x264-avs.nfo', '2018-02-21 16:06:23', '2018-02-21 16:06:23');
 
 -- --------------------------------------------------------
 
@@ -824,16 +794,6 @@ CREATE TABLE IF NOT EXISTS `torrent_ratings` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `torrent_ratings`
---
-
-INSERT INTO `torrent_ratings` (`id`, `torrent_id`, `user_id`, `rating`, `ip`, `created_at`, `updated_at`) VALUES
-(1, 3, 7, 2, '123123123', NULL, NULL),
-(2, 2, 2, 4, '3123', NULL, NULL),
-(3, 3, 1, 4, '3123', NULL, NULL),
-(4, 2, 7, 4, '::1', '2018-02-14 19:02:11', '2018-02-14 19:02:11');
-
 -- --------------------------------------------------------
 
 --
@@ -857,7 +817,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `confirmresetpwd` enum('yes','no') DEFAULT NULL,
   `ip` varchar(70) NOT NULL,
   `signature` varchar(200) DEFAULT NULL,
-  `avatar` varchar(190) DEFAULT 'http://localhost/imgs/default_avatar.jpg',
+  `avatar` varchar(190) DEFAULT '/imgs/default_avatar.jpg',
   `uploaded` bigint(20) NOT NULL DEFAULT 0,
   `downloaded` bigint(20) NOT NULL DEFAULT 0,
   `title` tinytext DEFAULT NULL,
@@ -883,10 +843,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `status`, `banned`, `privacy`, `class`, `dob`, `info`, `acceptpms`, `codeactivation`, `confirmresetpwd`, `ip`, `signature`, `avatar`, `uploaded`, `downloaded`, `title`, `estate_id`, `sex`, `passkey`, `points`, `invites`, `warn`, `donated`, `maxslots`, `lastlogin`, `created_at`, `updated_at`, `actived_at`, `resetpwd_at`) VALUES
-(1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'moderatorplus', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, NULL, 0, 2, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1020, 0, 'no', '0.00', 4, '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'admin', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, NULL, 0, 4, NULL, 17, 'na', '501237503104ff5394131a12102c61bb', 1030, 0, 'no', '0.00', 4, '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(7, 'admin', 'me@me.com', '$2y$10$Pbqvk7OvvTtWVzFlziEJge7TB.F0IBynq5PXcZUxb0J5uyoHO7NH2', 'confirmed', 'no', 'public', 'admin', '0000-00-00', NULL, 'yes', NULL, 'yes', '::1', NULL, 'http://localhost/imgs/default_avatar.jpg', 0, 6, NULL, 25, 'male', '016ff83462675dd258539ccd42601a9d', 1800, 0, 'no', '0.00', 4, '2018-02-16 18:47:49', '2018-01-24 17:17:06', '2018-01-25 23:45:55', '2018-01-26 15:14:11', '2018-01-25 20:08:40'),
-(21, 'Tester', 'juaorok@hotmail.com', '$2y$10$K/McZuyzJhPSkwYyEzj80eFUn7e.eNn.bFmyzDb5cQBbhNwplmgFi', 'confirmed', 'no', 'public', 'member', '1999-02-04', NULL, 'yes', NULL, NULL, '::1', NULL, 'http://localhost/imgs/default_avatar.jpg', 0, 0, NULL, 25, 'male', '1605dcde573c888c1aad3b56693b451c', 1000, 0, 'no', '0.00', 1, NULL, '2018-02-16 14:42:59', NULL, '2018-02-16 14:42:59', NULL);
+(1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'moderatorplus', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, '/imgs/default_avatar.jpg', 0, 2, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1020, 0, 'no', '0.00', 4, '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'admin', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, '/imgs/default_avatar.jpg', 0, 4, NULL, 17, 'na', '501237503104ff5394131a12102c61bb', 1030, 0, 'no', '0.00', 4, '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(7, 'admin', 'me@me.com', '$2y$10$6tqHX2zZPPHW7wj7c1U8yO6Ty6fN3.yqUL2mH6Kbu3yeytMYMCdle', 'confirmed', 'no', 'public', 'admin', '0000-00-00', 'dasdasdasda', 'yes', NULL, 'yes', '::1', '', '/imgs/default_avatar.jpg', 0, 6, '', 25, 'male', 'bb8eb740bf36cc991669ec035aad13d0', 1800, 0, 'no', '0.00', 4, '2018-02-16 18:47:49', '2018-01-24 17:17:06', '2018-02-22 15:15:18', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
 
 -- --------------------------------------------------------
 
