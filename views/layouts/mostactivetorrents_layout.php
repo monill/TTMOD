@@ -2,7 +2,7 @@
 
 use App\Libs\Database;
 
-$title = "Most Active";
+$title = "Most Active Torrents";
 $blockId = "b-" . sha1($title);
 $db = Database::getInstance();
 ?>

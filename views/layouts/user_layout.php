@@ -3,7 +3,6 @@
 $title = \App\Libs\Session::get("username");
 $blockId = "b-" . sha1($title);
 
-$avatar = "https://placehold.it/200x300";
 ?>
 
 <div class="card">

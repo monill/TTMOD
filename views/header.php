@@ -42,9 +42,19 @@ $user = $db->select1("SELECT * FROM users WHERE id = :id", ["id" => 7]);
                     <li class="nav-item"><a class="nav-link" href="<?= url("/forum"); ?>"> Forum </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/torrents/upload"); ?>"> Upload Torrents </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/torrents"); ?>"> Torrents </a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/torrents/import"); ?>"> Mass Torrent Import </a></li>
+
                     <li class="nav-item"><a class="nav-link" href="<?= url("/faq"); ?>"> F.A.Q </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/rules"); ?>"> Rules </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/polls"); ?>"> Polls </a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/members"); ?>"> Members </a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/rules"); ?>"> Rules </a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/faq"); ?>"> F.A.Q </a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= url("/staff"); ?>"> Staff </a></li>
+
+
                     <li class="nav-item"><a class="nav-link" href="<?= url("/admin"); ?>"> AdminCP </a></li>
                 </ul>
                 <a class="btn btn-outline-success my-2 my-sm-0" href="<?= url("/logout"); ?>">Logout</a>

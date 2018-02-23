@@ -1,5 +1,5 @@
 <?php
-$title = "Browse Torrents";
+$title = "Main categories";
 $blockId = "b-" . sha1($title);
 use App\Models\Torrent;
 ?>
