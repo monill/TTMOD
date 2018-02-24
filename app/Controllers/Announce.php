@@ -301,7 +301,7 @@ class Announce extends Controller
         // Standard Information Fields
         $event = Input::get("event");
         $hash = bin2hex(Input::get("info_hash"));
-        $peer_id = bin2hex(Input::get("peer_id"));
+        $peer_id = Input::get("peer_id");
         $md5_peer_id = md5($peer_id);
 
         $ip = Helper::getIP();
@@ -320,6 +320,11 @@ class Announce extends Controller
         $browser = new BrowserDetection();
         $agent = $browser->getUserAgent();
 
+        $events = array('started', 'stopped', 'completed', 'paused');
+        if (!in_array($_GET['event'], $events)) {
+            $this->err("Invalid event.");
+        }
+
 //        if (strlen($peer_id) != 20) {
 //            $this->err("Invalid peerid: peerid is not 20 bytes long.");
 //        }
@@ -335,11 +340,11 @@ class Announce extends Controller
         }
 
         if ($this->portBlackListed($port)) {
-            $this->err("Port $port is blacklisted.");
+            $this->err("Port {$port} is Blacklisted.");
         }
 
-        $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `info_hash` = :hash LIMIT 1", ["hash" => $hash]) or $this->err("Cannot Get Torrent Details");
-        $user = $this->db->select1("SELECT * FROM `users` WHERE `passkey` = :passkey LIMIT 1", ["passkey" => $passkey]) or $this->err("Cannot Get User Details");
+        $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `info_hash` = :hash", ["hash" => $hash]) or $this->err("Cannot Get Torrent Details");
+        $user = $this->db->select1("SELECT * FROM `users` WHERE `passkey` = :passkey", ["passkey" => $passkey]) or $this->err("Cannot Get User Details");
 
         if (!$user) {
             $this->err("Passkey is invalid.");
@@ -372,23 +377,23 @@ class Announce extends Controller
                 $seeders++;
             }
 
-            unset(
-                $peer->id,
-                $peer->torrent_id,
-                $peer->peer_id,
-                $peer->ip,
-                $peer->port,
-                $peer->uploaded,
-                $peer->downloaded,
-                $peer->to_go,
-                $peer->seeder,
-                $peer->connectable,
-                $peer->client,
-                $peer->user_id,
-                $peer->passkey,
-                $peer->started,
-                $peer->lastaction
-            );
+//            unset(
+//                $peer->id,
+//                $peer->torrent_id,
+//                $peer->peer_id,
+//                $peer->ip,
+//                $peer->port,
+//                $peer->uploaded,
+//                $peer->downloaded,
+//                $peer->to_go,
+//                $peer->seeder,
+//                $peer->connectable,
+//                $peer->client,
+//                $peer->user_id,
+//                $peer->passkey,
+//                $peer->started,
+//                $peer->lastaction
+//            );
         }
 
         if ($torrent->freeleeach = 'yes') {
@@ -401,16 +406,16 @@ class Announce extends Controller
         if (!$sockets) {
             $connectable = "no";
         } else {
+            fclose($sockets);
             $connectable = "yes";
         }
-        //fclose($sockets);
 
         if ($event == 'started')
         {
             //Peer update
             $this->db->insert('torrent_peers', [
                 'torrent_id' => $torrent->id,
-                'peer_id' => $md5_peer_id,
+                'peer_id' => $peer_id,
                 'ip' => $ip,
                 'port' => $port,
                 'uploaded' => $real_uploaded,
@@ -433,7 +438,7 @@ class Announce extends Controller
 
             //Peer update
             $this->db->update('torrent_peers', [
-                'peer_id' => $md5_peer_id,
+                'peer_id' => $peer_id,
                 'ip' => $ip,
                 'port' => $port,
                 'uploaded' => $real_uploaded,
@@ -444,7 +449,7 @@ class Announce extends Controller
                 'client' => $agent,
                 'user_id' => $user->id,
                 'lastaction' => Helper::dateTime()
-            ], "`torrent_id` = :tid AND `peer_id` = :pid", ["tid" => $torrent->id, "pid" => $md5_peer_id]);
+            ], "`torrent_id` = :tid AND `peer_id` = :pid", ["tid" => $torrent->id, "pid" => $peer_id]);
 
             //User update
             $this->db->update('users', [
@@ -480,21 +485,23 @@ class Announce extends Controller
                 'user_id' => $user->id,
                 'created_at' => Helper::dateTime()
             ]);
+        } elseif ($event == 'paused') {
+
         }
 
         $res = "d5:files";
-        $res .= "d20:info_hashi". $torrent->info_hash;
-        $res .= "d8:completei" . $seeders;
-        $res .= "e10:incompletei" . $leechers;
-        $res .= "e10downloadedi" . $torrent->times_completed;
-        $res .= "e8intervali" . (60 * 45);
-        $res .= "e12min intervali" . (60 * 30);
-        $res .= "e" . $this->bencStr("peers") . $this->givePeers($peers, $compact, $no_peer_id);
-        $res .= "e4:name" . strlen($torrent->filename) . ":" . $torrent->filename;
+        $res .= "d20:". $torrent->info_hash;
+        $res .= "d8:completei" . (int)$torrent->seeders;
+        $res .= "e10:incompletei" . (int)$torrent->leechers;
+        $res .= "e10downloadedi" . (int)$torrent->times_completed;
+        $res .= "d8intervali" . (60 * 30);
+        $res .= "e12min intervali" . (60 * 15);
+        $res .= "e5peers" . $this->givePeers($peers, $compact, $no_peer_id);
+        $res .= "e4:name" . strlen($torrent->filename) . ":" . $torrent->filename . 'e' . 'e';
         $res .= "ee";
 
-        //$data = Bencode::encode($res);
-        return $this->bencRespRaw($res);
+        $data = Bencode::encode($res);
+        return $this->bencRespRaw($data);
     }
 
     public function bencRespRaw($value)
@@ -546,12 +553,7 @@ class Announce extends Controller
         return false;
     }
 
-    public function bencInt($value)
-    {
-        return "i" . $value . "e";
-    }
-
-    public function maxSlots($userid)
+    private function maxSlots($userid)
     {
         $user = $this->db->select1("SELECT `id`, `warn`, `maxslots` FROM `users` WHERE `id` = :idd", ["idd" => $userid]);
         if ($user->warn == "yes") {

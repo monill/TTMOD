@@ -72,7 +72,9 @@ class UdpScraper extends Scraper {
         }
 
         stream_set_timeout($fp, $this->timeout);
+
         $current_connid = "\x00\x00\x04\x17\x27\x10\x19\x80";
+
         //Connection request
         $packet = $current_connid . pack('N', 0) . pack('N', $transaction_id);
         fwrite($fp, $packet);

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Libs\Input;
 use App\Libs\Torrent\Bencode;
 
 class Scrape extends Controller
@@ -53,10 +52,10 @@ class Scrape extends Controller
         $res = "d5:files";
         foreach ($torrent as $key => $val) {
             $hash = pack("H*", $val->info_hash);
-            $res .= "20:" . str_pad($hash, 20);
-            $res .= "d8:completei" . $val->seeders;
+            $res .= "d20:" . str_pad($hash, 20);
+            $res .= "d8:completei" . (int)$val->seeders;
             $res .= "e10:downloadedi" . $val->times_completed;
-            $res .= "e10:incompletei" . $val->leechers;
+            $res .= "e10:incompletei" . (int)$val->leechers;
             $res .= "e4:name" . strlen($val->filename) . ":" . $val->filename;
             $res .= "ee";
         }
@@ -64,7 +63,6 @@ class Scrape extends Controller
 
         //$data = Bencode::encode($res);
 
-        ob_start();
         header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
         header("Content-Type: text/plain; charset=UTF-8");
         header("Pragma: no-cache");
