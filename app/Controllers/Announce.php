@@ -410,8 +410,8 @@ class Announce extends Controller
             $connectable = "yes";
         }
 
-        if ($event == 'started')
-        {
+        if ($event == 'started') {
+
             //Peer update
             $this->db->insert('torrent_peers', [
                 'torrent_id' => $torrent->id,
@@ -485,6 +485,7 @@ class Announce extends Controller
                 'user_id' => $user->id,
                 'created_at' => Helper::dateTime()
             ]);
+
         } elseif ($event == 'paused') {
 
         }
@@ -535,19 +536,27 @@ class Announce extends Controller
 
     public function portBlackListed($port)
     {
-        if ($port >= 411 && $port <= 413) { //direct connect
-            return true;
-        }
-        if ($port == 1214) { //kazaa
-            return true;
-        }
-        if ($port >= 6346 && $port <= 6347) { // gnutella
-            return true;
-        }
-        if ($port == 4662) { // emule
-            return true;
-        }
-        if ($port == 6699) { // winmx
+        $blocked = [
+            411,
+            412,
+            413,
+            1214,
+            4662,
+            6346,
+            6347,
+            6699,
+            6881,
+            6882,
+            6883,
+            6884,
+            6885,
+            6886,
+            6887,
+            6889,
+            65535
+        ];
+
+        if (in_array($port, $blocked)) {
             return true;
         }
         return false;
