@@ -48,21 +48,30 @@ class Scrape extends Controller
 
         if (!count($infohash)) die("Invalid infohash");
 
-        $torrent = $this->db->select("SELECT info_hash, seeders, leechers, times_completed, filename FROM torrents WHERE info_hash = :infoh ", ["infoh" => $info_hash]);
+        $torrent = $this->db->select1("SELECT info_hash, seeders, leechers, times_completed, filename FROM torrents WHERE info_hash = :infoh ", ["infoh" => $info_hash]);
 
-        $res = "d5:files";
-        foreach ($torrent as $key => $val) {
-            $hash = pack("H*", $val->info_hash);
-            $res .= "d20:" . $val->info_hash; //str_pad($hash, 20);
-            $res .= "d8:completei" . (int)$val->seeders;
-            $res .= "e10:downloadedi" . $val->times_completed;
-            $res .= "e10:incompletei" . (int)$val->leechers;
-            //$res .= "e4:name" . strlen($val->filename) . ":" . $val->filename;
-            $res .= "ee";
-        }
-        $res .= "ee";
+//        $res = "d5:files";
+//        foreach ($torrent as $key => $val) {
+//            $hash = hex2bin($val->info_hash);
+//            $res .= "d20:" . $hash;
+//            $res .= "d8:completei" . (int)$val->seeders;
+//            $res .= "e10:downloadedi" . $val->times_completed;
+//            $res .= "e10:incompletei" . (int)$val->leechers;
+//            $res .= "e4:name" . strlen($val->filename) . ":" . $val->filename;
+//            $res .= "ee";
+//        }
+//        $res .= "ee";
 
-        $data = Bencode::encode($res);
+        $res = [];
+        $res['infohash'] = $torrent->info_hash;
+        $res['complete'] = (int)$torrent->seeders;
+        $res['downloaded'] = (int)$torrent->times_completed;
+        $res['incomplete'] = (int)$torrent->leechers;
+        $res['interval'] = (60 * 45);
+        $res['min interval'] = (60 * 30);
+
+        //$data = Bencode::encode($res);
+        $data = \Rych\Bencode\Bencode::encode($res);
 
         header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
         header("Content-Type: text/plain; charset=UTF-8");

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a268b28244b384c12e2ccc8cb349157e",
+    "content-hash": "59513c7dd21493a55e6d58b654a60f82",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -525,6 +525,57 @@
                 "psr-3"
             ],
             "time": "2016-10-10T12:19:37+00:00"
+        },
+        {
+            "name": "rych/bencode",
+            "version": "v1.0.0",
+            "target-dir": "Rych/Bencode",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rchouinard/bencode.git",
+                "reference": "d1b5c88f3fd7ff1f4167756f0ed63f970a32431c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rchouinard/bencode/zipball/d1b5c88f3fd7ff1f4167756f0ed63f970a32431c",
+                "reference": "d1b5c88f3fd7ff1f4167756f0ed63f970a32431c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Rych\\Bencode": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Chouinard",
+                    "email": "rchouinard@gmail.com",
+                    "homepage": "http://ryanchouinard.com"
+                }
+            ],
+            "description": "Bencode serializer for PHP 5.3+",
+            "homepage": "https://github.com/rchouinard/bencode",
+            "keywords": [
+                "bencode",
+                "serialize"
+            ],
+            "time": "2014-01-13T00:34:03+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
