@@ -61,12 +61,12 @@ class Scrape extends Controller
         }
         $res .= "ee";
 
-        //$data = Bencode::encode($res);
+        $data = Bencode::encode($res);
 
         header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
         header("Content-Type: text/plain; charset=UTF-8");
         header("Pragma: no-cache");
-        print $res;
+        print $data;
         ob_end_flush();
         exit();
     }
