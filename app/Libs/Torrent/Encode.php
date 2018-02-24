@@ -19,7 +19,7 @@ class Encode {
 
     /**
     * Passes lists and dictionaries accordingly,
-    * and has encodeEntry handle the strings and integers.
+    * and has encodeString handle the strings and integers.
     *
     * @param  mixed $unknown
     * @return string|void
@@ -33,7 +33,7 @@ class Encode {
                 return $this->encodeDict($unknown);
             }
         }
-        return $this->encodeEntry($unknown);
+        return $this->encodeString($unknown);
     }
 
     /**
@@ -43,7 +43,7 @@ class Encode {
      * @param  boolean $unstrip is set to true when decoding dictionary keys
      * @return void
      */
-    public function encodeEntry($entry, $unstrip = false)
+    public function encodeString($entry, $unstrip = false)
     {
         if (is_bool($entry)) {
             return $this->content .= "de";
@@ -99,7 +99,7 @@ class Encode {
         $newarray = $this->makeSorted($array);
 
         foreach ($newarray as $left => $right) {
-            $this->encodeEntry($left, true);
+            $this->encodeString($left, true);
             $this->encodeDecide($right);
         }
         return $this->content .= "e";
@@ -109,7 +109,7 @@ class Encode {
      * Dictionary keys must be sorted. foreach tends to iterate over the
      * order the array was made, so we make a new one in sorted order.
      *
-     * @param  array $array
+     * @param array $array
      * @return array
      */
     public function makeSorted($array)

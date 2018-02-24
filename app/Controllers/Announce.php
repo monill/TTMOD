@@ -486,13 +486,11 @@ class Announce extends Controller
                     'created_at' => Helper::dateTime()
                 ]);
 
-            } elseif ($event == 'paused') {
-
             }
 
             $res = "d5:files";
             $res .= "d20:". $torrent->info_hash;
-            $res .= "d8:completei" . (int)$torrent->seeders;
+            $res .= "i8:completei" . (int)$torrent->seeders;
             $res .= "e10:incompletei" . (int)$torrent->leechers;
             $res .= "e10downloadedi" . (int)$torrent->times_completed;
             $res .= "d8intervali" . (60 * 30);
@@ -501,10 +499,11 @@ class Announce extends Controller
             $res .= "e4:name" . strlen($torrent->filename) . ":" . $torrent->filename . 'e' . 'e';
             $res .= "ee";
 
-            $data = Bencode::encode($res);
-            return $this->bencRespRaw($data);
+            //$data = Bencode::encode($res);
+
+            return $this->bencRespRaw($res);
         }
-        
+
     }
 
     public function bencRespRaw($value)
