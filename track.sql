@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 23, 2018 at 01:47 AM
+-- Generation Time: Feb 24, 2018 at 11:15 PM
 -- Server version: 10.2.8-MariaDB
 -- PHP Version: 7.1.9
 
@@ -202,13 +202,6 @@ CREATE TABLE IF NOT EXISTS `guests` (
   `time` decimal(20,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `guests`
---
-
-INSERT INTO `guests` (`ip`, `time`) VALUES
-('::1', '1519229527');
-
 -- --------------------------------------------------------
 
 --
@@ -242,9 +235,9 @@ CREATE TABLE IF NOT EXISTS `layouts` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `named` varchar(45) NOT NULL,
   `name` varchar(45) NOT NULL,
-  `position` varchar(15) NOT NULL,
+  `position` enum('left','middle','right') NOT NULL,
   `description` varchar(200) NOT NULL,
-  `enabled` tinyint(3) UNSIGNED NOT NULL,
+  `enabled` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
   `sort` tinyint(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
@@ -254,26 +247,20 @@ CREATE TABLE IF NOT EXISTS `layouts` (
 --
 
 INSERT INTO `layouts` (`id`, `named`, `name`, `position`, `description`, `enabled`, `sort`) VALUES
-(1, 'donate', 'donate', 'right', 'Description here...', 0, 11),
-(2, 'invite', 'invite', 'right', 'Description here...', 0, 2),
-(3, 'Main Navigation', 'navigate', 'left', 'Description here...', 0, 4),
-(4, 'User Block', 'user', 'left', 'Description here...', 0, 1),
-(5, 'rss', 'rss', 'right', 'Description here...', 0, 0),
-(6, 'latestuploads', 'latestuploads', 'right', 'Description here...', 0, 1),
-(7, 'advancestats', 'advancestats', 'left', 'Description here...', 0, 5),
-(8, 'serverload', 'serverload', 'right', 'Description here...', 0, 5),
-(9, 'usersonline', 'usersonline', 'middle', 'Description here...', 0, 1),
-(10, 'Main Category', 'maincats', 'left', 'Description here...', 0, 3),
-(11, 'simplesearch', 'simplesearch', 'right', 'Description here...', 0, 4),
-(13, 'latestimages', 'latestimages', 'right', 'Description here...', 0, 7),
-(14, 'mostactivetorrents', 'mostactivetorrents', 'left', 'Description here...', 0, 10),
-(15, 'scrollingnews', 'scrollingnews', 'left', 'Description here...', 0, 9),
-(16, 'newestmember', 'newestmember', 'middle', 'Description here...', 0, 8),
-(18, 'seedwanted', 'seedwanted', 'left', 'Description here...', 0, 7),
-(20, 'Powered By', 'poweredby', 'right', 'Description here...', 0, 3),
-(21, 'Admin CP', 'admincp', 'right', 'Admin Cp', 0, 8),
-(22, 'Disclaimer', 'disclaimer', 'middle', 'Disclaimer', 0, 9),
-(23, 'Notice', 'notice', 'middle', 'Notice', 0, 10);
+(1, 'Donation Methods', 'donate', 'right', 'Description here...', 1, 11),
+(2, 'Invites', 'invite', 'right', 'Description here...', 1, 2),
+(4, 'User Block', 'user', 'left', 'Description here...', 1, 1),
+(5, 'RSS', 'rss', 'right', 'Description here...', 1, 0),
+(6, 'Latest Torrents', 'latestuploads', 'right', 'Description here...', 1, 1),
+(7, 'Advanced Statistics', 'advancestats', 'left', 'Description here...', 1, 5),
+(8, 'Server Load', 'serverload', 'right', 'Description here...', 1, 5),
+(9, 'Users online', 'usersonline', 'middle', 'Description here...', 1, 1),
+(10, 'Main categories', 'maincats', 'left', 'Description here...', 1, 3),
+(13, 'Latest Posters', 'latestimages', 'right', 'Description here...', 1, 7),
+(14, 'Most Active Torrents', 'mostactivetorrents', 'left', 'Description here...', 1, 10),
+(16, 'Newest Members', 'newestmember', 'right', 'Description here...', 1, 8),
+(18, 'Seeders Wanted', 'seedwanted', 'left', 'Description here...', 1, 7),
+(20, 'Powered By', 'poweredby', 'right', 'Description here...', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -621,40 +608,15 @@ CREATE TABLE IF NOT EXISTS `torrents` (
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
   KEY `uploader` (`uploader_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `torrents`
 --
 
 INSERT INTO `torrents` (`id`, `info_hash`, `name`, `filename`, `description`, `poster`, `image1`, `image2`, `image3`, `category_id`, `size`, `numfiles`, `views`, `comments`, `downs`, `times_completed`, `leechers`, `seeders`, `visible`, `banned`, `anon`, `nfo`, `announce`, `external`, `freeleech`, `thanks`, `uploader_id`, `created_at`, `updated_at`) VALUES
-(5, '268c5313b21b8175b3634d85c5e28c8772e1b097', 'Arrow.S06E05.720p.HDTV.x264-AVS[rarbg]', 'Arrow.S06E05.720p.HDTV.x264-AVS[rarbg]', 'dedeedededed', '', '', '', '', 2, 990676710, 3, 7, 0, 0, 0, 0, 0, 'yes', 'no', 'yes', 'no', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-21 16:06:23', '2018-02-22 13:10:23');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `torrent_announces`
---
-
-DROP TABLE IF EXISTS `torrent_announces`;
-CREATE TABLE IF NOT EXISTS `torrent_announces` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `torrent_id` int(11) UNSIGNED NOT NULL,
-  `url` varchar(255) NOT NULL,
-  `seeders` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `leechers` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `times_completed` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `online` enum('yes','no') NOT NULL DEFAULT 'no',
-  PRIMARY KEY (`id`),
-  KEY `torrent_id` (`torrent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `torrent_announces`
---
-
-INSERT INTO `torrent_announces` (`id`, `torrent_id`, `url`, `seeders`, `leechers`, `times_completed`, `online`) VALUES
-(5, 5, 'http://tracker.trackerfix.com:80/announce', 0, 0, 0, 'no');
+(12, 'df732307f64b011bb0beff736322ad087ebd4b02', 'joshlaravel-591', 'joshlaravel-591.rar', 'sss', '', '', '', '', 6, 263039845, 1, 9, 0, 4, 1, 0, 1, 'yes', 'no', 'yes', 'no', 'http://kaihou.com/announce', 'no', 'no', 0, 7, '2018-02-23 23:15:30', NULL),
+(15, 'b105818432fcef1628a1024bd761206eb0f66f9a', 'Lady.Bird.2017.1080p.BluRay.H264.AAC-RARBG', 'Lady.Bird.2017.1080p.BluRay.H264.AAC-RARBG', 'dasdasd', '', '', '', '', 1, 1925311880, 3, 1, 0, 0, 12834, 679, 1206, 'yes', 'no', 'no', 'no', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-24 18:52:57', '2018-02-24 18:53:04');
 
 -- --------------------------------------------------------
 
@@ -714,7 +676,7 @@ CREATE TABLE IF NOT EXISTS `torrent_completes` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `torrent_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
   `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `torrent_id` (`torrent_id`)
@@ -736,16 +698,17 @@ CREATE TABLE IF NOT EXISTS `torrent_files` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `torrent_id` (`torrent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `torrent_files`
 --
 
 INSERT INTO `torrent_files` (`id`, `torrent_id`, `length`, `path`, `created_at`, `updated_at`) VALUES
-(13, 5, 990676626, 'Arrow.S06E05.720p.HDTV.x264-AVS.mkv', '2018-02-21 16:06:23', '2018-02-21 16:06:23'),
-(14, 5, 30, 'RARBG.txt', '2018-02-21 16:06:23', '2018-02-21 16:06:23'),
-(15, 5, 54, 'arrow.s06e05.720p.hdtv.x264-avs.nfo', '2018-02-21 16:06:23', '2018-02-21 16:06:23');
+(26, 12, 263039845, 'joshlaravel-591.rar', '2018-02-23 23:15:30', '2018-02-23 23:15:30'),
+(32, 15, 1925210348, 'Lady.Bird.2017.1080p.BluRay.H264.AAC-RARBG.mp4', '2018-02-24 18:52:57', '2018-02-24 18:52:57'),
+(33, 15, 30, 'RARBG.txt', '2018-02-24 18:52:57', '2018-02-24 18:52:57'),
+(34, 15, 101502, 'Subs/2_Eng.srt', '2018-02-24 18:52:57', '2018-02-24 18:52:57');
 
 -- --------------------------------------------------------
 
@@ -759,20 +722,28 @@ CREATE TABLE IF NOT EXISTS `torrent_peers` (
   `torrent_id` int(11) UNSIGNED NOT NULL DEFAULT 0,
   `peer_id` varchar(45) NOT NULL,
   `ip` varchar(70) NOT NULL,
-  `port` smallint(7) NOT NULL DEFAULT 0,
+  `port` smallint(2) UNSIGNED NOT NULL,
   `uploaded` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `downloaded` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `to_go` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `seeder` enum('yes','no') NOT NULL DEFAULT 'no',
   `connectable` enum('yes','no') NOT NULL DEFAULT 'yes',
   `client` varchar(70) NOT NULL,
-  `userid` varchar(45) NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
   `passkey` varchar(45) NOT NULL,
   `started` datetime DEFAULT NULL,
   `lastaction` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `torrent_id` (`torrent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `torrent_id` (`torrent_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `torrent_peers`
+--
+
+INSERT INTO `torrent_peers` (`id`, `torrent_id`, `peer_id`, `ip`, `port`, `uploaded`, `downloaded`, `to_go`, `seeder`, `connectable`, `client`, `user_id`, `passkey`, `started`, `lastaction`) VALUES
+(246, 12, '-DE13F0-.j4hnUqZBsN0', '::1', 59860, 0, 0, 0, 'yes', 'no', 'Deluge 1.3.15', 7, 'bb8eb740bf36cc991669ec035aad13d0', '2018-02-24 19:37:47', '2018-02-24 20:09:25');
 
 -- --------------------------------------------------------
 
@@ -962,12 +933,6 @@ ALTER TABLE `torrents`
   ADD CONSTRAINT `torrents_ibfk_2` FOREIGN KEY (`uploader_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `torrent_announces`
---
-ALTER TABLE `torrent_announces`
-  ADD CONSTRAINT `torrent_announces_ibfk_1` FOREIGN KEY (`torrent_id`) REFERENCES `torrents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `torrent_comments`
 --
 ALTER TABLE `torrent_comments`
@@ -991,7 +956,8 @@ ALTER TABLE `torrent_files`
 -- Constraints for table `torrent_peers`
 --
 ALTER TABLE `torrent_peers`
-  ADD CONSTRAINT `torrent_peers_ibfk_1` FOREIGN KEY (`torrent_id`) REFERENCES `torrents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `torrent_peers_ibfk_1` FOREIGN KEY (`torrent_id`) REFERENCES `torrents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `torrent_peers_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `torrent_ratings`
