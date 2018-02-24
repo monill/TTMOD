@@ -82,13 +82,6 @@ class MegaScrape
                             'updated_at' => Helper::dateTime()
                         ], "`id` = :id", ["id" => $tor->id]);
 
-                        $this->db->update('torrent_announces', [
-                            'seeders' => $seeders,
-                            'leechers' => $leechers,
-                            'times_completed' => $downloaded,
-                            'online' => 'yes'
-                        ], "`torrent_id` = :id", ["id" => $tor->id]);
-
                     } catch (ScraperException $exc) {
                         $exc->isConnectionError();
                     }
@@ -113,13 +106,6 @@ class MegaScrape
                             'updated_at' => Helper::dateTime()
                         ], "`id` = :id", ["id" => $tor->id]);
 
-                        $this->db->update('torrent_announces', [
-                            'seeders' => $seeders,
-                            'leechers' => $leechers,
-                            'times_completed' => $downloaded,
-                            'online' => 'yes'
-                        ], "`torrent_id` = :id", ["id" => $tor->id]);
-
                     } catch (ScraperException $exc) {
                         $exc->isConnectionError();
                     }
@@ -128,5 +114,5 @@ class MegaScrape
         }
 
     }
-    
+
 }

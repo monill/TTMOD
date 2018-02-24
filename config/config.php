@@ -12,7 +12,7 @@ define('SNAME', 'TTMOD');
 // Password key security, dont change this after install
 define('PWD_KEY', '!@#Mobiorum^&*');
 
-define('ANNOUNCE', URL . '/announce/passkey/');
+define('ANNOUNCE', URL . '/announce');
 define('TUPLOAD', ROOT . 'data/torrents/');
 
 // Set timezone

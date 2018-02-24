@@ -70,7 +70,7 @@ class Torrent extends Controller
 
         $this->view->title = SNAME . " :: " . $tor->name;
         $this->view->tor = $tor;
-        $this->view->totalspeed = $totalspeed;
+        $this->view->totalspd = $totalspeed;
         $this->view->files = $files;
         $this->view->ratings = $rates;
         $this->view->userRts = $userRating;
@@ -228,20 +228,6 @@ class Torrent extends Controller
                 ]);
             }
 
-            if (!count($annlist)) {
-                $annlist = [[$announce]];
-            }
-
-            foreach ($annlist as $ann) {
-                foreach ($ann as $value) {
-                    if (strtolower(substr($value, 0, 4)) != "udp:") {
-                        $this->db->insert('torrent_announces', [
-                            'url' => Helper::escape($value),
-                            'torrent_id' => $idd
-                        ]);
-                    }
-                }
-            }
 
             //External scrape
             if ($external == "yes")
@@ -295,13 +281,6 @@ class Torrent extends Controller
                                 'updated_at' => Helper::dateTime()
                             ], "`id` = :id", ["id" => $idd]);
 
-                            $this->db->update('torrent_announces', [
-                                'seeders' => $seeders,
-                                'leechers' => $leechers,
-                                'times_completed' => $downloaded,
-                                'online' => 'yes'
-                            ], "`torrent_id` = :id", ["id" => $idd]);
-
                         } catch (ScraperException $exc) {
                             $exc->isConnectionError();
                         }
@@ -325,13 +304,6 @@ class Torrent extends Controller
                                 'visible' => 'yes',
                                 'updated_at' => Helper::dateTime()
                             ], "`id` = :id", ["id" => $idd]);
-
-                            $this->db->update('torrent_announces', [
-                                'seeders' => $seeders,
-                                'leechers' => $leechers,
-                                'times_completed' => $downloaded,
-                                'online' => 'yes'
-                            ], "`torrent_id` = :id", ["id" => $idd]);
 
                         } catch (ScraperException $exc) {
                             $exc->isConnectionError();
@@ -385,7 +357,7 @@ class Torrent extends Controller
         {
             //TODO
             //fix this passkey from user
-            $user = $this->db->select1("SELECT `passkey` FROM `users` WHERE `id` = :idd AND `status` = 'confirmed' LIMIT 1", ["idd" => $tid]);
+            $user = $this->db->select1("SELECT `passkey` FROM `users` WHERE `id` = :idd AND `status` = 'confirmed' LIMIT 1", ["idd" => 7]);
 
             $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `id` = :id LIMIT 1", ["id" => $tid]);
 
@@ -420,7 +392,7 @@ class Torrent extends Controller
                     {
                         $arq = file_get_contents("$file");
                         $decoded = Bencode::decode($arq);
-                        $decoded["announce"] = ANNOUNCE . $user->passkey;
+                        $decoded["announce"] = ANNOUNCE . "/passkey/" . $user->passkey;
                         unset($decoded["announce-list"]);
 
                         $data = Bencode::encode($decoded);
@@ -430,6 +402,7 @@ class Torrent extends Controller
                         header("Content-Type: application/x-bittorrent");
                         //header("Content-Length:" . filesize($data)); //error if uncomment this
                         header("Content-Disposition: attachment; filename=" . $name . ".torrent");
+                        //header("Pragma: no-cache");
                         ob_clean();
                         flush();
                         print $data;
@@ -568,17 +541,6 @@ class Torrent extends Controller
                     $annlist = [[$announce]];
                 }
 
-                foreach ($annlist as $ann) {
-                    foreach ($ann as $value) {
-                        if (strtolower(substr($value, 0, 4)) != "udp:") {
-                            $this->db->insert('torrent_announces', [
-                                'url' => Helper::escape($value),
-                                'torrent_id' => $idd
-                            ]);
-                        }
-                    }
-                }
-
                 //External scrape
                 if ($external == "yes")
                 {
@@ -631,13 +593,6 @@ class Torrent extends Controller
                                     'updated_at' => Helper::dateTime()
                                 ], "`id` = :id", ["id" => $idd]);
 
-                                $this->db->update('torrent_announces', [
-                                    'seeders' => $seeders,
-                                    'leechers' => $leechers,
-                                    'times_completed' => $downloaded,
-                                    'online' => 'yes'
-                                ], "`torrent_id` = :id", ["id" => $idd]);
-
                             } catch (ScraperException $exc) {
                                 $exc->isConnectionError();
                             }
@@ -661,13 +616,6 @@ class Torrent extends Controller
                                     'visible' => 'yes',
                                     'updated_at' => Helper::dateTime()
                                 ], "`id` = :id", ["id" => $idd]);
-
-                                $this->db->update('torrent_announces', [
-                                    'seeders' => $seeders,
-                                    'leechers' => $leechers,
-                                    'times_completed' => $downloaded,
-                                    'online' => 'yes'
-                                ], "`torrent_id` = :id", ["id" => $idd]);
 
                             } catch (ScraperException $exc) {
                                 $exc->isConnectionError();

@@ -46,7 +46,7 @@ $blockId = "f-" . sha1($title);
                                     <font color="#ff0000"> <?= $this->tor->leechers; ?> </font>
 
                                     <?php if ($this->tor->external != "yes"): ?>
-                                        <b> Speed: </b> <?= $this->tor->totalspeed; ?>
+                                        <b> Speed: </b> <?= $this->totalspd; ?>
                                     <?php endif; ?>
 
                                     <b> Completed: </b> <?= $this->tor->times_completed; ?>
