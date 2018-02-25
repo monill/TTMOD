@@ -33,27 +33,26 @@ class Announce extends Controller
 
     public function passkey($passkey = '')
     {
-
         $this->checkRequestType();
 
         // Standard Information Fields
         $event = Input::get("event");
-        $hash = Input::get("info_hash");
+        $ihash = Input::get("info_hash");
         $peer_id = Input::get("peer_id");
-        $md5_peer_id = md5($peer_id);
 
         $ip = Helper::getIP();
 
         $port = (int)Input::get("port");
         $left = (float)Input::get("left");
         $uploaded = (float)Input::get("uploaded");
-        $real_uploaded = $uploaded;
         $downloaded = (float)Input::get("downloaded");
-        $real_downloaded = $downloaded;
 
         //Extra Information Fields
         $no_peer_id = Input::get("no_peer_id");
         $compact = (Input::get("compact") && Input::get("compact") == 1) ? true : false;
+        $numwant = Input::get("numwant") ? (int)Input::get("numwant") : 50;
+
+        $seeder = ($left == 0) ? "yes" : "no";
 
         $browser = new BrowserDetection();
         $agent = $browser->getUserAgent();
@@ -63,86 +62,50 @@ class Announce extends Controller
             $this->err("Invalid event.");
         }
 
-//        if (strlen($peer_id) != 20) {
-//            $this->err("Invalid peerid: peerid is not 20 bytes long.");
-//        }
-        if (strlen($hash) != 40) {
-            $this->err("Invalid info hash value");
-        }
-        if (strlen($passkey) != 32) {
-            $this->err("Invalid passkey size (" . strlen($passkey) . " - $passkey)");
-        }
+        //Peer_id lenght check
+        if (strlen($peer_id) != 20) { $this->err("Invalid peerid: peerid is not 20 bytes long."); }
+        //Info_hash lenght check
+        if (strlen($ihash) != 40) { $this->err("Invalid info hash value."); }
+        //Passkey lenght check
+        if (strlen($passkey) != 32) { $this->err("Invalid passkey size (" . strlen($passkey) . " - {$passkey})"); }
         //Port check
-        if (!$port || $port > 0xffff) {
-            $this->err("Invalid port.");
-        }
+        if (!$port || $port > 0xffff) { $this->err("Port is invalid."); }
+        //Blacklist port check
+        if ($this->portBlackListed($port)) { $this->err("Port {$port} is Blacklisted."); }
 
-        if ($this->portBlackListed($port)) {
-            $this->err("Port {$port} is Blacklisted.");
-        }
+        $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `info_hash` = :hash", ["hash" => $ihash]) or $this->err("Cannot Get Torrent Details");
 
-        $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `info_hash` = :hash", ["hash" => $hash]) or $this->err("Cannot Get Torrent Details");
+        $mod_downloaded = $torrent->freeleeach == 'yes' ? 0 : $downloaded;
+
         $user = $this->db->select1("SELECT * FROM `users` WHERE `passkey` = :passkey", ["passkey" => $passkey]) or $this->err("Cannot Get User Details");
 
-        if (!$user) {
-            $this->err("Passkey is invalid.");
-        }
-        if ($user->status != "confirmed") {
-            $this->err("Your account is not activated.");
-        }
-        if ($user->banned == "yes") {
-            $this->err("You are no longer welcome here.");
-        }
-        if (!$torrent) {
-            $this->err("Torrent not found on this tracker - hash = " . $hash);
-        }
-        if ($torrent->banned == "yes") {
-            $this->err("Torrent has been banned - hash = " . $hash);
-        }
+        if (!$user) { $this->err("Passkey is invalid."); }
+        if ($user->status != "confirmed") { $this->err("Your account is not activated."); }
+        if ($user->banned == "yes") { $this->err("You are no longer welcome here."); }
+        if (!$torrent) { $this->err("Torrent not found on this tracker"); }
+        if ($torrent->banned == "yes") { $this->err("Torrent has been banned"); }
 
-        if (!$compact) {
-            $this->err("Your client doesn't support compact, please update your client");
-        }
+        if (!$compact) { $this->err("Your client doesn't support compact, please update your client"); }
 
-        $peers = $this->db->select("SELECT * FROM `torrent_peers` WHERE `torrent_id` = :tid LIMIT 100", ["tid" => $torrent->id]);
-        $seeders = 0;
-        $leechers = 0;
+        $peers = $this->db->select("SELECT `peer_id`, `ip`, `port` FROM `torrent_peers` WHERE `torrent_id` = :tid LIMIT {$numwant}", ["tid" => $torrent->id]);
 
-        foreach ($peers as $peer) {
-            if ($peer->to_go > 0) {
-                $leechers++;
-            } else {
-                $seeders++;
-            }
-        }
-
-        if ($torrent->freeleeach = 'yes') {
-            $mod_downloaded  = 0;
-        } else {
-            $mod_downloaded  = $downloaded;
-        }
-
-        $sockets = @fsockopen($ip, $port, $errno, $errstr, 2.5);
-        if (!$sockets) {
-            $connectable = "no";
-        } else {
-            $connectable = "yes";
-            @fclose($sockets);
-        }
+        $sockets = fsockopen($ip, $port, $errno, $errstr, 2.5);
+        $connectable = !$sockets ? "no" : "yes";
+        fclose($sockets);
         unset($sockets, $errno, $errstr);
 
         if ($event == 'started') {
 
-            //Peer update
+            //Peer insert
             $this->db->insert('torrent_peers', [
                 'torrent_id' => $torrent->id,
                 'peer_id' => $peer_id,
                 'ip' => $ip,
                 'port' => $port,
-                'uploaded' => $real_uploaded,
-                'downloaded' => $real_downloaded,
+                'uploaded' => $uploaded,
+                'downloaded' => $downloaded,
                 'to_go' => $left,
-                'seeder' => ($left == 0) ? "yes" : "no",
+                'seeder' => $seeder,
                 'connectable' => $connectable,
                 'client' => $agent,
                 'user_id' => $user->id,
@@ -151,48 +114,25 @@ class Announce extends Controller
             ]);
 
             $this->db->update('torrents', [
-                //'seeders' => $torrent->seeders + 1,
+                'seeders' => $torrent->seeders + 1,
                 'visible' => 'yes',
             ], "`id` = :tid", ["tid" => $torrent->id]);
-
-        } elseif ($event == 'stopped') {
-
-            //Peer update
-            $this->db->update('torrent_peers', [
-                'peer_id' => $peer_id,
-                'ip' => $ip,
-                'port' => $port,
-                'uploaded' => $real_uploaded,
-                'downloaded' => $real_downloaded,
-                'to_go' => $left,
-                'seeder' => ($left == 0) ? "yes" : "no",
-                'connectable' => $connectable,
-                'client' => $agent,
-                'user_id' => $user->id,
-                'lastaction' => Helper::dateTime()
-            ], "`torrent_id` = :tid AND `peer_id` = :pid", ["tid" => $torrent->id, "pid" => $peer_id]);
-
-            //User update
-            $this->db->update('users', [
-                'uploaded' => $user->uploaded + $real_uploaded,
-                'downloaded' => $user->downloaded + $real_downloaded
-            ], "`id` = :uid", ["uid" => $user->id]);
 
         } elseif ($event == 'completed') {
 
             //Peer update
             $this->db->update('torrent_peers', [
                 'client' => $agent,
-                'seeder' => ($left == 0) ? "yes" : "no",
+                'seeder' => $seeder,
                 'uploaded' => $uploaded,
-                'downloaded' => $mod_downloaded,
+                'downloaded' => $downloaded,
                 'updated_at' => Helper::dateTime()
             ], "`torrent_id` = :tid", ["tid" => $torrent->id]);
 
             //User update
             $this->db->update('users', [
-                'uploaded' => $user->uploaded + $real_uploaded,
-                'downloaded' => $user->downloaded + $real_downloaded
+                'uploaded' => $user->uploaded + $uploaded,
+                'downloaded' => $user->downloaded + $mod_downloaded
             ], "`id` = :uid", ["uid" => $user->id]);
 
             //Torrent update
@@ -200,51 +140,43 @@ class Announce extends Controller
                 'times_completed' => $torrent->times_completed + 1
             ], "`id` = :tid", ["tid" => $torrent->id]);
 
-            //Torrent completes update
+            //Torrent completed increment
             $this->db->insert('torrent_completes', [
                 'torrent_id' => $torrent->id,
                 'user_id' => $user->id,
                 'created_at' => Helper::dateTime()
             ]);
 
+        } elseif ($event == 'stopped') {
+
+            //Peer update
+            $this->db->delete('torrent_peers',"`torrent_id` = :tid AND `peer_id` = :pid", ["tid" => $torrent->id, "pid" => $peer_id]);
+
+            //User update
+            $this->db->update('users', [
+                'uploaded' => $user->uploaded + $uploaded,
+                'downloaded' => $user->downloaded + $mod_downloaded
+            ], "`id` = :uid", ["uid" => $user->id]);
+
+        } else {
+
+            $this->err("Some error");
+
         }
 
-        $res = "d5:files";
-        $res .= "d20:" . hex2bin($torrent->info_hash);
-        $res  = "d8:completei" . (int)$torrent->seeders;
-        $res .= "e10:downloadedi" . (int)$torrent->times_completed;
-        $res .= "e10:incompletei" . (int)$torrent->leechers;
-        $res .= "e8:intervali" . (60 * 30);
-        $res .= "e12:min intervali" . (60 * 15);
-        $res .= "e5:peers";
-
-        while ($peers) {
-            //$Peer = "";
-            if ($peer_id === $peers->peer_id) {
-                continue;
-            }
-            $Peer = "d" . benc_str("ip") . benc_str($peers->ip);
-
-            if (!$no_peer_id) {
-                $Peer .= benc_str("peer id") . benc_str($peers->peer_id);
-            }
-            $Peer .= benc_str("port") . "i" . $peers->port . "ee";
-        }
-        $res .= "l{$Peer}e";
-        $res .= "ee";
-
-//        $res = [];
-//        $res['infohash'] = $torrent->info_hash;
-//        $res['complete'] = (int)$torrent->seeders;
-//        $res['downloaded'] = (int)$torrent->times_completed;
-//        $res['incomplete'] = (int)$torrent->leechers;
-//        $res['interval'] = (60 * 20);
-//        $res['min interval'] = (60 * 10);
-//        $res['peers'] = $this->givePeers($peers, $compact, $no_peer_id);
-
-        $data = \Rych\Bencode\Bencode::encode($res);
-
-        return $this->bencRespRaw($data);
+//        $res = [
+//            'infohash' => $torrent->info_hash,
+//            'complete' => (int)$torrent->seeders,
+//            'downloaded' => (int)$torrent->times_completed,
+//            'incomplete' => (int)$torrent->leechers,
+//            'interval' => (60 * 20),
+//            'min interval' => (60 * 10),
+//            'peers' => $this->givePeers($peers, $compact, $no_peer_id)
+//        ];
+//
+//        $data = \Rych\Bencode\Bencode::encode($res);
+//
+//        return $this->bencRespRaw($data);
     }
 
     public function bencRespRaw($value)

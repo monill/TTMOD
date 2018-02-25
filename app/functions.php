@@ -18,8 +18,7 @@ function url($url) {
     return URL . $url;
 }
 
-function ratingpic($num)
-{
+function ratingpic($num) {
     $r = round($num * 2) / 2;
 
     if ($r != $num) {
@@ -36,3 +35,4 @@ function ratingpic($num)
     }
     return '<img src="' . URL . "/imgs/rating/{$r}.png\" border=\"0\" alt=\"rating: {$num}/5\" title=\"rating: {$num}/5\" width=\"140\" />";
 }
+

@@ -32,7 +32,7 @@ $blockId = "f-" . sha1($title);
                                     <?php  if ($this->tor->external == "yes"): ?>
                                         <a href="magnet:?xt=urn:btih:<?= $this->tor->info_hash; ?>&dn=<?= $this->tor->filename; ?>&tr=udp://tracker.openbittorrent.com&tr=udp://tracker.publicbt.com"> Magnet </a>
                                     <?php else: ?>
-                                        <a href="magnet:?xt=urn:btih:<?= $this->tor->info_hash; ?>&dn=<?= $this->tor->filename; ?>&tr=<?= url("/announce/passkey/") . $user->passkey; ?>"> Magnet </a>
+                                        <a href="magnet:?xt=urn:btih:<?= $this->tor->info_hash; ?>&dn=<?= $this->tor->filename; ?>&tr=<?= urlencode(url("/announce/passkey/") . $user->passkey); ?>"> Magnet </a>
                                     <?php endif; ?>
                                     <br />
 

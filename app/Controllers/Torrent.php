@@ -363,7 +363,7 @@ class Torrent extends Controller
 
             $errors = array();
 
-            if (count($torrent) === 1)
+            if (count($torrent) == 1)
             {
                 $file = TUPLOAD . "$tid.torrent";
 
@@ -402,7 +402,7 @@ class Torrent extends Controller
                         header("Content-Type: application/x-bittorrent");
                         //header("Content-Length:" . filesize($data)); //error if uncomment this
                         header("Content-Disposition: attachment; filename=" . $name . ".torrent");
-                        //header("Pragma: no-cache");
+                        header("Pragma: no-cache");
                         ob_clean();
                         flush();
                         print $data;
@@ -415,6 +415,7 @@ class Torrent extends Controller
                         header("Content-Type: application/x-bittorrent");
                         header("Content-Length:" . filesize($file));
                         header("Content-Disposition: attachment; filename=" . $name . ".torrent");
+                        header("Pragma: no-cache");
                         ob_clean();
                         flush();
                         readfile($file);
@@ -425,6 +426,8 @@ class Torrent extends Controller
                     $result = ["status" => "error", "errors" => $errors];
                     echo json_encode($result);
                 }
+            } else {
+                Redirect::to("/torrents");
             }
         } else {
             Redirect::to("/torrents");
