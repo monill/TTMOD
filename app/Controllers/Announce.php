@@ -33,7 +33,7 @@ class Announce extends Controller
 
     public function passkey($passkey = '')
     {
-        $this->checkRequestType();
+//        $this->checkRequestType();
 
         // Standard Information Fields
         $event = Input::get("event");
@@ -57,10 +57,10 @@ class Announce extends Controller
         $browser = new BrowserDetection();
         $agent = $browser->getUserAgent();
 
-        $events = array('started', 'stopped', 'completed', 'paused');
-        if (!in_array($_GET['event'], $events)) {
-            $this->err("Invalid event.");
-        }
+//        $events = array('started', 'stopped', 'completed', 'paused');
+//        if (!in_array($_GET['event'], $events)) {
+//            $this->err("Invalid event.");
+//        }
 
         //Peer_id lenght check
         if (strlen($peer_id) != 20) { $this->err("Invalid peerid: peerid is not 20 bytes long."); }
@@ -93,6 +93,12 @@ class Announce extends Controller
         $connectable = !$sockets ? "no" : "yes";
         fclose($sockets);
         unset($sockets, $errno, $errstr);
+
+        $this->db->insert('news', [
+            'user_id' => 1,
+            'title' => 'testing',
+            'content' => 'dlaskldkasldkasldk'
+        ]);
 
         if ($event == 'started') {
 
@@ -164,19 +170,18 @@ class Announce extends Controller
 
         }
 
-//        $res = [
-//            'infohash' => $torrent->info_hash,
-//            'complete' => (int)$torrent->seeders,
-//            'downloaded' => (int)$torrent->times_completed,
-//            'incomplete' => (int)$torrent->leechers,
-//            'interval' => (60 * 20),
-//            'min interval' => (60 * 10),
-//            'peers' => $this->givePeers($peers, $compact, $no_peer_id)
-//        ];
-//
-//        $data = \Rych\Bencode\Bencode::encode($res);
-//
-//        return $this->bencRespRaw($data);
+        $res = [
+            'complete' => (int)$torrent->seeders,
+            'downloaded' => (int)$torrent->times_completed,
+            'incomplete' => (int)$torrent->leechers,
+            'interval' => (60 * 20),
+            'min interval' => (60 * 10),
+            'peers' => $this->givePeers($peers, $compact, $no_peer_id)
+        ];
+
+        return \Rych\Bencode\Bencode::encode($res);
+
+        //return $this->bencRespRaw($data);
     }
 
     public function bencRespRaw($value)
@@ -192,7 +197,7 @@ class Announce extends Controller
 
     public function bencStr($msg)
     {
-        return strlen($msg) . ":{$msg}e";
+        return strlen($msg) . ":{$msg}";
     }
 
     public function err($msg)

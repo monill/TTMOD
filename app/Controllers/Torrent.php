@@ -357,9 +357,9 @@ class Torrent extends Controller
         {
             //TODO
             //fix this passkey from user
-            $user = $this->db->select1("SELECT `passkey` FROM `users` WHERE `id` = :idd AND `status` = 'confirmed' LIMIT 1", ["idd" => 7]);
+            $user = $this->db->select1("SELECT `passkey` FROM `users` WHERE `id` = :uid AND `status` = 'confirmed' LIMIT 1", ["uid" => 7]);
 
-            $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `id` = :id LIMIT 1", ["id" => $tid]);
+            $torrent = $this->db->select1("SELECT * FROM `torrents` WHERE `tid` = :id LIMIT 1", ["tid" => $tid]);
 
             $errors = array();
 
@@ -415,7 +415,7 @@ class Torrent extends Controller
                         header("Content-Type: application/x-bittorrent");
                         header("Content-Length:" . filesize($file));
                         header("Content-Disposition: attachment; filename=" . $name . ".torrent");
-                        header("Pragma: no-cache");
+                        //header("Pragma: no-cache");
                         ob_clean();
                         flush();
                         readfile($file);
