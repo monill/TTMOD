@@ -179,9 +179,9 @@ class Announce extends Controller
             'peers' => $this->givePeers($peers, $compact, $no_peer_id)
         ];
 
-        return \Rych\Bencode\Bencode::encode($res);
+        $data = \Rych\Bencode\Bencode::encode($res);
 
-        //return $this->bencRespRaw($data);
+        return $this->bencRespRaw($data);
     }
 
     public function bencRespRaw($value)

@@ -397,7 +397,6 @@ class Torrent extends Controller
                         header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
                         header("Cache-Control: public"); // needed for internet explorer
                         header("Content-Type: application/x-bittorrent");
-                        header("Content-Length:" . filesize($file));
                         header("Content-Disposition: attachment; filename=" . $name . ".torrent");
                         header("Pragma: no-cache");
                         ob_clean();
