@@ -13,27 +13,47 @@ class Encode {
     *
     * @param array $info
     */
-    public function __construct() { }
+    private function __construct($data)
+    {
+        $this->content = $data;
+    }
 
     private function __clone() { }
+
+    static public function encode($data)
+    {
+        if (is_object($data)) {
+            if (method_exists($data, 'toArray')) {
+                $data = $data->toArray();
+            } else {
+                $data = (array) $data;
+            }
+        }
+        $encoder = new self($data);
+        return $encoder->encodeDecide($data);
+    }
 
     /**
     * Passes lists and dictionaries accordingly,
     * and has encodeString handle the strings and integers.
     *
-    * @param  mixed $unknown
+    * @param  mixed $data
     * @return string|void
     */
-    public function encodeDecide($unknown)
+    private function encodeDecide($data)
     {
-        if (is_array($unknown)) {
-            if (isset($unknown[0]) || empty($unknown)) {
-                return $this->encodeList($unknown);
-            } else {
-                return $this->encodeDict($unknown);
-            }
+        $data = is_null($data) ? $this->content : $data;
+
+        if (is_array($data) && (isset($data[0]) || empty($data))) {
+            return $this->encodeList($data);
+        } elseif (is_array($data)) {
+            return $this->encodeDict($data);
+        } elseif (is_integer($data) || is_float($data)) {
+            $data = sprintf('%.0f', round($data, 0));
+            return $this->encodeInt($data);
+        } else {
+            return $this->encodeString($data);
         }
-        return $this->encodeString($unknown);
     }
 
     /**
@@ -43,13 +63,13 @@ class Encode {
      * @param  boolean $unstrip is set to true when decoding dictionary keys
      * @return void
      */
-    public function encodeString($entry, $unstrip = false)
+    private function encodeString($entry, $unstrip = false)
     {
         if (is_bool($entry)) {
-            return $this->content .= "de";
+            $this->content .= "de";
         }
         if (is_int($entry) || is_float($entry)) {
-            return $this->content .= "i" . $entry . "e";
+            $this->content .= "i" . $entry . "e";
         }
         if ($unstrip) {
             $myentry = stripslashes($entry);
@@ -57,7 +77,19 @@ class Encode {
             $myentry = $entry;
         }
         $lenght = strlen($myentry);
-        return $this->content .= $lenght . ":" . $myentry;
+        $this->content .= $lenght . ":" . $myentry;
+    }
+
+    /**
+     * Encode an integer into a bencode integer
+     *
+     * @param integer $data The integer to be encoded.
+     * @return string Returns the bencoded integer.
+     */
+    private function encodeInt($data = null)
+    {
+        $data = is_null($data) ? $this->content : $data;
+        return sprintf('i%.0fe', $data);
     }
 
     /**
@@ -66,19 +98,15 @@ class Encode {
      * @param  array $array
      * @return void
      */
-    public function encodeList($array)
+    private function encodeList(array $data = null)
     {
-        $this->content .= "l";
+        $data = is_null($data) ? $this->content : $data;
 
-        // The empty list is defined as array();
-        if (empty($array)) {
-            return $this->content .= "e";
+        $list = '';
+        foreach ($data as $value) {
+            $list .= $this->encodeDecide($value);
         }
-
-        for ($i = 0; isset($array[$i]); $i++) {
-            $this->encodeDecide($array[$i]);
-        }
-        return $this->content .= "e";
+        return "l{$list}e";
     }
 
     /**
@@ -87,60 +115,16 @@ class Encode {
      * @param  mixed $array
      * @return void
      */
-    public function encodeDict($array)
+    private function encodeDict(array $data = null)
     {
-        $this->content .= "d";
+        $data = is_null($data) ? $this->content : $data;
+        sort($data);
 
-        if (is_bool($array)) {
-            return $this->content .= "e";
+        $dict = '';
+        foreach ($data as $left => $right) {
+            $dict .= $this->encodeString($left) . $this->encodeDecide($right);
         }
-
-        // NEED TO SORT!
-        $newarray = $this->makeSorted($array);
-
-        foreach ($newarray as $left => $right) {
-            $this->encodeString($left, true);
-            $this->encodeDecide($right);
-        }
-        return $this->content .= "e";
-    }
-
-    /**
-     * Dictionary keys must be sorted. foreach tends to iterate over the
-     * order the array was made, so we make a new one in sorted order.
-     *
-     * @param array $array
-     * @return array
-     */
-    public function makeSorted($array)
-    {
-        $i = 0;
-
-        // Shouldn't happen!
-        if (empty($array)) {
-            return $array;
-        }
-
-        foreach ($array as $key => $value) {
-            $keys[$i++] = stripslashes($key);
-        }
-
-        sort($keys);
-
-        for ($i = 0; isset($keys[$i]); $i++) {
-            $return[addslashes($keys[$i])] = $array[addslashes($keys[$i])];
-        }
-        return $return;
-    }
-
-    /**
-     * Get torrent
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->content;
+        return "d{$dict}e";
     }
 
 }

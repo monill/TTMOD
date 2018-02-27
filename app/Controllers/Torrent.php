@@ -228,7 +228,6 @@ class Torrent extends Controller
                 ]);
             }
 
-
             //External scrape
             if ($external == "yes")
             {
@@ -315,13 +314,11 @@ class Torrent extends Controller
             //End Scrape
 
             if ($external == "yes") {
-                $message = printf("Torrent Upado OK:<br><br />%s foi carregado.<br><br> Lembre-se de voltar a baixar para que sua passkey seja adicionada e você pode semear este torrents.<br><br><a href='" . url('/torrent/download/') . "%d'>Baixar Agora</a><br><a href='" . url('/torrent/view/') . "%d'>Ver Torrent Upado </a><br><br>", $name, $idd, $idd);
+                echo printf("Torrent Upado OK:<br><br />%s foi carregado.<br><br> Lembre-se de voltar a baixar para que sua passkey seja adicionada e você pode semear este torrents.<br><br><a href='" . url('/torrent/download/') . "%d'>Baixar Agora</a><br><a href='" . url('/torrent/view/') . "%d'>Ver Torrent Upado </a><br><br>", $name, $idd, $idd);
             } else {
-                $message = printf("Torrent Upado OK:<br><br>%s foi carregado.<br><br><a href='" . url('/torrent/view/') . "%d'>Ver Torrent Upado</a><br><br>", $name, $idd);
+                echo printf("Torrent Upado OK:<br><br>%s foi carregado.<br><br><a href='" . url('/torrent/view/') . "%d'>Ver Torrent Upado</a><br><br>", $name, $idd);
                 echo "Upload Completed.";
             }
-
-            echo $message;
 
 //           if (count($errors) == 1) {
 //               $result = ["status" => "error", "errors" => $errors];
@@ -381,18 +378,18 @@ class Torrent extends Controller
 
                 if (count($errors) == 0)
                 {
-                    $name = $torrent->name . "[" . SNAME . "]";
+                    $name = $torrent->name . '[' . SNAME . ']';
 
                     $this->db->update('torrents', ['downs' => $torrent->downs + 1], "`id` = :tid", ["tid" => $tid]);
 
                     if ($torrent->external != "yes")
                     {
                         $arq = file_get_contents("$file");
-                        $decoded = Bencode::decode($arq);
-                        $decoded["announce"] = ANNOUNCE . '/passkey/' . $user->passkey;
+                        $decoded = \Rych\Bencode\Bencode::decode($arq);
+                        $decoded["announce"] = ANNOUNCE . "/passkey/" . $user->passkey;
                         unset($decoded["announce-list"]);
 
-                        $data = Bencode::encode($decoded);
+                        $data = \Rych\Bencode\Bencode::encode($decoded);
 
                         header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
                         header("Cache-Control: public"); // needed for internet explorer
@@ -405,7 +402,7 @@ class Torrent extends Controller
                         exit();
 
                     } else {
-
+                        // external torrent so no passkey needed
                         header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
                         header("Cache-Control: public"); // needed for internet explorer
                         header("Content-Type: application/x-bittorrent");

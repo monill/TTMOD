@@ -170,18 +170,18 @@ class Announce extends Controller
 
         }
 
-        $res = [
-            'complete' => (int)$torrent->seeders,
-            'downloaded' => (int)$torrent->times_completed,
-            'incomplete' => (int)$torrent->leechers,
-            'interval' => (60 * 20),
-            'min interval' => (60 * 10),
-            'peers' => $this->givePeers($peers, $compact, $no_peer_id)
-        ];
+         $res = [
+             'complete' => (int)$torrent->seeders,
+             'downloaded' => (int)$torrent->times_completed,
+             'incomplete' => (int)$torrent->leechers,
+             'interval' => (60 * 20),
+             'min interval' => (60 * 10),
+             'peers' => $this->givePeers($peers, $compact, $no_peer_id)
+         ];
 
-        $data = \Rych\Bencode\Bencode::encode($res);
+         $data = \Rych\Bencode\Bencode::encode($res);
 
-        return $this->bencRespRaw($data);
+         return $this->bencRespRaw($data);
     }
 
     public function bencRespRaw($value)

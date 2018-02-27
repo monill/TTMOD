@@ -106,11 +106,11 @@ $blockId = "f-" . sha1($title);
                 <label class="col-lg-4 col-sm-4 custom-control"> Annonymous Upload? </label>
                 <div class="col-md-8">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="showuploader" id="yes" value="yes" checked>
+                        <input class="form-check-input" type="radio" name="showuploader" id="yes" value="yes">
                         <label class="form-check-label" for="yes"> Yes </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="showuploader" id="no" value="no">
+                        <input class="form-check-input" type="radio" name="showuploader" id="no" value="no" checked>
                         <label class="form-check-label" for="no"> No </label>
                     </div>
                 </div>

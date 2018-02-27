@@ -11,9 +11,9 @@ class Bencode {
 
     private function __clone() { }
 
-    public static function encode($array) {
-        $encode = new Encode();
-        return $encode->encodeDecide($array);
+    public static function encode($data)
+    {
+        return Encode::encode($data);
     }
 
     public static function decode($wholefile) {

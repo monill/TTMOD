@@ -29,7 +29,7 @@ class Parse {
             if (!isset($parse)) {
                 echo "Parser Error: Error Opening torrent. Torrent file not chosen or could not be found.<br>";
             } else {
-                $array = Bencode::decode($parse);
+                $array = \Rych\Bencode\Bencode::decode($parse);
 
                 if ($array === false) {
                     echo "Parser Error: Error Opening torrent, unable to decode.<br>";
@@ -49,7 +49,7 @@ class Parse {
                         $info = $array["info"];
 
                         //Calculates SHA1 Hash
-                        $torrentInfo[1] = sha1(Bencode::encode($info));
+                        $torrentInfo[1] = sha1(\Rych\Bencode\Bencode::encode($info));
 
                         // Calculates date from UNIX Epoch
                         $torrentInfo[2] = date('r', $array["creation date"]);
