@@ -19,7 +19,10 @@ define('VIEWS', ROOT . 'views' . DIRECTORY_SEPARATOR);
 define('CACHE', ROOT . 'data' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR);
 
 require ROOT . 'config/config.php';
+require ROOT . 'config/database.php';
 require ROOT . 'config/email.php';
+require ROOT . 'config/login.php';
+require ROOT . 'config/session.php';
 require ROOT . 'app/functions.php';
 
 if (file_exists(ROOT . 'vendor/autoload.php')) {

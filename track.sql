@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 24, 2018 at 11:15 PM
+-- Generation Time: Feb 28, 2018 at 06:07 PM
 -- Server version: 10.2.8-MariaDB
 -- PHP Version: 7.1.9
 
@@ -35,14 +35,7 @@ CREATE TABLE IF NOT EXISTS `bruteforces` (
   `alltimes` int(10) UNSIGNED NOT NULL DEFAULT 1,
   `alldate` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `bruteforces`
---
-
-INSERT INTO `bruteforces` (`id`, `ip`, `alltimes`, `alldate`) VALUES
-(1, '::1', 4, '2018-02-16');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -318,20 +311,20 @@ INSERT INTO `messages` (`id`, `sender`, `receiver`, `subject`, `message`, `reade
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `userid` int(11) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
   `title` varchar(200) NOT NULL,
   `content` text NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `userid` (`userid`)
+  KEY `userid` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `userid`, `title`, `content`, `created_at`, `updated_at`) VALUES
+INSERT INTO `news` (`id`, `user_id`, `title`, `content`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Testingd...', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat nunc eget neque iaculis, ac iaculis diam laoreet. Maecenas porta pulvinar nulla lacinia imperdiet. Nam et dignissim ex. Phasellus pretium tempor erat non accumsan. Nullam at nunc ipsum. Donec lorem libero, convallis id orci ut, fringilla vestibulum justo. Fusce sit amet lobortis turpis.', '2018-01-29 17:58:50', '2018-01-29 17:58:50');
 
 -- --------------------------------------------------------
@@ -608,15 +601,14 @@ CREATE TABLE IF NOT EXISTS `torrents` (
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
   KEY `uploader` (`uploader_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `torrents`
 --
 
 INSERT INTO `torrents` (`id`, `info_hash`, `name`, `filename`, `description`, `poster`, `image1`, `image2`, `image3`, `category_id`, `size`, `numfiles`, `views`, `comments`, `downs`, `times_completed`, `leechers`, `seeders`, `visible`, `banned`, `anon`, `nfo`, `announce`, `external`, `freeleech`, `thanks`, `uploader_id`, `created_at`, `updated_at`) VALUES
-(12, 'df732307f64b011bb0beff736322ad087ebd4b02', 'joshlaravel-591', 'joshlaravel-591.rar', 'sss', '', '', '', '', 6, 263039845, 1, 9, 0, 4, 1, 0, 1, 'yes', 'no', 'yes', 'no', 'http://kaihou.com/announce', 'no', 'no', 0, 7, '2018-02-23 23:15:30', NULL),
-(15, 'b105818432fcef1628a1024bd761206eb0f66f9a', 'Lady.Bird.2017.1080p.BluRay.H264.AAC-RARBG', 'Lady.Bird.2017.1080p.BluRay.H264.AAC-RARBG', 'dasdasd', '', '', '', '', 1, 1925311880, 3, 1, 0, 0, 12834, 679, 1206, 'yes', 'no', 'no', 'no', 'http://tracker.trackerfix.com:80/announce', 'yes', 'no', 0, 7, '2018-02-24 18:52:57', '2018-02-24 18:53:04');
+(26, '4092b6c8cbc9ae7cec700a1ff1dc43a72ae31f28', '321membership', '321membership.rar', 'dasd', '', '', '', '', 6, 321737, 1, 3, 0, 4, 0, 0, 0, 'yes', 'no', 'no', 'no', 'http://devlop.net/announce', 'no', 'no', 0, 7, '2018-02-26 13:37:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -698,17 +690,14 @@ CREATE TABLE IF NOT EXISTS `torrent_files` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `torrent_id` (`torrent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `torrent_files`
 --
 
 INSERT INTO `torrent_files` (`id`, `torrent_id`, `length`, `path`, `created_at`, `updated_at`) VALUES
-(26, 12, 263039845, 'joshlaravel-591.rar', '2018-02-23 23:15:30', '2018-02-23 23:15:30'),
-(32, 15, 1925210348, 'Lady.Bird.2017.1080p.BluRay.H264.AAC-RARBG.mp4', '2018-02-24 18:52:57', '2018-02-24 18:52:57'),
-(33, 15, 30, 'RARBG.txt', '2018-02-24 18:52:57', '2018-02-24 18:52:57'),
-(34, 15, 101502, 'Subs/2_Eng.srt', '2018-02-24 18:52:57', '2018-02-24 18:52:57');
+(47, 26, 321737, '321membership.rar', '2018-02-26 13:37:28', '2018-02-26 13:37:28');
 
 -- --------------------------------------------------------
 
@@ -737,13 +726,6 @@ CREATE TABLE IF NOT EXISTS `torrent_peers` (
   KEY `torrent_id` (`torrent_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `torrent_peers`
---
-
-INSERT INTO `torrent_peers` (`id`, `torrent_id`, `peer_id`, `ip`, `port`, `uploaded`, `downloaded`, `to_go`, `seeder`, `connectable`, `client`, `user_id`, `passkey`, `started`, `lastaction`) VALUES
-(246, 12, '-DE13F0-.j4hnUqZBsN0', '::1', 59860, 0, 0, 0, 'yes', 'no', 'Deluge 1.3.15', 7, 'bb8eb740bf36cc991669ec035aad13d0', '2018-02-24 19:37:47', '2018-02-24 20:09:25');
 
 -- --------------------------------------------------------
 
@@ -814,9 +796,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `status`, `banned`, `privacy`, `class`, `dob`, `info`, `acceptpms`, `codeactivation`, `confirmresetpwd`, `ip`, `signature`, `avatar`, `uploaded`, `downloaded`, `title`, `estate_id`, `sex`, `passkey`, `points`, `invites`, `warn`, `donated`, `maxslots`, `lastlogin`, `created_at`, `updated_at`, `actived_at`, `resetpwd_at`) VALUES
-(1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'moderatorplus', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, '/imgs/default_avatar.jpg', 0, 2, NULL, 17, 'na', '506007503104ff5194131612102c61bb', 1020, 0, 'no', '0.00', 4, '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'admin', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, '/imgs/default_avatar.jpg', 0, 4, NULL, 17, 'na', '501237503104ff5394131a12102c61bb', 1030, 0, 'no', '0.00', 4, '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(7, 'admin', 'me@me.com', '$2y$10$6tqHX2zZPPHW7wj7c1U8yO6Ty6fN3.yqUL2mH6Kbu3yeytMYMCdle', 'confirmed', 'no', 'public', 'admin', '0000-00-00', 'dasdasdasda', 'yes', NULL, 'yes', '::1', '', '/imgs/default_avatar.jpg', 0, 6, '', 25, 'male', 'bb8eb740bf36cc991669ec035aad13d0', 1800, 0, 'no', '0.00', 4, '2018-02-16 18:47:49', '2018-01-24 17:17:06', '2018-02-22 15:15:18', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
+(1, 'System', 'system@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'moderatorplus', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, '/imgs/default_avatar.jpg', 0, 2, NULL, 17, 'na', '07cc694b9b3fc636710fa08b6922c42b', 1020, 0, 'no', '0.00', 4, '2018-01-24 13:50:08', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(2, 'Bot', 'bot@track.org', '$2y$10$2VH1evFcDK1i8Bf1p4mUhOqMdpii1JxluNdeS2AxCgd2vciljo8i.', 'confirmed', 'no', 'private', 'admin', '0000-00-00', NULL, 'no', NULL, NULL, '::1', NULL, '/imgs/default_avatar.jpg', 0, 4, NULL, 17, 'na', '639ceb123a0b22b21b722d6cd9a0ee8e', 1030, 0, 'no', '0.00', 4, '2018-01-28 19:20:38', '2017-08-10 16:55:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(7, 'admin', 'me@me.com', '$2y$10$6tqHX2zZPPHW7wj7c1U8yO6Ty6fN3.yqUL2mH6Kbu3yeytMYMCdle', 'confirmed', 'no', 'public', 'admin', '0000-00-00', 'dasdasdasda', 'yes', NULL, 'yes', '::1', '', '/imgs/default_avatar.jpg', 0, 6, '', 25, 'male', '7627cb9027e713e301e83a8f13057055', 1800, 0, 'no', '0.00', 4, '2018-02-16 18:47:49', '2018-01-24 17:17:06', '2018-02-22 15:15:18', '2018-01-26 15:14:11', '2018-01-25 20:08:40');
 
 -- --------------------------------------------------------
 
@@ -889,7 +871,7 @@ ALTER TABLE `messages`
 -- Constraints for table `news`
 --
 ALTER TABLE `news`
-  ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `poll_answers`

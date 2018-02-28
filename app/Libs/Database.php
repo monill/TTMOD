@@ -7,18 +7,15 @@ use PDOException;
 
 class Database extends PDO
 {
-    private $type = "mysql";
-    private $host = "localhost";
-    private $username = "root";
-    private $passwd = "";
-    private $datab = "track";
-    private $port = 3306;
+    /**
+    * @var Instance of Database class itself
+    */
     private static $instance;
 
-    public function __construct()
+    public function __construct($DB_TYPE, $DB_HOST, $DB_PORT, $DB_NAME, $DB_USER, $DB_PASS)
     {
         try {
-            parent::__construct($this->type . ':host=' . $this->host . ';port=' . $this->port . ';dbname=' . $this->datab . ';charset=UTF8', $this->username, $this->passwd);
+            parent::__construct($DB_TYPE . ':host=' . $DB_HOST . ';port=' . $DB_PORT . ';dbname=' . $DB_NAME . ';charset=UTF8', $DB_USER, $DB_PASS);
             // comente esta linha se você não quiser relatórios de erros
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->exec("SET CHARACTER SET utf8");
@@ -34,7 +31,7 @@ class Database extends PDO
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
-            self::$instance = new self();
+            self::$instance = new self(DB_TYPE, DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS);
         }
         return self::$instance;
     }

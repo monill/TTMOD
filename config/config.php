@@ -1,7 +1,7 @@
 <?php
 
 // Website URL
-define('URL', 'http://devlop.net');
+define('URL', 'http://kaihou.com');
 // App root
 define('RUT', $_SERVER['DOCUMENT_ROOT']);
 // Page name

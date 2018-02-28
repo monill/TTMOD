@@ -4,21 +4,16 @@ namespace App\Libs;
 
 class Session
 {
-    private $onlyCookies = false;
-    private $siteNome = SNAME;
-    private $sessionSecure = false;
-    private $sessionHttpOnly = true;
-    private $sessionRegenerateID = true;
-
     public function __construct() { }
-    
+
     private function __clone() { }
+
     /**
      * Start session.
      */
     public static function startSession()
     {
-        ini_set("session.use_only_cookies", false);
+        ini_set("session.use_only_cookies", SESSION_USE_ONLY_COOKIES);
         //ini_set('session.cookie_domain', '.localhost');
 
         $cookieParams = session_get_cookie_params();
@@ -26,13 +21,13 @@ class Session
             $cookieParams["lifetime"],
             $cookieParams["path"],
             $cookieParams["domain"],
-            false,
-            true
+            SESSION_SECURE,
+            SESSION_HTTP_ONLY
         );
         //session_name(SNAME);
 
         session_start();
-        session_regenerate_id(true);
+        session_regenerate_id(SESSION_REGENERATE_ID);
     }
 
     /**
