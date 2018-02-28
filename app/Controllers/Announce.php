@@ -79,7 +79,7 @@ class Announce extends Controller
 
         $user = $this->db->select1("SELECT * FROM `users` WHERE `passkey` = :passkey", ["passkey" => $passkey]) or $this->err("Cannot Get User Details");
 
-        if (!$user) { $this->err("Passkey is invalid."); }
+        if (!$user) { $this->err("User is invalid."); }
         if ($user->status != "confirmed") { $this->err("Your account is not activated."); }
         if ($user->banned == "yes") { $this->err("You are no longer welcome here."); }
         if (!$torrent) { $this->err("Torrent not found on this tracker"); }
@@ -93,12 +93,6 @@ class Announce extends Controller
         $connectable = !$sockets ? "no" : "yes";
         fclose($sockets);
         unset($sockets, $errno, $errstr);
-
-        $this->db->insert('news', [
-            'user_id' => 1,
-            'title' => 'testing',
-            'content' => 'dlaskldkasldkasldk'
-        ]);
 
         if ($event == 'started') {
 
@@ -156,7 +150,7 @@ class Announce extends Controller
         } elseif ($event == 'stopped') {
 
             //Peer update
-            $this->db->delete('torrent_peers',"`torrent_id` = :tid AND `peer_id` = :pid", ["tid" => $torrent->id, "pid" => $peer_id]);
+            $this->db->delete('torrent_peers', "`torrent_id` = :tid AND `peer_id` = :pid", ["tid" => $torrent->id, "pid" => $peer_id]);
 
             //User update
             $this->db->update('users', [
