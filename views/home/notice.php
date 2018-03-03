@@ -1,4 +1,6 @@
 <?php
+use App\Libs\Lang;
+
 $title = "Notice";
 $blockId = "b-" . sha1($title);
 ?>
@@ -11,6 +13,7 @@ $blockId = "b-" . sha1($title);
     <div class="card-body slidingDiv<?php echo $blockId; ?>">
     <!-- content -->
 
+        <?= Lang::get('forgot_password'); ?>
         Welcome To TTMOD<br /><br />The modd open source torrent tracker view our <a href="<?= url("/forum"); ?>"> Forum </a> for support
 
     <!-- end content -->

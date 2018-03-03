@@ -12,7 +12,7 @@ class Controller
 {
     public $view = null;
     public $db;
-    private $loginFingerPrint = LOGINFG;
+    private $loginFingerPrint = LOGIN_FINGERPRINT;
 
     public function __construct()
     {

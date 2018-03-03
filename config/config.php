@@ -23,5 +23,5 @@ ini_set("display_errors", true);
 ini_set("log_errors", true);
 ini_set("error_log", RUT . "/data/logs/php-error.txt");
 
-//Login fringer printer
-define('LOGINFG', false);
+// TRANSLATION
+define('DEFAULT_LANGUAGE', 'en');

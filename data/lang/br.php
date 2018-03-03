@@ -19,7 +19,7 @@ return [
 
 	"create_account" => "Create Account",
 
-	"forgot_password" => "Forgot Password?",
+	"forgot_password" => "Esqueceu a senha?",
 
 	"repeat_password" => "Repeat Password",
 

@@ -1,6 +1,7 @@
 <?php
 use App\Models\Layout;
 use App\Libs\Database;
+use App\Libs\Lang;
 
 $startime =  array_sum(explode(" ", microtime()));
 $db = Database::getInstance();
@@ -54,9 +55,18 @@ $user = $db->select1("SELECT * FROM users WHERE id = :id", ["id" => 7]);
                     <li class="nav-item"><a class="nav-link" href="<?= url("/faq"); ?>"> F.A.Q </a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= url("/staff"); ?>"> Staff </a></li>
 
-
                     <li class="nav-item"><a class="nav-link" href="<?= url("/admin"); ?>"> AdminCP </a></li>
                 </ul>
+                <div class="dropdown show">
+                    <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Language
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item <?= Lang::getLanguage() == 'en' ? 'active' : ''; ?>" href="#">English</a>
+                        <a class="dropdown-item <?= Lang::getLanguage() == 'br' ? 'active' : ''; ?>" href="#">Portuguese-BR</a>
+                    </div>
+                </div>
                 <a class="btn btn-outline-success my-2 my-sm-0" href="<?= url("/logout"); ?>">Logout</a>
             </div>
         </nav>

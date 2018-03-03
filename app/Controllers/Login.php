@@ -12,7 +12,7 @@ use App\Libs\Validation;
 
 class Login extends Controller
 {
-    private $loginFingerPrint = LOGINFG;
+    private $loginFingerPrint = LOGIN_FINGERPRINT;
     public $valid;
 
     public function __construct()
