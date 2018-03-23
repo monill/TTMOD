@@ -1,5 +1,6 @@
 # TTMOD
-A Torrent Trade Modd in 'MVC' and not completed
+A Torrent Trade Modd in 'MVC' and <b>not completed</b> <br />
+Now I have college works-study, back to work in July.
 
 Database file is track.sql
 Add countries.sql to use countries instead estates, change in user estate_id to country_id
