@@ -2,6 +2,8 @@
 A Torrent Trade Modd in 'MVC' and <b>not completed</b> <br />
 Now I have college works-study, back to work in July.
 
+Required php version 5.6 or 7.0
+
 Database file is track.sql
 Add countries.sql to use countries instead estates, change in users table field estate_id to country_id
 
