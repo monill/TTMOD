@@ -3,11 +3,16 @@ A Torrent Trade Modd in 'MVC' and <b>not completed</b> <br />
 Now I have college works-study, back to work in July.
 
 Database file is track.sql
-Add countries.sql to use countries instead estates, change in user estate_id to country_id
+Add countries.sql to use countries instead estates, change in users table field estate_id to country_id
 
-All three users with password: 123123
+All three users pre-created with password: 123123
 
 to use need to change: <br>
 install all composer dependecies <br>
-config/config.php //edit URL line <br>
-app/Libs/Database.php //set database connection <br>
+composer install<br>
+
+//edit URL line <br>
+config/config.php <br>
+
+//set database connection <br>
+config/database.php
