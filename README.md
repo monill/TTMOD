@@ -13,8 +13,8 @@ to use need to change: <br>
 install all composer dependecies <br>
 composer install<br>
 
-//edit URL line <br>
+Edit URL line <br>
 config/config.php <br>
 
-//set database connection <br>
+Set database connection <br>
 config/database.php
